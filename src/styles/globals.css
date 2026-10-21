@@ -1,0 +1,606 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Ada-inspired daylight gallery palette */
+  --background: #f9f9f9;
+  --surface: #ffffff;
+  --foreground: #0a0b0c;
+  --muted-foreground: rgba(10, 11, 12, 0.66);
+  --border: rgba(10, 11, 12, 0.12);
+  --border-strong: rgba(10, 11, 12, 0.28);
+
+  --forest: #00543d;
+  --periwinkle: #abcbf9;
+  --pink: #ffbbfc;
+  --yellow: #fce88b;
+
+  --industrial-blue: #345b76;
+  --safety-orange: #e7672e;
+
+  /* Channel triples for Tailwind's `<alpha-value>` slot.
+     Tailwind can only apply an `/opacity` modifier to a colour it can take
+     apart, and a hex string inside `var()` is opaque to it — so every
+     `bg-forest/10`, `text-foreground/80`, `border-border/50` in the codebase
+     was compiling to an invalid colour and silently dropping out. These mirror
+     the values above; keep the two in sync when a colour changes.
+     `--muted-foreground-rgb` / `--border-rgb` are the alpha-on-daylight blends
+     of their rgba() counterparts, flattened so they can carry their own alpha. */
+  --background-rgb: 249 249 249;
+  --surface-rgb: 255 255 255;
+  --foreground-rgb: 10 11 12;
+  --muted-foreground-rgb: 91 92 93;
+  --border-rgb: 220 220 221;
+  --border-strong-rgb: 182 182 183;
+  --forest-rgb: 0 84 61;
+  --periwinkle-rgb: 171 203 249;
+  --pink-rgb: 255 187 252;
+  --yellow-rgb: 252 232 139;
+  --industrial-blue-rgb: 52 91 118;
+  --safety-orange-rgb: 231 103 46;
+
+  /* Typography scale */
+  --hero: clamp(2.9rem, 7.4vw, 7rem);
+  --kinetic: clamp(3rem, 12vw, 11rem);
+  --display-xl: clamp(3.2rem, 6.5vw, 6.5rem);
+  --display: clamp(2.5rem, 5vw, 4.5rem);
+  --h1: clamp(2.1rem, 4vw, 3.75rem);
+  --h2: clamp(1.6rem, 2.8vw, 2.5rem);
+  --h3: clamp(1.25rem, 2vw, 1.75rem);
+  --body-large: clamp(1.05rem, 1.25vw, 1.25rem);
+  --body: 1rem;
+  --small: 0.875rem;
+  --micro: 0.75rem;
+
+  /* Transitions */
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Live header height, published by SiteHeader; lets the homepage hero
+     bleed underneath the transparent floating nav. */
+  --header-h: 96px;
+  /* Live announcement-bar height, published by AnnouncementBar. */
+  --announce-h: 0px;
+
+  /* Motion tokens — one vocabulary for every transition on the site. */
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --dur-fast: 160ms;
+  --dur-base: 280ms;
+  --dur-slow: 520ms;
+
+  /* Section rhythm — fluid so mobile does not inherit desktop whitespace. */
+  --section-y: clamp(3.5rem, 8vw, 7.5rem);
+  --gutter: clamp(1rem, 4vw, 2rem);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--background);
+  }
+
+  body {
+    background-color: transparent;
+    color: var(--foreground);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.02em;
+    font-weight: 400;
+    line-height: 1.08;
+    color: var(--foreground);
+    /* Stops the one-orphan-word ragged edge that fluid type produces at
+       tablet widths. */
+    text-wrap: balance;
+    /* Long certification names ("Radiographic…") must not blow out the
+       viewport on 320px phones. */
+    overflow-wrap: break-word;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Anything linked to from the nav or an in-page jump must clear the sticky
+     header instead of hiding beneath it. */
+  :target,
+  [id] {
+    scroll-margin-top: calc(var(--header-h, 96px) + 1.5rem);
+  }
+
+  /* Focus visible accessibility */
+  :focus-visible {
+    outline: 2px solid var(--forest);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* On dark full-bleed heroes an ink outline is invisible. */
+  .on-dark :focus-visible {
+    outline-color: #ffffff;
+  }
+
+  /* Comfortable touch targets on coarse pointers without inflating the
+     desktop layout. */
+  @media (pointer: coarse) {
+    a, button, [role='button'], summary, input[type='checkbox'], input[type='radio'] {
+      touch-action: manipulation;
+    }
+    nav a,
+    nav button,
+    button:not(.pill-button-primary):not(.pill-button-forest):not(.pill-button-secondary) {
+      min-height: 44px;
+    }
+  }
+
+  img, video, svg, canvas {
+    max-width: 100%;
+  }
+
+  ::selection {
+    background-color: var(--periwinkle);
+    color: #0a0b0c;
+  }
+}
+
+@layer components {
+  .site-container {
+    width: min(100% - 2rem, 1440px);
+    margin-inline: auto;
+    /* Landscape phones with a notch would otherwise clip the first column. */
+    padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
+  }
+
+  @media (min-width: 768px) {
+    .site-container {
+      width: min(100% - 4rem, 1440px);
+    }
+  }
+
+  /* Vertical rhythm that scales with the viewport instead of 96px everywhere. */
+  .section-y {
+    padding-block: var(--section-y);
+  }
+  .section-pt {
+    padding-top: var(--section-y);
+  }
+  .section-pb {
+    padding-bottom: var(--section-y);
+  }
+
+  .hairline-divider {
+    height: 1px;
+    background-color: var(--border);
+    width: 100%;
+  }
+
+  .editorial-card {
+    position: relative;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: transform var(--dur-base) var(--ease-editorial),
+      border-color var(--dur-base) var(--ease-editorial),
+      box-shadow var(--dur-base) var(--ease-editorial);
+  }
+
+  /* Hover lift only where a real pointer exists — on touch the transform
+     sticks after tap and reads as a broken card. */
+  @media (hover: hover) and (pointer: fine) {
+    .editorial-card:hover {
+      border-color: var(--border-strong);
+      transform: translateY(-4px);
+      box-shadow: 0 14px 34px rgba(10, 11, 12, 0.08);
+    }
+  }
+
+  /* Keyboard users get the same affordance as hover. */
+  .editorial-card:focus-within {
+    border-color: var(--border-strong);
+    box-shadow: 0 14px 34px rgba(10, 11, 12, 0.08);
+  }
+
+  @media (pointer: coarse) {
+    .editorial-card:active {
+      transform: scale(0.99);
+    }
+  }
+
+  /* Card-wide hit area: put this on the primary link inside an
+     `.editorial-card` and the whole card becomes clickable, while the link
+     text stays the accessible name. */
+  .stretched-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+  }
+
+  .pill-button-primary,
+  .pill-button-forest,
+  .pill-button-secondary {
+    @apply inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-medium;
+    min-height: 44px;
+    transition: background-color var(--dur-fast) ease, border-color var(--dur-fast) ease,
+      transform var(--dur-fast) var(--ease-out-soft), box-shadow var(--dur-base) var(--ease-out-soft);
+  }
+
+  .pill-button-primary {
+    background-color: var(--foreground);
+    color: #ffffff;
+  }
+
+  .pill-button-forest {
+    background-color: var(--forest);
+    color: #ffffff;
+  }
+
+  .pill-button-secondary {
+    background-color: var(--surface);
+    color: var(--foreground);
+    border: 1px solid var(--border-strong);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .pill-button-primary:hover {
+      background-color: #1a1c1e;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(10, 11, 12, 0.18);
+    }
+    .pill-button-forest:hover {
+      background-color: #004230;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(0, 84, 61, 0.24);
+    }
+    .pill-button-secondary:hover {
+      background-color: #f0f0f0;
+      border-color: var(--foreground);
+      transform: translateY(-2px);
+    }
+  }
+
+  /* Press feedback matters more than hover on phones. */
+  .pill-button-primary:active,
+  .pill-button-forest:active,
+  .pill-button-secondary:active {
+    transform: translateY(0) scale(0.97);
+    box-shadow: none;
+  }
+
+  .pill-button-primary[aria-disabled='true'],
+  .pill-button-forest[aria-disabled='true'],
+  .pill-button-secondary[aria-disabled='true'],
+  .pill-button-primary:disabled,
+  .pill-button-forest:disabled,
+  .pill-button-secondary:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .tag-pill {
+    @apply inline-flex items-center px-3 py-1 text-xs font-medium rounded-full;
+    background-color: rgba(10, 11, 12, 0.05);
+    color: var(--foreground);
+    border: 1px solid var(--border);
+  }
+
+  .accent-tag-periwinkle,
+  .accent-tag-pink,
+  .accent-tag-yellow {
+    @apply inline-flex w-fit items-center self-start rounded-full px-3.5 py-1 text-xs font-medium;
+    color: #0a0b0c;
+  }
+
+  .accent-tag-periwinkle {
+    background-color: var(--periwinkle);
+  }
+
+  .accent-tag-pink {
+    background-color: var(--pink);
+  }
+
+  .accent-tag-yellow {
+    background-color: var(--yellow);
+  }
+
+  /* Cinematic hero: animated brand gradient field behind the 3D stack */
+  .hero-gradient {
+    background:
+      radial-gradient(120% 90% at 12% 18%, #0b6b50 0%, transparent 58%),
+      radial-gradient(110% 80% at 88% 12%, #345b76 0%, transparent 55%),
+      radial-gradient(120% 100% at 70% 95%, #e7a06e 0%, transparent 60%),
+      linear-gradient(140deg, #00543d 0%, #0e4a55 45%, #7d5f5a 78%, #e7a06e 100%);
+    background-size: 180% 180%;
+    animation: hero-drift 26s var(--ease-editorial) infinite alternate;
+  }
+
+  .hero-scrim {
+    background: linear-gradient(100deg, rgba(6, 30, 24, 0.62) 0%, rgba(6, 30, 24, 0.28) 45%, transparent 72%);
+  }
+
+  @media (max-width: 767px) {
+    .hero-scrim {
+      background: linear-gradient(180deg, rgba(6, 30, 24, 0.55) 0%, rgba(6, 30, 24, 0.5) 60%, rgba(6, 30, 24, 0.2) 100%);
+    }
+  }
+
+  .hero-grain {
+    opacity: 0.16;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  @keyframes hero-drift {
+    0% { background-position: 0% 30%; }
+    100% { background-position: 100% 70%; }
+  }
+
+  .reveal-hidden {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  /* Safety net: if the GSAP bundle fails or is blocked, nothing stays
+     invisible forever. Reveal removes this class the moment it mounts. */
+  .reveal-hidden {
+    animation: reveal-failsafe 1ms linear 2.5s forwards;
+  }
+
+  @keyframes reveal-failsafe {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* The project referenced tailwindcss-animate utilities (`animate-in`,
+     `fade-in`, …) but that plugin is not installed, so the dropdown and mobile
+     drawer were popping in with no transition. These are the real thing. */
+  .anim-pop-in {
+    animation: anim-pop-in var(--dur-base) var(--ease-out-soft) both;
+    transform-origin: top center;
+  }
+
+  .anim-fade-in {
+    animation: anim-fade-in var(--dur-fast) ease-out both;
+  }
+
+  .anim-drawer-in {
+    animation: anim-drawer-in 320ms var(--ease-out-soft) both;
+  }
+
+  /* Drawer rows cascade in; index published by the component. */
+  .anim-stagger-item {
+    animation: anim-stagger-item 420ms var(--ease-out-soft) both;
+    animation-delay: calc(var(--i, 0) * 38ms + 60ms);
+  }
+
+  @keyframes anim-pop-in {
+    from { opacity: 0; transform: translateY(-8px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  @keyframes anim-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes anim-drawer-in {
+    from { opacity: 0; transform: translateY(-12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes anim-stagger-item {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  /* Keyboard-only escape hatch past the nav. */
+  .skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 100;
+    transform: translateY(-160%);
+    transition: transform var(--dur-fast) var(--ease-out-soft);
+    background-color: var(--forest);
+    color: #ffffff;
+    padding: 0.625rem 1.125rem;
+    border-radius: 9999px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+  }
+
+  .skip-link:focus-visible {
+    transform: translateY(0);
+  }
+
+  /* Underline that grows from the left instead of snapping on. */
+  .link-underline {
+    position: relative;
+  }
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 1px;
+    width: 100%;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur-base) var(--ease-editorial);
+  }
+  .link-underline:hover::after,
+  .link-underline:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  .blur-hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    filter: blur(60px);
+    opacity: 0.45;
+  }
+}
+
+/* iOS Safari zooms the whole page the moment a focused field is under 16px,
+   and every field here carries a `text-sm` utility. `!important` is the only
+   thing that outranks a utility class, and it is scoped to phone widths so the
+   desktop type scale is untouched. */
+@media (max-width: 767px) {
+  input:not([type='checkbox']):not([type='radio']):not([type='range']),
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Technical graphic (ultrasonic waveform) animations */
+.tg-wave {
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  animation: tg-draw 2.4s var(--ease-editorial) 0.3s forwards;
+}
+
+.tg-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: tg-pulse 2.6s ease-in-out 2.4s infinite;
+}
+
+@keyframes tg-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes tg-pulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tg-wave {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .tg-pulse {
+    animation: none;
+  }
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Certificate print: isolate #certificate-print so only the certificate prints */
+@media print {
+  body * {
+    visibility: hidden !important;
+  }
+  #certificate-print,
+  #certificate-print * {
+    visibility: visible !important;
+  }
+  #certificate-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    border: none;
+  }
+}
+
+/* Account surfaces only. Public pages keep the :root palette. */
+.account-theme {
+  --background: #F6F4EE;
+  --surface: #FFFFFF;
+  --foreground: #102B46;
+  --muted-foreground: #64748B;
+  --border: #E2E6EA;
+  --border-strong: #C9D0D6;
+  --forest: #087F73;
+  --yellow: #D9AD55;
+  --background-rgb: 246 244 238;
+  --surface-rgb: 255 255 255;
+  --foreground-rgb: 16 43 70;
+  --muted-foreground-rgb: 100 116 139;
+  --border-rgb: 226 230 234;
+  --border-strong-rgb: 201 208 214;
+  --forest-rgb: 8 127 115;
+  --yellow-rgb: 217 173 85;
+  background-color: #F6F4EE;
+  color: #102B46;
+}
+
+.account-theme h1,
+.account-theme h2,
+.account-theme h3,
+.account-theme h4,
+.account-theme h5,
+.account-theme h6 {
+  color: #102B46;
+}
+
+.account-theme .auth-panel,
+.account-theme .auth-panel h1,
+.account-theme .auth-panel p,
+.account-theme .auth-panel li {
+  color: #ffffff;
+}
+
+.account-theme header.bg-white {
+  box-shadow: inset 0 -3px 0 #D9AD55;
+}
+
+.account-theme input:not([type='checkbox']):not([type='radio']):not([type='file']),
+.account-theme select,
+.account-theme textarea {
+  background-color: #ffffff;
+  color: #102B46;
+  border-color: #E2E6EA;
+}
+
+.account-theme input:focus,
+.account-theme select:focus,
+.account-theme textarea:focus {
+  border-color: #087F73;
+  outline-color: #087F73;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .account-theme .pill-button-forest:hover {
+    background-color: #06685e;
+    box-shadow: 0 10px 22px rgba(8, 127, 115, 0.24);
+  }
+
+  .account-theme .pill-button-primary:hover {
+    background-color: #0c2238;
+    box-shadow: 0 10px 22px rgba(16, 43, 70, 0.18);
+  }
+}
