@@ -40,7 +40,7 @@ export default function AdmissionPage() {
             </div>
             <h3 className="text-xl font-normal text-foreground">2. Flexible Fee Payment</h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Pay course fees in convenient installments. We accept UPI, online bank transfers, debit/credit cards, cheques, and cash payments at our Noida campus.
+              Pay course fees in convenient installments. We accept UPI, online bank transfers, debit/credit cards, cheques, and cash payments at our Bengaluru training centre.
             </p>
           </div>
 

@@ -46,7 +46,7 @@ export default function PlacementPage() {
               Apply for Admission
             </Link>
             <a
-              href={`tel:${defaultSettings.phone_primary}`}
+              href={`tel:${defaultSettings.phone_primary.replace(/\s/g, '')}`}
               className="pill-button-secondary text-xs py-3 px-6 flex items-center gap-1.5"
             >
               <Phone className="w-3.5 h-3.5" /> Call Placement Cell

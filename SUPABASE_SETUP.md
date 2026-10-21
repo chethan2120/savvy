@@ -1,6 +1,6 @@
 # Supabase Architecture & Setup Guide
 
-This document outlines the database schema, Row Level Security (RLS) policies, storage buckets, and seed data setup for World Wide NDT Institute.
+This document outlines the database schema, Row Level Security (RLS) policies, storage buckets, and seed data setup for Savvy Training Institute.
 
 > **Status: LIVE.** Project `wwi` (`ljkrnpszvhjkolaacqwi`) is provisioned, migrated, and seeded. Tables, RLS, the `admissions-files` bucket, and the admin allowlist are all applied. The contact form was verified writing a real row end-to-end. The only remaining manual step is **creating the admin login user** (see below).
 
@@ -33,10 +33,10 @@ This document outlines the database schema, Row Level Security (RLS) policies, s
 
 ## Create your admin login (required, one-time)
 
-The app authenticates admins with Supabase Auth (`signInWithPassword`) and authorises them via the `admin_users` allowlist (already seeded with `admin@ndtis.in`).
+The app authenticates admins with Supabase Auth (`signInWithPassword`) and authorises them via the `admin_users` allowlist (already seeded with `admin@savvytraining.example`).
 
 1. Supabase Dashboard → **Authentication → Users → Add user**.
-2. Email: `admin@ndtis.in` (or your own — then also add it to the allowlist below). Set a strong password. Tick **Auto Confirm User**.
+2. Email: `admin@savvytraining.example` (or your own — then also add it to the allowlist below). Set a strong password. Tick **Auto Confirm User**.
 3. To use a different email, add it to the allowlist:
    ```sql
    INSERT INTO admin_users (email) VALUES ('you@example.com');
@@ -70,10 +70,10 @@ Added in migration `20260724010000_student_portal.sql`. Live and seeded.
 ### Test credentials (dummy seed data)
 | Role | Email | Password | Sees |
 |------|-------|----------|------|
-| Admin | `admin@ndtis.in` | `Admin@12345` | Everything |
-| Student | `rahul.student@ndtis.in` | `Student@12345` | NDT Level II + QA/QC (2 certs, 6 materials) |
-| Student | `priya.student@ndtis.in` | `Student@12345` | Fire & Safety (1 cert, 2 materials) |
-| Student | `amit.student@ndtis.in` | `Student@12345` | HVAC + CSWIP 3.1 (2 certs, 4 materials) |
+| Admin | `admin@savvytraining.example` | `Admin@12345` | Everything |
+| Student | `rahul.student@savvytraining.example` | `Student@12345` | NDT Level II + QA/QC (2 certs, 6 materials) |
+| Student | `priya.student@savvytraining.example` | `Student@12345` | Fire & Safety (1 cert, 2 materials) |
+| Student | `amit.student@savvytraining.example` | `Student@12345` | HVAC + CSWIP 3.1 (2 certs, 4 materials) |
 
 > These are seeded dummy accounts for testing. Change/remove them before production. Dummy videos point at public sample MP4s; real lessons should be uploaded to the private `course-materials` bucket so signed-URL + enrollment protection applies to the file bytes too.
 

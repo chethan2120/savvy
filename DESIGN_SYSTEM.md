@@ -1,6 +1,6 @@
-# World Wide NDT Institute — Design System
+# Savvy Training Institute — Design System
 
-This design system translates the calm, editorial, daylight-gallery visual language of **Ada.cx** into a high-credibility identity for **World Wide NDT Institute & Services**.
+This design system translates the calm, editorial, daylight-gallery visual language of **Ada.cx** into a high-credibility identity for **Savvy Training Institute**.
 
 ---
 

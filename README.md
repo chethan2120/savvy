@@ -1,6 +1,6 @@
-# World Wide NDT Institute & Services — Modern Web Application
+# Savvy Training Institute — Modern Web Application
 
-A premium, editorial redesign of World Wide NDT Institute (wwndtis.in) built with Next.js App Router, TypeScript, Tailwind CSS, Motion (Framer Motion), and Supabase. Inspired by the daylight-gallery visual language of Ada.cx.
+The Savvy Training Institute website, built with Next.js App Router, TypeScript, Tailwind CSS, Motion (Framer Motion), and Supabase.
 
 ---
 
@@ -21,8 +21,8 @@ A premium, editorial redesign of World Wide NDT Institute (wwndtis.in) built wit
 ### 1. Clone & Install Dependencies
 
 ```bash
-git clone https://github.com/wwndtis/website.git
-cd website
+git clone https://github.com/chethan2120/savvy.git
+cd savvy
 npm install
 ```
 
@@ -82,4 +82,4 @@ npm run start
 
 ## License & Copyright
 
-© 2024–2026 World Wide NDT Institute & Services. All Rights Reserved.
+© 2024–2026 Savvy Training Institute. All Rights Reserved.

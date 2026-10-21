@@ -5,16 +5,14 @@ import {
 
 export const defaultSettings: SiteSettings = {
   site_name: 'Savvy Training Institute',
-  phone_primary: '+91 7290095961',
-  phone_secondary: '+91 7290095962',
-  email_primary: 'info@ndtis.in',
-  email_secondary: 'worldwidendtis@gmail.com',
-  address: 'Office No:1101 Assotech Business Cresstera Tower 1 Sector 135 Noida, (UP) India',
-  whatsapp_number: '916361992599',
-  facebook_url: 'https://www.facebook.com/worldwidendtinstitutenoida',
-  youtube_url: 'https://www.youtube.com/@wwndtis',
-  twitter_url: 'https://twitter.com/wwndtis',
-  instagram_url: 'https://www.instagram.com/wwndtis',
+  phone_primary: '+91 90000 12345',
+  email_primary: 'contact@savvytraining.example',
+  address: 'Savvy Training Institute, Training Centre, Bengaluru, Karnataka, India',
+  whatsapp_number: '919000012345',
+  facebook_url: '',
+  youtube_url: '',
+  twitter_url: '',
+  instagram_url: '',
 };
 
 export const defaultBanner: AnnouncementBanner = {
@@ -31,7 +29,7 @@ export const coursesData: Course[] = [
     slug: 'ndt-level-2-course',
     title: 'NDT Level II Course',
     short_description: 'Comprehensive ASNT Level 2 training covering Ultrasonic, Radiographic, Magnetic Particle, Liquid Penetrant, and Visual Testing with 100% placement support.',
-    description: 'Are you ready to take your technical career to the next level? At Savvy Training Institute in Noida, India, we offer a comprehensive NDT Level 2 Course that prepares you for real-world industrial challenges. Whether you are just starting or upskilling, our training programs in NDT Level 2 are built to help you succeed in oil & gas, aerospace, construction, power, and heavy manufacturing.',
+    description: 'Are you ready to take your technical career to the next level? At Savvy Training Institute in Bengaluru, India, we offer a comprehensive NDT Level 2 Course that prepares you for real-world industrial challenges. Whether you are just starting or upskilling, our training programs in NDT Level 2 are built to help you succeed in oil & gas, aerospace, construction, power, and heavy manufacturing.',
     duration: '45 Days',
     fee: '₹35,000',
     training_mode: 'Classroom & Online',
@@ -393,6 +391,6 @@ export const placementStats = {
 
 export const preEnrollmentOffersData: PreEnrollmentOffer[] = [
   { id: 'o1', title: 'Early-Bird Pre-Enrolment', description: 'Book your seat before the batch starts and lock in the current fee with a flat discount on any certification course.', discount_label: '25% OFF', coupon_code: 'EARLY25', valid_till: '2026-08-24', seats_left: 12, is_active: true, sort_order: 1 },
-  { id: 'o2', title: 'YouTube Subscriber Offer', description: 'Watching us on YouTube? Pre-enrol with this code for an extra fee waiver plus a free NDT fundamentals starter kit.', discount_label: '₹5,000 OFF', coupon_code: 'WWNDTYT', valid_till: '2026-09-08', seats_left: 25, is_active: true, sort_order: 2 },
+  { id: 'o2', title: 'YouTube Subscriber Offer', description: 'Watching us on YouTube? Pre-enrol with this code for an extra fee waiver plus a free NDT fundamentals starter kit.', discount_label: '₹5,000 OFF', coupon_code: 'SAVVYYT', valid_till: '2026-09-08', seats_left: 25, is_active: true, sort_order: 2 },
   { id: 'o3', title: 'Placement Fast-Track Bundle', description: 'Pre-enrol in any two courses and get free placement fast-track: CV workshop, mock interviews and priority recruiter referrals.', discount_label: 'BUNDLE', coupon_code: 'PLACE2X', valid_till: '2026-09-23', seats_left: 8, is_active: true, sort_order: 3 },
 ];

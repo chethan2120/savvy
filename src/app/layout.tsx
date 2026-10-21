@@ -27,7 +27,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://wwndtis.in'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://savvytraining.example'),
   title: {
     default: 'Savvy Training Institute | Best NDT Level 2 & QA/QC Training in India',
     template: '%s | Savvy Training Institute',
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     'NDT Level 2 Course',
     'ASNT Level 2 Certification',
     'Best NDT Training Institute in India',
-    'QA/QC Course Noida',
+    'QA/QC Course Bengaluru',
     'Fire and Safety Diploma',
     'HVAC Training',
     'Revit MEP Course',
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://wwndtis.in',
+    url: process.env.NEXT_PUBLIC_APP_URL || 'https://savvytraining.example',
     siteName: 'Savvy Training Institute',
     title: 'Savvy Training Institute | NDT Level 2 & QA/QC Certification',
     description:
@@ -65,8 +65,6 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@wwndtis',
-    creator: '@wwndtis',
   },
   robots: {
     index: true,
@@ -83,14 +81,14 @@ export default function RootLayout({
     '@context': 'https://schema.org',
     '@type': 'EducationalOrganization',
     name: defaultSettings.site_name,
-    url: 'https://wwndtis.in',
+    url: process.env.NEXT_PUBLIC_APP_URL || 'https://savvytraining.example',
     telephone: defaultSettings.phone_primary,
     email: defaultSettings.email_primary,
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'Office No:1101 Assotech Business Cresstera Tower 1 Sector 135',
-      addressLocality: 'Noida',
-      addressRegion: 'UP',
+      streetAddress: 'Training Centre',
+      addressLocality: 'Bengaluru',
+      addressRegion: 'Karnataka',
       addressCountry: 'IN',
     },
     sameAs: [
@@ -98,7 +96,7 @@ export default function RootLayout({
       defaultSettings.youtube_url,
       defaultSettings.twitter_url,
       defaultSettings.instagram_url,
-    ],
+    ].filter(Boolean),
   };
 
   return (

@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, CheckCircle2, Award, Shield, Users, Globe2, BookOpen, Layers, Phone, HelpCircle, QrCode, ShieldCheck, PlayCircle, MonitorPlay } from 'lucide-react';
+import { defaultSettings } from '@/lib/data';
 import { USE_INKHERO } from '@/config/hero';
 import { CoinHero } from '@/components/hero/CoinHero';
 import { SavvyInkHero } from '@/components/hero/SavvyInkHero';
@@ -112,7 +113,7 @@ export default async function HomePage() {
       {/* Section E: Featured Courses */}
       <FeaturedCoursesShowcase courses={featuredCourses} />
 
-      {/* Section F: Why Choose WWNDT */}
+      {/* Why choose Savvy Training Institute */}
       <section className="bg-surface py-20 border-y border-border">
         <div className="site-container flex flex-col gap-12">
           <div className="text-center max-w-2xl mx-auto flex flex-col items-center gap-3">
@@ -162,7 +163,7 @@ export default async function HomePage() {
               </div>
               <h4 className="text-base font-normal text-foreground">Online &amp; Classroom</h4>
               <p className="text-xs text-muted-foreground leading-relaxed">
-                Flexible weekday and weekend batches available both in-person at Noida lab and online for working engineers.
+                Flexible weekday and weekend batches available both in-person at the Bengaluru training centre and online for working engineers.
               </p>
             </div>
           </div>
@@ -244,7 +245,7 @@ export default async function HomePage() {
               <Link href="/admission" className="pill-button-secondary text-xs py-3 px-6">
                 Get Free Counselling
               </Link>
-              <a href="tel:7290095961" className="pill-button-secondary text-xs py-3 px-6 flex items-center gap-2">
+              <a href={`tel:${defaultSettings.phone_primary.replace(/\s/g, '')}`} className="pill-button-secondary text-xs py-3 px-6 flex items-center gap-2">
                 <Phone className="w-3.5 h-3.5" /> Call Placement Cell
               </a>
             </div>
@@ -450,8 +451,8 @@ export default async function HomePage() {
               <HelpCircle className="w-8 h-8 text-forest" />
               <h4 className="text-base font-normal text-foreground">Still Have Questions?</h4>
               <p className="text-xs text-muted-foreground">Talk with our senior counsellors for immediate guidance.</p>
-              <a href="tel:7290095961" className="text-xs font-semibold text-forest hover:underline">
-                Call +91 7290095961 &rarr;
+              <a href={`tel:${defaultSettings.phone_primary.replace(/\s/g, '')}`} className="text-xs font-semibold text-forest hover:underline">
+                Call {defaultSettings.phone_primary} &rarr;
               </a>
             </div>
           </div>
@@ -471,7 +472,7 @@ export default async function HomePage() {
               Ready to launch your technical inspection career?
             </h2>
             <p className="text-body-large text-muted-foreground leading-relaxed">
-              Join Savvy Training Institute in Noida and transform your career with hands-on lab training and international certification.
+              Join Savvy Training Institute in Bengaluru and transform your career with hands-on lab training and international certification.
             </p>
             <div className="flex flex-col gap-3 text-xs text-foreground font-medium pt-2">
               <div className="flex items-center gap-2">

@@ -137,14 +137,14 @@ BEGIN
     RAISE EXCEPTION 'An account already exists for %', p_email;
   END IF;
 
-  -- Enrolment numbers run WWNDT-<year>-<4 digits>, continuing the existing series.
+  -- Enrolment numbers run SAV-<year>-<4 digits>, continuing the existing series.
   enr_no := nullif(btrim(coalesce(p_enrollment_no, '')), '');
   IF enr_no IS NULL THEN
     SELECT coalesce(max(substring(s.enrollment_no from '(\d{4})$')::int), 100) + 1
       INTO seq
       FROM students s
-     WHERE s.enrollment_no ~ '^WWNDT-\d{4}-\d{4}$';
-    enr_no := format('WWNDT-%s-%s', to_char(CURRENT_DATE, 'YYYY'), lpad(seq::text, 4, '0'));
+     WHERE s.enrollment_no ~ '^SAV-\d{4}-\d{4}$';
+    enr_no := format('SAV-%s-%s', to_char(CURRENT_DATE, 'YYYY'), lpad(seq::text, 4, '0'));
   END IF;
 
   INSERT INTO auth.users (

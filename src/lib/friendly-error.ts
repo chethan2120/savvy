@@ -17,7 +17,7 @@ type SupabaseLikeError = {
 };
 
 /** Message shown when nothing more specific matches — never a raw error string. */
-const FALLBACK = 'Something went wrong on our side. Please try again, and contact the institute office on +91 7290095961 if it keeps happening.';
+const FALLBACK = 'Something went wrong on our side. Please try again, and contact the institute office on +91 90000 12345 if it keeps happening.';
 
 /**
  * `context` names the thing being acted on ("student", "certificate", …) so a

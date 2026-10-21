@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ChevronDown, Menu, X, ArrowUpRight } from 'lucide-react';
-import { coursesData } from '@/lib/data';
+import { coursesData, defaultSettings } from '@/lib/data';
 import { SavvyLogo } from '@/components/brand/SavvyLogo';
 import { lockScroll, unlockScroll } from '@/lib/scroll-lock';
 
@@ -376,10 +376,10 @@ export const SiteHeader: React.FC = () => {
             </Link>
             {/* Tap-to-call: this is a phone-only surface. */}
             <a
-              href="tel:+917290095961"
+              href={`tel:${defaultSettings.phone_primary.replace(/\s/g, '')}`}
               className="flex min-h-[44px] items-center justify-center text-center text-xs text-muted-foreground"
             >
-              Call us: +91 7290095961
+              Call us: {defaultSettings.phone_primary}
             </a>
           </div>
         </div>

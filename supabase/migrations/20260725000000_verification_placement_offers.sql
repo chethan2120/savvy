@@ -156,5 +156,5 @@ INSERT INTO placements (student_name, course_title, company, job_role, location,
 
 INSERT INTO pre_enrollment_offers (title, description, discount_label, coupon_code, valid_till, seats_left, is_active, sort_order) VALUES
   ('Early-Bird Pre-Enrolment', 'Book your seat before the batch starts and lock in the current fee with a flat discount on any certification course.', '25% OFF', 'EARLY25', CURRENT_DATE + 30, 12, TRUE, 1),
-  ('YouTube Subscriber Offer', 'Watching us on YouTube? Pre-enrol with this code for an extra fee waiver plus a free NDT fundamentals starter kit.', '₹5,000 OFF', 'WWNDTYT', CURRENT_DATE + 45, 25, TRUE, 2),
+  ('YouTube Subscriber Offer', 'Watching us on YouTube? Pre-enrol with this code for an extra fee waiver plus a free NDT fundamentals starter kit.', '₹5,000 OFF', 'SAVYT', CURRENT_DATE + 45, 25, TRUE, 2),
   ('Placement Fast-Track Bundle', 'Pre-enrol in any two courses and get free placement fast-track: CV workshop, mock interviews and priority recruiter referrals.', 'BUNDLE', 'PLACE2X', CURRENT_DATE + 60, 8, TRUE, 3);

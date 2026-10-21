@@ -28,7 +28,7 @@ export interface CertificateFace {
 
 export function verificationUrl(certificateNo: string): string {
   const origin =
-    typeof window !== 'undefined' ? window.location.origin : 'https://www.ndtis.in';
+    typeof window !== 'undefined' ? window.location.origin : 'https://savvytraining.example';
   return `${origin}/verify-certificate?id=${encodeURIComponent(certificateNo)}`;
 }
 

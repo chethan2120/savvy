@@ -7,6 +7,7 @@ import type { VerifiedCertificate } from '@/lib/types';
 import { fmtCertDate } from '@/components/CertificateDocument';
 import { downloadCertificate } from '@/lib/certificate-file';
 import { friendlyError } from '@/lib/friendly-error';
+import { defaultSettings } from '@/lib/data';
 import {
   Search, Loader2, AlertCircle, ShieldCheck, ShieldAlert, QrCode, Download, Award, CheckCircle2,
 } from 'lucide-react';
@@ -41,7 +42,7 @@ export const CertificateVerifier: React.FC = () => {
     }
     if (!isSupabaseConfigured) {
       setStatus('error');
-      setErrorMsg('Verification needs a connected backend. Call the institute office on +91 7290095961.');
+      setErrorMsg(`Verification needs a connected backend. Call the institute office on ${defaultSettings.phone_primary}.`);
       return;
     }
     setStatus('searching');
@@ -80,7 +81,7 @@ export const CertificateVerifier: React.FC = () => {
               id="cert-id"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="e.g. WWNDT/NDT2/2024/0101 or WWNDT-2024-0101"
+              placeholder="e.g. SAV-2026-0101"
               className="flex-1 bg-background border border-border rounded-lg px-3.5 py-2.5 text-sm text-foreground focus:outline-none focus:border-forest"
             />
             <button
@@ -111,7 +112,7 @@ export const CertificateVerifier: React.FC = () => {
             <ShieldAlert className="w-4 h-4 shrink-0 mt-0.5 text-safety-orange" />
             <span>
               No certificate matches that ID. Check the spelling, or call the admissions office at{' '}
-              <a href="tel:+917290095961" className="underline">+91 7290095961</a>.
+              <a href={`tel:${defaultSettings.phone_primary.replace(/\s/g, '')}`} className="underline">{defaultSettings.phone_primary}</a>.
             </span>
           </div>
         )}

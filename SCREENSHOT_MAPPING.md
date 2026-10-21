@@ -2,8 +2,8 @@
 
 How the two evidence directories informed the rebuild.
 
-## `content_screenshots/` (55 images) — WWNDT source of truth
-Screenshots of the current https://wwndtis.in/ site. Used to preserve real business content, not visual style.
+## `content_screenshots/` (55 images) — SAV source of truth
+Screenshots of the current https://savvytraining.example/ site. Used to preserve real business content, not visual style.
 
 | Captured content | Extracted into |
 |---|---|
@@ -14,7 +14,7 @@ Screenshots of the current https://wwndtis.in/ site. Used to preserve real busin
 | Instructors (Feroz Alam, Tabrej Alam, Md Javed, Deepak Kumar) + roles/bios | `instructorsData` |
 | Testimonials (Shadab, Vikash, Rohit, Sanjay) + Hindi placement quote | `testimonialsData`, home placement section |
 | Stats (student count, awards, instructors) — **conflicting across pages** | Reconciled in `CONTENT_ISSUES.md`; `MetricStrip.tsx` |
-| Contact: phone(s), emails, Noida address, WhatsApp, social URLs | `defaultSettings` in `data.ts`, `SiteFooter`, `contact-us` |
+| Contact: phone, email, Bengaluru address, WhatsApp | `defaultSettings` in `data.ts`, `SiteFooter`, `contact-us` |
 | Blog posts (NDT methods, RT guide, Level II certification guide) | `blogPostsData` |
 | Announcement / batch messaging | `defaultBanner`, `AnnouncementBar.tsx` |
 | Typos ("Instructers", "achived", "Sucessfull") and keyword-stuffing | Corrected — logged in `CONTENT_ISSUES.md` |

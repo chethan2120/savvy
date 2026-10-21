@@ -43,7 +43,7 @@ export default function AboutPage() {
           <div className="lg:col-span-6 relative aspect-[4/3] rounded-2xl overflow-hidden border border-border shadow-overlay">
             <Image
               src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1000&auto=format&fit=crop"
-              alt="WWNDT Institute Practical Inspection Training"
+              alt="Practical inspection training at Savvy Training Institute"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"

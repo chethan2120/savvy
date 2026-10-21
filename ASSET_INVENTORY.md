@@ -5,8 +5,7 @@ Tracks every visual asset used in the rebuild, its purpose, source, and ownershi
 ## 1. Brand & identity
 | Asset | Path / Location | Source | Notes |
 |---|---|---|---|
-| **Real institute logo** (globe emblem) | `public/brand/logo.png` | Migrated from wwndtis.in | ✅ Now used in `SiteHeader`. Low-resolution (~5.7 KB); request a higher-res SVG/PNG for crisp large display. |
-| Wordmark "World Wide NDT — Institute & Services" | `SiteHeader.tsx`, `SiteFooter.tsx` | Text lockup beside the logo | — |
+| Savvy Training Institute logo | `public/brand/logo.svg` and `SavvyLogo` | Site header, footer, and certificates | The old globe mark has been removed. |
 
 ## 1b. Real accreditation / recognition marks ✅ migrated
 Genuine approval logos carried over from the source site — used in `AccreditationStrip.tsx` on the homepage.
@@ -25,7 +24,7 @@ Genuine approval logos carried over from the source site — used in `Accreditat
 | Director Feroz Alam | `public/instructors/feroz-alam.jpg` | Instructor card |
 
 ## 2. Photography (currently placeholders) 🟡
-All photographic imagery is sourced from **Unsplash** (free licence, `images.unsplash.com`) as a stand-in for real WWNDT lab/classroom/site photos. These are **not** owned WWNDT assets.
+All photographic imagery is sourced from **Unsplash** (free licence, `images.unsplash.com`) as a stand-in for real SAV lab/classroom/site photos. These are **not** owned SAV assets.
 
 | Usage | Where | Current source |
 |---|---|---|
@@ -38,7 +37,7 @@ All photographic imagery is sourced from **Unsplash** (free licence, `images.uns
 **Known limitation:** a few Unsplash IDs repeat across cards, so some course/gallery images look similar. This is intentional (only verified-loading IDs were used to avoid broken images) and should be resolved during real-asset migration.
 
 ## 3. Migration required ⛔
-To satisfy the brief's "use existing WWNDT images / migrate owned assets to `public/`" requirement:
+To satisfy the brief's "use existing SAV images / migrate owned assets to `public/`" requirement:
 1. Obtain the institute's real photo library (lab sessions, equipment, site visits, graduation, instructor headshots) and the official logo.
 2. Place optimised WebP/AVIF versions under `public/images/…`.
 3. Swap the Unsplash URLs in `src/lib/data.ts` and `EditorialHero.tsx` for local paths.

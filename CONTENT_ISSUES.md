@@ -1,6 +1,6 @@
 # Content Audit & Discrepancy Log
 
-This document records all content inconsistencies, spelling/grammar errors, and structural issues identified on the source website (https://wwndtis.in/) and how they are resolved in this rebuild.
+This document records all content inconsistencies, spelling/grammar errors, and structural issues identified on the source website (https://savvytraining.example/) and how they are resolved in this rebuild.
 
 ## 1. Course Duration & Fee Discrepancies
 

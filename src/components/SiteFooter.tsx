@@ -29,7 +29,7 @@ export const SiteFooter: React.FC = () => {
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-forest shrink-0" />
-                <a href={`tel:${defaultSettings.phone_primary}`} className="hover:text-white transition-colors">
+                <a href={`tel:${defaultSettings.phone_primary.replace(/\s/g, '')}`} className="hover:text-white transition-colors">
                   {defaultSettings.phone_primary}
                 </a>
               </div>
@@ -89,20 +89,14 @@ export const SiteFooter: React.FC = () => {
 
             <NewsletterForm />
 
+            {(defaultSettings.facebook_url || defaultSettings.youtube_url || defaultSettings.twitter_url || defaultSettings.instagram_url) && (
             <div className="flex items-center gap-3 pt-2">
-              <a href={defaultSettings.facebook_url} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="p-2 rounded-full bg-white/5 hover:bg-forest text-white/80 hover:text-white transition-colors">
-                <Facebook className="w-4 h-4" />
-              </a>
-              <a href={defaultSettings.youtube_url} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="p-2 rounded-full bg-white/5 hover:bg-forest text-white/80 hover:text-white transition-colors">
-                <Youtube className="w-4 h-4" />
-              </a>
-              <a href={defaultSettings.twitter_url} target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="p-2 rounded-full bg-white/5 hover:bg-forest text-white/80 hover:text-white transition-colors">
-                <Twitter className="w-4 h-4" />
-              </a>
-              <a href={defaultSettings.instagram_url} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="p-2 rounded-full bg-white/5 hover:bg-forest text-white/80 hover:text-white transition-colors">
-                <Instagram className="w-4 h-4" />
-              </a>
+              {defaultSettings.facebook_url && <a href={defaultSettings.facebook_url} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="p-2 rounded-full bg-white/5 hover:bg-forest text-white/80 hover:text-white transition-colors"><Facebook className="w-4 h-4" /></a>}
+              {defaultSettings.youtube_url && <a href={defaultSettings.youtube_url} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="p-2 rounded-full bg-white/5 hover:bg-forest text-white/80 hover:text-white transition-colors"><Youtube className="w-4 h-4" /></a>}
+              {defaultSettings.twitter_url && <a href={defaultSettings.twitter_url} target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="p-2 rounded-full bg-white/5 hover:bg-forest text-white/80 hover:text-white transition-colors"><Twitter className="w-4 h-4" /></a>}
+              {defaultSettings.instagram_url && <a href={defaultSettings.instagram_url} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="p-2 rounded-full bg-white/5 hover:bg-forest text-white/80 hover:text-white transition-colors"><Instagram className="w-4 h-4" /></a>}
             </div>
+            )}
           </div>
         </div>
 

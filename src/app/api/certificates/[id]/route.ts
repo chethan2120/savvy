@@ -90,20 +90,6 @@ async function drawLogo(pdf: PDFDocument, page: PDFPage, bold: PDFFont) {
         return;
       }
     } catch {
-      /* The raster logo below is the fallback. */
-    }
-  }
-  const logoPath = path.join(process.cwd(), 'public', 'brand', 'logo.png');
-  if (existsSync(logoPath)) {
-    try {
-      const bytes = readFileSync(logoPath);
-      const logo = bytes[0] === 0x89 ? await pdf.embedPng(bytes) : await pdf.embedJpg(bytes);
-      const scale = Math.min(72 / logo.width, 56 / logo.height);
-      const width = logo.width * scale;
-      const height = logo.height * scale;
-      page.drawImage(logo, { x: (PAGE_W - width) / 2, y: 500, width, height });
-      return;
-    } catch {
       /* Text heading below. */
     }
   }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { PageHero } from '@/components/PageHero';
+import { defaultSettings } from '@/lib/data';
 
 export const metadata = {
   title: 'Privacy Policy | Savvy Training Institute',
@@ -37,7 +38,7 @@ export default function PrivacyPolicyPage() {
 
           <h2 className="text-xl font-normal text-foreground">4. Contact Us</h2>
           <p>
-            For any questions regarding your data privacy, contact us at info@ndtis.in or call +91 7290095961.
+            For any questions regarding your data privacy, contact us at {defaultSettings.email_primary} or call {defaultSettings.phone_primary}. The email address is a placeholder and is not a working inbox yet.
           </p>
         </div>
       </section>

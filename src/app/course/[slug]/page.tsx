@@ -5,6 +5,7 @@ import { PageHero } from '@/components/PageHero';
 import { Accordion } from '@/components/Accordion';
 import { ContactForm } from '@/components/ContactForm';
 import { getPublishedCourse, getPublishedCourses } from '@/lib/courses';
+import { defaultSettings } from '@/lib/data';
 import { Clock, Award, CheckCircle, ShieldCheck, BookOpen, ChevronRight, Phone } from 'lucide-react';
 
 export const dynamic = 'force-dynamic';
@@ -162,7 +163,7 @@ export default async function CourseDetailPage({ params }: CourseDetailPageProps
                 Apply for Course Now
               </Link>
 
-              <a href="tel:7290095961" className="pill-button-secondary text-xs py-3 text-center flex items-center justify-center gap-2">
+              <a href={`tel:${defaultSettings.phone_primary.replace(/\s/g, '')}`} className="pill-button-secondary text-xs py-3 text-center flex items-center justify-center gap-2">
                 <Phone className="w-3.5 h-3.5" /> Call Counsellor
               </a>
 

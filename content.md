@@ -1,5 +1,5 @@
-# World Wide NDT Institute & Services — Full Website Content Extract
-**Source site:** https://wwndtis.in/
+# Savvy Training Institute — Full Website Content Extract
+**Source site:** https://savvytraining.example/
 **Purpose:** Complete content reference for website rebuild
 **Extracted:** 24 July 2026
 
@@ -32,53 +32,53 @@
 ## 1.1 Site Identity
 | Field | Value |
 |---|---|
-| Site Name | World Wide NDT Institute & Services |
-| Domain | wwndtis.in |
+| Site Name | Savvy Training Institute |
+| Domain | savvytraining.example |
 | Logo file | `/wp-content/uploads/elementor/thumbs/World-Wide-NDT-Institute_LOGO_-rbz64lzduz87mwmgoddacw6t70p62za52j0viaiiyc.png` |
-| Logo alt text | World Wide NDT Institute_LOGO_ |
+| Logo alt text | Savvy Training Institute_LOGO_ |
 | Locale | en_US |
 | Platform (old) | WordPress + Elementor 4.1.3 |
-| Twitter handle | @wwndtis |
+| Twitter handle |  |
 
 ## 1.2 Primary Navigation Menu
 | Label | URL |
 |---|---|
-| Home | https://wwndtis.in/ |
-| About Us | https://wwndtis.in/about-us/ |
-| Course | https://wwndtis.in/course/ |
-| Admission | https://wwndtis.in/admission/ |
-| Blog | https://wwndtis.in/blog/ |
-| Gallery | https://wwndtis.in/gallery/ |
-| Contact Us | https://wwndtis.in/contact-us/ |
+| Home | https://savvytraining.example/ |
+| About Us | https://savvytraining.example/about-us/ |
+| Course | https://savvytraining.example/course/ |
+| Admission | https://savvytraining.example/admission/ |
+| Blog | https://savvytraining.example/blog/ |
+| Gallery | https://savvytraining.example/gallery/ |
+| Contact Us | https://savvytraining.example/contact-us/ |
 
 ## 1.3 Header Social Icons
-- Facebook — https://www.facebook.com/worldwidendtinstitutenoida
-- YouTube — https://www.youtube.com/channel/UCvGvHyDoAqC8fuO3iS516_Q
-- Twitter/X — https://twitter.com/wwndtis
-- Instagram — https://www.instagram.com/wwndtis
+- Facebook — 
+- YouTube — 
+- Twitter/X — 
+- Instagram — 
 
 ## 1.4 Footer (identical on every page)
 
 **Column 1 — "About Company"**
-> Office No:1101 Assotech Business Cresstera Tower 1 Sector 135 Noida ,(UP) India
+> Savvy Training Institute, Training Centre, Bengaluru, Karnataka, India
 >
-> +91 7290095961
+> +91 90000 12345
 >
-> info@ndtis.in
+> contact@savvytraining.example
 
 **Column 2 — "Useful Links"**
-- Home — https://wwndtis.in/
-- About Us — https://wwndtis.in/about-us/
-- Admission — https://wwndtis.in/admission/
-- Blog — https://wwndtis.in/blog/
-- Contact Us — https://wwndtis.in/contact-us/
+- Home — https://savvytraining.example/
+- About Us — https://savvytraining.example/about-us/
+- Admission — https://savvytraining.example/admission/
+- Blog — https://savvytraining.example/blog/
+- Contact Us — https://savvytraining.example/contact-us/
 
 **Column 3 — "Subscribe Newsletter"**
 - Button label: `Subscribe`
 - Body text: "Sign up for our latest news & articles. We won't give you spam mails."
 
 **Copyright bar**
-> © 2024 World Wide NDT Institute & Services. All Rights Reserved
+> © 2024 Savvy Training Institute. All Rights Reserved
 
 **Footer social links:** FACEBOOK / TWITTER / INSTAGRAM / YOUTUBE (same URLs as header)
 
@@ -138,7 +138,7 @@
 - /ndt-level-ii-training-course-fee-eligibility-minimum-qualifications-and-experience-required-for-joining-course/
 
 ### External video links referenced on-site
-- YouTube channel: https://www.youtube.com/@wwndtis
+- YouTube channel: 
 - NDT Certification & Training: https://youtu.be/bmWeMKy-T7c
 - Course Review video: https://youtu.be/AI4IPhrySwI
 - QA/QC + Revit demo video: https://www.youtube.com/watch?v=CcDMIA_GsSE&t=130s
@@ -150,9 +150,9 @@
 ## 3.1 SEO / Meta
 | Field | Value |
 |---|---|
-| URL | https://wwndtis.in/ |
+| URL | https://savvytraining.example/ |
 | Title tag | Best NDT Training Institute in India \| Join NDT level 2 course |
-| Meta description | Join the Best NDT Training Institute in India! World Wide NDT Institute offers top NDT Level 2 courses, QA/QC certification, online NDT training, expert trainers. |
+| Meta description | Join the Best NDT Training Institute in India! Savvy Training Institute offers top NDT Level 2 courses, QA/QC certification, online NDT training, expert trainers. |
 | OG image | /wp-content/uploads/2025/04/Join-NDT-Level-II-Course.png (1300×1300) |
 | OG image alt | Best NDT Training Institute in India |
 | OG type | website |
@@ -163,7 +163,7 @@
 
 ## 3.2 Hero Section
 **Eyebrow heading (H2):**
-> Welcome in World wide Institute Best NDT Training Institute in India
+> Welcome in Savvy Training Institute Best NDT Training Institute in India
 
 **Main heading (H2):**
 > Join NDT Level II &  QA/QC Courses
@@ -176,7 +176,7 @@
 
 ## 3.3 Intro Section
 **Heading (H2):**
-> At World Wide NDT Institute, we are your launchpad to a brilliant and exciting career! Join Our NDT Level II Course Now
+> At Savvy Training Institute, we are your launchpad to a brilliant and exciting career! Join Our NDT Level II Course Now
 
 **Body:**
 > Discover the premier destination for non-destructive testing (NDT) training in India. Our comprehensive program is designed to help you build expertise in this critical field. **Join NDT level 2 course** and equip yourself with the skills and knowledge to unlock new career opportunities in the thriving NDT industry.
@@ -222,7 +222,7 @@ Alt: "Factory workers working together in industrial metal production line."
 **Heading (H2):** Trustworthy And Efficient Training
 
 **Paragraph 1:**
-> We are passionate about education and committed to providing high-quality learning resources for learners around the globe. At **World Wide NDT Institute**, we pride ourselves on being the **Best NDT Training Institute in India**, delivering exceptional results and fostering the development of skilled professionals in the field of Non-Destructive Testing (NDT). Our courses, including the highly sought-after **NDT Level II Course**, are designed to equip you with the expertise required to excel in this dynamic industry.
+> We are passionate about education and committed to providing high-quality learning resources for learners around the globe. At **Savvy Training Institute**, we pride ourselves on being the **Best NDT Training Institute in India**, delivering exceptional results and fostering the development of skilled professionals in the field of Non-Destructive Testing (NDT). Our courses, including the highly sought-after **NDT Level II Course**, are designed to equip you with the expertise required to excel in this dynamic industry.
 
 **Paragraph 2:**
 > Our team of seasoned experts is dedicated to your success, ensuring you receive hands-on training, expert guidance, and industry insights that will set you apart from the competition. Whether you are just starting out or looking to advance your career, **Join NDT level 2 course** with us to gain comprehensive skills and knowledge that are in demand worldwide.
@@ -247,8 +247,8 @@ Alt: "Factory workers working together in industrial metal production line."
 ### Contact strip
 | Heading | Value |
 |---|---|
-| Call us Anytime | +97290095961  ⚠️ *(malformed — likely +91 7290095961)* |
-| Email us Anytime | worldwidendtis@gmail.com |
+| Call us Anytime | +91 90000 12345  ⚠️ *(malformed — likely +91 90000 12345)* |
+| Email us Anytime | contact@savvytraining.example |
 
 ## 3.8 Our Courses Section
 **Heading (H2):** Our Courses
@@ -308,7 +308,7 @@ Social: Facebook / Twitter / Youtube / Linkedin
 *(All four use the Elementor placeholder avatar — replace with real photos in rebuild. Rating: 5 stars each.)*
 
 **Shadab**
-> Outstanding job placement assistance! I secured a position soon after completing my NDT Level II Course at World Wide NDT Institute the Best NDT Training Institute in India, thanks to the institute's strong industry connections and unwavering support. The course provided me with the skills and knowledge needed to succeed in the field of Non-Destructive Testing, and I am truly grateful for the comprehensive training and guidance I received. Thank you, Worldwide NDT Institute, for launching my career!
+> Outstanding job placement assistance! I secured a position soon after completing my NDT Level II Course at Savvy Training Institute the Best NDT Training Institute in India, thanks to the institute's strong industry connections and unwavering support. The course provided me with the skills and knowledge needed to succeed in the field of Non-Destructive Testing, and I am truly grateful for the comprehensive training and guidance I received. Thank you, Savvy Training Institute, for launching my career!
 
 **Vikash** — *Designation* ⚠️ *(placeholder text left in original)*
 > Great facilities and hands-on experience! The practical sessions during my NDT Level II Course at the Best NDT Training Institute in India were invaluable, providing real-world exposure to the latest equipment and procedures. The training gave me the confidence and skills needed to excel in the field of Non-Destructive Testing. I highly recommend this institute to anyone serious about building a successful career in NDT!
@@ -324,10 +324,10 @@ Social: Facebook / Twitter / Youtube / Linkedin
 **Heading 2 (H2):** To Start on a Transformative Journey in Non-Destructive Testing (NDT)
 
 **Paragraph 1:**
-> Our comprehensive courses offer hands-on training, expert guidance, and certification that will elevate your skills and career prospects in the field. World Wide NDT Institute is The Best NDT Training Institute in India with Placement Records.
+> Our comprehensive courses offer hands-on training, expert guidance, and certification that will elevate your skills and career prospects in the field. Savvy Training Institute is The Best NDT Training Institute in India with Placement Records.
 
 **Paragraph 2:**
-> Whether you're starting fresh or looking to advance your knowledge, our tailored programs at World Wide **NDT Training Institute** ensure you gain the proficiency and confidence needed to excel in NDT Level II and QAQC Certification. **Join NDT level 2 course** today and take your career to the next level.
+> Whether you're starting fresh or looking to advance your knowledge, our tailored programs at **Savvy Training Institute** ensure you gain the proficiency and confidence needed to excel in NDT Level II and QAQC Certification. **Join NDT level 2 course** today and take your career to the next level.
 
 **Paragraph 3:**
 > At our **NDT Training Institute**, we provide comprehensive training that equips you with the essential skills to succeed in the ever-growing field of Non-Destructive Testing. Whether you're a beginner or looking to expand your expertise, our courses are designed to give you hands-on experience and in-depth knowledge. **Join NDT level 2 course** to enhance your career prospects and become an industry-ready professional in NDT and QA/QC.
@@ -467,7 +467,7 @@ Upload fields:
 
 ---
 
-**Q4: Does World wide NDT Institute provide 100% Job after level II & QAQC Course?**
+**Q4: Does Savvy Training Institute provide 100% Job after level II & QAQC Course?**
 > Yes, **NDT Training Institute** Worldwide provides a 100% job guarantee in India and abroad. **Join NDT level 2 course** today and take advantage of our comprehensive training programs that ensure your success in the global NDT industry.
 
 ---
@@ -491,7 +491,7 @@ Upload fields:
 
 **Sub-CTA:**
 Heading: Still Have Questions?
-Button: Get In Touch → tel:7290095961
+Button: Get In Touch → tel:9000012345
 Image: manager-supervisor-worker-discussing-about-production-results-new-strategy-factory-industrial-hall-scaled...jpg
 
 ## 3.17 Accreditation Logos
@@ -537,9 +537,9 @@ Link: READ MORE → /unlocking-safety-exploring-non-destructive-testing-ndt/
 ## 4.1 SEO / Meta
 | Field | Value |
 |---|---|
-| URL | https://wwndtis.in/about-us/ |
+| URL | https://savvytraining.example/about-us/ |
 | Title tag | About Us \| Leading NDT Training Institute in India |
-| Meta description | Learn about World Wide NDT Institute – India's top NDT Training Institute, QA QC, Fire & Safety, CSWIP 3.1, and Revit MEP training with global placement |
+| Meta description | Learn about Savvy Training Institute – India's top NDT Training Institute, QA QC, Fire & Safety, CSWIP 3.1, and Revit MEP training with global placement |
 | OG image | /wp-content/uploads/2025/05/feroz-sir.jpg (296×428) |
 | OG image alt | NDT Training Institute |
 | OG type | article |
@@ -554,7 +554,7 @@ Link: READ MORE → /unlocking-safety-exploring-non-destructive-testing-ndt/
 **Eyebrow (H2):** About
 **Heading (H2):** About Our Institute
 
-> Welcome to World Wide NDT Institute — a premier training hub dedicated to shaping future leaders in Non-Destructive Testing (NDT), Quality Assurance/Quality Control (QA/QC), and a wide range of technical fields. In addition to NDT and QA/QC, we offer specialized courses in HVAC, MEP, and Fire & Safety, ensuring comprehensive career development for aspiring professionals. Our mission is to deliver industry-relevant education that bridges the gap between theory and practical application, while also providing 100% placement support in top organizations across India and abroad. At World Wide NDT Institute, we don't just train you — we prepare you for a successful future.
+> Welcome to Savvy Training Institute — a premier training hub dedicated to shaping future leaders in Non-Destructive Testing (NDT), Quality Assurance/Quality Control (QA/QC), and a wide range of technical fields. In addition to NDT and QA/QC, we offer specialized courses in HVAC, MEP, and Fire & Safety, ensuring comprehensive career development for aspiring professionals. Our mission is to deliver industry-relevant education that bridges the gap between theory and practical application, while also providing 100% placement support in top organizations across India and abroad. At Savvy Training Institute, we don't just train you — we prepare you for a successful future.
 
 ### Statistics
 | Number | Label |
@@ -566,9 +566,9 @@ Link: READ MORE → /unlocking-safety-exploring-non-destructive-testing-ndt/
 
 ## 4.4 Director's Message
 Image: `/wp-content/uploads/2025/05/feroz-sir.jpg`
-**Heading (H2):** Hello .Welcome to World wide NDT Institute
+**Heading (H2):** Hello .Welcome to Savvy Training Institute
 
-> At World Wide NDT Institute, our vision is to build a skilled workforce ready to meet the evolving demands of the global industrial landscape. As the Director, I take immense pride in our commitment to delivering quality training in NDT, QA/QC, HVAC, MEP, and Fire & Safety. We believe education must go beyond textbooks — it should empower individuals with hands-on experience, confidence, and real-world skills.
+> At Savvy Training Institute, our vision is to build a skilled workforce ready to meet the evolving demands of the global industrial landscape. As the Director, I take immense pride in our commitment to delivering quality training in NDT, QA/QC, HVAC, MEP, and Fire & Safety. We believe education must go beyond textbooks — it should empower individuals with hands-on experience, confidence, and real-world skills.
 >
 > Our goal is not only to provide technical knowledge but also to guide each student toward a successful and fulfilling career, both in India and abroad. With expert trainers, modern facilities, and a strong placement network, we ensure our students are industry-ready from day one.
 >
@@ -655,7 +655,7 @@ Image: `/wp-content/uploads/2025/05/feroz-sir.jpg`
 
 ## 4.11 Newsletter Block (page-level, in addition to footer)
 **Heading (H2):** Subscribe to Our Newsletter
-> Subscribe to our newsletter to get the latest updates on courses, career tips, and placement opportunities from World Wide NDT Institute.
+> Subscribe to our newsletter to get the latest updates on courses, career tips, and placement opportunities from Savvy Training Institute.
 **Button:** Subscribe
 
 ---
@@ -665,7 +665,7 @@ Image: `/wp-content/uploads/2025/05/feroz-sir.jpg`
 ## 5.1 SEO / Meta
 | Field | Value |
 |---|---|
-| URL | https://wwndtis.in/course/ |
+| URL | https://savvytraining.example/course/ |
 | Title tag | Course -NDT Level 2, HVAC, MEP, fire & Safety Courses |
 | Meta description | Join certified NDT Level 2, HVAC, Revit MEP, Fire & Safety, CSWIP 3.1 courses with 100% placement in India & abroad. Ideal for 12th pass & engineering students. |
 | OG image | /wp-content/uploads/2024/04/depositphotos_232369518-stock-photo-ultrasonic-flaw-detector-stand-exhibition.jpg (380×253) |
@@ -675,7 +675,7 @@ Image: `/wp-content/uploads/2025/05/feroz-sir.jpg`
 
 ## 5.2 Hero
 **Heading (H2):** Hey, what would You want to learn today
-> At World Wide NDT Institute, we offer industry-focused training in NDT, QAQC, HVAC, MEP, and Fire & Safety with 100% placement support in India and abroad.
+> At Savvy Training Institute, we offer industry-focused training in NDT, QAQC, HVAC, MEP, and Fire & Safety with 100% placement support in India and abroad.
 
 **Button:** Get Started → `#` ⚠️ *(dead link)*
 
@@ -773,7 +773,7 @@ Button: Read More → /cswip-3-1-course/
 ## 6.1 SEO / Meta
 | Field | Value |
 |---|---|
-| URL | https://wwndtis.in/ndt-level-2-course/ |
+| URL | https://savvytraining.example/ndt-level-2-course/ |
 | Title tag | Best NDT Level 2 Course \| ASNT Level 2 Certification with Placement |
 | Meta description | Join our certified NDT Level 2 & ASNT Level 2 training with 100% placement. Start your career in industrial inspection with expert guidance. Enroll now! |
 | OG image | /wp-content/uploads/2025/05/freepik__a-stunning-realistic-3d-image-of-a-mechanical-engi__54440.jpeg (1024×1024) |
@@ -783,15 +783,15 @@ Button: Read More → /cswip-3-1-course/
 
 ## 6.2 Hero
 **Page label (H2):** ndt level 2
-**Heading (H2):** Explore NDT Level 2 Course at World Wide NDT Institute
+**Heading (H2):** Explore NDT Level 2 Course at Savvy Training Institute
 
-> Are you ready to take your career to the next level? At **World Wide NDT Institute** in Noida, India, we offer a comprehensive **NDT Level 2 Course** that prepares you for real-world industrial challenges. Whether you're just starting or upskilling, our training programs in **NDT Level 2** are built to help you succeed.
+> Are you ready to take your career to the next level? At **Savvy Training Institute** in Bengaluru, India, we offer a comprehensive **NDT Level 2 Course** that prepares you for real-world industrial challenges. Whether you're just starting or upskilling, our training programs in **NDT Level 2** are built to help you succeed.
 
 **Button:** Register Now → /admission/
 **Image:** freepik__a-stunning-realistic-3d-image-of-a-mechanical-engi__54440.jpeg
 
 ## 6.3 Why Choose Us
-**Heading (H2):** ✅ Why Choose World Wide NDT Institute?
+**Heading (H2):** ✅ Why Choose Savvy Training Institute?
 
 **🌍 Globally Recognized Certification**
 > Enroll in our **ASNT Level 2** and **NDT Level 2 Course** programs and earn globally accepted certifications. These credentials open the doors to job opportunities both in India and abroad.
@@ -809,8 +809,8 @@ Button: Read More → /cswip-3-1-course/
 > Our course structure is developed with employer needs in mind. This ensures you gain the skills that hiring managers look for in **ASNT Level 2** certified professionals.
 
 ## 6.4 Start Your Career CTA
-**Heading (H2):** 🚀 Start Your Career with World Wide NDT Institute
-> Join our expertly designed **NDT Level 2 Course** in Noida today and step confidently into a high-demand field. Gain your **ASNT Level 2** certification and become an expert in Non-Destructive Testing.
+**Heading (H2):** 🚀 Start Your Career with Savvy Training Institute
+> Join our expertly designed **NDT Level 2 Course** in Bengaluru today and step confidently into a high-demand field. Gain your **ASNT Level 2** certification and become an expert in Non-Destructive Testing.
 >
 > 👉 **Contact Us Today** to learn more and enroll in our next batch!
 
@@ -831,7 +831,7 @@ Button: Read More → /cswip-3-1-course/
 - Radiographic Film Interpretation (RTFI)
 
 ## 6.7 Fees Block
-**Heading (H2):** NDT Training Course Fees in World wide NDT Institute
+**Heading (H2):** NDT Training Course Fees in Savvy Training Institute
 1. NDT Course Fees: **Contact Us For Course Details**
 2. Qualification Required: Preferably Engineering/Diploma Graduates/ 12TH
 3. NDT Level 2 Course Duration: 35 Days
@@ -961,12 +961,12 @@ Button: Read More → /cswip-3-1-course/
 ⚠️ *The "Keywords:" lines are visible SEO stuffing on the live page — remove in rebuild.*
 
 ## 6.10 Training Levels Block
-**Heading (H2):** World Wide NDT Institute Offer NDT Training in Level (I ,II,III)
-> World Wide NDT Institute stands out by not only offering extensive training but also promising 100% job placement assistance in India and abroad. This commitment ensures that students are not only well-prepared theoretically and practically but are also supported in finding relevant job opportunities globally, enhancing their career prospects significantly.
+**Heading (H2):** Savvy Training Institute Offer NDT Training in Level (I ,II,III)
+> Savvy Training Institute stands out by not only offering extensive training but also promising 100% job placement assistance in India and abroad. This commitment ensures that students are not only well-prepared theoretically and practically but are also supported in finding relevant job opportunities globally, enhancing their career prospects significantly.
 
 ## 6.11 Help Block *(identical on all course pages)*
 **Heading (H2):** Need Help Or Have a Question?
-> Please Call Our Expert at +91 7290095961 or +91 7290095962
+> Please Call Our Expert at +91 90000 12345 or +91 90000 12345
 **Button:** Contact us → /contact-us/
 
 ## 6.12 Student Enquiry Form *(identical on all course pages)*
@@ -1005,9 +1005,9 @@ Images: 8-cOrY34fI91oISKj.png, ceddfa9f-0c07-4a86-ad88-a3786d0fb16a.jpg
 ## 7.1 SEO / Meta
 | Field | Value |
 |---|---|
-| URL | https://wwndtis.in/qa-and-qc-course/ |
+| URL | https://savvytraining.example/qa-and-qc-course/ |
 | Title tag | Best QA QC Course with Fees \| 100% Guaranteed Placement Today |
-| Meta description | Join the best QA QC Engineer Course at World Wide NDT Institute. Learn from experts, get 100% placement. Check QA QC course fees and enroll today! |
+| Meta description | Join the best QA QC Engineer Course at Savvy Training Institute. Learn from experts, get 100% placement. Check QA QC course fees and enroll today! |
 | OG image | /wp-content/uploads/2025/05/Add-a-heading.jpg (1300×1300) |
 | OG image alt | qa qc course |
 | Published | 2024-05-09 |
@@ -1018,10 +1018,10 @@ Images: 8-cOrY34fI91oISKj.png, ceddfa9f-0c07-4a86-ad88-a3786d0fb16a.jpg
 **Heading (H2):** QA & QC Course
 **Sub-heading (H2):** Ready to Excel in Quality Assurance? Join the Best QA QC Course Today!
 
-> Ready to excel in the high-demand fields of **Quality Assurance (QA)** and **Quality Control (QC)**? **World Wide NDT Institute** in Noida, India, offers a top-tier **QA QC course** designed to launch your career in ensuring quality and reliability across industries. Whether you're a fresher or a working professional, our institute delivers a globally recognized **QA QC engineer course** with practical learning, expert guidance, and affordable **QA QC course fees**.
+> Ready to excel in the high-demand fields of **Quality Assurance (QA)** and **Quality Control (QC)**? **Savvy Training Institute** in Bengaluru, India, offers a top-tier **QA QC course** designed to launch your career in ensuring quality and reliability across industries. Whether you're a fresher or a working professional, our institute delivers a globally recognized **QA QC engineer course** with practical learning, expert guidance, and affordable **QA QC course fees**.
 
 ## 7.3 Why Choose Us
-**Heading (H2):** Why Choose World Wide NDT Institute for QA QC Courses?
+**Heading (H2):** Why Choose Savvy Training Institute for QA QC Courses?
 
 > **Global Standards:** Our **QA QC courses** align with international benchmarks, making your certification globally recognized. The **QA QC engineer course** helps you build credentials that unlock international job opportunities.
 >
@@ -1035,9 +1035,9 @@ Images: 8-cOrY34fI91oISKj.png, ceddfa9f-0c07-4a86-ad88-a3786d0fb16a.jpg
 
 ## 7.4 Fees & Placement
 **Heading (H2):** Affordable QA QC Course Fees & 100% Placement Assistance
-> At World Wide NDT Institute, we are proud to offer **QA QC courses** at competitive rates. Our transparent **QA QC course fees** make high-quality training accessible to all. Plus, our 100% placement assistance ensures that once you complete the **QA QC engineer course**, you're fully prepared to enter the job market with confidence.
+> At Savvy Training Institute, we are proud to offer **QA QC courses** at competitive rates. Our transparent **QA QC course fees** make high-quality training accessible to all. Plus, our 100% placement assistance ensures that once you complete the **QA QC engineer course**, you're fully prepared to enter the job market with confidence.
 >
-> **Join the World Wide NDT Institute today** and enroll in a **QA QC course** that not only builds your skills but also sets you up for a thriving international career.
+> **Join the Savvy Training Institute today** and enroll in a **QA QC course** that not only builds your skills but also sets you up for a thriving international career.
 
 **Button:** Register Now → /admission/
 **Image:** Add-a-heading-1024x1024.jpg (alt: qa qc course)
@@ -1056,7 +1056,7 @@ Images: 8-cOrY34fI91oISKj.png, ceddfa9f-0c07-4a86-ad88-a3786d0fb16a.jpg
 - QA/QC Piping
 
 ## 7.7 Fees Block
-**Heading (H2):** QA/QC Course Fees in World wide NDT Institute
+**Heading (H2):** QA/QC Course Fees in Savvy Training Institute
 1. QA/QC Course Fees: **Contact Us For Course Details**
 2. Qualification Required: Preferably Engineering/Diploma Graduates/ 12TH
 3. QA/QC Course Duration: 30 Days
@@ -1096,7 +1096,7 @@ Images: 8-cOrY34fI91oISKj.png, ceddfa9f-0c07-4a86-ad88-a3786d0fb16a.jpg
 
 ## 7.9 Help Block
 **Heading (H2):** Need Help Or Have a Question?
-> Please Call Our Expert at +91 7290095961 or +91 7290095962
+> Please Call Our Expert at +91 90000 12345 or +91 90000 12345
 **Button:** Contact us → /contact-us/
 
 ## 7.10 What is QA/QC Course
@@ -1123,7 +1123,7 @@ Images: 8-cOrY34fI91oISKj.png, ceddfa9f-0c07-4a86-ad88-a3786d0fb16a.jpg
 ## 8.1 SEO / Meta
 | Field | Value |
 |---|---|
-| URL | https://wwndtis.in/fire-safety-course/ |
+| URL | https://savvytraining.example/fire-safety-course/ |
 | Title tag | Fire & Safety Course: 100% Job-Ready Fire Fighting Course |
 | Meta description | Join our certified Fire & Safety Course for hands-on Fire Fighting Training. Learn emergency response, safety protocols & get job-ready. Enroll now! |
 | OG image | /wp-content/uploads/2024/05/pikaso_texttoimage_fire-safety-engineer.jpeg (1024×1024) |
@@ -1135,9 +1135,9 @@ Images: 8-cOrY34fI91oISKj.png, ceddfa9f-0c07-4a86-ad88-a3786d0fb16a.jpg
 **Page label (H2):** Fire & Safety Course
 **Heading (H2):** Fire & Safety Course
 
-> **Join the Fire & Safety Course at World Wide NDT Institute** and empower yourself with the knowledge and skills to manage and prevent fire hazards effectively. Our comprehensive **fire and safety training** course is designed to educate students on the latest fire safety protocols, equipment handling, and emergency response techniques. Ideal for both professionals seeking to enhance their qualifications and newcomers eager to enter the field, this **fire fighting course** covers everything from basic fire safety principles to advanced firefighting strategies.
+> **Join the Fire & Safety Course at Savvy Training Institute** and empower yourself with the knowledge and skills to manage and prevent fire hazards effectively. Our comprehensive **fire and safety training** course is designed to educate students on the latest fire safety protocols, equipment handling, and emergency response techniques. Ideal for both professionals seeking to enhance their qualifications and newcomers eager to enter the field, this **fire fighting course** covers everything from basic fire safety principles to advanced firefighting strategies.
 >
-> At World Wide NDT Institute, you'll benefit from expert instructors, practical training sessions, and state-of-the-art facilities, ensuring you are well-prepared to tackle fire safety challenges in any setting. Enroll today and take a proactive step towards a safer future, enhancing your career prospects and contributing to the safety of your community.
+> At Savvy Training Institute, you'll benefit from expert instructors, practical training sessions, and state-of-the-art facilities, ensuring you are well-prepared to tackle fire safety challenges in any setting. Enroll today and take a proactive step towards a safer future, enhancing your career prospects and contributing to the safety of your community.
 
 **Button:** Enquire Now → /contact-us/
 **Image:** pikaso_texttoimage_fire-safety-engineer.jpeg
@@ -1150,7 +1150,7 @@ Images: 8-cOrY34fI91oISKj.png, ceddfa9f-0c07-4a86-ad88-a3786d0fb16a.jpg
 - 100% Job Placement
 
 ## 8.4 Fees Block
-**Heading (H2):** Fire & Safety Course Fees in World wide NDT Institute
+**Heading (H2):** Fire & Safety Course Fees in Savvy Training Institute
 1. Fire & Safety Course Fees: **Contact Us For Course Details**
 2. Qualification Required: Preferably Engineering/Diploma Graduates/ 12TH
 3. Fire & Safety Course Duration: 1 Year Diploma
@@ -1185,7 +1185,7 @@ Images: 8-cOrY34fI91oISKj.png, ceddfa9f-0c07-4a86-ad88-a3786d0fb16a.jpg
 
 ## 8.7 Help Block
 **Heading (H2):** Need Help Or Have a Question?
-> Please Call Our Expert at +91 7290095961 or +91 7290095962
+> Please Call Our Expert at +91 90000 12345 or +91 90000 12345
 **Button:** Contact us → /contact-us/
 
 ## 8.8 FAQ Accordion — ⚠️ ALL LOREM IPSUM (MUST BE WRITTEN)
@@ -1207,7 +1207,7 @@ Suggested replacements to draft:
 >
 > This certification can significantly add to your educational profile and is an excellent opportunity for those looking to advance in the **Fire and Safety Training** and **Fire Fighting Course** industries. Additionally, students who complete the course are eligible to register at the employment exchange, opening up numerous career opportunities in the **Fire and Safety** sector.
 >
-> To explore our training videos, student testimonials, and course highlights, visit our official YouTube channel [here](https://www.youtube.com/@wwndtis).
+> To explore our training videos, student testimonials, and course highlights, visit our official YouTube channel [here]().
 
 **Button:** Enquire Now → /contact-us/
 
@@ -1221,7 +1221,7 @@ Suggested replacements to draft:
 ## 9.1 SEO / Meta
 | Field | Value |
 |---|---|
-| URL | https://wwndtis.in/hvac-course/ |
+| URL | https://savvytraining.example/hvac-course/ |
 | Title tag | Top HVAC Course & Expert Technician Training \| 100% Job Placement |
 | Meta description | Enroll in a top-rated HVAC course with hands-on HVAC technician training. Learn from experts and get 100% job assistance after completion. Join Now |
 | OG image | /wp-content/uploads/2024/05/pikaso_texttoimage_Heating-Ventilation-and-Air-Conditioning.jpeg (1024×1024) |
@@ -1233,16 +1233,16 @@ Suggested replacements to draft:
 **Page label (H2):** Hvac course
 **Heading (H2):** HVAC Course
 
-**Sub-heading:** World Wide NDT Institute HVAC Training Program in Noida
+**Sub-heading:** Savvy Training Institute HVAC Training Program in Bengaluru
 
-> Discover a premier HVAC training experience at World Wide NDT Institute in Noida, renowned for its alignment with current industry standards and its effectiveness in facilitating stellar placements at global MNCs. As one of Noida's most reputable HVAC training institutes, we provide a curriculum that is both comprehensive and practical.
+> Discover a premier HVAC training experience at Savvy Training Institute in Bengaluru, renowned for its alignment with current industry standards and its effectiveness in facilitating stellar placements at global MNCs. As one of Bengaluru's most reputable HVAC training institutes, we provide a curriculum that is both comprehensive and practical.
 
 **Why Choose Our HVAC Course?**
 > - **Industry-Relevant Curriculum**: Our course is designed based on the latest industry standards, ensuring you learn the most current practices and technologies in HVAC systems.
 > - **Practical Hands-On Training**: Gain invaluable practical experience with our hands-on training approach. You'll work with real-world HVAC equipment and simulation tools that prepare you for immediate entry into the workforce.
 > - **Placement-Focused**: We are committed to helping you secure your dream job. Our strong industry connections and dedicated placement cell work tirelessly to support you in launching a successful career in multinational companies.
 >
-> Embark on your HVAC career with confidence at World Wide NDT Institute, where we empower you with the skills needed to excel in the ever-evolving HVAC industry.
+> Embark on your HVAC career with confidence at Savvy Training Institute, where we empower you with the skills needed to excel in the ever-evolving HVAC industry.
 
 **Button:** Register Now → /admission/
 **Image:** pikaso_texttoimage_Heating-Ventilation-and-Air-Conditioning.jpeg
@@ -1255,7 +1255,7 @@ Suggested replacements to draft:
 - 100% Job Placement
 
 ## 9.4 Fees Block
-**Heading (H2):** HVAC Course Fee in World wide NDT Institute
+**Heading (H2):** HVAC Course Fee in Savvy Training Institute
 1. HVAC Course Fees: **Contact Us For Course Details**
 2. Qualification Required: Preferably Engineering/Diploma Graduates/ 12TH
 3. HVAC Course Duration: 35 Days
@@ -1266,9 +1266,9 @@ Suggested replacements to draft:
 ## 9.5 Course Overview / Syllabus
 **Heading (H2):** Course Overview
 **Sub-headings:**
-- Course Content and Syllabus for HVAC Training in Noida
-- Top 20 Reasons to Choose World wide NDT Institute for HVAC Training in Noida ⚠️ *(header promises 20 reasons but only 4 are listed at the end)*
-- HVAC Training Curriculum in Noida
+- Course Content and Syllabus for HVAC Training in Bengaluru
+- Top 20 Reasons to Choose Savvy Training Institute for HVAC Training in Bengaluru ⚠️ *(header promises 20 reasons but only 4 are listed at the end)*
+- HVAC Training Curriculum in Bengaluru
 
 **Essential Concepts of HVAC & Refrigeration**
 - Overview of Heating, Ventilation, and Air Conditioning
@@ -1324,7 +1324,7 @@ Suggested replacements to draft:
 **Applications of HVAC & Refrigeration**
 - Practical Usage in Different Settings like Hospitals, Commercial Buildings, Residences, Malls, Cold Storage Facilities
 
-**Reasons to Choose World Wide for HVAC Training**
+**Reasons to Choose Savvy Training Institute for HVAC Training**
 - Customized Training Programs with Industry-Relevant Content
 - Experienced Trainers for Comprehensive Learning
 - Well-Equipped Labs and Classrooms for Practical Sessions
@@ -1349,7 +1349,7 @@ Suggested replacements to draft:
 >
 > Through these roles, HVAC design engineers ensure that heating, cooling, and ventilation systems are functional, efficient, and appropriately integrated into the structural and aesthetic objectives of new construction projects. Enrolling in high-quality **HVAC technician training** is the first step toward mastering these responsibilities.
 >
-> 📺 [**Watch our HVAC training video on YouTube**](https://www.youtube.com/@wwndtis) to see practical learning in action at World Wide NDT Institute.
+> 📺 [**Watch our HVAC training video on YouTube**]() to see practical learning in action at Savvy Training Institute.
 
 ## 9.7 Help Block + Enquiry Form
 *(Same as Sections 6.11 / 6.12)*
@@ -1371,9 +1371,9 @@ Suggested replacements to draft:
 ## 10.1 SEO / Meta
 | Field | Value |
 |---|---|
-| URL | https://wwndtis.in/revit-mep-training-course-fees/ |
-| Title tag | Revit MEP Training Course & Fees \| Join World Wide NDT Institute |
-| Meta description | Discover expert-led Revit MEP training at World Wide NDT Institute. Learn Revit MEP design, modeling, and drafting with hands-on experience. Get details on course fees and enrollment. |
+| URL | https://savvytraining.example/revit-mep-training-course-fees/ |
+| Title tag | Revit MEP Training Course & Fees \| Join Savvy Training Institute |
+| Meta description | Discover expert-led Revit MEP training at Savvy Training Institute. Learn Revit MEP design, modeling, and drafting with hands-on experience. Get details on course fees and enrollment. |
 | OG image | /wp-content/uploads/2023/11/person-using-ai-tool-job-1024x681.jpg |
 | OG image alt | revit mep training |
 | Published | 2024-05-09 |
@@ -1403,16 +1403,16 @@ Suggested replacements to draft:
 *(Same five badges)*
 
 ## 10.4 Fees Block
-**Heading (H2):** Revit MEP Training Course Fees in World wide NDT Institute
+**Heading (H2):** Revit MEP Training Course Fees in Savvy Training Institute
 
 **💰 Revit Course Fee Details**
-> The **Revit course fee** at World Wide NDT Institute is highly affordable, considering the comprehensive curriculum, expert trainers, and practical approach. We provide flexible payment options and discounts for early or group enrollments. For full **Revit course fee** details, feel free to contact our team directly or visit our official course fee page.
+> The **Revit course fee** at Savvy Training Institute is highly affordable, considering the comprehensive curriculum, expert trainers, and practical approach. We provide flexible payment options and discounts for early or group enrollments. For full **Revit course fee** details, feel free to contact our team directly or visit our official course fee page.
 
 **🎥 Watch Revit MEP in Action**
 > Check out this YouTube video to see what you'll learn:
 > 👉 [Watch Now](https://www.youtube.com/watch?v=CcDMIA_GsSE&t=130s)
 >
-> Start your journey today with **Revit MEP training** at World Wide NDT Institute — where innovation meets expertise. Contact us to learn more about enrollment and the latest **Revit course fee**.
+> Start your journey today with **Revit MEP training** at Savvy Training Institute — where innovation meets expertise. Contact us to learn more about enrollment and the latest **Revit course fee**.
 
 ## 10.5 Career Prospects
 **Heading (H2):** Career Prospects / Job Roles
@@ -1426,7 +1426,7 @@ Suggested replacements to draft:
 - Mechanical Designer with expertise in Revit
 - BIM Trainee
 
-> If you're looking to build a career in building services design, enrolling in a **Revit MEP training** program is one of the smartest decisions you can make. Revit MEP (Mechanical, Electrical, and Plumbing) is a vital software tool used across the architecture, engineering, and construction industries. It allows professionals to create detailed and coordinated 3D models that enhance building performance and project accuracy. At **World Wide NDT Institute**, we offer one of the most industry-relevant **Revit courses near me**, especially designed for students and professionals aiming to become proficient in MEP system design.
+> If you're looking to build a career in building services design, enrolling in a **Revit MEP training** program is one of the smartest decisions you can make. Revit MEP (Mechanical, Electrical, and Plumbing) is a vital software tool used across the architecture, engineering, and construction industries. It allows professionals to create detailed and coordinated 3D models that enhance building performance and project accuracy. At **Savvy Training Institute**, we offer one of the most industry-relevant **Revit courses near me**, especially designed for students and professionals aiming to become proficient in MEP system design.
 >
 > Our **Revit MEP training** course equips learners with the skills needed to design HVAC, electrical, and plumbing systems using Revit's powerful BIM environment. You'll also learn how to detect design clashes, create construction documentation, and coordinate effectively with multidisciplinary teams. Whether you're a fresher or a working professional, our expert trainers provide hands-on training that prepares you for real-world projects both in India and abroad.
 >
@@ -1445,7 +1445,7 @@ Suggested replacements to draft:
 > We understand that cost plays an important role in choosing the right course. Our **Revit course fee** is designed to be affordable and competitive, providing great value for your investment. We also offer installment payment options to make learning accessible for all.
 >
 > **3. Hands-On Training**
-> Theory is important, but practice is essential. At World Wide NDT Institute, we focus on providing practical training that gives you real-world experience. You will work with actual **Revit MEP** software and simulate MEP system designs from start to finish.
+> Theory is important, but practice is essential. At Savvy Training Institute, we focus on providing practical training that gives you real-world experience. You will work with actual **Revit MEP** software and simulate MEP system designs from start to finish.
 >
 > **4. 100% Placement Support**
 > Our course doesn't end with training. We offer placement assistance and guidance to help you secure a job in the MEP design industry. With our training, you'll have the confidence and skills to thrive in your career.
@@ -1464,12 +1464,12 @@ Suggested replacements to draft:
 
 ## 10.9 Course Fees Block 2
 **Heading (H2):** Revit MEP Course Fees
-> We offer **affordable Revit MEP course fees** with clear transparency. Our pricing is designed to give you the best value for the extensive learning you'll receive. To learn more about the **Revit MEP course fees**, please contact our admissions team at **7290095961** or visit our website.
+> We offer **affordable Revit MEP course fees** with clear transparency. Our pricing is designed to give you the best value for the extensive learning you'll receive. To learn more about the **Revit MEP course fees**, please contact our admissions team at **9000012345** or visit our website.
 >
 > Additionally, we offer flexible payment options to make it easier for you to start your training.
 
 ## 10.10 Why Enroll
-**Heading (H2):** Why Enroll in Revit MEP Training at World Wide NDT Institute?
+**Heading (H2):** Why Enroll in Revit MEP Training at Savvy Training Institute?
 
 > - **Industry Expert Trainers**: Learn from experienced trainers who have years of experience working with Revit MEP in the construction industry.
 > - **State-of-the-Art Infrastructure**: Our training facility is equipped with the latest software and hardware for an enhanced learning experience.
@@ -1477,7 +1477,7 @@ Suggested replacements to draft:
 > - **Globally Recognized Certification**: Get certified with a Revit MEP course completion certificate recognized across India and abroad.
 
 **Closing line:**
-> **Start your journey toward becoming an expert in MEP system design with World Wide NDT Institute's Revit MEP training course today!**
+> **Start your journey toward becoming an expert in MEP system design with Savvy Training Institute's Revit MEP training course today!**
 
 ## 10.11 Other Courses Sidebar
 *(Same six links — see Section 6.13)*
@@ -1489,9 +1489,9 @@ Suggested replacements to draft:
 ## 11.1 SEO / Meta
 | Field | Value |
 |---|---|
-| URL | https://wwndtis.in/cswip-3-1-course/ |
+| URL | https://savvytraining.example/cswip-3-1-course/ |
 | Title tag | Top-Rated CSWIP 3.1 Course with Global Placement Join Now |
-| Meta description | Join CSWIP 3.1 course with 100% placement in India & abroad. Get certified at World Wide NDT Institute. Check CSWIP course details & fees now! |
+| Meta description | Join CSWIP 3.1 course with 100% placement in India & abroad. Get certified at Savvy Training Institute. Check CSWIP course details & fees now! |
 | OG image | /wp-content/uploads/2024/05/pikaso_texttoimage_welding-inspecter.jpeg (1024×1024) |
 | OG image alt | cswip 3.1 course in world wide ndt institute |
 | Published | 2024-05-09 |
@@ -1501,9 +1501,9 @@ Suggested replacements to draft:
 ## 11.2 Hero
 **H1:** cswip 3.1 course
 **Heading (H2):** cswip 3.1 course & fees
-**Sub-heading (H2):** Build Your Future with the CSWIP 3.1 Course at World Wide NDT Institute
+**Sub-heading (H2):** Build Your Future with the CSWIP 3.1 Course at Savvy Training Institute
 
-> **World Wide NDT Institute**, we proudly offer the **CSWIP 3.1 course**, a globally recognized **CSWIP course** designed for professionals aiming to advance their careers in welding inspection. Whether you're an experienced welder or new to inspection, this **CSWIP 3.1 course** gives you the skills and certification needed to thrive in the global welding industry. ⚠️ *(sentence starts abruptly — missing "At" — fix in rebuild)*
+> **Savvy Training Institute**, we proudly offer the **CSWIP 3.1 course**, a globally recognized **CSWIP course** designed for professionals aiming to advance their careers in welding inspection. Whether you're an experienced welder or new to inspection, this **CSWIP 3.1 course** gives you the skills and certification needed to thrive in the global welding industry. ⚠️ *(sentence starts abruptly — missing "At" — fix in rebuild)*
 >
 > Our **CSWIP 3.1 course** prepares you for the **CSWIP Welding Inspector certification exam**, covering essential topics like welding techniques, metallurgy, defect recognition, international codes, and hands-on inspection practices. We focus not just on passing the test but on building true inspection competence.
 
@@ -1519,7 +1519,7 @@ Suggested replacements to draft:
 > - **Flexible Batches:** Choose full-time, part-time, or weekend classes
 > - **Industry-Relevant Training:** Our **CSWIP 3.1 course** is designed to meet current job market needs
 >
-> Join thousands of successful students who trusted **World Wide NDT Institute** for their **CSWIP 3.1 course** and career launch.
+> Join thousands of successful students who trusted **Savvy Training Institute** for their **CSWIP 3.1 course** and career launch.
 >
 > For complete details on **CSWIP 3.1 course fees**, batch timings, and enrollment, contact us today!
 
@@ -1532,7 +1532,7 @@ Suggested replacements to draft:
 >
 > **Courses That Connect:** Our courses are designed to give you the skills employers want. Learn with us, and get ready to work.
 >
-> Join us at Worldwide NDT Institute and start your journey in Welding Inspector today!
+> Join us at Savvy Training Institute and start your journey in Welding Inspector today!
 
 **Button:** Register Now → /admission/
 **Image:** pikaso_texttoimage_welding-inspecter.jpeg
@@ -1541,7 +1541,7 @@ Suggested replacements to draft:
 *(Same five badges)*
 
 ## 11.6 Fees Block
-**Heading (H2):** cswip 3.1 course Fees in World wide NDT Institute
+**Heading (H2):** cswip 3.1 course Fees in Savvy Training Institute
 1. CSWIP Course Fees: **Contact Us For Course Details**
 2. Qualification Required: Preferably Engineering/Diploma Graduates/ 12TH
 3. CSWIP Welding Inspector Course Duration: 35 Days
@@ -1575,7 +1575,7 @@ Suggested replacements to draft:
 ## 11.9 Industries Hiring
 **Heading (H2):** Top Industries Hiring CSWIP-Certified Professionals
 
-> Completing a **CSWIP 3.1 course** opens doors to high-demand job roles across multiple industries worldwide. Sectors such as **oil & gas**, **power generation**, **shipbuilding**, **aerospace**, **construction**, and **manufacturing** actively seek CSWIP-certified welding inspectors to ensure structural safety and quality compliance. These industries rely on professionals trained through a **CSWIP course** to maintain international welding standards and prevent costly errors. With affordable and transparent **CSWIP 3.1 course fees**, gaining this certification is a smart investment for anyone looking to work in globally competitive fields. Enrolling in a **CSWIP 3.1 course** at World Wide NDT ensures you're industry-ready from day one.
+> Completing a **CSWIP 3.1 course** opens doors to high-demand job roles across multiple industries worldwide. Sectors such as **oil & gas**, **power generation**, **shipbuilding**, **aerospace**, **construction**, and **manufacturing** actively seek CSWIP-certified welding inspectors to ensure structural safety and quality compliance. These industries rely on professionals trained through a **CSWIP course** to maintain international welding standards and prevent costly errors. With affordable and transparent **CSWIP 3.1 course fees**, gaining this certification is a smart investment for anyone looking to work in globally competitive fields. Enrolling in a **CSWIP 3.1 course** at Savvy Training Institute ensures you're industry-ready from day one.
 
 ## 11.10 Help Block + Enquiry Form
 *(Same as Sections 6.11 / 6.12)*
@@ -1583,7 +1583,7 @@ Suggested replacements to draft:
 ## 11.11 What Will I Learn
 **Heading (H2):** What will I learn?
 
-> At World Wide NDT Institute, we are excited to offer our CSWIP 3.1 Welding Inspector Course, meticulously crafted for professionals in the field. This course provides a comprehensive, flexible learning experience, allowing participants to progress at their own pace with 60 days of access to the online materials, extendable upon request.
+> At Savvy Training Institute, we are excited to offer our CSWIP 3.1 Welding Inspector Course, meticulously crafted for professionals in the field. This course provides a comprehensive, flexible learning experience, allowing participants to progress at their own pace with 60 days of access to the online materials, extendable upon request.
 
 **Course Format and Resources:**
 > Participants will navigate through 30 detailed sections covering all essential aspects of welding inspection. The course is enriched with diverse learning tools, including:
@@ -1605,9 +1605,9 @@ Suggested replacements to draft:
 > 6. **Practical Applications**: Macro inspection, thermal cutting, heat treatments.
 > 7. **Assessment and Review**: Regular homework assignments and a mock examination to consolidate learning.
 >
-> This course structure is designed to ensure that you not only pass the CSWIP 3.1 Course but also emerge as a proficient and confident welding inspector, equipped with both theoretical knowledge and practical skills. Join us at World Wide NDT Institute to advance your career with credentials that are recognized globally in the welding industry.
+> This course structure is designed to ensure that you not only pass the CSWIP 3.1 Course but also emerge as a proficient and confident welding inspector, equipped with both theoretical knowledge and practical skills. Join us at Savvy Training Institute to advance your career with credentials that are recognized globally in the welding industry.
 >
-> 👉 **To learn more about cswip 3.1 Course, visit our official YouTube channel for detailed course insights, student testimonials, and training highlights.: https://www.youtube.com/@wwndtis**
+> 👉 **To learn more about cswip 3.1 Course, visit our official YouTube channel for detailed course insights, student testimonials, and training highlights.: **
 
 ## 11.12 Other Courses Sidebar
 *(Same six links — see Section 6.13)*
@@ -1619,13 +1619,13 @@ Suggested replacements to draft:
 ## 12.1 SEO / Meta
 | Field | Value |
 |---|---|
-| URL | https://wwndtis.in/admission/ |
+| URL | https://savvytraining.example/admission/ |
 | Title tag | Admission - Best NDT Training Institute in India \| Join NDT level 2 course |
 | Meta description | HOME / ADMISSION ⚠️ *(breadcrumb text was scraped as the description — must be rewritten)* |
 | Published | 2023-10-24 |
 | Modified | 2025-05-06 |
 
-**Suggested new meta description for rebuild:** *"Apply online for NDT Level 2, QA/QC, Fire & Safety and HVAC courses at World Wide NDT Institute, Noida. Free counselling, flexible fee payment, and 100% placement support."*
+**Suggested new meta description for rebuild:** *"Apply online for NDT Level 2, QA/QC, Fire & Safety and HVAC courses at Savvy Training Institute, Bengaluru. Free counselling, flexible fee payment, and 100% placement support."*
 
 ## 12.2 Page Banner
 **H1/H2:** Admission
@@ -1670,9 +1670,9 @@ Suggested replacements to draft:
 ## 13.1 SEO / Meta
 | Field | Value |
 |---|---|
-| URL | https://wwndtis.in/contact-us/ |
-| Title tag | Contact World Wide NDT Institute \| Get Expert Guidance |
-| Meta description | Need help with NDT, QA QC, or HVAC courses? Contact World Wide NDT Institute in Noida for expert guidance, admission support, and 24/7 assistance. |
+| URL | https://savvytraining.example/contact-us/ |
+| Title tag | Contact Savvy Training Institute \| Get Expert Guidance |
+| Meta description | Need help with NDT, QA QC, or HVAC courses? Contact Savvy Training Institute in Bengaluru for expert guidance, admission support, and 24/7 assistance. |
 | Published | 2024-07-16 |
 | Modified | 2025-05-07 |
 
@@ -1686,27 +1686,27 @@ Suggested replacements to draft:
 
 **Heading (H2):** Reach Us
 **Heading (H2):** Contact Form
-**Form intro (H5):** Contact World Wide NDT Institute | Get Expert Guidance and Admission Support
+**Form intro (H5):** Contact Savvy Training Institute | Get Expert Guidance and Admission Support
 *(Honeypot: "Please leave this field empty.")*
 
 ## 13.4 Contact Details Block
 **ADDRESS**
-> Office No:1101 Assotech Business Cresstera Tower 1 Sector 135 Noida ,(UP) India
+> Savvy Training Institute, Training Centre, Bengaluru, Karnataka, India
 
 **CONTACT US**
-> Mobile: +91 7290095961,
-> +91 7290095965
+> Mobile: +91 90000 12345,
+> +91 90000 12345
 
 **EMAIL**
-> info@ndtis.in
-> worldwidendtis@gmail.com
+> contact@savvytraining.example
+> contact@savvytraining.example
 
 ## 13.5 Map Embed
 Google Maps iframe. Current embed URL is malformed (a Google Maps short link nested inside the `q=` query parameter):
 ```
-https://maps.google.com/maps?q=Assotech%20Business%20https%3A%2F%2Fmaps.app.goo.gl%2FHKdyoG4WQJPQn5EQ8%2CSector%20135%20Noida&t=m&z=10&output=embed&iwloc=near
+https://www.google.com/maps?q=Training%20Centre%2C%20Bengaluru%2C%20Karnataka%2C%20India&output=embed
 ```
-⚠️ *Rebuild with a proper Google Maps Embed API call using the real place ID or clean coordinates for Assotech Business Cresterra, Sector 135, Noida.*
+The map points at the placeholder training centre in Bengaluru.
 
 ---
 
@@ -1715,7 +1715,7 @@ https://maps.google.com/maps?q=Assotech%20Business%20https%3A%2F%2Fmaps.app.goo.
 ## 14.1 SEO / Meta
 | Field | Value |
 |---|---|
-| URL | https://wwndtis.in/blog/ |
+| URL | https://savvytraining.example/blog/ |
 | Title tag | Top Expert Blogs on NDT Level 2, QA/QC, CSWIP 3.1 Courses |
 | Meta description | Explore expert blogs on NDT Level 2, QA/QC Course, Revit MEP, CSWIP 3.1 & Fire Safety courses. Get career tips, job trends & training updates for 12th pass students. |
 | Published | 2024-11-23 |
@@ -1812,15 +1812,15 @@ Each has two buttons: `Get Started` → `#` and `Read More` → `#` ⚠️ *(bot
 ## 15.1 SEO / Meta
 | Field | Value |
 |---|---|
-| URL | https://wwndtis.in/gallery/ |
+| URL | https://savvytraining.example/gallery/ |
 | Title tag | Gallery - Best NDT Training Institute in India \| Join NDT level 2 course |
 | Meta description | HOME / GALLERY ⚠️ *(breadcrumb scraped as description — rewrite)* |
 | OG image | /wp-content/uploads/2024/01/WhatsApp-Image-2023-11-08-at-11.59.20-AM.jpeg |
-| OG image alt | Best NDT Training Institute in India-wwndtis |
+| OG image alt | Best NDT Training Institute in Savvy Training Institute |
 | Published | 2023-10-24 |
 | Modified | 2025-05-06 |
 
-**Suggested new meta description:** *"See our labs, classrooms, practical training sessions and student certification ceremonies at World Wide NDT Institute, Noida."*
+**Suggested new meta description:** *"See our labs, classrooms, practical training sessions and student certification ceremonies at Savvy Training Institute, Bengaluru."*
 
 ## 15.2 Page Banner
 **H1/H2:** Our Gallery
@@ -1838,7 +1838,7 @@ Each has two buttons: `Get Started` → `#` and `Read More` → `#` ⚠️ *(bot
 ### Alt-text groups in use
 | Alt text | Approx. count |
 |---|---|
-| Best NDT Training Institute in India-wwndtis | ~8 |
+| Best NDT Training Institute in Savvy Training Institute | ~8 |
 | NDT Level II Course in world wide NDT Institute | ~7 |
 | *(filename as alt — no descriptive text)* | ~137 |
 
@@ -1867,25 +1867,24 @@ Many identical photos exist in both folders (e.g. `WhatsApp-Image-2023-09-09-at-
 
 ## 16.1 NAP (Name, Address, Phone) — for schema markup
 ```
-Name:     World Wide NDT Institute & Services
-Address:  Office No: 1101, Assotech Business Cresstera, Tower 1,
-          Sector 135, Noida, Uttar Pradesh, India
-Phones:   +91 7290095961  (primary — footer, all course pages)
-          +91 7290095962  (course pages "Need Help" block)
-          +91 7290095965  (contact page)
-          +97290095961    ⚠️ malformed, home page "Call us Anytime"
-Emails:   info@ndtis.in            (primary — footer)
-          worldwidendtis@gmail.com (home page + contact page)
+Name:     Savvy Training Institute
+Address:  Savvy Training Institute, Training Centre, Bengaluru, Karnataka, India
+Phones:   +91 90000 12345  (primary — footer, all course pages)
+          +91 90000 12345  (course pages "Need Help" block)
+          +91 90000 12345  (contact page)
+          +91 90000 12345    ⚠️ malformed, home page "Call us Anytime"
+Emails:   contact@savvytraining.example            (primary — footer)
+          contact@savvytraining.example (home page + contact page)
 ```
 ⚠️ *Four different phone numbers and two emails appear across the site. Consolidate to one primary + one alternate before rebuild.*
 
 ## 16.2 Social Profiles
 | Platform | URL |
 |---|---|
-| Facebook | https://www.facebook.com/worldwidendtinstitutenoida |
-| YouTube | https://www.youtube.com/channel/UCvGvHyDoAqC8fuO3iS516_Q — also https://www.youtube.com/@wwndtis |
-| Twitter/X | https://twitter.com/wwndtis |
-| Instagram | https://www.instagram.com/wwndtis/ |
+| Facebook |  |
+| YouTube |  — also  |
+| Twitter/X |  |
+| Instagram |  |
 | FB (author profile) | https://www.facebook.com/profile.php?id=100091830787015 |
 
 ## 16.3 Course Matrix — ⚠️ CONFLICTING DATA ACROSS PAGES
@@ -1935,7 +1934,7 @@ QCI · TWI · MSME · NABL · Skill India · ASNT · ISO
 | # | Issue | Location |
 |---|---|---|
 | 1 | **Lorem ipsum placeholder text in 5 live FAQ answers** | Fire & Safety page |
-| 2 | Four different phone numbers; one malformed (`+97290095961`) | Home / footer / contact |
+| 2 | Four different phone numbers; one malformed (`+91 90000 12345`) | Home / footer / contact |
 | 3 | Course fees and durations contradict each other across pages | Home vs /course/ vs detail pages |
 | 4 | Student/award counts contradict each other (3.5K vs 10K vs 15K) | Home vs About vs course pages |
 | 5 | Broken Google Maps embed (short link nested in query string) | Contact page |

@@ -139,7 +139,7 @@ export default function StudentPortalPage() {
     );
   }
 
-  const watermark = `${profile?.enrollment_no ?? 'WWNDT'} • ${profile?.full_name ?? ''}`.trim();
+  const watermark = `${profile?.enrollment_no ?? 'SAV'} • ${profile?.full_name ?? ''}`.trim();
   // Materials the enrolment does not cover (open previews) are grouped last so
   // the student's own courses stay at the top of the page.
   const enrolledIds = new Set(courses.map((c) => c.course_id));

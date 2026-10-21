@@ -1,6 +1,6 @@
-# Implementation Plan — World Wide NDT Institute
+# Implementation Plan — Savvy Training Institute
 
-Editorial redesign of https://wwndtis.in/ inspired by the visual language of https://www.ada.cx/, built on Next.js 14 (App Router) + TypeScript + Tailwind + Supabase.
+Editorial redesign of https://savvytraining.example/ inspired by the visual language of https://www.ada.cx/, built on Next.js 14 (App Router) + TypeScript + Tailwind + Supabase.
 
 ## Status legend
 - ✅ Done — implemented and verified (build + typecheck pass)

@@ -1,4 +1,4 @@
--- World Wide NDT Institute Initial Database Schema & Seed Data
+-- Savvy Training Institute Initial Database Schema & Seed Data
 -- NOTE: uses gen_random_uuid() (Postgres core). The live project also adds an
 -- admin_users allowlist + public.is_admin() and admin-only SELECT policies on
 -- submissions — see SUPABASE_SETUP.md for the full applied version.
@@ -10,17 +10,17 @@ CREATE TYPE submission_status AS ENUM ('unread', 'read', 'replied', 'archived');
 -- 2. SITE SETTINGS & ANNOUNCEMENT BANNERS
 CREATE TABLE site_settings (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  site_name TEXT NOT NULL DEFAULT 'World Wide NDT Institute & Services',
-  phone_primary TEXT NOT NULL DEFAULT '+91 7290095961',
-  phone_secondary TEXT DEFAULT '+91 7290095962',
-  email_primary TEXT NOT NULL DEFAULT 'info@ndtis.in',
-  email_secondary TEXT DEFAULT 'worldwidendtis@gmail.com',
-  address TEXT NOT NULL DEFAULT 'Office No:1101 Assotech Business Cresstera Tower 1 Sector 135 Noida, (UP) India',
-  whatsapp_number TEXT DEFAULT '917290095961',
-  facebook_url TEXT DEFAULT 'https://www.facebook.com/worldwidendtinstitutenoida',
-  youtube_url TEXT DEFAULT 'https://www.youtube.com/@wwndtis',
-  twitter_url TEXT DEFAULT 'https://twitter.com/wwndtis',
-  instagram_url TEXT DEFAULT 'https://www.instagram.com/wwndtis',
+  site_name TEXT NOT NULL DEFAULT 'Savvy Training Institute',
+  phone_primary TEXT NOT NULL DEFAULT '+91 90000 12345',
+  phone_secondary TEXT DEFAULT '+91 90000 12345',
+  email_primary TEXT NOT NULL DEFAULT 'contact@savvytraining.example',
+  email_secondary TEXT DEFAULT 'contact@savvytraining.example',
+  address TEXT NOT NULL DEFAULT 'Savvy Training Institute, Training Centre, Bengaluru, Karnataka, India',
+  whatsapp_number TEXT DEFAULT '919000012345',
+  facebook_url TEXT DEFAULT '',
+  youtube_url TEXT DEFAULT '',
+  twitter_url TEXT DEFAULT '',
+  instagram_url TEXT DEFAULT '',
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
@@ -114,7 +114,7 @@ CREATE TABLE blog_posts (
   content TEXT NOT NULL,
   featured_image TEXT NOT NULL,
   category_id UUID REFERENCES blog_categories(id) ON DELETE SET NULL,
-  author_name TEXT DEFAULT 'WWNDT Editorial Team',
+  author_name TEXT DEFAULT 'SAV Editorial Team',
   published_at TIMESTAMPTZ DEFAULT NOW(),
   published BOOLEAN DEFAULT TRUE,
   seo_title TEXT,
@@ -202,14 +202,14 @@ CREATE POLICY "Public can submit contact form" ON contact_submissions FOR INSERT
 CREATE POLICY "Public can subscribe to newsletter" ON newsletter_subscribers FOR INSERT WITH CHECK (TRUE);
 
 -- SEED DATA INSERTS
-INSERT INTO site_settings (site_name) VALUES ('World Wide NDT Institute & Services');
+INSERT INTO site_settings (site_name) VALUES ('Savvy Training Institute');
 
 INSERT INTO announcement_banners (message, link_text, link_url) VALUES 
 ('⚡ Next Batch Starts This Monday! Online & Offline Admissions Open for NDT Level 2 & QA/QC', 'Apply Now', '/admission');
 
 -- SEED COURSES
 INSERT INTO courses (slug, title, short_description, description, duration, fee, training_mode, certification, eligibility, featured_image, is_featured, sort_order) VALUES
-('ndt-level-2-course', 'NDT Level II Course', 'Comprehensive ASNT Level 2 training covering Ultrasonic, Radiographic, Magnetic Particle, Liquid Penetrant, and Visual Testing with 100% placement support.', 'Are you ready to elevate your engineering career? At World Wide NDT Institute in Noida, India, our NDT Level II Course prepares you for real-world industrial inspection challenges across aerospace, oil & gas, manufacturing, and heavy engineering.', '45 Days', '₹35,000', 'Classroom & Online', 'ASNT Level II Certificate (VT, LPT, MPT, UT, RT, RTFI)', 'B.Tech / Engineering Diploma / B.Sc / 12th Pass', 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1200&auto=format&fit=crop', TRUE, 1),
+('ndt-level-2-course', 'NDT Level II Course', 'Comprehensive ASNT Level 2 training covering Ultrasonic, Radiographic, Magnetic Particle, Liquid Penetrant, and Visual Testing with 100% placement support.', 'Are you ready to elevate your engineering career? At Savvy Training Institute in Bengaluru, India, our NDT Level II Course prepares you for real-world industrial inspection challenges across aerospace, oil & gas, manufacturing, and heavy engineering.', '45 Days', '₹35,000', 'Classroom & Online', 'ASNT Level II Certificate (VT, LPT, MPT, UT, RT, RTFI)', 'B.Tech / Engineering Diploma / B.Sc / 12th Pass', 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1200&auto=format&fit=crop', TRUE, 1),
 
 ('qa-and-qc-course', 'QA & QC Course', 'Master Quality Assurance & Quality Control standards, piping inspection, welding codes, and international ISO quality management.', 'Become a certified multi-discipline QA/QC Inspector. Our program covers inspection documentation, non-conformance reporting, welding metallurgy, NDT integration, and global site audit protocols.', '30 Days', '₹35,000', 'Classroom & Online', 'Certified Quality Inspector (QA/QC)', 'Engineering Graduate / Diploma / Technical Background', 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?q=80&w=1200&auto=format&fit=crop', TRUE, 2),
 
@@ -226,13 +226,13 @@ INSERT INTO instructors (name, role, bio, photo_url, sort_order) VALUES
 ('Feroz Alam', 'Director', 'A dynamic and results-driven director with over ten years of expertise in Non-Destructive Testing (NDT) training, renowned for building innovative, industry-aligned programs that empower both students and instructors.', 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=600&auto=format&fit=crop', 1),
 ('Tabrej Alam', 'Director', 'A visionary director with a decade of teaching experience, combining industrial inspection expertise and passion to create engaging, high-impact learning environments.', 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600&auto=format&fit=crop', 2),
 ('Md Javed', 'Senior Instructor', 'A seasoned educator with ten years of specialized experience in Ultrasonic and Radiographic NDT Training, delivering practical, real-world inspection skills.', 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop', 3),
-('Deepak Kumar', 'Digital & Technical Lead', 'Over 2 years of experience leading technical systems, student platforms, and web development for World Wide NDT Institute.', 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=600&auto=format&fit=crop', 4);
+('Deepak Kumar', 'Digital & Technical Lead', 'Over 2 years of experience leading technical systems, student platforms, and web development for Savvy Training Institute.', 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=600&auto=format&fit=crop', 4);
 
 -- SEED TESTIMONIALS
 INSERT INTO testimonials (student_name, course_taken, quote, is_featured) VALUES
-('Shadab', 'NDT Level II Course', 'Outstanding job placement assistance! I secured a quality inspection position in Gulf soon after completing my NDT Level II Course at World Wide NDT Institute. The hands-on lab sessions gave me complete practical confidence.', TRUE),
+('Shadab', 'NDT Level II Course', 'Outstanding job placement assistance! I secured a quality inspection position in Gulf soon after completing my NDT Level II Course at Savvy Training Institute. The hands-on lab sessions gave me complete practical confidence.', TRUE),
 ('Vikash', 'NDT & QA/QC Combo', 'Great facilities and hands-on experience! The practical flaw detection sessions were invaluable, providing real-world exposure to ultrasonic flaw detectors and radiographic film reading.', TRUE),
-('Rohit', 'QA/QC Course', 'Top-notch certification program! The instructors at World Wide NDT Institute ensure you grasp every technical aspect. I passed my certification exam with flying colors.', TRUE),
+('Rohit', 'QA/QC Course', 'Top-notch certification program! The instructors at Savvy Training Institute ensure you grasp every technical aspect. I passed my certification exam with flying colors.', TRUE),
 ('Sanjay', 'Fire & Safety Course', 'The training was clear, structured, and practical. The placement cell guided me through every interview stage until I landed my safety inspector role.', TRUE);
 
 -- SEED BLOG CATEGORIES & POSTS
@@ -242,7 +242,7 @@ INSERT INTO blog_categories (name, slug) VALUES
 ('Career Advice', 'career-advice');
 
 INSERT INTO blog_posts (slug, title, excerpt, content, featured_image, author_name) VALUES
-('exploring-the-top-non-destructive-testing-ndtmethods', 'Exploring the Top Non-Destructive Testing (NDT) Methods', 'Non-destructive testing (NDT) methods play a crucial role in ensuring structural integrity without damaging components. Learn about UT, RT, MT, PT, and VT.', 'Non-Destructive Testing (NDT) comprises a set of analysis techniques used in science and industry to evaluate the properties of a material, component, or system without causing damage. At World Wide NDT Institute, our ASNT Level 2 program trains students in the five primary methods: Visual Testing (VT), Liquid Penetrant Testing (LPT), Magnetic Particle Testing (MPT), Ultrasonic Testing (UT), and Radiographic Testing (RT).', 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1200&auto=format&fit=crop', 'Feroz Alam'),
+('exploring-the-top-non-destructive-testing-ndtmethods', 'Exploring the Top Non-Destructive Testing (NDT) Methods', 'Non-destructive testing (NDT) methods play a crucial role in ensuring structural integrity without damaging components. Learn about UT, RT, MT, PT, and VT.', 'Non-Destructive Testing (NDT) comprises a set of analysis techniques used in science and industry to evaluate the properties of a material, component, or system without causing damage. At Savvy Training Institute, our ASNT Level 2 program trains students in the five primary methods: Visual Testing (VT), Liquid Penetrant Testing (LPT), Magnetic Particle Testing (MPT), Ultrasonic Testing (UT), and Radiographic Testing (RT).', 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1200&auto=format&fit=crop', 'Feroz Alam'),
 
 ('radiographic-testing-rt-a-comprehensive-overview', 'Radiographic Testing (RT): A Comprehensive Industrial Guide', 'Discover how Radiographic Testing utilizes X-rays and Gamma rays to inspect internal material structures and weld integrity.', 'Radiographic Testing (RT) is one of the most critical NDT inspection techniques used in pipeline construction, pressure vessel fabrication, and aerospace engineering. By passing radiation through an object onto industrial film or digital sensors, inspectors can detect internal voids, porosity, incomplete penetration, and micro-cracks.', 'https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?q=80&w=1200&auto=format&fit=crop', 'Md Javed'),
 

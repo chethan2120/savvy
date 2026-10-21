@@ -5,9 +5,9 @@ import { defaultSettings } from '@/lib/data';
 import { MapPin, Phone, Mail, Clock, MessageSquare, ExternalLink } from 'lucide-react';
 
 export const metadata = {
-  title: 'Contact Us | Savvy Training Institute Noida Campus',
+  title: 'Contact Us | Savvy Training Institute Bengaluru',
   description:
-    'Get in touch with Savvy Training Institute. Phone: +91 7290095961, Email: info@ndtis.in. Visit our campus at Assotech Business Cresstera, Sector 135 Noida.',
+    'Get in touch with Savvy Training Institute. Phone: +91 90000 12345. Email: contact@savvytraining.example. Training Centre, Bengaluru, Karnataka, India. These contact details are placeholders.',
 };
 
 export default function ContactPage() {
@@ -23,7 +23,7 @@ export default function ContactPage() {
         actions={
           <>
             <a
-              href={`tel:${defaultSettings.phone_primary}`}
+              href={`tel:${defaultSettings.phone_primary.replace(/\s/g, '')}`}
               className="pill-button-forest text-xs py-3 px-6 flex items-center gap-1.5"
             >
               <Phone className="w-3.5 h-3.5" /> {defaultSettings.phone_primary}
@@ -60,11 +60,8 @@ export default function ContactPage() {
                   <Phone className="w-4 h-4 text-forest shrink-0 mt-0.5" />
                   <div className="flex flex-col">
                     <span className="font-semibold text-foreground">Call Us</span>
-                    <a href={`tel:${defaultSettings.phone_primary}`} className="hover:text-forest transition-colors">
+                    <a href={`tel:${defaultSettings.phone_primary.replace(/\s/g, '')}`} className="hover:text-forest transition-colors">
                       {defaultSettings.phone_primary}
-                    </a>
-                    <a href={`tel:${defaultSettings.phone_secondary}`} className="hover:text-forest transition-colors">
-                      {defaultSettings.phone_secondary}
                     </a>
                   </div>
                 </div>
@@ -76,9 +73,7 @@ export default function ContactPage() {
                     <a href={`mailto:${defaultSettings.email_primary}`} className="hover:text-forest transition-colors">
                       {defaultSettings.email_primary}
                     </a>
-                    <a href={`mailto:${defaultSettings.email_secondary}`} className="hover:text-forest transition-colors">
-                      {defaultSettings.email_secondary}
-                    </a>
+                    <span>Placeholder address. Not a working inbox yet.</span>
                   </div>
                 </div>
 
@@ -106,15 +101,15 @@ export default function ContactPage() {
 
             {/* Map Link Card */}
             <div className="editorial-card p-6 flex flex-col gap-3 bg-surface border-border">
-              <h4 className="text-sm font-semibold text-foreground">Noida Campus Directions</h4>
+              <h4 className="text-sm font-semibold text-foreground">Training Centre</h4>
               <p className="text-xs text-muted-foreground">
-                Located conveniently at Sector 135 Noida on the Expressway, accessible via metro and bus transport.
+                Savvy Training Institute, Training Centre, Bengaluru, Karnataka, India.
               </p>
 
               <div className="overflow-hidden rounded-xl border border-border">
                 <iframe
-                  title="Savvy Training Institute — Noida campus location"
-                  src="https://www.google.com/maps?q=Assotech%20Business%20Cresstera%2C%20Tower%201%2C%20Sector%20135%2C%20Noida%2C%20Uttar%20Pradesh%20201301&output=embed"
+                  title="Savvy Training Institute — Bengaluru training centre"
+                  src="https://www.google.com/maps?q=Training%20Centre%2C%20Bengaluru%2C%20Karnataka%2C%20India&output=embed"
                   width="100%"
                   height="260"
                   loading="lazy"
@@ -124,7 +119,7 @@ export default function ContactPage() {
               </div>
 
               <a
-                href="https://www.google.com/maps/dir/?api=1&destination=Assotech+Business+Cresstera+Tower+1+Sector+135+Noida+Uttar+Pradesh+201301"
+                href="https://www.google.com/maps/dir/?api=1&destination=Training+Centre+Bengaluru+Karnataka+India"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-xs font-semibold text-forest hover:underline"

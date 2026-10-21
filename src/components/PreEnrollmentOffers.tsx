@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
-import { preEnrollmentOffersData, coursesData } from '@/lib/data';
+import { preEnrollmentOffersData, coursesData, defaultSettings } from '@/lib/data';
 import type { PreEnrollmentOffer } from '@/lib/types';
 import { Tag, Clock, Users, CheckCircle2, Loader2, AlertCircle, X } from 'lucide-react';
 
@@ -100,7 +100,7 @@ function ClaimDialog({ offer, onClose }: { offer: PreEnrollmentOffer; onClose: (
     e.preventDefault();
     if (!isSupabaseConfigured) {
       setState('error');
-      setMsg('Backend not connected — please call +91 7290095961 to pre-enrol.');
+      setMsg(`Backend not connected — please call ${defaultSettings.phone_primary} to pre-enrol.`);
       return;
     }
     setState('sending');

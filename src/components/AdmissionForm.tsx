@@ -262,7 +262,7 @@ export const AdmissionForm: React.FC = () => {
             name="city"
             value={formData.city}
             onChange={handleChange}
-            placeholder="e.g. Noida / Delhi NCR"
+            placeholder="e.g. Bengaluru"
             className="w-full bg-background border border-border rounded-lg px-3.5 py-2.5 text-sm text-foreground focus:outline-none focus:border-forest"
           />
         </div>
@@ -303,7 +303,7 @@ export const AdmissionForm: React.FC = () => {
             onChange={handleChange}
             className="w-full bg-background border border-border rounded-lg px-3.5 py-2.5 text-sm text-foreground focus:outline-none focus:border-forest"
           >
-            <option value="Classroom">Classroom Lab Training (Noida)</option>
+            <option value="Classroom">Classroom Lab Training (Bengaluru)</option>
             <option value="Online">Online Interactive Classes</option>
             <option value="Hybrid">Hybrid Mode</option>
           </select>

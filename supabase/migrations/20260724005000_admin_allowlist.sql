@@ -53,5 +53,5 @@ CREATE POLICY "admin reads newsletter subscribers" ON newsletter_subscribers
   FOR SELECT USING (public.is_admin());
 
 INSERT INTO admin_users (email)
-VALUES ('admin@ndtis.in')
+VALUES ('admin@savvytraining.example')
 ON CONFLICT (email) DO NOTHING;

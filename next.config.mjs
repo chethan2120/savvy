@@ -18,10 +18,6 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'wwndtis.in',
-      },
-      {
-        protocol: 'https',
         hostname: 'images.unsplash.com',
       },
       {

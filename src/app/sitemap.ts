@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { coursesData, blogPostsData } from '@/lib/data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://wwndtis.in';
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://savvytraining.example';
 
   const staticRoutes = [
     '',
