@@ -12,7 +12,13 @@ export async function POST(request: Request) {
   if (role !== 'admin' && role !== 'staff' && role !== 'student') {
     return NextResponse.json({ ok: false, message: 'Select Admin, Staff, or Student.' }, { status: 400 });
   }
-  const result = authenticate(identifier, password, role);
+  let result;
+  try {
+    result = authenticate(identifier, password, role);
+  } catch (error) {
+    console.error('Sign-in could not be completed.', error instanceof Error ? error.message : 'unknown error');
+    return NextResponse.json({ ok: false, message: 'Sign-in failed. Try again.' }, { status: 500 });
+  }
   if (!result.ok) {
     const message = result.code === 'wrong-role'
       ? 'That account uses a different role. Choose the matching option.'
@@ -27,8 +33,21 @@ export async function POST(request: Request) {
               : 'That email or phone number and password do not match. Check both and try again.';
     return NextResponse.json({ ok: false, code: result.code, message }, { status: result.code === 'unknown' ? 404 : 401 });
   }
+  let token: string;
+  try {
+    token = signSession(result.account);
+  } catch (error) {
+    console.error('Sign-in session could not be created.', error instanceof Error ? error.message : 'unknown error');
+    const missingSecret = error instanceof Error && error.message === 'SESSION_SECRET is not configured';
+    return NextResponse.json({
+      ok: false,
+      message: missingSecret
+        ? 'Sign-in is not available until the server session key is configured.'
+        : 'Sign-in failed. Try again.',
+    }, { status: missingSecret ? 503 : 500 });
+  }
   const response = NextResponse.json({ ok: true, account: publicAccount(result.account) });
-  response.cookies.set(SESSION_COOKIE, signSession(result.account), {
+  response.cookies.set(SESSION_COOKIE, token, {
     httpOnly: true,
     sameSite: 'lax',
     path: '/',

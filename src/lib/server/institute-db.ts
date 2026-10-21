@@ -235,6 +235,8 @@ type Database = {
 const DATA_DIR = path.join(process.cwd(), 'data');
 const DB_PATH = path.join(DATA_DIR, 'institute-db.json');
 const SECRET_PATH = path.join(DATA_DIR, 'session-secret');
+let memoryDb: Database | null = null;
+let memorySecret: string | null = null;
 export const SESSION_COOKIE = 'savvy_session';
 export const INSTITUTE_TZ = 'Asia/Kolkata';
 
@@ -301,14 +303,7 @@ function emptyDatabase(): Database {
   };
 }
 
-function readDb(): Database {
-  mkdirSync(DATA_DIR, { recursive: true });
-  if (!existsSync(DB_PATH)) {
-    const seeded = emptyDatabase();
-    writeFileSync(DB_PATH, JSON.stringify(seeded, null, 2));
-    return seeded;
-  }
-  const parsed = JSON.parse(readFileSync(DB_PATH, 'utf8')) as Database;
+function normaliseDb(parsed: Database) {
   parsed.accounts ??= [];
   parsed.enrollments ??= [];
   parsed.logins ??= [];
@@ -328,6 +323,25 @@ function readDb(): Database {
   return parsed;
 }
 
+function readDb(): Database {
+  if (memoryDb) return memoryDb;
+  try {
+    mkdirSync(DATA_DIR, { recursive: true });
+    if (!existsSync(DB_PATH)) {
+      const seeded = emptyDatabase();
+      writeFileSync(DB_PATH, JSON.stringify(seeded, null, 2));
+      memoryDb = seeded;
+      return seeded;
+    }
+    memoryDb = normaliseDb(JSON.parse(readFileSync(DB_PATH, 'utf8')) as Database);
+    return memoryDb;
+  } catch (error) {
+    console.error('Institute database file is unavailable.', error instanceof Error ? error.message : 'read failed');
+    memoryDb = emptyDatabase();
+    return memoryDb;
+  }
+}
+
 const DEFAULT_INSTITUTE_NAME = 'Savvy Training Institute';
 
 function publicWebsiteSettings(record?: WebsiteSettingsRecord) {
@@ -339,14 +353,34 @@ function publicWebsiteSettings(record?: WebsiteSettingsRecord) {
 }
 
 function writeDb(db: Database) {
-  mkdirSync(DATA_DIR, { recursive: true });
-  writeFileSync(DB_PATH, JSON.stringify(db, null, 2));
+  memoryDb = db;
+  try {
+    mkdirSync(DATA_DIR, { recursive: true });
+    writeFileSync(DB_PATH, JSON.stringify(db, null, 2));
+  } catch (error) {
+    console.error('Institute database file could not be saved.', error instanceof Error ? error.message : 'write failed');
+  }
 }
 
 export function sessionSecret() {
-  mkdirSync(DATA_DIR, { recursive: true });
-  if (!existsSync(SECRET_PATH)) writeFileSync(SECRET_PATH, randomBytes(32).toString('hex'));
-  return readFileSync(SECRET_PATH, 'utf8').trim();
+  if (memorySecret) return memorySecret;
+  const configured = process.env.SESSION_SECRET?.trim();
+  if (configured && configured.length >= 32) {
+    memorySecret = configured;
+    return configured;
+  }
+  try {
+    mkdirSync(DATA_DIR, { recursive: true });
+    if (!existsSync(SECRET_PATH)) writeFileSync(SECRET_PATH, randomBytes(32).toString('hex'));
+    const stored = readFileSync(SECRET_PATH, 'utf8').trim();
+    if (stored.length >= 32) {
+      memorySecret = stored;
+      return stored;
+    }
+  } catch (error) {
+    console.error('Session secret file is unavailable.', error instanceof Error ? error.message : 'read failed');
+  }
+  throw new Error('SESSION_SECRET is not configured');
 }
 
 export function signSession(account: InstituteAccount) {

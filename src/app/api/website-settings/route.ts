@@ -3,7 +3,12 @@ import { saveWebsiteSettings, websiteSettings } from '@/lib/server/institute-db'
 import { currentAccount } from '@/lib/server/session';
 
 export async function GET() {
-  return NextResponse.json(websiteSettings());
+  try {
+    return NextResponse.json(websiteSettings());
+  } catch (error) {
+    console.error('Website settings could not be read.', error instanceof Error ? error.message : 'read failed');
+    return NextResponse.json({ show_recognitions: false, institute_name: 'Savvy Training Institute' });
+  }
 }
 
 export async function POST(request: Request) {
