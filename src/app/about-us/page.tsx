@@ -10,7 +10,7 @@ import { ShieldCheck, Award, Briefcase, CheckCircle2, UserCheck, Wrench, Users }
 export const metadata = {
   title: 'About Us | Leading NDT & QA/QC Training Institute in India',
   description:
-    'Learn about Savvy Training Institute – India’s top NDT Training Institute offering certified courses in NDT Level 2, QA QC, Fire & Safety, HVAC, and Revit MEP with 100% placement.',
+    'Learn about Savvy Training Institute and its NDT Level II, QA/QC, Fire & Safety, HVAC, and Revit MEP programmes.',
 };
 
 export default function AboutPage() {
@@ -36,15 +36,16 @@ export default function AboutPage() {
               Welcome to Savvy Training Institute — a premier training hub dedicated to building technical expertise in Non-Destructive Testing (NDT Level II), Quality Assurance / Quality Control (QA/QC), HVAC, MEP, and Fire &amp; Safety engineering.
             </p>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Our mission is to deliver industry-relevant education that bridges textbook theory with practical lab applications. We provide 100% placement support in top oil &amp; gas refineries, aerospace manufacturers, power plants, and construction projects across India and abroad.
+              Our mission is to deliver industry-relevant education that bridges textbook theory with practical lab applications.
             </p>
           </div>
 
           <div className="lg:col-span-6 relative aspect-[4/3] rounded-2xl overflow-hidden border border-border shadow-overlay">
             <Image
-              src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1000&auto=format&fit=crop"
+              src="/images/library/inspection.jpg"
               alt="Practical inspection training at Savvy Training Institute"
               fill
+              priority
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
             />
@@ -103,7 +104,7 @@ export default function AboutPage() {
               </div>
               <h3 className="text-xl font-normal text-foreground">Technical Training</h3>
               <p className="text-xs text-muted-foreground leading-relaxed">
-                Specialized ASNT Level II and QA/QC training programs with hands-on lab sessions, mock exams, and guaranteed job placement support.
+                Specialized ASNT Level II and QA/QC training programmes with hands-on lab sessions and mock exams.
               </p>
             </div>
 
@@ -179,7 +180,7 @@ export default function AboutPage() {
           <div className="flex flex-col gap-3 max-w-2xl">
             <h2 className="text-h2 font-normal text-white">Ready to start your journey?</h2>
             <p className="text-xs text-white/70 leading-relaxed">
-              Join certified NDT Level II &amp; QA/QC programs with 100% placement support in India and abroad.
+              Explore NDT Level II and QA/QC programmes and review their course details.
             </p>
           </div>
           <Link href="/admission" className="pill-button-forest text-xs py-3.5 px-8 shrink-0">

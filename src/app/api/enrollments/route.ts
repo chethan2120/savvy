@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server';
-import { assignCourse, requestEnrollment } from '@/lib/server/institute-db';
+import { assignCourse, refreshCourseCatalog, requestEnrollment } from '@/lib/server/institute-db';
 import { currentAccount } from '@/lib/server/session';
 
 export async function POST(request: Request) {
   const account = currentAccount();
   if (!account) return NextResponse.json({ message: 'Sign in to continue.' }, { status: 401 });
+  await refreshCourseCatalog();
   const body = await request.json().catch(() => ({}));
   const courseId = String(body.courseId ?? '');
   if (account.role === 'admin') {

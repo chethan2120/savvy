@@ -166,14 +166,18 @@ export const PageHero: React.FC<PageHeroProps> = ({
                     : 'relative aspect-[16/10]'
                 }
               >
-                <Image
-                  src={media.src}
-                  alt={mediaAlt}
-                  fill
-                  priority
-                  sizes="(min-width: 1024px) 40vw, 100vw"
-                  className="object-cover"
-                />
+                {media.src.startsWith('/api/') ? (
+                  <img src={media.src} alt={mediaAlt} className="absolute inset-0 h-full w-full object-cover" />
+                ) : (
+                  <Image
+                    src={media.src}
+                    alt={mediaAlt}
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 40vw, 100vw"
+                    className="object-cover"
+                  />
+                )}
                 <div
                   aria-hidden="true"
                   className="absolute inset-0 bg-gradient-to-t from-[#06110d]/35 via-transparent to-transparent"

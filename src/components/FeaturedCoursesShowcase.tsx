@@ -30,13 +30,10 @@ export const FeaturedCoursesShowcase: React.FC<FeaturedCoursesShowcaseProps> = (
       cards.forEach((card, i) => {
         gsap.fromTo(
           card,
-          { opacity: 0, y: 70, scale: 0.95, rotate: i % 2 === 0 ? -1.5 : 1.5 },
+          { y: 28 },
           {
-            opacity: 1,
             y: 0,
-            scale: 1,
-            rotate: 0,
-            duration: 0.9,
+            duration: 0.6,
             ease: 'power3.out',
             scrollTrigger: { trigger: card, start: 'top 88%', once: true },
           }
@@ -90,7 +87,7 @@ export const FeaturedCoursesShowcase: React.FC<FeaturedCoursesShowcaseProps> = (
               data-showcase-card
               className={`w-[30%] max-w-[420px] ${i % 2 === 0 ? 'self-start' : 'self-end'}`}
             >
-              <CourseCard course={course} />
+              <CourseCard course={course} priority={i < 2} />
             </div>
           ))}
         </div>

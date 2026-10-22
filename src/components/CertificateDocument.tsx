@@ -82,7 +82,7 @@ export const CertificateDocument: React.FC<{ cert: CertificateFace; setupHints?:
           </p>
         )}
         <div className="flex justify-center">
-          <SavvyLogo markClassName="h-14 w-14 shrink-0" />
+          <SavvyLogo markClassName="mx-auto h-28 w-28 shrink-0" />
         </div>
         <h2 className="mt-8 text-center font-serif text-3xl font-normal tracking-wide text-[#102B46] md:text-4xl">
           Certificate of Completion

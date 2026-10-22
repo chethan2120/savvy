@@ -66,29 +66,13 @@ function formatDate(value: string) {
 }
 
 async function drawLogo(pdf: PDFDocument, page: PDFPage, bold: PDFFont) {
-  const svgPath = path.join(process.cwd(), 'public', 'brand', 'logo.svg');
-  if (existsSync(svgPath)) {
+  const logoPath = path.join(process.cwd(), 'public', 'brand', 'logo.jpg');
+  if (existsSync(logoPath)) {
     try {
-      const svg = readFileSync(svgPath, 'utf8');
-      const paths = [...svg.matchAll(/\bd="([^"]+)"/g)].map((match) => match[1]);
-      if (paths.length > 0) {
-        const scale = 0.7;
-        const x = 348;
-        const y = 552;
-        const navy = rgb(0.043, 0.145, 0.271);
-        const gold = rgb(0.839, 0.698, 0.369);
-        const paper = rgb(0.957, 0.969, 0.984);
-        paths.forEach((mark, index) => {
-          const stroke = index === 1 || index === 2 || index === 5 || index === 6;
-          const color = [FOREST, gold, navy, navy, paper, gold, navy, gold][index] ?? FOREST;
-          page.drawSvgPath(mark, stroke
-            ? { x, y, scale, borderColor: color, borderWidth: index === 2 || index === 6 ? 1.4 : 0.7 }
-            : { x, y, scale, color });
-        });
-        page.drawText('SAVVY', { x: x + 54, y: 524, size: 13, font: bold, color: INK });
-        page.drawText('TRAINING INSTITUTE', { x: x + 54, y: 510, size: 7, font: bold, color: FOREST });
-        return;
-      }
+      const image = await pdf.embedJpg(readFileSync(logoPath));
+      const size = 86;
+      page.drawImage(image, { x: (PAGE_W - size) / 2, y: 488, width: size, height: size });
+      return;
     } catch {
       /* Text heading below. */
     }

@@ -1,12 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
-import { coursesData, defaultSettings } from '@/lib/data';
+import React, { useEffect, useState } from 'react';
+import { defaultSettings } from '@/lib/data';
+import { useCourseCatalog } from '@/lib/useCourseCatalog';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 import { friendlyError } from '@/lib/friendly-error';
 import { CheckCircle, AlertCircle, Upload, Loader2, Phone, MessageCircle } from 'lucide-react';
 
 export const AdmissionForm: React.FC = () => {
+  const { courses, loading: coursesLoading } = useCourseCatalog();
   const [formData, setFormData] = useState({
     full_name: '',
     email: '',
@@ -23,6 +25,12 @@ export const AdmissionForm: React.FC = () => {
   const [marksheetFile, setMarksheetFile] = useState<File | null>(null);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    if (courses.length && !courses.some((course) => course.title === formData.selected_course)) {
+      setFormData((current) => ({ ...current, selected_course: courses[0].title }));
+    }
+  }, [courses, formData.selected_course]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
@@ -285,9 +293,11 @@ export const AdmissionForm: React.FC = () => {
             name="selected_course"
             value={formData.selected_course}
             onChange={handleChange}
+            disabled={coursesLoading || courses.length === 0}
             className="w-full bg-background border border-border rounded-lg px-3.5 py-2.5 text-sm text-foreground focus:outline-none focus:border-forest"
           >
-            {coursesData.map((c) => (
+            {courses.length === 0 && <option value="">{coursesLoading ? 'Loading courses…' : 'Courses unavailable'}</option>}
+            {courses.map((c) => (
               <option key={c.id} value={c.title}>
                 {c.title} ({c.duration})
               </option>

@@ -1,16 +1,18 @@
 import { NextResponse } from 'next/server';
-import { createAccount, listAccounts, programs, updateAccount } from '@/lib/server/institute-db';
+import { createAccount, listAccounts, programs, refreshCourseCatalog, updateAccount } from '@/lib/server/institute-db';
 import { requireRole } from '@/lib/server/session';
 
 export async function GET() {
   const admin = requireRole(['admin']);
   if (!admin) return NextResponse.json({ message: 'Only an administrator can view accounts.' }, { status: 403 });
+  await refreshCourseCatalog();
   return NextResponse.json({ accounts: listAccounts(), courses: programs() });
 }
 
 export async function POST(request: Request) {
   const admin = requireRole(['admin']);
   if (!admin) return NextResponse.json({ message: 'Only an administrator can create accounts.' }, { status: 403 });
+  await refreshCourseCatalog();
   const body = await request.json().catch(() => ({}));
   const fullName = String(body.fullName ?? '').trim();
   const email = String(body.email ?? '').trim();

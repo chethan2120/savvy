@@ -28,7 +28,7 @@ export const coursesData: Course[] = [
     id: 'c1',
     slug: 'ndt-level-2-course',
     title: 'NDT Level II Course',
-    short_description: 'Comprehensive ASNT Level 2 training covering Ultrasonic, Radiographic, Magnetic Particle, Liquid Penetrant, and Visual Testing with 100% placement support.',
+    short_description: 'Comprehensive ASNT Level II training covering Ultrasonic, Radiographic, Magnetic Particle, Liquid Penetrant, and Visual Testing.',
     description: 'Are you ready to take your technical career to the next level? At Savvy Training Institute in Bengaluru, India, we offer a comprehensive NDT Level 2 Course that prepares you for real-world industrial challenges. Whether you are just starting or upskilling, our training programs in NDT Level 2 are built to help you succeed in oil & gas, aerospace, construction, power, and heavy manufacturing.',
     duration: '45 Days',
     fee: '₹35,000',
@@ -58,8 +58,8 @@ export const coursesData: Course[] = [
       {
         id: 'f2',
         course_id: 'c1',
-        question: 'Does Savvy Training Institute provide 100% placement support?',
-        answer: 'Yes! We provide 100% job placement assistance for all qualified NDT Level II students in top companies across India and abroad (Gulf / Middle East).',
+        question: 'Does completing this course guarantee employment?',
+        answer: 'No employment outcome is guaranteed. Career outcomes depend on each learner’s qualifications, experience, and employer requirements.',
         sort_order: 2,
       },
       {
@@ -265,7 +265,7 @@ export const testimonialsData: Testimonial[] = [
     student_name: 'Shadab',
     course_taken: 'NDT Level II Course',
     rating: 5,
-    quote: 'Outstanding job placement assistance! I secured a quality inspector position in the Gulf region soon after completing my NDT Level II Course at Savvy Training Institute. The hands-on flaw detection training gave me immense confidence.',
+    quote: 'The hands-on flaw detection training gave me confidence in the technical material.',
     is_featured: true,
   },
   {
@@ -289,7 +289,7 @@ export const testimonialsData: Testimonial[] = [
     student_name: 'Sanjay',
     course_taken: 'Fire & Safety Course',
     rating: 5,
-    quote: 'Top-notch certification program! The course structure was well-planned, covering industrial safety codes and practical hazard management. Grateful for the placement support!',
+    quote: 'The course structure was well-planned, covering industrial safety codes and practical hazard management.',
     is_featured: true,
   },
 ];
@@ -308,7 +308,7 @@ At Savvy Training Institute, our ASNT Level 2 program trains students in the fiv
 - **Magnetic Particle Testing (MPT)**: Surface and near-surface discontinuity inspection in ferromagnetic metals.
 - **Ultrasonic Testing (UT)**: Using high-frequency sound waves to measure wall thickness and locate internal voids.
 - **Radiographic Testing (RT)**: Internal structure analysis using X-rays and Gamma radiation.`,
-    featured_image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1200&auto=format&fit=crop',
+    featured_image: '/images/library/inspection.jpg',
     category_name: 'NDT Techniques',
     author_name: 'Feroz Alam',
     published_at: '2025-04-10',
@@ -321,7 +321,7 @@ At Savvy Training Institute, our ASNT Level 2 program trains students in the fiv
     content: `Radiographic Testing (RT) is one of the most critical NDT inspection techniques used in pipeline construction, pressure vessel fabrication, and aerospace engineering. 
 
 By passing radiation through an object onto industrial film or digital sensors, inspectors can detect internal voids, porosity, incomplete penetration, and micro-cracks. Understanding film density, sensitivity, and radiation safety protocols is central to becoming a certified RTFI technician.`,
-    featured_image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=1200&auto=format&fit=crop',
+    featured_image: '/images/library/piping.jpg',
     category_name: 'NDT Techniques',
     author_name: 'Md Javed',
     published_at: '2025-04-18',
@@ -334,7 +334,7 @@ By passing radiation through an object onto industrial film or digital sensors, 
     content: `NDT Level II certification qualifies technicians to set up and calibrate inspection equipment, perform tests according to written procedures, evaluate and record test results, and supervise Level I technicians. 
 
 Demand for certified ASNT Level II inspectors is surging across oil & gas refineries, aerospace manufacturing, shipyards, and major infrastructure projects both in India and abroad.`,
-    featured_image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1200&auto=format&fit=crop',
+    featured_image: '/images/library/inspection.jpg',
     category_name: 'Career Advice',
     author_name: 'Feroz Alam',
     published_at: '2025-05-02',
@@ -342,25 +342,25 @@ Demand for certified ASNT Level II inspectors is surging across oil & gas refine
 ];
 
 export const galleryData: GalleryItem[] = [
-  { id: 'g1', title: 'Ultrasonic Flaw Detector Lab Session', image_url: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1000&auto=format&fit=crop', category: 'Lab & Practical' },
-  { id: 'g2', title: 'Piping & Weld Inspection Training', image_url: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=1000&auto=format&fit=crop', category: 'Site Visit' },
-  { id: 'g3', title: 'QA/QC Inspection Instruments Demo', image_url: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1000&auto=format&fit=crop', category: 'Lab & Practical' },
-  { id: 'g4', title: 'Classroom Theory & Standards Lecture', image_url: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=1000&auto=format&fit=crop', category: 'Classroom' },
-  { id: 'g5', title: 'Student Graduation & Certification Event', image_url: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1000&auto=format&fit=crop', category: 'Events' },
-  { id: 'g6', title: 'HVAC Ducting & Refrigeration Lab', image_url: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=1000&auto=format&fit=crop', category: 'Lab & Practical' },
-  { id: 'g7', title: 'Fire & Industrial Safety Drill', image_url: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1000&auto=format&fit=crop', category: 'Lab & Practical' },
-  { id: 'g8', title: 'Revit MEP 3D Modeling Workshop', image_url: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1000&auto=format&fit=crop', category: 'Classroom' },
+  { id: 'g1', title: 'Ultrasonic Flaw Detector Lab Session', image_url: '/images/library/inspection.jpg', category: 'Lab & Practical' },
+  { id: 'g2', title: 'Piping & Weld Inspection Training', image_url: '/images/library/piping.jpg', category: 'Site Visit' },
+  { id: 'g3', title: 'QA/QC Inspection Instruments Demo', image_url: '/images/library/inspection.jpg', category: 'Lab & Practical' },
+  { id: 'g4', title: 'Classroom Theory & Standards Lecture', image_url: '/images/library/classroom.jpg', category: 'Classroom' },
+  { id: 'g5', title: 'Student Graduation & Certification Event', image_url: '/images/library/graduation.jpg', category: 'Events' },
+  { id: 'g6', title: 'HVAC Ducting & Refrigeration Lab', image_url: '/images/library/piping.jpg', category: 'Lab & Practical' },
+  { id: 'g7', title: 'Fire & Industrial Safety Drill', image_url: '/images/library/safety-drill.jpg', category: 'Lab & Practical' },
+  { id: 'g8', title: 'Revit MEP 3D Modeling Workshop', image_url: '/images/library/workshop.jpg', category: 'Classroom' },
 ];
 
 // --- Placement (institute's primary focus) ---
 
 export const placementsData: PlacementRecord[] = [
-  { id: 'p1', student_name: 'Rahul Verma', course_title: 'NDT Level II Course', company: 'Bureau Veritas', job_role: 'NDT Technician Level II', location: 'Abu Dhabi, UAE', package_lpa: '₹9.6 LPA', placed_on: '2026-03-27', is_featured: true, sort_order: 1, photo_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop' },
-  { id: 'p2', student_name: 'Priya Singh', course_title: 'Fire & Safety Course', company: 'Adani Ports & SEZ', job_role: 'Safety Officer', location: 'Mundra, India', package_lpa: '₹6.2 LPA', placed_on: '2026-04-26', is_featured: true, sort_order: 2, photo_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=400&auto=format&fit=crop' },
-  { id: 'p3', student_name: 'Amit Kumar', course_title: 'CSWIP 3.1 Welding Inspector Course', company: 'Petrofac', job_role: 'Welding Inspector', location: 'Doha, Qatar', package_lpa: '₹12.4 LPA', placed_on: '2026-05-26', is_featured: true, sort_order: 3, photo_url: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400&auto=format&fit=crop' },
-  { id: 'p4', student_name: 'Mohd Arshad', course_title: 'QA & QC Course', company: 'L&T Hydrocarbon Engineering', job_role: 'QA/QC Engineer', location: 'Hazira, India', package_lpa: '₹7.8 LPA', placed_on: '2026-06-10', is_featured: true, sort_order: 4, photo_url: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=400&auto=format&fit=crop' },
-  { id: 'p5', student_name: 'Sneha Rathore', course_title: 'HVAC Course', company: 'Voltas Ltd', job_role: 'HVAC Site Engineer', location: 'Noida, India', package_lpa: '₹5.4 LPA', placed_on: '2026-06-25', is_featured: false, sort_order: 5, photo_url: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=400&auto=format&fit=crop' },
-  { id: 'p6', student_name: 'Imran Sheikh', course_title: 'NDT Level II Course', company: 'SGS India', job_role: 'Radiographer Level II', location: 'Jamnagar, India', package_lpa: '₹8.1 LPA', placed_on: '2026-07-05', is_featured: false, sort_order: 6, photo_url: 'https://images.unsplash.com/photo-1508341591423-4347099e1f19?q=80&w=400&auto=format&fit=crop' },
+  { id: 'p1', student_name: 'Rahul Verma', course_title: 'NDT Level II Course', company: 'Bureau Veritas', job_role: 'NDT Technician Level II', location: 'Abu Dhabi, UAE', package_lpa: '₹9.6 LPA', placed_on: '2026-03-27', is_featured: true, sort_order: 1, photo_url: '/images/library/portrait-rahul.jpg' },
+  { id: 'p2', student_name: 'Priya Singh', course_title: 'Fire & Safety Course', company: 'Adani Ports & SEZ', job_role: 'Safety Officer', location: 'Mundra, India', package_lpa: '₹6.2 LPA', placed_on: '2026-04-26', is_featured: true, sort_order: 2, photo_url: '/images/library/portrait-priya.jpg' },
+  { id: 'p3', student_name: 'Amit Kumar', course_title: 'CSWIP 3.1 Welding Inspector Course', company: 'Petrofac', job_role: 'Welding Inspector', location: 'Doha, Qatar', package_lpa: '₹12.4 LPA', placed_on: '2026-05-26', is_featured: true, sort_order: 3, photo_url: '/images/library/portrait-amit.jpg' },
+  { id: 'p4', student_name: 'Mohd Arshad', course_title: 'QA & QC Course', company: 'L&T Hydrocarbon Engineering', job_role: 'QA/QC Engineer', location: 'Hazira, India', package_lpa: '₹7.8 LPA', placed_on: '2026-06-10', is_featured: true, sort_order: 4, photo_url: '/images/library/portrait-arshad.jpg' },
+  { id: 'p5', student_name: 'Sneha Rathore', course_title: 'HVAC Course', company: 'Voltas Ltd', job_role: 'HVAC Site Engineer', location: 'Noida, India', package_lpa: '₹5.4 LPA', placed_on: '2026-06-25', is_featured: false, sort_order: 5, photo_url: '/images/library/portrait-sneha.jpg' },
+  { id: 'p6', student_name: 'Imran Sheikh', course_title: 'NDT Level II Course', company: 'SGS India', job_role: 'Radiographer Level II', location: 'Jamnagar, India', package_lpa: '₹8.1 LPA', placed_on: '2026-07-05', is_featured: false, sort_order: 6, photo_url: '/images/library/portrait-imran.jpg' },
 ];
 
 export const recruitersData: Recruiter[] = [
@@ -392,5 +392,4 @@ export const placementStats = {
 export const preEnrollmentOffersData: PreEnrollmentOffer[] = [
   { id: 'o1', title: 'Early-Bird Pre-Enrolment', description: 'Book your seat before the batch starts and lock in the current fee with a flat discount on any certification course.', discount_label: '25% OFF', coupon_code: 'EARLY25', valid_till: '2026-08-24', seats_left: 12, is_active: true, sort_order: 1 },
   { id: 'o2', title: 'YouTube Subscriber Offer', description: 'Watching us on YouTube? Pre-enrol with this code for an extra fee waiver plus a free NDT fundamentals starter kit.', discount_label: '₹5,000 OFF', coupon_code: 'SAVVYYT', valid_till: '2026-09-08', seats_left: 25, is_active: true, sort_order: 2 },
-  { id: 'o3', title: 'Placement Fast-Track Bundle', description: 'Pre-enrol in any two courses and get free placement fast-track: CV workshop, mock interviews and priority recruiter referrals.', discount_label: 'BUNDLE', coupon_code: 'PLACE2X', valid_till: '2026-09-23', seats_left: 8, is_active: true, sort_order: 3 },
 ];

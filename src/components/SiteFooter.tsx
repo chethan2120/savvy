@@ -3,11 +3,13 @@
 import React from 'react';
 import Link from 'next/link';
 import { MapPin, Phone, Mail, Facebook, Youtube, Twitter, Instagram, ArrowUpRight } from 'lucide-react';
-import { defaultSettings, coursesData } from '@/lib/data';
+import { defaultSettings } from '@/lib/data';
+import { useCourseCatalog } from '@/lib/useCourseCatalog';
 import { SavvyLogo } from '@/components/brand/SavvyLogo';
 import { NewsletterForm } from './NewsletterForm';
 
 export const SiteFooter: React.FC = () => {
+  const { courses } = useCourseCatalog();
   return (
     <footer className="bg-[#0a0b0c] text-white pt-16 pb-12 border-t border-white/10">
       <div className="site-container">
@@ -19,7 +21,7 @@ export const SiteFooter: React.FC = () => {
             </Link>
 
             <p className="text-xs text-white/70 leading-relaxed">
-              India&apos;s premier institute for Non-Destructive Testing (NDT Level II), QA/QC, Fire & Safety, HVAC, and Revit MEP training with 100% placement support.
+              Training programmes in Non-Destructive Testing (NDT Level II), QA/QC, Fire & Safety, HVAC, and Revit MEP.
             </p>
 
             <div className="flex flex-col gap-3 text-xs text-white/80 mt-2">
@@ -67,7 +69,7 @@ export const SiteFooter: React.FC = () => {
               Programs
             </h4>
             <ul className="flex flex-col gap-2.5 text-xs text-white/70">
-              {coursesData.map((course) => (
+              {courses.map((course) => (
                 <li key={course.id}>
                   <Link href={`/course/${course.slug}`} className="hover:text-white transition-colors flex items-center justify-between group">
                     <span className="group-hover:translate-x-0.5 transition-transform">{course.title}</span>

@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
-import { preEnrollmentOffersData, coursesData, defaultSettings } from '@/lib/data';
+import { preEnrollmentOffersData, defaultSettings } from '@/lib/data';
+import { useCourseCatalog } from '@/lib/useCourseCatalog';
 import type { PreEnrollmentOffer } from '@/lib/types';
 import { Tag, Clock, Users, CheckCircle2, Loader2, AlertCircle, X } from 'lucide-react';
 
@@ -29,8 +30,7 @@ export const PreEnrollmentOffers: React.FC<{ offers?: PreEnrollmentOffer[] }> = 
           </span>
           <h2 className="text-headline font-normal text-foreground">Book your seat before the batch opens</h2>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Limited seats per batch. Pre-enrol now to lock the current fee, claim your discount code, and get priority
-            access to our placement cell the day your course ends.
+            Review the published course details and contact the institute to confirm current batch availability and fees.
           </p>
         </div>
 
@@ -86,6 +86,7 @@ export const PreEnrollmentOffers: React.FC<{ offers?: PreEnrollmentOffer[] }> = 
 };
 
 function ClaimDialog({ offer, onClose }: { offer: PreEnrollmentOffer; onClose: () => void }) {
+  const { courses } = useCourseCatalog();
   const [form, setForm] = useState({
     full_name: '',
     phone: '',
@@ -154,7 +155,7 @@ function ClaimDialog({ offer, onClose }: { offer: PreEnrollmentOffer; onClose: (
             <input type="email" placeholder="Email (optional)" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className={input} />
             <select value={form.course_slug} onChange={(e) => setForm({ ...form, course_slug: e.target.value })} className={input}>
               <option value="">Select a course</option>
-              {coursesData.map((c) => (
+              {courses.map((c) => (
                 <option key={c.slug} value={c.slug}>{c.title}</option>
               ))}
             </select>

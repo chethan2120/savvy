@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, CheckCircle2, Award, Shield, Users, Globe2, BookOpen, Layers, Phone, HelpCircle, QrCode, ShieldCheck, PlayCircle, MonitorPlay } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Award, Shield, Users, Globe2, BookOpen, Layers, HelpCircle, QrCode, ShieldCheck, PlayCircle, MonitorPlay } from 'lucide-react';
 import { defaultSettings } from '@/lib/data';
 import { USE_INKHERO } from '@/config/hero';
 import { CoinHero } from '@/components/hero/CoinHero';
@@ -9,21 +9,20 @@ import { SavvyInkHero } from '@/components/hero/SavvyInkHero';
 import { KineticStatement } from '@/components/motion/KineticStatement';
 import { Reveal } from '@/components/motion/Reveal';
 import { RecognitionSection } from '@/components/RecognitionSection';
-import { MetricStrip } from '@/components/MetricStrip';
 import { FeaturedCoursesShowcase } from '@/components/FeaturedCoursesShowcase';
 import { InstructorCard } from '@/components/InstructorCard';
 import { TestimonialCarousel } from '@/components/TestimonialCarousel';
 import { Accordion } from '@/components/Accordion';
 import { ContactForm } from '@/components/ContactForm';
 import { PreEnrollmentOffers } from '@/components/PreEnrollmentOffers';
-import { instructorsData, testimonialsData, blogPostsData, galleryData, placementStats } from '@/lib/data';
+import { instructorsData, testimonialsData, blogPostsData, galleryData } from '@/lib/data';
 import { getPublishedCourses } from '@/lib/courses';
 
 export const dynamic = 'force-dynamic';
 
 export default async function HomePage() {
-  const { courses } = await getPublishedCourses();
-  const featuredCourses = courses.filter((c) => c.is_featured);
+  const { courses, error: courseError } = await getPublishedCourses();
+  const featuredCourses = courses;
   const generalFAQs = [
     {
       id: 'faq1',
@@ -37,8 +36,8 @@ export default async function HomePage() {
     },
     {
       id: 'faq3',
-      question: 'Does Savvy Training Institute guarantee 100% job placement assistance?',
-      answer: 'Yes! We have a dedicated placement cell that connects certified students with leading companies across India and international markets in the Middle East (Gulf).',
+      question: 'Does completing a course guarantee employment?',
+      answer: 'No. Career outcomes depend on each learner’s qualifications, experience, and employer requirements.',
     },
     {
       id: 'faq4',
@@ -56,12 +55,7 @@ export default async function HomePage() {
       <RecognitionSection />
 
       {/* Pinned kinetic statement */}
-      <KineticStatement eyebrow="Certify your career" lines={['100%', 'Placement']} />
-
-      {/* Proof Statistics Bar */}
-      <Reveal>
-        <MetricStrip />
-      </Reveal>
+      <KineticStatement eyebrow="Build technical capability" lines={['Learn', 'Practise']} />
 
       {/* Section D: Institute Introduction (Mission, Vision, Motto) */}
       <section className="site-container">
@@ -72,7 +66,7 @@ export default async function HomePage() {
               Your launchpad to a brilliant and exciting technical career
             </h2>
             <p className="text-body-large text-muted-foreground leading-relaxed">
-              Discover India&apos;s premier destination for Non-Destructive Testing and Quality Assurance training. Our programs empower students with hands-on skills, international accreditation standards, and direct career placement.
+              Discover Savvy Training Institute&apos;s programmes in Non-Destructive Testing and Quality Assurance, with course details and eligibility information.
             </p>
           </div>
 
@@ -93,7 +87,7 @@ export default async function HomePage() {
               </div>
               <h3 className="text-xl font-normal text-foreground">Our Vision</h3>
               <p className="text-xs text-muted-foreground leading-relaxed">
-                To become the global leader in industrial testing education, setting the benchmark for technical excellence, innovation, and international career placements.
+                To support technical learning in industrial testing through education, practice, and innovation.
               </p>
             </div>
 
@@ -111,7 +105,9 @@ export default async function HomePage() {
       </section>
 
       {/* Section E: Featured Courses */}
-      <FeaturedCoursesShowcase courses={featuredCourses} />
+      {courseError ? (
+        <p role="alert" className="site-container rounded-2xl border border-red-200 bg-red-50 p-5 text-sm text-red-900">{courseError}</p>
+      ) : <FeaturedCoursesShowcase courses={featuredCourses} />}
 
       {/* Why choose Savvy Training Institute */}
       <section className="bg-surface py-20 border-y border-border">
@@ -151,9 +147,9 @@ export default async function HomePage() {
               <div className="w-10 h-10 rounded-full bg-forest text-white flex items-center justify-center">
                 <Shield className="w-5 h-5" />
               </div>
-              <h4 className="text-base font-normal text-foreground">100% Placement Support</h4>
+              <h4 className="text-base font-normal text-foreground">Career pathways</h4>
               <p className="text-xs text-muted-foreground leading-relaxed">
-                Dedicated career cell assisting with CV building, interview prep, and placements in India, Gulf, and abroad.
+                Explore the technical roles and industries related to each programme.
               </p>
             </div>
 
@@ -212,54 +208,14 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Section G: Placement Story */}
       <section className="site-container">
-        <div className="editorial-card p-8 md:p-14 bg-gradient-to-br from-surface to-background border-border flex flex-col lg:flex-row gap-12 items-center">
-          <div className="flex flex-col gap-6 lg:w-7/12">
-            <span className="accent-tag-periwinkle self-start">Career Guarantee</span>
-            <h2 className="text-h1 font-normal text-foreground">
-              100% Placement Assistance Guarantee
-            </h2>
-            <div className="p-5 rounded-xl bg-background border border-border text-sm text-foreground/90 italic leading-relaxed">
-              &ldquo;वर्ल्ड वाइड NDT इंस्टीट्यूट: सपनों को हकीकत में बदलने का मंच। हम आपको नौकरी प्राप्त करने की गारंटी देते हैं, और इसके लिए हमारा समर्पित प्लेसमेंट विभाग हमेशा आपके साथ होता है।&rdquo;
-            </div>
-            <p className="text-xs text-muted-foreground leading-relaxed">
-              Our placement department works closely with leading inspection agencies, oil refineries, and engineering firms to ensure that every certified graduate transitions seamlessly into a high-paying job.
-            </p>
-            <div className="grid grid-cols-3 gap-3 pt-1">
-              {[
-                { v: placementStats.students_placed, l: 'Students Placed' },
-                { v: placementStats.hiring_partners, l: 'Hiring Partners' },
-                { v: placementStats.highest_package, l: 'Highest Package' },
-              ].map((s) => (
-                <div key={s.l} className="rounded-xl border border-border bg-background p-3 flex flex-col items-center text-center">
-                  <span className="text-xl font-light text-foreground">{s.v}</span>
-                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground">{s.l}</span>
-                </div>
-              ))}
-            </div>
-            <div className="flex flex-wrap gap-4 pt-2">
-              <Link href="/placement" className="pill-button-forest text-xs py-3 px-6">
-                See All Placements
-              </Link>
-              <Link href="/admission" className="pill-button-secondary text-xs py-3 px-6">
-                Get Free Counselling
-              </Link>
-              <a href={`tel:${defaultSettings.phone_primary.replace(/\s/g, '')}`} className="pill-button-secondary text-xs py-3 px-6 flex items-center gap-2">
-                <Phone className="w-3.5 h-3.5" /> Call Placement Cell
-              </a>
-            </div>
-          </div>
-
-          <div className="lg:w-5/12 relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-border">
-            <Image
-              src="/images/engineer.jpg"
-              alt="Savvy Training Institute graduate working as a certified field inspector"
-              fill
-              sizes="(max-width: 1024px) 100vw, 40vw"
-              className="object-cover"
-            />
-          </div>
+        <div className="editorial-card flex flex-col gap-4 bg-surface p-8 md:p-12">
+          <span className="accent-tag-periwinkle self-start">Career pathways</span>
+          <h2 className="text-h1 font-normal text-foreground">Build skills for your next step</h2>
+          <p className="max-w-3xl text-sm leading-relaxed text-muted-foreground">
+            Course completion does not guarantee a job. Employment outcomes depend on qualifications, experience, and employer requirements.
+          </p>
+          <Link href="/course" className="pill-button-forest self-start px-6 py-3 text-xs">Explore courses</Link>
         </div>
       </section>
 
@@ -280,7 +236,7 @@ export default async function HomePage() {
               { step: '03', title: 'Classroom', desc: 'Master ASNT codes, standards, and inspection theory.' },
               { step: '04', title: 'Lab Work', desc: 'Practice flaw detection on actual test samples in our lab.' },
               { step: '05', title: 'Certification', desc: 'Pass examinations to earn ASNT Level II credentials.' },
-              { step: '06', title: 'Placement', desc: 'Interview with top recruiters in India & abroad.' },
+              { step: '06', title: 'Next steps', desc: 'Review employer requirements for the roles related to your course.' },
             ].map((s, index) => (
               <div key={index} className="editorial-card p-6 flex flex-col gap-3 relative">
                 <span className="text-3xl font-light text-forest">{s.step}</span>
@@ -327,80 +283,15 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Section K: Course Fee Overview */}
+      {/* Course prices and details come from the published catalogue. */}
       <section className="site-container">
-        <div className="flex flex-col gap-12">
-          <div className="flex flex-col items-start gap-3 max-w-2xl">
-            <span className="accent-tag-pink">Transparent Fees</span>
-            <h2 className="text-h1 font-normal text-foreground">
-              Course fees &amp; plan overview
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="editorial-card p-8 flex flex-col justify-between gap-6 border-forest/30 bg-surface">
-              <div className="flex flex-col gap-4">
-                <span className="text-xs uppercase tracking-wider text-forest font-bold">Popular Choice</span>
-                <h3 className="text-2xl font-normal text-foreground">NDT Level II Course</h3>
-                <div className="text-3xl font-light text-foreground">
-                  ₹35,000 <span className="text-xs font-normal text-muted-foreground">/ 45 Days</span>
-                </div>
-                <div className="hairline-divider" />
-                <ul className="flex flex-col gap-2.5 text-xs text-muted-foreground">
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-forest" /> ASNT Level 2 Certification</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-forest" /> UT, RT, MT, PT, VT &amp; RTFI</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-forest" /> Fully Equipped Hands-on Lab</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-forest" /> 100% Placement Assistance</li>
-                </ul>
-              </div>
-              <Link href="/admission" className="pill-button-forest text-xs py-3 text-center">
-                Enroll Now
-              </Link>
-            </div>
-
-            <div className="editorial-card p-8 flex flex-col justify-between gap-6 bg-surface">
-              <div className="flex flex-col gap-4">
-                <span className="text-xs uppercase tracking-wider text-muted-foreground font-bold">Quality Standard</span>
-                <h3 className="text-2xl font-normal text-foreground">QA &amp; QC Course</h3>
-                <div className="text-3xl font-light text-foreground">
-                  ₹35,000 <span className="text-xs font-normal text-muted-foreground">/ 30 Days</span>
-                </div>
-                <div className="hairline-divider" />
-                <ul className="flex flex-col gap-2.5 text-xs text-muted-foreground">
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-forest" /> QA/QC Inspector Certificate</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-forest" /> Welding Metallurgy &amp; ISO 9001</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-forest" /> Piping Code ASME B31.3</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-forest" /> Site Audit Protocols</li>
-                </ul>
-              </div>
-              <Link href="/admission" className="pill-button-secondary text-xs py-3 text-center">
-                Enroll Now
-              </Link>
-            </div>
-
-            <div className="editorial-card p-8 flex flex-col justify-between gap-6 bg-surface">
-              <div className="flex flex-col gap-4">
-                <span className="text-xs uppercase tracking-wider text-muted-foreground font-bold">Safety Diploma</span>
-                <h3 className="text-2xl font-normal text-foreground">Fire &amp; Safety Course</h3>
-                <div className="text-3xl font-light text-foreground">
-                  ₹45,000 <span className="text-xs font-normal text-muted-foreground">/ 1 Year</span>
-                </div>
-                <div className="hairline-divider" />
-                <ul className="flex flex-col gap-2.5 text-xs text-muted-foreground">
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-forest" /> Diploma in Fire &amp; Safety</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-forest" /> Industrial Safety Drills</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-forest" /> Risk Assessment &amp; HIRA</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-forest" /> Overseas Job Placement</li>
-                </ul>
-              </div>
-              <Link href="/admission" className="pill-button-secondary text-xs py-3 text-center">
-                Enroll Now
-              </Link>
-            </div>
-          </div>
+        <div className="editorial-card flex flex-col items-start gap-4 bg-surface p-8 md:p-12">
+          <span className="accent-tag-pink">Course catalogue</span>
+          <h2 className="text-h1 font-normal text-foreground">Current courses and fees</h2>
+          <p className="max-w-2xl text-sm text-muted-foreground">View the live course catalogue for current prices, durations, and programme summaries.</p>
+          <Link href="/course" className="pill-button-forest px-6 py-3 text-xs">Browse all courses</Link>
         </div>
       </section>
-
       {/* Section L: Student Gallery Preview */}
       <section className="bg-surface py-20 border-y border-border">
         <div className="site-container flex flex-col gap-10">
@@ -444,7 +335,7 @@ export default async function HomePage() {
               Frequently asked questions
             </h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Find answers regarding NDT Level II certification, qualification criteria, course durations, and placement guarantees.
+              Find answers about NDT Level II certification, qualification criteria, and course durations.
             </p>
 
             <div className="p-6 rounded-2xl bg-surface border border-border flex flex-col gap-3 mt-4">
@@ -481,7 +372,7 @@ export default async function HomePage() {
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-forest" />
-                <span>100% Placement Assistance Guarantee</span>
+                <span>Employment outcomes are not guaranteed</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-forest" />

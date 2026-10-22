@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     template: '%s | Savvy Training Institute',
   },
   description:
-    "India's premier training institute for NDT Level II, ASNT Certification, QA/QC Inspection, Fire & Safety, HVAC, and Revit MEP with 100% job placement support in India and abroad.",
+    'Training programmes in NDT Level II, QA/QC Inspection, Fire & Safety, HVAC, and Revit MEP.',
   keywords: [
     'NDT Level 2 Course',
     'ASNT Level 2 Certification',
@@ -53,10 +53,10 @@ export const metadata: Metadata = {
     siteName: 'Savvy Training Institute',
     title: 'Savvy Training Institute | NDT Level 2 & QA/QC Certification',
     description:
-      'Premier NDT Level II, QA/QC, Fire & Safety, HVAC, and Revit MEP training with 100% placement guarantee.',
+      'NDT Level II, QA/QC, Fire & Safety, HVAC, and Revit MEP training programmes.',
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1200&auto=format&fit=crop',
+        url: '/images/library/inspection.jpg',
         width: 1200,
         height: 630,
         alt: 'Savvy Training Institute',

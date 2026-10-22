@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { listRegistrationRequests, reviewRegistration } from '@/lib/server/institute-db';
+import { listRegistrationRequests, refreshCourseCatalog, reviewRegistration } from '@/lib/server/institute-db';
 import { requireRole } from '@/lib/server/session';
 
 export async function GET() {
@@ -15,6 +15,7 @@ export async function GET() {
 export async function POST(request: Request) {
   const admin = requireRole(['admin']);
   if (!admin) return NextResponse.json({ message: 'Only an administrator can review registration requests.' }, { status: 403 });
+  await refreshCourseCatalog();
   const body = await request.json().catch(() => null);
   const id = String(body?.id ?? '');
   const action = body?.action;

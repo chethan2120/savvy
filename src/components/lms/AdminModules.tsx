@@ -59,6 +59,8 @@ type CourseRow = {
   certification?: string;
   eligibility?: string;
   training_mode?: string;
+  prerequisites?: string[];
+  learning_outcomes?: string[];
 };
 
 const inputClass = 'w-full bg-background border border-border rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:border-forest';
@@ -327,7 +329,7 @@ function CourseAdmin() {
   const blank: CourseRow = {
     id: '', title: '', slug: '', short_description: '', description: '', duration: '', fee: '',
     expected_hours: 40, category: '', attribution: '', featured_image: '', published: false, archived: false,
-    certification: '', eligibility: 'As published by the institute', training_mode: 'Classroom & Online',
+    certification: '', eligibility: '', training_mode: 'Classroom & Online', prerequisites: [], learning_outcomes: [],
   };
   const [form, setForm] = useState<CourseRow>(blank);
 
@@ -356,6 +358,8 @@ function CourseAdmin() {
       certification: form.certification || form.title,
       eligibility: form.eligibility || 'As published by the institute',
       training_mode: form.training_mode || 'Classroom & Online',
+      prerequisites: (form.prerequisites ?? []).map((item) => item.trim()).filter(Boolean),
+      learning_outcomes: (form.learning_outcomes ?? []).map((item) => item.trim()).filter(Boolean),
     };
     const query = editing
       ? supabase.from('courses').update(payload).eq('id', editing.id)
@@ -400,11 +404,17 @@ function CourseAdmin() {
           <input required aria-label="Course title" placeholder="Title" className={inputClass} value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
           <input aria-label="Course slug" placeholder="Slug" className={inputClass} value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} />
           <textarea aria-label="Short description" placeholder="Short description" className={inputClass} value={form.short_description} onChange={(e) => setForm({ ...form, short_description: e.target.value })} />
+          <textarea aria-label="Full course description" placeholder="Course description" className={inputClass} value={form.description ?? ''} onChange={(e) => setForm({ ...form, description: e.target.value })} />
           <textarea aria-label="Attribution" placeholder="Attribution — leave blank unless a third party owns this credential" className={inputClass} value={form.attribution ?? ''} onChange={(e) => setForm({ ...form, attribution: e.target.value })} />
           <input aria-label="Duration" placeholder="Duration" className={inputClass} value={form.duration} onChange={(e) => setForm({ ...form, duration: e.target.value })} />
           <input aria-label="Expected study hours" type="number" min={1} placeholder="Expected hours" className={inputClass} value={form.expected_hours ?? 40} onChange={(e) => setForm({ ...form, expected_hours: Number(e.target.value) })} />
           <input aria-label="Category" placeholder="Category" className={inputClass} value={form.category ?? ''} onChange={(e) => setForm({ ...form, category: e.target.value })} />
-          <input aria-label="Fee" placeholder="Fee" className={inputClass} value={form.fee} onChange={(e) => setForm({ ...form, fee: e.target.value })} />
+          <input aria-label="Fee" placeholder="Fee in INR" className={inputClass} value={form.fee} onChange={(e) => setForm({ ...form, fee: e.target.value })} />
+          <input aria-label="Course image" placeholder="Course image URL or path" className={inputClass} value={form.featured_image ?? ''} onChange={(e) => setForm({ ...form, featured_image: e.target.value })} />
+          <input aria-label="Certificate details" placeholder="Certificate details" className={inputClass} value={form.certification ?? ''} onChange={(e) => setForm({ ...form, certification: e.target.value })} />
+          <textarea aria-label="Prerequisites" placeholder="Prerequisites (one per line)" className={inputClass} value={(form.prerequisites ?? []).join('\n')} onChange={(e) => setForm({ ...form, prerequisites: e.target.value.split('\n') })} />
+          <textarea aria-label="Learning outcomes" placeholder="Learning outcomes (one per line)" className={inputClass} value={(form.learning_outcomes ?? []).join('\n')} onChange={(e) => setForm({ ...form, learning_outcomes: e.target.value.split('\n') })} />
+          <input aria-label="Eligibility" placeholder="Eligibility" className={inputClass} value={form.eligibility ?? ''} onChange={(e) => setForm({ ...form, eligibility: e.target.value })} />
           <label className="text-xs flex items-center gap-2">
             <input type="checkbox" checked={Boolean(form.published)} onChange={(e) => setForm({ ...form, published: e.target.checked })} />
             Published on the website

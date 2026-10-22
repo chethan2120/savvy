@@ -32,7 +32,7 @@ export default function TermsPage() {
 
           <h2 className="text-xl font-normal text-foreground">3. Placement Assistance</h2>
           <p>
-            Savvy Training Institute provides 100% job placement support, interview preparation, and recruiter networking. Candidate participation in scheduled recruiter interviews is required.
+            Completing a course does not guarantee employment. Career outcomes depend on each learner’s qualifications, experience, and employer requirements.
           </p>
         </div>
       </section>

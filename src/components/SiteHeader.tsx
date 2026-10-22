@@ -4,7 +4,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ChevronDown, Menu, X, ArrowUpRight } from 'lucide-react';
-import { coursesData, defaultSettings } from '@/lib/data';
+import { defaultSettings } from '@/lib/data';
+import { useCourseCatalog } from '@/lib/useCourseCatalog';
 import { SavvyLogo } from '@/components/brand/SavvyLogo';
 import { lockScroll, unlockScroll } from '@/lib/scroll-lock';
 
@@ -35,6 +36,7 @@ export const SiteHeader: React.FC = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isCoursesOpen, setIsCoursesOpen] = useState(false);
   const pathname = usePathname();
+  const { courses, loading: coursesLoading } = useCourseCatalog();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
@@ -212,7 +214,8 @@ export const SiteHeader: React.FC = () => {
                       </div>
                       <div className="hairline-divider my-1.5" />
                       <div className="flex flex-col gap-0.5">
-                        {coursesData.map((course, i) => (
+                        {courses.length === 0 && <span className="px-3 py-2 text-xs text-muted-foreground">{coursesLoading ? 'Loading courses…' : 'No courses available'}</span>}
+                        {courses.map((course, i) => (
                           <Link
                             key={course.id}
                             href={`/course/${course.slug}`}
@@ -336,7 +339,8 @@ export const SiteHeader: React.FC = () => {
                     <span className="text-[11px] uppercase tracking-wider text-muted-foreground font-semibold px-2">
                       Courses
                     </span>
-                    {coursesData.map((c) => (
+                    {courses.length === 0 && <span className="px-2 text-sm text-muted-foreground">{coursesLoading ? 'Loading courses…' : 'No courses available'}</span>}
+                    {courses.map((c) => (
                       <Link
                         key={c.id}
                         href={`/course/${c.slug}`}

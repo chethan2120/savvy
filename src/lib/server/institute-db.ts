@@ -2,6 +2,9 @@ import { createHmac, randomBytes, scryptSync, timingSafeEqual } from 'crypto';
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'fs';
 import path from 'path';
 import { coursesData } from '@/lib/data';
+import type { Course, CourseModule } from '@/lib/types';
+import { supabase, isSupabaseConfigured } from '@/lib/supabase';
+import { supabaseTablesReady } from '@/lib/supabase-schema';
 
 export type InstituteRole = 'admin' | 'staff' | 'student';
 export type AccountStatus = 'active' | 'inactive';
@@ -110,6 +113,31 @@ export type CustomCourse = {
   categoryId: string;
   active: boolean;
   createdAt: string;
+  shortDescription?: string;
+  priceInr?: number | null;
+  studyHours?: number | null;
+  manualChapterCount?: number | null;
+  image?: string;
+  certificate?: string;
+  prerequisites?: string[];
+  outcomes?: string[];
+  visible?: boolean;
+};
+
+export type CourseOverride = {
+  title?: string;
+  shortDescription?: string;
+  description?: string;
+  duration?: string;
+  priceInr?: number | null;
+  studyHours?: number | null;
+  manualChapterCount?: number | null;
+  image?: string;
+  certificate?: string;
+  prerequisites?: string[];
+  outcomes?: string[];
+  visible?: boolean;
+  categoryId?: string;
 };
 
 export type AttendanceMark = {
@@ -219,6 +247,7 @@ type Database = {
   punches: PunchRecord[];
   categories: CourseCategory[];
   customCourses: CustomCourse[];
+  courseOverrides: Record<string, CourseOverride>;
   courseCategories: Record<string, string>;
   marks: AttendanceMark[];
   notifications: AppNotification[];
@@ -241,6 +270,31 @@ export const SESSION_COOKIE = 'savvy_session';
 export const INSTITUTE_TZ = 'Asia/Kolkata';
 
 const PROGRAM_IDS = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
+type DatabaseCourse = {
+  id: string; slug: string; title: string; short_description?: string; duration: string;
+  fee?: string; featured_image?: string; category?: string | null; expected_hours?: number | null;
+  certification?: string; eligibility?: string; published?: boolean; archived?: boolean;
+};
+let databaseCourses: DatabaseCourse[] | null = null;
+
+/** Refresh the server-session catalogue from the same published course table as the website. */
+export async function refreshCourseCatalog() {
+  if (!isSupabaseConfigured) {
+    databaseCourses = null;
+    return;
+  }
+  if (!(await supabaseTablesReady())) {
+    databaseCourses = [];
+    return;
+  }
+  const { data, error } = await supabase.from('courses').select('*').eq('published', true).order('sort_order');
+  if (error || !data) {
+    databaseCourses = [];
+    console.error('Portal course catalogue could not be refreshed.', error?.message ?? 'No course data returned.');
+    return;
+  }
+  databaseCourses = (data as DatabaseCourse[]).filter((course) => !course.archived);
+}
 
 function hashPassword(password: string, salt = randomBytes(16).toString('hex')) {
   const passwordHash = scryptSync(password, salt, 32).toString('hex');
@@ -290,6 +344,7 @@ function emptyDatabase(): Database {
     punches: [],
     categories: [],
     customCourses: [],
+    courseOverrides: {},
     courseCategories: {},
     marks: [],
     notifications: [],
@@ -310,6 +365,7 @@ function normaliseDb(parsed: Database) {
   parsed.punches ??= [];
   parsed.categories ??= [];
   parsed.customCourses ??= [];
+  parsed.courseOverrides ??= {};
   parsed.courseCategories ??= {};
   parsed.marks ??= [];
   parsed.notifications ??= [];
@@ -690,38 +746,135 @@ export function updateAccount(id: string, patch: {
   return { ok: true as const, account: publicAccount(account) };
 }
 
+const COURSE_IMAGE = '/images/course/ndt-level-2-course.png';
+
+function formatInr(amount: number) {
+  return `₹${new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0 }).format(amount)}`;
+}
+
+function lessonStats(db: Database, courseId: string, manualHours: number | null | undefined, manualCount: number | null | undefined) {
+  const chapters = db.chapters.filter((chapter) => chapter.courseId === courseId && chapter.status !== 'archived');
+  const hourValues = chapters.map((chapter) => chapter.studyHours).filter((hours): hours is number => hours != null);
+  return {
+    chapterCount: chapters.length > 0 ? chapters.length : (manualCount ?? 0),
+    studyHours: hourValues.length > 0 ? hourValues.reduce((sum, hours) => sum + hours, 0) : (manualHours ?? null),
+  };
+}
+
 export function allCourses() {
   const db = readDb();
-  const published = coursesData.filter((course) => PROGRAM_IDS.includes(course.id)).map((course) => ({
-    id: course.id,
-    slug: course.slug,
-    title: course.title,
-    duration: course.duration,
-    description: course.short_description ?? '',
-    image: course.featured_image,
-    href: `/course/${course.slug}`,
-    active: true,
-    custom: false,
-  }));
-  const custom = db.customCourses.filter((course) => course.active).map((course) => ({
-    id: course.id,
-    slug: course.slug,
-    title: course.title,
-    duration: course.duration,
-    description: course.description,
-    image: '/images/course/ndt-level-2-course.png',
-    href: `/course/${course.slug}`,
-    active: course.active,
-    custom: true,
-    categoryId: course.categoryId,
-  }));
+  const source = databaseCourses && databaseCourses.length > 0
+    ? databaseCourses
+    : coursesData.filter((course) => PROGRAM_IDS.includes(course.id));
+  const published = source.map((course) => {
+    const seed = coursesData.find((item) => item.id === course.id);
+    const override = db.courseOverrides[course.id] ?? {};
+    const stats = lessonStats(db, course.id, override.studyHours ?? seed?.expected_hours ?? null, override.manualChapterCount ?? null);
+    const chapterCount = stats.chapterCount > 0 ? stats.chapterCount : (seed?.modules?.length ?? 0);
+    const prerequisites = override.prerequisites ?? [];
+    return {
+      id: course.id,
+      slug: course.slug,
+      title: override.title || course.title,
+      shortDescription: override.shortDescription || seed?.short_description || '',
+      description: override.description || seed?.description || seed?.short_description || '',
+      duration: override.duration || course.duration,
+      image: override.image || seed?.featured_image || ('featured_image' in course ? course.featured_image : '') || COURSE_IMAGE,
+      fee: override.priceInr != null ? formatInr(override.priceInr) : (('fee' in course && course.fee) || seed?.fee || ''),
+      priceInr: override.priceInr ?? null,
+      certification: override.certificate || seed?.certification || ('certification' in course ? course.certification : '') || '',
+      prerequisites,
+      outcomes: override.outcomes ?? seed?.learning_outcomes ?? [],
+      eligibility: prerequisites.length ? prerequisites.join(' · ') : (seed?.eligibility || ('eligibility' in course ? course.eligibility : '') || ''),
+      expectedHours: stats.studyHours,
+      manualStudyHours: override.studyHours ?? null,
+      manualChapterCount: override.manualChapterCount ?? null,
+      chapterCount,
+      href: `/course/${course.slug}`,
+      active: true,
+      visible: override.visible !== false,
+      custom: false,
+      categoryId: override.categoryId || db.courseCategories[course.id] || '',
+    };
+  });
+  const custom = db.customCourses.filter((course) => course.active).map((course) => {
+    const stats = lessonStats(db, course.id, course.studyHours, course.manualChapterCount);
+    const prerequisites = course.prerequisites ?? [];
+    return {
+      id: course.id,
+      slug: course.slug,
+      title: course.title,
+      shortDescription: course.shortDescription || '',
+      description: course.description,
+      duration: course.duration,
+      image: course.image || COURSE_IMAGE,
+      fee: course.priceInr != null ? formatInr(course.priceInr) : '',
+      priceInr: course.priceInr ?? null,
+      certification: course.certificate || '',
+      prerequisites,
+      outcomes: course.outcomes ?? [],
+      eligibility: prerequisites.join(' · '),
+      expectedHours: stats.studyHours,
+      manualStudyHours: course.studyHours ?? null,
+      manualChapterCount: course.manualChapterCount ?? null,
+      chapterCount: stats.chapterCount,
+      href: `/course/${course.slug}`,
+      active: course.active,
+      visible: course.visible !== false,
+      custom: true,
+      categoryId: course.categoryId,
+    };
+  });
   return [...published, ...custom].map((course) => {
-    const categoryId = ('categoryId' in course && course.categoryId) || db.courseCategories[course.id] || '';
-    const category = db.categories.find((item) => item.id === categoryId);
+    const category = db.categories.find((item) => item.id === course.categoryId);
     return {
       ...course,
-      categoryId,
       categoryName: category?.name || 'Uncategorised',
+    };
+  });
+}
+
+/** Public catalogue: the same active courses the admin list edits, including later additions. */
+export function websiteCourses(): Course[] {
+  const db = readDb();
+  return allCourses().filter((course) => course.visible && course.active).map((course) => {
+    const seed = coursesData.find((item) => item.id === course.id);
+    const chapters = db.chapters
+      .filter((chapter) => chapter.courseId === course.id && chapter.status === 'published')
+      .sort((a, b) => a.sortOrder - b.sortOrder || a.createdAt.localeCompare(b.createdAt));
+    const modules: CourseModule[] = chapters.length
+      ? chapters.map((chapter) => ({
+        id: chapter.id,
+        course_id: course.id,
+        title: chapter.title,
+        description: chapter.objectives || chapter.description,
+        sort_order: chapter.sortOrder,
+        study_hours: chapter.studyHours,
+      }))
+      : (seed?.modules ?? []);
+    return {
+      id: course.id,
+      slug: course.slug,
+      title: course.title,
+      short_description: course.shortDescription || seed?.short_description || course.description,
+      description: course.description || seed?.description || course.shortDescription,
+      duration: course.duration,
+      fee: course.fee || 'Fee on request',
+      training_mode: seed?.training_mode || 'Classroom & Online',
+      certification: course.certification,
+      eligibility: course.eligibility,
+      placement_support: seed?.placement_support ?? false,
+      expected_hours: course.expectedHours,
+      chapter_count: course.chapterCount > 0 ? course.chapterCount : (seed?.modules?.length ?? 0),
+      category: course.categoryName === 'Uncategorised' ? undefined : course.categoryName,
+      prerequisites: course.prerequisites,
+      learning_outcomes: course.outcomes,
+      rating: seed?.rating ?? 0,
+      featured_image: course.image,
+      is_featured: seed?.is_featured ?? false,
+      sort_order: seed?.sort_order ?? 100,
+      modules,
+      faqs: seed?.faqs,
     };
   });
 }
@@ -1066,27 +1219,126 @@ export function saveCategory(input: { id?: string; name: string; description?: s
   return { ok: true as const, category };
 }
 
-export function createCustomCourse(input: { title: string; duration: string; description?: string; categoryId: string }) {
+type CourseDraft = {
+  id?: string;
+  title: string;
+  duration?: string;
+  description?: string;
+  shortDescription?: string;
+  categoryId?: string;
+  priceInr?: number | null;
+  studyHours?: number | null;
+  manualChapterCount?: number | null;
+  certificate?: string;
+  prerequisites?: string[];
+  outcomes?: string[];
+  visible?: boolean;
+};
+
+function cleanLines(value: string[] | undefined) {
+  return (value ?? []).map((item) => item.trim()).filter(Boolean);
+}
+
+export function createCustomCourse(input: CourseDraft) {
   const db = readDb();
   const title = input.title.trim();
   if (!title) return { ok: false as const, message: 'Enter a course name.' };
   const category = db.categories.find((item) => item.id === input.categoryId && item.active);
   if (!category) return { ok: false as const, message: 'Choose an active category.' };
-  const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || `course-${randomBytes(2).toString('hex')}`;
+  const base = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || `course-${randomBytes(2).toString('hex')}`;
+  const taken = new Set([...coursesData.map((course) => course.slug), ...db.customCourses.map((course) => course.slug)]);
+  let slug = base;
+  let suffix = 2;
+  while (taken.has(slug)) slug = `${base}-${suffix++}`;
   const course: CustomCourse = {
     id: `course-${randomBytes(4).toString('hex')}`,
     title,
     slug,
-    duration: input.duration.trim() || 'Not set',
+    duration: input.duration?.trim() || 'Not set',
     description: input.description?.trim() ?? '',
+    shortDescription: input.shortDescription?.trim() ?? '',
     categoryId: category.id,
     active: true,
     createdAt: new Date().toISOString(),
+    priceInr: input.priceInr ?? null,
+    studyHours: input.studyHours ?? null,
+    manualChapterCount: input.manualChapterCount ?? null,
+    image: '',
+    certificate: input.certificate?.trim() ?? '',
+    prerequisites: cleanLines(input.prerequisites),
+    outcomes: cleanLines(input.outcomes),
+    visible: input.visible !== false,
   };
   db.customCourses.push(course);
   db.courseCategories[course.id] = category.id;
   writeDb(db);
   return { ok: true as const, course };
+}
+
+export function saveCourseDetails(input: CourseDraft) {
+  if (!input.id) return createCustomCourse(input);
+  const db = readDb();
+  const title = input.title.trim();
+  if (!title) return { ok: false as const, message: 'Enter a course name.' };
+  const custom = db.customCourses.find((course) => course.id === input.id);
+  if (custom) {
+    custom.title = title;
+    if (input.duration !== undefined) custom.duration = input.duration.trim() || custom.duration;
+    if (input.description !== undefined) custom.description = input.description.trim();
+    if (input.shortDescription !== undefined) custom.shortDescription = input.shortDescription.trim();
+    if (input.priceInr !== undefined) custom.priceInr = input.priceInr;
+    if (input.studyHours !== undefined) custom.studyHours = input.studyHours;
+    if (input.manualChapterCount !== undefined) custom.manualChapterCount = input.manualChapterCount;
+    if (input.certificate !== undefined) custom.certificate = input.certificate.trim();
+    if (input.prerequisites) custom.prerequisites = cleanLines(input.prerequisites);
+    if (input.outcomes) custom.outcomes = cleanLines(input.outcomes);
+    if (input.visible !== undefined) custom.visible = input.visible;
+    if (input.categoryId) {
+      const category = db.categories.find((item) => item.id === input.categoryId && item.active);
+      if (!category) return { ok: false as const, message: 'Choose an active category.' };
+      custom.categoryId = category.id;
+      db.courseCategories[custom.id] = category.id;
+    }
+    writeDb(db);
+    return { ok: true as const, course: custom };
+  }
+  if (!allCourses().some((course) => course.id === input.id)) return { ok: false as const, message: 'That course was not found.' };
+  const override: CourseOverride = { ...(db.courseOverrides[input.id] ?? {}) };
+  override.title = title;
+  if (input.duration !== undefined) override.duration = input.duration.trim();
+  if (input.description !== undefined) override.description = input.description.trim();
+  if (input.shortDescription !== undefined) override.shortDescription = input.shortDescription.trim();
+  if (input.priceInr !== undefined) override.priceInr = input.priceInr;
+  if (input.studyHours !== undefined) override.studyHours = input.studyHours;
+  if (input.manualChapterCount !== undefined) override.manualChapterCount = input.manualChapterCount;
+  if (input.certificate !== undefined) override.certificate = input.certificate.trim();
+  if (input.prerequisites) override.prerequisites = cleanLines(input.prerequisites);
+  if (input.outcomes) override.outcomes = cleanLines(input.outcomes);
+  if (input.visible !== undefined) override.visible = input.visible;
+  if (input.categoryId) {
+    const category = db.categories.find((item) => item.id === input.categoryId);
+    if (!category) return { ok: false as const, message: 'Choose a category.' };
+    override.categoryId = category.id;
+    db.courseCategories[input.id] = category.id;
+  }
+  db.courseOverrides[input.id] = override;
+  writeDb(db);
+  return { ok: true as const, course: { id: input.id } };
+}
+
+export function setCourseImage(courseId: string, publicPath: string) {
+  const db = readDb();
+  const custom = db.customCourses.find((course) => course.id === courseId);
+  if (custom) {
+    custom.image = publicPath;
+    writeDb(db);
+    return { ok: true as const };
+  }
+  if (!allCourses().some((course) => course.id === courseId)) return { ok: false as const, message: 'That course was not found.' };
+  const override: CourseOverride = { ...(db.courseOverrides[courseId] ?? {}), image: publicPath };
+  db.courseOverrides[courseId] = override;
+  writeDb(db);
+  return { ok: true as const };
 }
 
 export function assignCategory(courseId: string, categoryId: string) {
@@ -1291,7 +1543,6 @@ export function courseRecord(courseId: string, viewer: InstituteAccount) {
     .filter((chapter) => chapter.courseId === courseId && chapter.status !== 'archived')
     .filter((chapter) => viewer.role !== 'student' || (enrolled && db.studentAccess.viewChapters && chapter.status === 'published'))
     .sort((a, b) => a.sortOrder - b.sortOrder || a.createdAt.localeCompare(b.createdAt));
-  const hourValues = db.chapters.filter((chapter) => chapter.courseId === courseId && chapter.status !== 'archived' && chapter.studyHours != null).map((chapter) => chapter.studyHours as number);
   const instructors = db.instructors
     .filter((row) => row.courseId === courseId)
     .map((row) => db.accounts.find((account) => account.id === row.accountId))
@@ -1306,8 +1557,8 @@ export function courseRecord(courseId: string, viewer: InstituteAccount) {
       ? { ...chapter, content: '', objectives: '' }
       : chapter),
     instructors,
-    chapterCount: db.chapters.filter((chapter) => chapter.courseId === courseId && chapter.status !== 'archived' && (viewer.role !== 'student' || chapter.status === 'published')).length,
-    studyHours: hourValues.length ? hourValues.reduce((sum, hours) => sum + hours, 0) : null,
+    chapterCount: course.chapterCount,
+    studyHours: course.expectedHours,
     enrolledCount: viewer.role === 'student' ? null : enrolledStudents.length,
     students: manage ? enrolledStudents.map((row) => {
       const student = db.accounts.find((account) => account.id === row.accountId);

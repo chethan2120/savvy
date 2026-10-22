@@ -34,11 +34,14 @@ export interface Course {
   placement_support: boolean;
   published?: boolean;
   archived?: boolean;
-  expected_hours?: number;
+  expected_hours?: number | null;
+  chapter_count?: number | null;
   start_date?: string;
   end_date?: string;
   category?: string;
   attribution?: string;
+  prerequisites?: string[];
+  learning_outcomes?: string[];
   rating: number;
   featured_image: string;
   is_featured: boolean;
@@ -53,6 +56,7 @@ export interface CourseModule {
   title: string;
   description?: string;
   sort_order: number;
+  study_hours?: number | null;
 }
 
 export interface CourseFAQ {

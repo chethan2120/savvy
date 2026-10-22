@@ -6,7 +6,8 @@ import { Accordion } from '@/components/Accordion';
 import { ContactForm } from '@/components/ContactForm';
 import { getPublishedCourse, getPublishedCourses } from '@/lib/courses';
 import { defaultSettings } from '@/lib/data';
-import { Clock, Award, CheckCircle, ShieldCheck, BookOpen, ChevronRight, Phone } from 'lucide-react';
+import { currentAccount } from '@/lib/server/session';
+import { Clock, Award, BookOpen, ChevronRight, Phone } from 'lucide-react';
 
 export const dynamic = 'force-dynamic';
 export const dynamicParams = true;
@@ -29,6 +30,7 @@ export async function generateMetadata({ params }: CourseDetailPageProps) {
 
 export default async function CourseDetailPage({ params }: CourseDetailPageProps) {
   const course = await getPublishedCourse(params.slug);
+  const canViewCurriculum = Boolean(currentAccount());
 
   if (!course) {
     notFound();
@@ -46,11 +48,6 @@ export default async function CourseDetailPage({ params }: CourseDetailPageProps
           <>
             <span className="accent-tag-periwinkle">{course.duration}</span>
             <span className="accent-tag-yellow">Fee: {course.fee}</span>
-            {course.placement_support && (
-              <span className="bg-forest text-white text-[10px] font-medium px-2.5 py-1 rounded-full">
-                100% Job Placement Assistance
-              </span>
-            )}
           </>
         }
         title={course.title}
@@ -65,7 +62,7 @@ export default async function CourseDetailPage({ params }: CourseDetailPageProps
           {/* Left Main Column */}
           <div className="lg:col-span-8 flex flex-col gap-12">
             {/* Quick Specs Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-6 rounded-2xl bg-surface border border-border">
+            <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 p-6 rounded-2xl bg-surface border border-border">
               <div className="flex flex-col gap-1">
                 <span className="text-[11px] uppercase tracking-wider text-muted-foreground">Duration</span>
                 <span className="text-sm font-semibold text-foreground flex items-center gap-1.5">
@@ -81,10 +78,12 @@ export default async function CourseDetailPage({ params }: CourseDetailPageProps
                 <span className="text-sm font-semibold text-foreground">{course.training_mode}</span>
               </div>
               <div className="flex flex-col gap-1">
-                <span className="text-[11px] uppercase tracking-wider text-muted-foreground">Placement</span>
-                <span className="text-sm font-semibold text-forest flex items-center gap-1">
-                  <ShieldCheck className="w-4 h-4" /> 100% Support
-                </span>
+                <span className="text-[11px] uppercase tracking-wider text-muted-foreground">Estimated study time</span>
+                <span className="text-sm font-semibold text-foreground">{course.expected_hours ? `${course.expected_hours} hours` : 'Contact us'}</span>
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-[11px] uppercase tracking-wider text-muted-foreground">Chapters</span>
+                <span className="text-sm font-semibold text-foreground">{course.chapter_count ?? course.modules?.length ?? 0}</span>
               </div>
             </div>
 
@@ -113,8 +112,15 @@ export default async function CourseDetailPage({ params }: CourseDetailPageProps
               </div>
             </div>
 
+            {((course.prerequisites?.length ?? 0) > 0 || (course.learning_outcomes?.length ?? 0) > 0) && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {Boolean(course.prerequisites?.length) && <div className="editorial-card bg-surface p-6"><h2 className="text-sm font-semibold">Prerequisites</h2><ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-muted-foreground">{course.prerequisites?.map((item) => <li key={item}>{item}</li>)}</ul></div>}
+                {Boolean(course.learning_outcomes?.length) && <div className="editorial-card bg-surface p-6"><h2 className="text-sm font-semibold">Learning outcomes</h2><ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-muted-foreground">{course.learning_outcomes?.map((item) => <li key={item}>{item}</li>)}</ul></div>}
+              </div>
+            )}
+
             {/* Modules / Curriculum */}
-            {course.modules && course.modules.length > 0 && (
+            {canViewCurriculum && course.modules && course.modules.length > 0 && (
               <div className="flex flex-col gap-6">
                 <h2 className="text-h2 font-normal text-foreground">What You Will Learn (Curriculum)</h2>
                 <div className="flex flex-col gap-3">
@@ -124,7 +130,8 @@ export default async function CourseDetailPage({ params }: CourseDetailPageProps
                         <span className="w-6 h-6 rounded-full bg-forest/10 text-forest text-xs flex items-center justify-center font-bold">
                           {idx + 1}
                         </span>
-                        {m.title}
+                        <span className="flex-1">{m.title}</span>
+                        {m.study_hours != null && <span className="text-xs font-normal text-muted-foreground">{m.study_hours} hours</span>}
                       </div>
                       {m.description && (
                         <p className="text-xs text-muted-foreground pl-8 leading-relaxed">{m.description}</p>
@@ -132,6 +139,13 @@ export default async function CourseDetailPage({ params }: CourseDetailPageProps
                     </div>
                   ))}
                 </div>
+              </div>
+            )}
+            {!canViewCurriculum && (
+              <div className="rounded-2xl border border-border bg-surface p-6">
+                <h2 className="text-lg font-medium text-foreground">Course curriculum</h2>
+                <p className="mt-2 text-sm text-muted-foreground">Sign in to view the full curriculum and lesson details.</p>
+                <Link href="/login" className="mt-4 inline-flex text-sm font-semibold text-forest underline underline-offset-4">Sign in</Link>
               </div>
             )}
 

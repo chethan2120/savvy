@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { ArrowLeft, ArrowRight, CheckCircle2, Eye, EyeOff, GraduationCap, Loader2, Lock, Mail, ShieldCheck, UserRound } from 'lucide-react';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 import { signInAs, type SignInRole } from '@/lib/portal-auth';
-import { coursesData } from '@/lib/data';
+import { useCourseCatalog } from '@/lib/useCourseCatalog';
 import { friendlyError } from '@/lib/friendly-error';
 import { SavvyLogo } from '@/components/brand/SavvyLogo';
 
@@ -18,6 +18,7 @@ const roles: { id: SignInRole; label: string; hint: string; href: string; icon: 
 
 export default function LoginPage() {
   const router = useRouter();
+  const { courses, loading: coursesLoading } = useCourseCatalog();
   const [role, setRole] = useState<SignInRole | null>(null);
   const [mode, setMode] = useState<'signin' | 'signup' | 'forgot'>('signin');
   const [email, setEmail] = useState('');
@@ -25,7 +26,7 @@ export default function LoginPage() {
   const [confirm, setConfirm] = useState('');
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
-  const [course, setCourse] = useState(coursesData[0]?.title ?? '');
+  const [course, setCourse] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('');
@@ -35,6 +36,10 @@ export default function LoginPage() {
     const selected = new URLSearchParams(window.location.search).get('role');
     if (selected === 'admin' || selected === 'staff' || selected === 'student') setRole(selected);
   }, []);
+
+  useEffect(() => {
+    if (courses.length && !courses.some((item) => item.title === course)) setCourse(courses[0].title);
+  }, [courses, course]);
 
   const resetNotice = () => setMessage('');
 
@@ -124,7 +129,7 @@ export default function LoginPage() {
             <ArrowLeft className="h-4 w-4" /> Back to website
           </Link>
           <div className="relative z-10 flex w-full max-w-lg flex-col gap-6">
-            <SavvyLogo tone="light" markClassName="h-16 w-16 shrink-0 sm:h-20 sm:w-20" />
+            <SavvyLogo tone="light" markClassName="h-32 w-32 shrink-0 sm:h-40 sm:w-40" />
             <div className="h-0.5 w-14 bg-[#D9AD55]" />
             <div className="flex flex-col gap-3">
               <h1 className="text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl">SAVVY TRAINING INSTITUTE</h1>
@@ -198,8 +203,9 @@ export default function LoginPage() {
                 <Field label="Mobile number" value={phone} onChange={setPhone} autoComplete="tel" />
                 <label className="flex flex-col gap-1 text-xs">
                   <span className="font-semibold text-foreground">Course of interest</span>
-                  <select value={course} onChange={(e) => setCourse(e.target.value)} className="bg-background border border-border rounded-lg px-3 py-2.5 text-sm">
-                    {coursesData.map((item) => (
+                  <select value={course} onChange={(e) => setCourse(e.target.value)} disabled={coursesLoading || courses.length === 0} className="bg-background border border-border rounded-lg px-3 py-2.5 text-sm">
+                    {courses.length === 0 && <option value="">{coursesLoading ? 'Loading courses…' : 'Courses unavailable'}</option>}
+                    {courses.map((item) => (
                       <option key={item.id} value={item.title}>{item.title}</option>
                     ))}
                   </select>

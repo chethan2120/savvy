@@ -19,8 +19,8 @@ export const SavvyInkHero: React.FC = () => {
       <InkHero
         showNav={false}
         image={{
-          src: '/images/hero/plant.webp',
-          alt: 'Refinery storage tank and insulated piping. Photograph by Carl Young, CC BY-SA 4.0, via Wikimedia Commons.',
+          src: '/images/library/inspection.jpg',
+          alt: 'Inspection of industrial piping and welded joints.',
         }}
         eyebrow="Professional Certification"
         headline={'Advance your career\nin inspection & quality'}
@@ -28,7 +28,7 @@ export const SavvyInkHero: React.FC = () => {
         cta={{ label: 'View Courses', href: '/course' }}
         inkColor="#102B46"
         ease="ink"
-        travel={220}
+        travel={300}
         onStation={(station) => {
           if (station >= 1) document.documentElement.dataset.darkHero = 'true';
           else delete document.documentElement.dataset.darkHero;

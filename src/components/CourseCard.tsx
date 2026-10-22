@@ -3,25 +3,31 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowUpRight, Clock, Star, Award, CheckCircle } from 'lucide-react';
+import { ArrowUpRight, Star, Award } from 'lucide-react';
 import { Course } from '@/lib/types';
 
 interface CourseCardProps {
   course: Course;
+  priority?: boolean;
 }
 
-export const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
+export const CourseCard: React.FC<CourseCardProps> = ({ course, priority = false }) => {
   return (
     <article className="editorial-card group flex h-full flex-col overflow-hidden">
       {/* Course Image */}
       <div className="aspect-[16/9] relative overflow-hidden bg-muted-foreground/10">
-        <Image
-          src={course.featured_image}
-          alt={course.title}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-cover transition-transform duration-700 ease-editorial motion-safe:group-hover:scale-[1.06]"
-        />
+        {course.featured_image.startsWith('/api/') ? (
+          <img src={course.featured_image} alt={course.title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-editorial motion-safe:group-hover:scale-[1.06]" />
+        ) : (
+          <Image
+            src={course.featured_image}
+            alt={course.title}
+            fill
+            priority={priority}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover transition-transform duration-700 ease-editorial motion-safe:group-hover:scale-[1.06]"
+          />
+        )}
         {/* Ink wash on hover so the white pills keep contrast over bright
             photography. */}
         <div
@@ -32,11 +38,6 @@ export const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
           <span className="accent-tag-periwinkle text-[11px] font-semibold px-2.5 py-1 rounded-full shadow-subtle">
             {course.duration}
           </span>
-          {course.placement_support && (
-            <span className="bg-forest text-white text-[10px] font-medium px-2.5 py-1 rounded-full shadow-subtle flex items-center gap-1">
-              <CheckCircle className="w-3 h-3" /> 100% Placement
-            </span>
-          )}
         </div>
       </div>
 
@@ -44,9 +45,11 @@ export const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
       <div className="p-6 flex flex-col flex-grow justify-between gap-4">
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between text-xs text-muted-foreground">
-            <span className="flex items-center gap-1 text-amber-600 font-medium">
-              <Star className="w-3.5 h-3.5 fill-current" /> {course.rating.toFixed(1)} / 5.0
-            </span>
+            {course.rating > 0 ? (
+              <span className="flex items-center gap-1 text-amber-600 font-medium">
+                <Star className="w-3.5 h-3.5 fill-current" /> {course.rating.toFixed(1)} / 5.0
+              </span>
+            ) : <span />}
             <span className="font-semibold text-foreground bg-black/5 px-2.5 py-0.5 rounded-full">
               {course.fee}
             </span>
@@ -58,6 +61,10 @@ export const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
 
           <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
             {course.short_description}
+          </p>
+          <p className="text-[11px] text-muted-foreground">
+            {course.chapter_count ?? course.modules?.length ?? 0} chapters
+            {course.expected_hours ? ` · ${course.expected_hours} study hours` : ''}
           </p>
         </div>
 

@@ -28,7 +28,7 @@ export default function PrivacyPolicyPage() {
 
           <h2 className="text-xl font-normal text-foreground">2. Purpose of Data Use</h2>
           <p>
-            Your information is used strictly to process course enrolments, communicate training schedules, verify prerequisites, provide job placement assistance, and respond to your inquiries.
+            Your information is used to process course enrolments, communicate training schedules, verify prerequisites, and respond to your inquiries.
           </p>
 
           <h2 className="text-xl font-normal text-foreground">3. Information Security &amp; Sharing</h2>

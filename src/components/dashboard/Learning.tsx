@@ -13,7 +13,7 @@ type Chapter = {
   objectives: string; content: string; status: 'draft' | 'published' | 'archived';
 };
 type Detail = {
-  course: { id: string; title: string; categoryName?: string; image: string; duration: string; description: string; href: string; custom?: boolean; active?: boolean };
+  course: { id: string; title: string; categoryName?: string; image: string; duration: string; description: string; href: string; fee?: string; certification?: string; eligibility?: string; expectedHours?: number | null; custom?: boolean; active?: boolean };
   chapters: Chapter[];
   instructors: { id: string; fullName: string }[];
   chapterCount: number;
@@ -112,8 +112,11 @@ function CourseBody({
           <h2 className="text-2xl font-semibold">{course.title}</h2>
           <p className="mt-1 text-sm text-muted-foreground">{course.description || 'No short description has been added.'}</p>
           <p className="mt-2 text-sm">Status: {course.active === false ? 'Inactive' : 'Published'} · Duration: {course.duration}</p>
+          {course.fee && <p className="mt-1 text-sm font-semibold">Fee: {course.fee}</p>}
+          {course.certification && <p className="mt-1 text-sm">Certificate: {course.certification}</p>}
+          {course.eligibility && <p className="mt-1 text-sm">Eligibility: {course.eligibility}</p>}
           {role === 'admin' && <Link href="/admin#courseAdmin" className="mt-3 inline-flex rounded-lg bg-forest px-3 py-2 text-sm font-semibold text-white">Edit Course</Link>}
-          {role !== 'student' && !course.custom && <Link href={course.href} className="ml-3 text-sm text-forest underline">View on Website</Link>}
+          {role !== 'student' && course.href && <Link href={course.href} className="ml-3 text-sm text-forest underline">View on Website</Link>}
         </div>
       </section>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
@@ -131,7 +134,7 @@ function CourseBody({
         ))}
       </div>
       {notice && <p className="text-sm">{notice}</p>}
-      {section === 'overview' && <p className="rounded-2xl border border-border bg-white p-4 text-sm">Course duration on the catalog is {course.duration}. Study hours are calculated from chapter hours and stay “Not assigned” until a chapter records them.</p>}
+      {section === 'overview' && <p className="rounded-2xl border border-border bg-white p-4 text-sm">Course duration on the catalogue is {course.duration}. The study-hours total is the sum of chapter hours. Until a chapter records hours, the total entered on the course is shown. The chapter count is the number of chapters, or the count entered on the course when none exist yet.</p>}
       {section === 'chapters' && <Chapters detail={detail} role={role} setNotice={setNotice} reload={reload} />}
       {section === 'staff' && role !== 'student' && <Instructors detail={detail} setNotice={setNotice} reload={reload} />}
       {section === 'students' && role !== 'student' && (

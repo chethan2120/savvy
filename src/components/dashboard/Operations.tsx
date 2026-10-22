@@ -5,7 +5,12 @@ import Link from 'next/link';
 import { InstituteIdentity, RoleAccessPanel } from '@/components/dashboard/Learning';
 
 type Person = { id: string; fullName: string; email: string; phone: string; role: string; status: string; createdAt: string; permissions?: Record<string, boolean> };
-type Course = { id: string; title: string; duration: string; categoryId: string; categoryName: string; href: string; description?: string; custom?: boolean };
+type Course = {
+  id: string; title: string; duration: string; categoryId: string; categoryName: string; href: string;
+  description?: string; shortDescription?: string; custom?: boolean; fee?: string; priceInr?: number | null;
+  expectedHours?: number | null; manualStudyHours?: number | null; manualChapterCount?: number | null; chapterCount?: number; image?: string;
+  certification?: string; prerequisites?: string[]; outcomes?: string[]; visible?: boolean;
+};
 type Category = { id: string; name: string; description: string; active: boolean; courseCount: number };
 type RequestRow = { id: string; studentName: string; courseTitle: string; categoryName: string; status: string; createdAt: string; reason?: string | null };
 type Mark = { id: string; name: string; role: string; date: string; status: string; courseTitle: string; markedByName: string };
@@ -233,7 +238,9 @@ export function CourseDesk() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [course, setCourse] = useState({ title: '', duration: '', description: '', categoryId: '' });
+  const blank = { id: '', title: '', shortDescription: '', description: '', duration: '', price: '', studyHours: '', chapterCount: '', categoryId: '', certificate: '', prerequisites: '', outcomes: '', visible: true };
+  const [course, setCourse] = useState(blank);
+  const [image, setImage] = useState<File | null>(null);
   const [notice, setNotice] = useState('');
   const [query, setQuery] = useState('');
 
@@ -253,9 +260,55 @@ export function CourseDesk() {
   };
   const addCourse = async (event: React.FormEvent) => {
     event.preventDefault();
-    const result = await post({ resource: 'course', ...course });
-    setNotice(result.ok ? 'Course saved under that category.' : result.payload.message);
-    if (result.ok) { setCourse({ title: '', duration: '', description: '', categoryId: '' }); load(); }
+    const result = await post({
+      resource: 'course',
+      id: course.id || undefined,
+      title: course.title,
+      shortDescription: course.shortDescription,
+      description: course.description,
+      duration: course.duration,
+      priceInr: course.price,
+      studyHours: course.studyHours,
+      manualChapterCount: course.chapterCount,
+      categoryId: course.categoryId,
+      certificate: course.certificate,
+      prerequisites: course.prerequisites,
+      outcomes: course.outcomes,
+      visible: course.visible,
+    });
+    if (!result.ok) { setNotice(result.payload.message); return; }
+    const courseId = course.id || result.payload.course?.id;
+    if (image && courseId) {
+      const form = new FormData();
+      form.set('courseId', courseId);
+      form.set('file', image);
+      const upload = await fetch('/api/course-images', { method: 'POST', body: form });
+      const uploaded = await upload.json().catch(() => ({}));
+      if (!upload.ok) { setNotice(uploaded.message || 'The course was saved, but the image was not.'); load(); return; }
+    }
+    setNotice(course.id ? 'Course updated.' : 'Course saved. It is now on the website.');
+    setCourse(blank);
+    setImage(null);
+    load();
+  };
+  const editCourse = (item: Course) => {
+    setCourse({
+      id: item.id,
+      title: item.title,
+      shortDescription: item.shortDescription || '',
+      description: item.description || '',
+      duration: item.duration,
+      price: item.priceInr != null ? String(item.priceInr) : '',
+      studyHours: item.manualStudyHours != null ? String(item.manualStudyHours) : '',
+      chapterCount: item.manualChapterCount != null ? String(item.manualChapterCount) : '',
+      categoryId: item.categoryId || '',
+      certificate: item.certification || '',
+      prerequisites: (item.prerequisites ?? []).join('\n'),
+      outcomes: (item.outcomes ?? []).join('\n'),
+      visible: item.visible !== false,
+    });
+    setImage(null);
+    document.getElementById('courseAdmin')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
   const move = async (courseId: string, categoryId: string) => {
     const result = await post({ resource: 'assign-category', courseId, categoryId });
@@ -280,16 +333,32 @@ export function CourseDesk() {
         </form>
         <ul className="mt-3 text-sm">{categories.map((category) => <li key={category.id}>{category.name} · {category.courseCount} course{category.courseCount === 1 ? '' : 's'} · {category.active ? 'Active' : 'Inactive'}</li>)}</ul>
       </section>
-      <section className="rounded-2xl border border-border bg-white p-5">
-        <h2 className="text-lg font-semibold">Add a course inside a category</h2>
+      <section id="courseAdmin" className="rounded-2xl border border-border bg-white p-5">
+        <h2 className="text-lg font-semibold">{course.id ? 'Edit course' : 'Add a course'}</h2>
+        <p className="mt-1 text-sm text-muted-foreground">Price is stored in rupees. Chapter hours replace the study-hours total once a chapter records them.</p>
         <form onSubmit={addCourse} className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-2">
           <input required className={field} placeholder="Course name" value={course.title} onChange={(event) => setCourse({ ...course, title: event.target.value })} />
+          <input className={field} placeholder="Short description" value={course.shortDescription} onChange={(event) => setCourse({ ...course, shortDescription: event.target.value })} />
+          <textarea className={`${field} md:col-span-2 min-h-24`} placeholder="Description" value={course.description} onChange={(event) => setCourse({ ...course, description: event.target.value })} />
           <input className={field} placeholder="Duration" value={course.duration} onChange={(event) => setCourse({ ...course, duration: event.target.value })} />
-          <select required className={field} value={course.categoryId} onChange={(event) => setCourse({ ...course, categoryId: event.target.value })}>
-            <option value="">Category</option>
+          <input className={field} inputMode="numeric" placeholder="Price in rupees" value={course.price} onChange={(event) => setCourse({ ...course, price: event.target.value })} />
+          <input className={field} inputMode="numeric" placeholder="Study hours until chapters have hours" value={course.studyHours} onChange={(event) => setCourse({ ...course, studyHours: event.target.value })} />
+          <input className={field} inputMode="numeric" placeholder="Chapter count until chapters exist" value={course.chapterCount} onChange={(event) => setCourse({ ...course, chapterCount: event.target.value })} />
+          <select required={!course.id} className={field} value={course.categoryId} onChange={(event) => setCourse({ ...course, categoryId: event.target.value })}>
+            <option value="">{course.id ? 'Keep current category' : 'Category'}</option>
             {categories.filter((item) => item.active).map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
           </select>
-          <button className="pill-button-forest py-2.5 text-sm" type="submit">Add course</button>
+          <input className={field} placeholder="Certificate name" value={course.certificate} onChange={(event) => setCourse({ ...course, certificate: event.target.value })} />
+          <textarea className={`${field} min-h-20`} placeholder="Prerequisites, one per line" value={course.prerequisites} onChange={(event) => setCourse({ ...course, prerequisites: event.target.value })} />
+          <textarea className={`${field} min-h-20`} placeholder="Learning outcomes, one per line" value={course.outcomes} onChange={(event) => setCourse({ ...course, outcomes: event.target.value })} />
+          <label className="text-sm">Course image (PNG or JPG)
+            <input className={`${field} mt-1`} type="file" accept="image/png,image/jpeg" onChange={(event) => setImage(event.target.files?.[0] ?? null)} />
+          </label>
+          <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={course.visible} onChange={(event) => setCourse({ ...course, visible: event.target.checked })} /> Visible on the website</label>
+          <div className="flex gap-2">
+            <button className="pill-button-forest py-2.5 text-sm" type="submit">{course.id ? 'Save course' : 'Add course'}</button>
+            {course.id && <button className="rounded-full border border-border px-4 py-2.5 text-sm" type="button" onClick={() => { setCourse(blank); setImage(null); }}>Cancel</button>}
+          </div>
         </form>
       </section>
       <section className="rounded-2xl border border-border bg-white p-5">
@@ -304,10 +373,11 @@ export function CourseDesk() {
             <ul className="mt-2 flex flex-col gap-2">
               {group.courses.map((item) => (
                 <li key={item.id} className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-border px-3 py-2 text-sm">
-                  <span>{item.title} · {item.duration}</span>
+                  <span>{item.title} · {item.duration}{item.fee ? ` · ${item.fee}` : ''} · {item.chapterCount ?? 0} chapters{item.visible === false ? ' · Hidden' : ''}</span>
                   <span className="flex items-center gap-2">
+                    <button type="button" className="text-forest underline" onClick={() => editCourse(item)}>Edit</button>
                     <Link className="text-forest underline" href={`/admin/courses/${item.id}`}>View Course</Link>
-                    {item.href && !item.custom && <a className="text-forest underline" href={item.href}>View on Website</a>}
+                    {item.href && item.visible !== false && <a className="text-forest underline" href={item.href}>View on Website</a>}
                     <select className="rounded-lg border border-border px-2 py-1" value={item.categoryId} onChange={(event) => move(item.id, event.target.value)}>
                       <option value="">Uncategorised</option>
                       {categories.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}

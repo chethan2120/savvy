@@ -36,7 +36,7 @@ export async function downloadCertificate(cert: CertificateFace): Promise<void> 
       errorCorrectionLevel: 'M',
       color: { dark: '#102B46ff', light: '#ffffffff' },
     }).catch(() => ''),
-    fetchDataUrl('/brand/logo.svg'),
+    fetchDataUrl('/brand/logo.jpg'),
     fetchDataUrl('/api/branding?asset=seal'),
     fetchDataUrl('/api/branding?asset=signature'),
     fetch('/api/branding', { cache: 'no-store' }).then((response) => (response.ok ? response.json() : null)).catch(() => null),
@@ -100,10 +100,8 @@ function certificateHtml(
   .sheet.revoked { border-color: #b91c1c; }
   .revoked-note { margin: 0 0 18px; text-align: center; color: #b91c1c; letter-spacing: .18em; text-transform: uppercase; font-size: 11px; font-weight: 700; }
   .inner { border: 1px solid rgba(0,84,61,.25); padding: 36px; text-align: center; }
-  .brand { display: flex; align-items: center; justify-content: center; gap: 12px; }
-  .brand img { width: 56px; height: 56px; object-fit: contain; }
-  .brand .name { font-size: 18px; font-weight: 650; letter-spacing: 0; margin: 0; border: 0; padding: 0; color: #0b2545; }
-  .brand .sub { display: block; margin-top: 4px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #0f766e; }
+  .brand { display: flex; align-items: center; justify-content: center; }
+  .brand img { width: 112px; height: 112px; object-fit: contain; }
   h1 { font-family: Georgia, "Times New Roman", serif; color: #102B46; font-size: 34px; font-weight: 400; margin: 28px 0 8px; }
   .lede { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: rgba(16,43,70,.7); margin: 18px 0 0; }
   .person { font-family: Georgia, "Times New Roman", serif; font-size: 32px; margin: 12px 0 0; }
@@ -132,8 +130,7 @@ function certificateHtml(
     <div class="inner">
       ${cert.status === 'revoked' ? '<p class="revoked-note">Revoked — this certificate is not valid</p>' : ''}
       <div class="brand">
-        ${assets.logo ? `<img src="${assets.logo}" alt="Savvy Training Institute" />` : ''}
-        <div><p class="name">SAVVY</p><span class="sub">Training Institute</span></div>
+        ${assets.logo ? `<img src="${assets.logo}" alt="Savvy Training Institute" />` : '<p>SAVVY TRAINING INSTITUTE</p>'}
       </div>
       <h1>Certificate of Completion</h1>
       <p class="lede">This is to certify that</p>

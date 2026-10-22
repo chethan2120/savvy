@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { Loader2 } from 'lucide-react';
 
-type Program = { id: string; slug: string; title: string; duration: string; image: string; href: string; categoryName?: string; custom?: boolean };
+type Program = { id: string; slug: string; title: string; duration: string; image: string; href: string; categoryName?: string; fee?: string; certification?: string; eligibility?: string; expectedHours?: number | null; custom?: boolean };
 type CourseLink = { id: string; accountId: string; courseId: string; status: 'enrolled' | 'requested' };
 type Account = { id: string; fullName: string; email: string; phone: string; role: 'admin' | 'staff' | 'student'; status: 'active' | 'inactive' };
 type AttendanceRow = {
@@ -557,7 +557,7 @@ export function CertifiedPrograms({
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
             <h2 className="text-lg font-semibold">{mode === 'student' ? 'Should Enroll' : 'Certified Programs'}</h2>
-            <p className="text-xs text-muted-foreground">{mode === 'student' ? 'Explore available courses and request enrolment.' : 'The same six programs published on the website.'}</p>
+            <p className="text-xs text-muted-foreground">{mode === 'student' ? 'Explore published courses and request enrolment.' : 'Published courses from the website catalogue.'}</p>
           </div>
           <div className="flex items-center gap-3">
             <input className={fieldClass} placeholder="Search programs" value={query} onChange={(event) => setQuery(event.target.value)} />
@@ -708,11 +708,12 @@ function CourseCard({
   const href = mode === 'admin' ? `/admin/courses/${course.id}` : mode === 'staff' ? `/staff/courses/${course.id}` : `/student/courses/${course.id}`;
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-forest">
-      <img src={course.image} alt="" width={640} height={360} loading="lazy" decoding="async" className="h-40 w-full object-cover" />
+      <img src={course.image} alt="" width={640} height={360} loading="eager" decoding="async" className="h-40 w-full object-cover" />
       <div className="flex flex-1 flex-col gap-2 p-4">
         <h3 className="font-semibold leading-snug">{course.title}</h3>
         <p className="text-xs text-muted-foreground">{course.categoryName || 'Uncategorised'}</p>
         <p className="text-sm text-muted-foreground">{course.duration}</p>
+        {course.fee && <p className="text-sm font-semibold">{course.fee}</p>}
         {status && <p className="text-xs">Enrollment status: {status}</p>}
         {typeof count === 'number' && <p className="text-xs text-muted-foreground">{`${count} student ${count === 1 ? 'enrollment' : 'enrollments'}`}</p>}
         <div className="mt-auto flex flex-wrap items-center gap-2 pt-2">

@@ -1,8 +1,10 @@
 import { MetadataRoute } from 'next';
-import { coursesData, blogPostsData } from '@/lib/data';
+import { blogPostsData } from '@/lib/data';
+import { getPublishedCourses } from '@/lib/courses';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://savvytraining.example';
+  const { courses } = await getPublishedCourses();
 
   const staticRoutes = [
     '',
@@ -23,7 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: route === '' ? 1.0 : 0.8,
   }));
 
-  const courseRoutes = coursesData.map((course) => ({
+  const courseRoutes = courses.map((course) => ({
     url: `${baseUrl}/course/${course.slug}`,
     lastModified: new Date().toISOString(),
     changeFrequency: 'weekly' as const,

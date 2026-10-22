@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 import { CheckCircle, Loader2, AlertCircle, Phone, MessageCircle } from 'lucide-react';
-import { coursesData } from '@/lib/data';
 import { defaultSettings } from '@/lib/data';
+import { useCourseCatalog } from '@/lib/useCourseCatalog';
 
 export const ContactForm: React.FC = () => {
+  const { courses } = useCourseCatalog();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -18,6 +19,12 @@ export const ContactForm: React.FC = () => {
   });
 
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+
+  useEffect(() => {
+    if (courses.length && !courses.some((course) => course.title === formData.course_applied)) {
+      setFormData((current) => ({ ...current, course_applied: courses[0].title }));
+    }
+  }, [courses, formData.course_applied]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -168,7 +175,8 @@ export const ContactForm: React.FC = () => {
             onChange={handleChange}
             className="w-full bg-background border border-border rounded-lg px-3.5 py-2.5 text-sm text-foreground focus:outline-none focus:border-forest"
           >
-            {coursesData.map((c) => (
+            {courses.length === 0 && <option value="">No courses available</option>}
+            {courses.map((c) => (
               <option key={c.id} value={c.title}>
                 {c.title}
               </option>

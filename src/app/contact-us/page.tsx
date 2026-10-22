@@ -17,7 +17,7 @@ export default function ContactPage() {
       <PageHero
         breadcrumbs={[{ label: 'Contact Us' }]}
         title="Get in Touch"
-        description="Have questions about course admissions, fee structures, batch timings, or placement support? Our team is here to assist you."
+        description="Have questions about course admissions, fee structures, batch timings, or entry requirements? Contact the institute."
         media={{ type: 'image', src: '/images/hero-contact.png' }}
         mediaAlt="Savvy Training Institute campus entrance at dusk"
         actions={

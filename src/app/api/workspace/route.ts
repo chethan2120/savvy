@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import {
   assignCategory,
   createCustomCourse,
+  saveCourseDetails,
   listAnnouncements,
   listAccounts,
   listCategories,
@@ -27,6 +28,7 @@ import {
   listCertificates,
   orderChapters,
   revokeCertificate,
+  refreshCourseCatalog,
   saveChapter,
   savePermissions,
   saveStudentAccess,
@@ -39,6 +41,7 @@ import { currentAccount } from '@/lib/server/session';
 export async function GET(request: Request) {
   const account = currentAccount();
   if (!account) return NextResponse.json({ message: 'Sign in to continue.' }, { status: 401 });
+  await refreshCourseCatalog();
   const resource = new URL(request.url).searchParams.get('resource');
   if (resource === 'overview' && account.role === 'admin') return NextResponse.json(overviewCounts());
   if (resource === 'requests' && account.role === 'admin') return NextResponse.json({ requests: listEnrollmentRequests() });
@@ -84,6 +87,7 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   const account = currentAccount();
   if (!account) return NextResponse.json({ message: 'Sign in to continue.' }, { status: 401 });
+  await refreshCourseCatalog();
   const body = await request.json().catch(() => ({}));
   const resource = String(body.resource ?? '');
 
@@ -103,9 +107,30 @@ export async function POST(request: Request) {
 
   if (resource === 'course') {
     if (account.role !== 'admin' && !(account.role === 'staff' && staffAllows(account, 'manageCourses'))) {
-      return NextResponse.json({ message: 'You do not have permission to create courses.' }, { status: 403 });
+      return NextResponse.json({ message: 'You do not have permission to edit courses.' }, { status: 403 });
     }
-    const result = createCustomCourse({ title: String(body.title ?? ''), duration: String(body.duration ?? ''), description: String(body.description ?? ''), categoryId: String(body.categoryId ?? '') });
+    const lines = (value: unknown) => Array.isArray(value) ? value.map(String) : String(value ?? '').split('\n');
+    const amount = (value: unknown) => {
+      if (value === null || value === undefined || value === '') return null;
+      const parsed = Number(String(value).replace(/[₹,\s]/g, ''));
+      return Number.isFinite(parsed) && parsed >= 0 ? parsed : null;
+    };
+    const draft = {
+      id: body.id ? String(body.id) : undefined,
+      title: String(body.title ?? ''),
+      duration: String(body.duration ?? ''),
+      description: String(body.description ?? ''),
+      shortDescription: String(body.shortDescription ?? ''),
+      categoryId: String(body.categoryId ?? ''),
+      priceInr: amount(body.priceInr),
+      studyHours: amount(body.studyHours),
+      manualChapterCount: amount(body.manualChapterCount),
+      certificate: String(body.certificate ?? ''),
+      prerequisites: lines(body.prerequisites),
+      outcomes: lines(body.outcomes),
+      visible: body.visible !== false,
+    };
+    const result = draft.id ? saveCourseDetails(draft) : createCustomCourse(draft);
     if (!result.ok) return NextResponse.json({ message: result.message }, { status: 400 });
     return NextResponse.json({ course: result.course });
   }

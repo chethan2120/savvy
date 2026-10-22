@@ -36,7 +36,7 @@ export const EditorialHero: React.FC = () => {
             </h1>
 
             <p className="text-body-large text-muted-foreground max-w-2xl leading-relaxed">
-              Your launchpad to a global engineering career. Savvy Training Institute delivers hands-on laboratory testing, expert instruction, and 100% placement support in India and abroad.
+              Savvy Training Institute offers technical training programmes in inspection, quality assurance, HVAC and related fields.
             </p>
 
             {/* CTAs */}
@@ -55,7 +55,7 @@ export const EditorialHero: React.FC = () => {
             <div className="grid grid-cols-3 gap-6 text-xs text-foreground/80 font-medium">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-forest shrink-0" />
-                <span>100% Placement Support</span>
+                <span>Career pathways</span>
               </div>
               <div className="flex items-center gap-2">
                 <Award className="w-4 h-4 text-forest shrink-0" />

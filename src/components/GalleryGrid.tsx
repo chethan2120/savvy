@@ -54,6 +54,7 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({ items }) => {
               src={item.image_url}
               alt={item.title}
               fill
+              priority={index < 4}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
               className="object-cover group-hover:scale-105 transition-transform duration-500"
             />

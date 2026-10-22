@@ -785,7 +785,7 @@ export default function InkHero({
             </nav>
           </header>
         ) : null}
-        <div className="absolute inset-x-0 top-0 z-10 flex items-end justify-between gap-6 px-6 pb-8 pt-[calc(var(--header-h,96px)+1.25rem)] md:gap-8 md:px-10">
+        <div className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between gap-6 p-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] md:gap-8 md:p-10">
           <div className="min-w-0 max-w-3xl">
             {eyebrow ? (
               <Mask ref={eyebrowRef} motion="ink-eyebrow" className="mb-4" innerClassName="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
@@ -823,7 +823,7 @@ export default function InkHero({
               ) : null}
             </div>
           </div>
-          <nav ref={railRef} data-station="0" aria-label="Stations" className="group hidden shrink-0 flex-col items-end gap-3 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground md:flex">
+          <nav ref={railRef} data-station="0" aria-label="Stations" className="group mb-16 hidden shrink-0 flex-col items-end gap-3 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground md:flex">
             {stationLabels.map((label, i) => (
               <button
                 key={label}
