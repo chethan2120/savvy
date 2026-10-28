@@ -116,8 +116,8 @@ export function EditorialHero() {
                     priority
                   />
                   <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between gap-2 rounded-full bg-white/95 px-3 py-1.5 shadow-md">
-                    <span className="text-[11px] font-bold text-[#14532d]">Inspection Lab</span>
-                    <span className="inline-flex items-center gap-1 text-[10px] font-bold text-[#047857]">
+                    <span className="min-w-0 truncate text-[11px] font-bold text-[#14532d]">Inspection Lab</span>
+                    <span className="inline-flex shrink-0 items-center gap-1 text-[10px] font-bold text-[#047857]">
                       <Award className="w-3 h-3" />
                       ASNT · ISO · ASME
                     </span>

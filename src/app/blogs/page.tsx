@@ -129,8 +129,8 @@ export default function BlogsPage() {
                 </p>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-white/15 flex items-center justify-between">
-                <div className="flex items-center gap-3 text-xs text-white/80">
+              <div className="mt-8 pt-6 border-t border-white/15 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex flex-wrap items-center gap-3 text-xs text-white/80">
                   <div className="flex items-center gap-1.5">
                     <User className="w-3.5 h-3.5 text-amber-300" />
                     <span>{featured.author_name}</span>

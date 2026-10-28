@@ -45,6 +45,7 @@ export function SiteHeader() {
 
   const megaTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const megaMenuRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
 
   // Session check with immediate revalidation on route changes and auth events
   const checkSession = useCallback(() => {
@@ -175,6 +176,7 @@ export function SiteHeader() {
       </div>
 
       <header
+        ref={headerRef}
         className={`sticky top-0 z-50 transition-all duration-300 ${
           isScrolled
             ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-[#e2e8f0]'
@@ -508,7 +510,9 @@ export function SiteHeader() {
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-40 lg:hidden bg-black/50" onClick={() => setMobileMenuOpen(false)}>
           <div
-            className="fixed top-20 right-0 w-full max-w-sm h-[calc(100vh-5rem)] bg-white shadow-2xl p-6 overflow-y-auto flex flex-col justify-between"
+            className={`fixed inset-x-0 w-full bg-white shadow-2xl p-6 overflow-y-auto flex flex-col justify-between sm:left-auto sm:right-0 sm:max-w-sm top-16 h-[calc(100dvh-4rem)] sm:top-20 sm:h-[calc(100dvh-5rem)] ${
+              isScrolled ? '' : 'md:top-[7.25rem] md:h-[calc(100dvh-7.25rem)]'
+            }`}
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex flex-col gap-5">
