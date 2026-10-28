@@ -1,0 +1,26 @@
+{
+  "framework": "Next.js 14 App Router, React 18, TypeScript, Tailwind CSS 3",
+  "dependencies": {
+    "next": "^14.2.24",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "@supabase/supabase-js": "^2.48.1",
+    "lucide-react": "^0.475.0",
+    "pdf-lib": "^1.17.1",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3",
+    "@types/node": "^20.17.19",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@types/qrcode": "^1.5.6",
+    "tailwindcss": "^3.4.17",
+    "postcss": "^8.5.2",
+    "autoprefixer": "^10.4.20"
+  },
+  "installedInTheOriginalAppButNotImportedByTheseFiles": {
+    "@supabase/ssr": "^0.5.2"
+  },
+  "nodeBuiltinsUsed": ["crypto", "fs", "path"]
+}

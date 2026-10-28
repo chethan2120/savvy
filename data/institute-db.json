@@ -1,0 +1,1210 @@
+{
+  "accounts": [
+    {
+      "id": "acct-admin",
+      "fullName": "Savvy Admin",
+      "email": "admin@gmail.com",
+      "phone": "9000000001",
+      "role": "admin",
+      "status": "active",
+      "passwordHash": "0f6aab65efc6960558723566fc20c8e08201f85c0ca2f1b70b5e44ff0ac4bee6",
+      "passwordSalt": "6d2ca0458e299f5fe92b7626685b2ae0",
+      "createdAt": "2026-10-26T08:45:17.082Z"
+    },
+    {
+      "id": "acct-staff",
+      "fullName": "Savvy Staff",
+      "email": "staff@gmail.com",
+      "phone": "9000000002",
+      "role": "staff",
+      "status": "active",
+      "passwordHash": "e19d93239b2f625af53c77cec551c71bbe15e75a1a58df7f7ef4924699e6c88e",
+      "passwordSalt": "bd9d46981f8f504d6a061fed30ab3f74",
+      "createdAt": "2026-10-26T08:45:17.116Z",
+      "permissions": {
+        "manageCourses": true,
+        "markAttendance": true,
+        "uploadMaterials": true,
+        "viewStudents": true,
+        "manageAnnouncements": false,
+        "viewEnrollments": false,
+        "viewAssignedCourses": true,
+        "viewAllCourses": false,
+        "editCourses": false,
+        "manageChapters": false,
+        "addChapters": true,
+        "editChapters": false,
+        "publishChapters": true,
+        "viewEnrolledStudents": true,
+        "assignTeachingStaff": false,
+        "manageEnrolments": false
+      }
+    },
+    {
+      "id": "acct-student",
+      "fullName": "Savvy Student",
+      "email": "student1@gmail.com",
+      "phone": "9000000003",
+      "role": "student",
+      "status": "active",
+      "passwordHash": "20b7db1efb1784245e8026333b189f78e250c192314be1e1f62cf2cd714dd530",
+      "passwordSalt": "4b6fb0f86083d9b3ea76caeb0459882f",
+      "createdAt": "2026-10-26T08:45:17.144Z"
+    },
+    {
+      "id": "acct-a465cdabc05f",
+      "fullName": "A M Chethan Kumar",
+      "email": "amchethan21@gmail.com",
+      "phone": "+916361992599",
+      "role": "student",
+      "status": "active",
+      "passwordHash": "db7a86705cf8fa350a4416f77890e8c0640f1326fb3160baadda67d5caac54c3",
+      "passwordSalt": "ad4451c721560ca224e664dbe2d6434f",
+      "createdAt": "2026-10-27T07:57:47.347Z"
+    },
+    {
+      "id": "acct-8ef4c7703795",
+      "fullName": "Testing account",
+      "email": "testing@gmail.com",
+      "phone": "4546447890",
+      "role": "staff",
+      "status": "active",
+      "passwordHash": "f0c9c9b51ac5e3bf335dab07a12f5623b3bf015c451561178aaf185157b4b53b",
+      "passwordSalt": "a4d20dc7b0ad2bc959bb6b96f0a69501",
+      "createdAt": "2026-10-27T07:58:24.106Z"
+    }
+  ],
+  "enrollments": [
+    {
+      "id": "enr-staff-c1",
+      "accountId": "acct-staff",
+      "courseId": "c1",
+      "status": "enrolled",
+      "createdAt": "2026-10-26T08:45:17.144Z"
+    },
+    {
+      "id": "enr-staff-c2",
+      "accountId": "acct-staff",
+      "courseId": "c2",
+      "status": "enrolled",
+      "createdAt": "2026-10-26T08:45:17.144Z"
+    },
+    {
+      "id": "enr-f3c91c62",
+      "accountId": "acct-student",
+      "courseId": "c1",
+      "status": "requested",
+      "createdAt": "2026-10-27T05:52:17.355Z"
+    },
+    {
+      "id": "enr-e0b717b2",
+      "accountId": "acct-student",
+      "courseId": "c9",
+      "status": "requested",
+      "createdAt": "2026-10-27T05:52:21.913Z"
+    }
+  ],
+  "logins": [
+    {
+      "id": "login-f89186fbf0a5",
+      "accountId": "acct-admin",
+      "loggedInAt": "2026-10-26T09:10:37.347Z",
+      "loggedOutAt": "2026-10-26T11:46:18.498Z"
+    },
+    {
+      "id": "login-5aa2ae8d50ef",
+      "accountId": "acct-admin",
+      "loggedInAt": "2026-10-26T11:46:44.709Z",
+      "loggedOutAt": "2026-10-26T13:22:29.596Z"
+    },
+    {
+      "id": "login-d10d34aec213",
+      "accountId": "acct-admin",
+      "loggedInAt": "2026-10-26T13:22:50.420Z",
+      "loggedOutAt": "2026-10-27T05:39:42.152Z"
+    },
+    {
+      "id": "login-1b14efb24db2",
+      "accountId": "acct-admin",
+      "loggedInAt": "2026-10-27T05:39:55.697Z",
+      "loggedOutAt": "2026-10-27T05:46:48.731Z"
+    },
+    {
+      "id": "login-b7e2296c6f18",
+      "accountId": "acct-staff",
+      "loggedInAt": "2026-10-27T05:51:11.375Z",
+      "loggedOutAt": "2026-10-27T05:51:36.407Z"
+    },
+    {
+      "id": "login-c0a617fbc913",
+      "accountId": "acct-student",
+      "loggedInAt": "2026-10-27T05:51:55.562Z",
+      "loggedOutAt": "2026-10-27T05:52:26.791Z"
+    },
+    {
+      "id": "login-85e572927469",
+      "accountId": "acct-admin",
+      "loggedInAt": "2026-10-27T05:52:37.467Z",
+      "loggedOutAt": "2026-10-27T05:55:11.257Z"
+    },
+    {
+      "id": "login-81d9a79a3592",
+      "accountId": "acct-admin",
+      "loggedInAt": "2026-10-27T06:26:33.258Z",
+      "loggedOutAt": "2026-10-27T06:40:40.199Z"
+    },
+    {
+      "id": "login-7350d78d2c93",
+      "accountId": "acct-admin",
+      "loggedInAt": "2026-10-27T06:44:13.074Z",
+      "loggedOutAt": "2026-10-27T06:45:14.480Z"
+    },
+    {
+      "id": "login-e78b05459275",
+      "accountId": "acct-admin",
+      "loggedInAt": "2026-10-27T07:55:41.018Z",
+      "loggedOutAt": null
+    },
+    {
+      "id": "login-6783f543a92e",
+      "accountId": "acct-admin",
+      "loggedInAt": "2026-10-27T07:57:10.328Z",
+      "loggedOutAt": "2026-10-27T08:26:41.759Z"
+    },
+    {
+      "id": "login-42e78e477770",
+      "accountId": "acct-admin",
+      "loggedInAt": "2026-10-27T08:27:04.958Z",
+      "loggedOutAt": "2026-10-27T08:36:09.443Z"
+    },
+    {
+      "id": "login-ef555851a1c4",
+      "accountId": "acct-admin",
+      "loggedInAt": "2026-10-27T09:30:17.231Z",
+      "loggedOutAt": "2026-10-27T09:41:49.636Z"
+    },
+    {
+      "id": "login-63db279791d9",
+      "accountId": "acct-admin",
+      "loggedInAt": "2026-10-27T09:55:38.015Z",
+      "loggedOutAt": "2026-10-27T10:06:14.966Z"
+    },
+    {
+      "id": "login-015d2aa257ab",
+      "accountId": "acct-student",
+      "loggedInAt": "2026-10-27T10:24:57.303Z",
+      "loggedOutAt": "2026-10-27T10:30:31.976Z"
+    },
+    {
+      "id": "login-5e703629780b",
+      "accountId": "acct-admin",
+      "loggedInAt": "2026-10-27T12:26:25.753Z",
+      "loggedOutAt": "2026-10-27T12:27:08.098Z"
+    }
+  ],
+  "punches": [
+    {
+      "id": "punch-f68158eef29f",
+      "accountId": "acct-staff",
+      "punchedInAt": "2026-10-27T05:51:21.704Z",
+      "punchedOutAt": null
+    },
+    {
+      "id": "punch-1d90f2075d04",
+      "accountId": "acct-student",
+      "punchedInAt": "2026-10-27T05:52:01.911Z",
+      "punchedOutAt": null
+    }
+  ],
+  "categories": [
+    {
+      "id": "cat-ndt",
+      "name": "Non-Destructive Testing (NDT)",
+      "description": "ASNT Level II, Ultrasonic, Radiographic, and Surface testing techniques",
+      "active": true,
+      "createdAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "cat-qaqc",
+      "name": "QA & QC Inspection",
+      "description": "Welding inspection, quality assurance protocols, ASME/ISO codes",
+      "active": true,
+      "createdAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "cat-hse",
+      "name": "Health, Safety & Environment",
+      "description": "Industrial safety engineering, fire hazard management, and OSHA audits",
+      "active": true,
+      "createdAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "cat-mep",
+      "name": "MEP & Building Services",
+      "description": "HVAC design, 3D Revit MEP modeling, and building engineering systems",
+      "active": true,
+      "createdAt": "2026-01-01T00:00:00.000Z"
+    }
+  ],
+  "customCourses": [
+    {
+      "id": "course-d5b00b87",
+      "title": "social media",
+      "slug": "social-media",
+      "duration": "45 days",
+      "description": "",
+      "shortDescription": "",
+      "categoryId": "cat-ndt",
+      "active": true,
+      "createdAt": "2026-10-27T08:35:51.429Z",
+      "priceInr": 2500,
+      "prices": {
+        "INR": 2500,
+        "GBP": 236,
+        "USD": 555,
+        "AED": 352
+      },
+      "studyHours": null,
+      "manualChapterCount": null,
+      "image": "",
+      "certificate": "",
+      "prerequisites": [],
+      "outcomes": [],
+      "visible": true
+    }
+  ],
+  "courseOverrides": {
+    "c1": {
+      "prices": {
+        "INR": 35000,
+        "GBP": 330,
+        "USD": 420,
+        "AED": 1550
+      },
+      "priceInr": 35000
+    },
+    "c2": {
+      "prices": {
+        "INR": 35000,
+        "GBP": 330,
+        "USD": 420,
+        "AED": 1550
+      },
+      "priceInr": 35000
+    },
+    "c3": {
+      "prices": {
+        "INR": 45000,
+        "GBP": 420,
+        "USD": 540,
+        "AED": 1980
+      },
+      "priceInr": 45000
+    },
+    "c4": {
+      "prices": {
+        "INR": 25000,
+        "GBP": 240,
+        "USD": 300,
+        "AED": 1100
+      },
+      "priceInr": 25000
+    },
+    "c5": {
+      "prices": {
+        "INR": 25000,
+        "GBP": 240,
+        "USD": 300,
+        "AED": 1100
+      },
+      "priceInr": 25000
+    },
+    "c6": {
+      "prices": {
+        "INR": 180000,
+        "GBP": 1690,
+        "USD": 2150,
+        "AED": 7900
+      },
+      "priceInr": 180000
+    },
+    "c7": {
+      "prices": {
+        "INR": 28000,
+        "GBP": 280,
+        "USD": 360,
+        "AED": 1350
+      },
+      "priceInr": 28000
+    },
+    "c8": {
+      "prices": {
+        "INR": 25000,
+        "GBP": 250,
+        "USD": 320,
+        "AED": 1200
+      },
+      "priceInr": 25000
+    },
+    "c9": {
+      "prices": {
+        "INR": 32000,
+        "GBP": 320,
+        "USD": 410,
+        "AED": 1550
+      },
+      "priceInr": 32000
+    }
+  },
+  "courseCategories": {
+    "c1": "cat-ndt",
+    "c2": "cat-qaqc",
+    "c3": "cat-hse",
+    "c4": "cat-mep",
+    "c5": "cat-mep",
+    "c6": "cat-qaqc",
+    "c7": "cat-ndt",
+    "c8": "cat-ndt",
+    "c9": "cat-qaqc",
+    "course-d5b00b87": "cat-ndt"
+  },
+  "marks": [],
+  "notifications": [
+    {
+      "id": "ntf-4956e8c7",
+      "accountId": "acct-admin",
+      "title": "New Contact Enquiry",
+      "body": "A M ChethN enquired about QA & QC Course (BANGLAORE).",
+      "href": "/admin#contacts",
+      "read": false,
+      "createdAt": "2026-10-26T09:12:51.177Z"
+    },
+    {
+      "id": "ntf-cf4c35c6",
+      "accountId": "acct-admin",
+      "title": "New enrolment request",
+      "body": "Savvy Student requested NDT Level II Course.",
+      "href": "/admin#applications",
+      "read": false,
+      "createdAt": "2026-10-27T05:52:17.355Z"
+    },
+    {
+      "id": "ntf-c85ba2f9",
+      "accountId": "acct-admin",
+      "title": "New enrolment request",
+      "body": "Savvy Student requested Piping & Pipeline Inspection Engineering.",
+      "href": "/admin#applications",
+      "read": false,
+      "createdAt": "2026-10-27T05:52:21.914Z"
+    },
+    {
+      "id": "ntf-39498d5e",
+      "accountId": "acct-admin",
+      "title": "New Contact Enquiry",
+      "body": "Alastair Vance enquired about Strategy Call: NDT Level II (UT, RT, MPT, LPT, VT) (Online Session / Web Enquiry).",
+      "href": "/admin#contacts",
+      "read": false,
+      "createdAt": "2026-10-27T07:50:26.152Z"
+    },
+    {
+      "id": "ntf-af1ee29e",
+      "accountId": "acct-admin",
+      "title": "New Contact Enquiry",
+      "body": "Alastair Vance enquired about Strategy Call: NDT Level II (UT, RT, MPT, LPT, VT) (Online Session / Web Enquiry).",
+      "href": "/admin#contacts",
+      "read": false,
+      "createdAt": "2026-10-27T07:54:42.230Z"
+    }
+  ],
+  "announcements": [],
+  "leaveRequests": [],
+  "chapters": [
+    {
+      "id": "chap-c1-1",
+      "courseId": "c1",
+      "title": "Visual Testing (VT)",
+      "description": "Surface flaw identification, optical tools, weld profile inspection, and alignment verification.",
+      "sortOrder": 1,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Visual Testing (VT).",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Visual Testing (VT).",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.267Z",
+      "updatedAt": "2026-10-26T12:08:18.270Z"
+    },
+    {
+      "id": "chap-c1-2",
+      "courseId": "c1",
+      "title": "Liquid Penetrant Testing (LPT)",
+      "description": "Dye penetrant principles, fluorescent penetrants, dwell time, developer application, and discontinuity evaluation.",
+      "sortOrder": 2,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Liquid Penetrant Testing (LPT).",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Liquid Penetrant Testing (LPT).",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.270Z",
+      "updatedAt": "2026-10-26T12:08:18.270Z"
+    },
+    {
+      "id": "chap-c1-3",
+      "courseId": "c1",
+      "title": "Magnetic Particle Testing (MPT)",
+      "description": "Ferromagnetic inspection, longitudinal/circular magnetization, Yoke method, and magnetic field calibration.",
+      "sortOrder": 3,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Magnetic Particle Testing (MPT).",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Magnetic Particle Testing (MPT).",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.270Z",
+      "updatedAt": "2026-10-26T12:08:18.270Z"
+    },
+    {
+      "id": "chap-c1-4",
+      "courseId": "c1",
+      "title": "Ultrasonic Testing (UT)",
+      "description": "Pulse-echo flaw detectors, straight/angle beam calibration, thickness measurement, and DAC curve creation.",
+      "sortOrder": 4,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Ultrasonic Testing (UT).",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Ultrasonic Testing (UT).",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.270Z",
+      "updatedAt": "2026-10-26T12:08:18.270Z"
+    },
+    {
+      "id": "chap-c1-5",
+      "courseId": "c1",
+      "title": "Radiographic Testing (RT) & RTFI",
+      "description": "Radiation safety, X-ray/Gamma-ray exposures, film processing, and Radiographic Film Interpretation (RTFI) for welds.",
+      "sortOrder": 5,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Radiographic Testing (RT) & RTFI.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Radiographic Testing (RT) & RTFI.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.270Z",
+      "updatedAt": "2026-10-26T12:08:18.270Z"
+    },
+    {
+      "id": "chap-c2-1",
+      "courseId": "c2",
+      "title": "Industrial Fire Protection",
+      "description": "Fire chemistry, hydraulics, automatic sprinkler systems, fire pumps, and suppression equipment.",
+      "sortOrder": 1,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Industrial Fire Protection.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Industrial Fire Protection.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c2-2",
+      "courseId": "c2",
+      "title": "Hazard Identification & Risk Assessment (HIRA)",
+      "description": "Job Safety Analysis (JSA), Permit To Work (PTW) systems, and hazard mitigation.",
+      "sortOrder": 2,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Hazard Identification & Risk Assessment (HIRA).",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Hazard Identification & Risk Assessment (HIRA).",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c2-3",
+      "courseId": "c2",
+      "title": "Occupational Health & Environmental Safety (OSHA)",
+      "description": "Workplace toxicology, personal protective equipment (PPE), ergonomics, and noise pollution control.",
+      "sortOrder": 3,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Occupational Health & Environmental Safety (OSHA).",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Occupational Health & Environmental Safety (OSHA).",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c2-4",
+      "courseId": "c2",
+      "title": "Construction Safety & Scaffolding Standards",
+      "description": "Working at heights, excavation safety, scaffolding tagging (OSHA/BS), and heavy lifting compliance.",
+      "sortOrder": 4,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Construction Safety & Scaffolding Standards.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Construction Safety & Scaffolding Standards.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c2-5",
+      "courseId": "c2",
+      "title": "Emergency Response & Industrial Disaster Management",
+      "description": "Evacuation drills, chemical spill containment, HAZMAT protocols, and crisis command procedures.",
+      "sortOrder": 5,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Emergency Response & Industrial Disaster Management.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Emergency Response & Industrial Disaster Management.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c3-1",
+      "courseId": "c3",
+      "title": "Heat Load Calculation & Psychrometrics",
+      "description": "ASHRAE standards, E-20 cooling load calculation, software tools, and humidity control.",
+      "sortOrder": 1,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Heat Load Calculation & Psychrometrics.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Heat Load Calculation & Psychrometrics.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c3-2",
+      "courseId": "c3",
+      "title": "Duct Design & Air Distribution",
+      "description": "Equal friction method, diffuser selection, fan static pressure calculation, and damper installation.",
+      "sortOrder": 2,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Duct Design & Air Distribution.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Duct Design & Air Distribution.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c3-3",
+      "courseId": "c3",
+      "title": "Chilled Water Systems & Equipment Selection",
+      "description": "Centrifugal chillers, cooling towers, primary/secondary pumps, and AHU/FCU sizing calculations.",
+      "sortOrder": 3,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Chilled Water Systems & Equipment Selection.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Chilled Water Systems & Equipment Selection.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c3-4",
+      "courseId": "c3",
+      "title": "VRF/VRV Design & Refrigerant Piping",
+      "description": "Variable Refrigerant Flow architecture, indoor unit diversity factor, and copper pipe brazing standards.",
+      "sortOrder": 4,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for VRF/VRV Design & Refrigerant Piping.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for VRF/VRV Design & Refrigerant Piping.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c3-5",
+      "courseId": "c3",
+      "title": "Testing, Adjusting & Balancing (TAB) and BMS",
+      "description": "Anemometer air flow measurements, water balancing valves, and Building Management System controls.",
+      "sortOrder": 5,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Testing, Adjusting & Balancing (TAB) and BMS.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Testing, Adjusting & Balancing (TAB) and BMS.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c4-1",
+      "courseId": "c4",
+      "title": "BIM Fundamentals & Revit Setup",
+      "description": "Building Information Modeling workflows, linking architectural models, grid levels.",
+      "sortOrder": 1,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for BIM Fundamentals & Revit Setup.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for BIM Fundamentals & Revit Setup.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c4-2",
+      "courseId": "c4",
+      "title": "3D Mechanical & Plumbing Modeling",
+      "description": "Ductwork systems, piping runs, sanitary drainage, water supply, and clash detection with Navisworks.",
+      "sortOrder": 2,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for 3D Mechanical & Plumbing Modeling.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for 3D Mechanical & Plumbing Modeling.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c4-3",
+      "courseId": "c4",
+      "title": "Electrical Systems & Conduit Modeling",
+      "description": "Lighting fixtures, cable tray routing, panel schedules, switchboards, and power circuit modeling.",
+      "sortOrder": 3,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Electrical Systems & Conduit Modeling.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Electrical Systems & Conduit Modeling.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c4-4",
+      "courseId": "c4",
+      "title": "Fire Fighting & Sprinkler Distribution",
+      "description": "Fire protection network modeling, sprinkler heads, zone control valves, and hydraulic pipe sizing.",
+      "sortOrder": 4,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Fire Fighting & Sprinkler Distribution.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Fire Fighting & Sprinkler Distribution.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c4-5",
+      "courseId": "c4",
+      "title": "Clash Resolution & Construction Documentation",
+      "description": "Navisworks Manage clash matrix tests, MEP shop drawings, bill of quantities (BOQ), and sheet generation.",
+      "sortOrder": 5,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Clash Resolution & Construction Documentation.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Clash Resolution & Construction Documentation.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c5-1",
+      "courseId": "c5",
+      "title": "Welding Inspection Duties & Terminology",
+      "description": "Before, during, and after welding duties, joint geometry, and weld symbol specifications.",
+      "sortOrder": 1,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Welding Inspection Duties & Terminology.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Welding Inspection Duties & Terminology.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c5-2",
+      "courseId": "c5",
+      "title": "Codes, Standards & WPS/PQR",
+      "description": "ASME IX, AWS D1.1, BS EN ISO standards, qualifying procedures, and welder certification.",
+      "sortOrder": 2,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Codes, Standards & WPS/PQR.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Codes, Standards & WPS/PQR.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c5-3",
+      "courseId": "c5",
+      "title": "Weld Defect Morphology & Root Causes",
+      "description": "Cracking mechanisms (hydrogen, solidification), lack of fusion, porosity, and lamellar tearing.",
+      "sortOrder": 3,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Weld Defect Morphology & Root Causes.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Weld Defect Morphology & Root Causes.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c5-4",
+      "courseId": "c5",
+      "title": "Destructive Testing & Metallurgy",
+      "description": "Tensile, Charpy V-notch impact, bend, and hardness testing per BS EN ISO 9018/15614.",
+      "sortOrder": 4,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Destructive Testing & Metallurgy.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Destructive Testing & Metallurgy.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c5-5",
+      "courseId": "c5",
+      "title": "Radiographic Interpretation & Visual Inspection Exam",
+      "description": "Real radiographic weld films interpretation and practical plate/pipe inspection under exam conditions.",
+      "sortOrder": 5,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Radiographic Interpretation & Visual Inspection Exam.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Radiographic Interpretation & Visual Inspection Exam.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c6-1",
+      "courseId": "c6",
+      "title": "Acoustic Wave Physics & Probe Calibration",
+      "description": "Longitudinal and transverse shear wave velocity calculations, probe indexing, and beam angle verification.",
+      "sortOrder": 1,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Acoustic Wave Physics & Probe Calibration.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Acoustic Wave Physics & Probe Calibration.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c6-2",
+      "courseId": "c6",
+      "title": "IIW V1 & V2 Calibration Block Operations",
+      "description": "Time-base range calibration, zero offset adjustment, and index point determination.",
+      "sortOrder": 2,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for IIW V1 & V2 Calibration Block Operations.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for IIW V1 & V2 Calibration Block Operations.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c6-3",
+      "courseId": "c6",
+      "title": "DAC & TCG Curve Construction",
+      "description": "Plotting Distance Amplitude Correction curves and Time Corrected Gain for flaw sizing per ASME Sec V.",
+      "sortOrder": 3,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for DAC & TCG Curve Construction.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for DAC & TCG Curve Construction.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c6-4",
+      "courseId": "c6",
+      "title": "Butt Weld Scanning & Flaw Sizing",
+      "description": "Practical flaw sizing using 6dB and 20dB drop methods on welded coupon samples.",
+      "sortOrder": 4,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Butt Weld Scanning & Flaw Sizing.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Butt Weld Scanning & Flaw Sizing.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c6-5",
+      "courseId": "c6",
+      "title": "ASNT UT Level II Written Practice & Reporting",
+      "description": "Preparing formal ultrasonic examination procedures, reporting test findings, and calibration records.",
+      "sortOrder": 5,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for ASNT UT Level II Written Practice & Reporting.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for ASNT UT Level II Written Practice & Reporting.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c7-1",
+      "courseId": "c7",
+      "title": "Sensitometry & Film Quality Assessment",
+      "description": "Optical density verification using calibrated transmission densitometers, IQI sensitivity, and geometric unsharpness.",
+      "sortOrder": 1,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Sensitometry & Film Quality Assessment.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Sensitometry & Film Quality Assessment.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c7-2",
+      "courseId": "c7",
+      "title": "Weld Discontinuity Identification",
+      "description": "Classifying planar vs volumetric flaws: slag lines, gas pores, hollow beads, root cracks, and undercut.",
+      "sortOrder": 2,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Weld Discontinuity Identification.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Weld Discontinuity Identification.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c7-3",
+      "courseId": "c7",
+      "title": "Code Acceptance & Reporting",
+      "description": "Applying ASME Sec VIII Div 1 Appendix 4 and API 1104 Section 9 standards to prepare signed inspection dispositions.",
+      "sortOrder": 3,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Code Acceptance & Reporting.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Code Acceptance & Reporting.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c7-4",
+      "courseId": "c7",
+      "title": "Casting & Forging Radiography Evaluation",
+      "description": "ASTM reference radiographs (E446, E186) for gas porosity, sand inclusions, shrinkages, and hot tears.",
+      "sortOrder": 4,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Casting & Forging Radiography Evaluation.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Casting & Forging Radiography Evaluation.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c7-5",
+      "courseId": "c7",
+      "title": "Digital Radiography (CR/DR) Principles",
+      "description": "Computed radiography imaging plates, digital detector arrays (DDA), and digital viewer calibration.",
+      "sortOrder": 5,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Digital Radiography (CR/DR) Principles.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Digital Radiography (CR/DR) Principles.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c8-1",
+      "courseId": "c8",
+      "title": "Piping Design Codes & Material Verification",
+      "description": "ASME B31.3 code rules, ASTM pipe and fitting metallurgy, heat number traceability, and review of Mill Test Certificates (MTC).",
+      "sortOrder": 1,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Piping Design Codes & Material Verification.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Piping Design Codes & Material Verification.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c8-2",
+      "courseId": "c8",
+      "title": "Isometric Walkdown & Spool Fabrication",
+      "description": "Checking spool orientation, support placement, valve installation, and tolerance verification against piping isometrics.",
+      "sortOrder": 2,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Isometric Walkdown & Spool Fabrication.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Isometric Walkdown & Spool Fabrication.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c8-3",
+      "courseId": "c8",
+      "title": "Pressure Testing & Flange Management",
+      "description": "Hydrostatic and pneumatic leak testing procedures, test manifold setup, torque tightening sequences, and punch list clearance.",
+      "sortOrder": 3,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Pressure Testing & Flange Management.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Pressure Testing & Flange Management.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c8-4",
+      "courseId": "c8",
+      "title": "Pipeline Cross-Country Construction & Trenching",
+      "description": "API 1104 welding standards, stringing, ditching, lower-and-lay operations, and cathodic protection testing.",
+      "sortOrder": 4,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Pipeline Cross-Country Construction & Trenching.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Pipeline Cross-Country Construction & Trenching.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c8-5",
+      "courseId": "c8",
+      "title": "Final Dossier Preparation & As-Built Certification",
+      "description": "Welding summary logs, hydrotest signoffs, NDT clearances, and compilation of turnover inspection dossiers.",
+      "sortOrder": 5,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Final Dossier Preparation & As-Built Certification.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Final Dossier Preparation & As-Built Certification.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:18.271Z",
+      "updatedAt": "2026-10-26T12:08:18.271Z"
+    },
+    {
+      "id": "chap-c9-1",
+      "courseId": "c9",
+      "title": "Piping Design Codes & Material Verification",
+      "description": "ASME B31.3 code rules, ASTM pipe and fitting metallurgy, heat number traceability, and review of Mill Test Certificates (MTC).",
+      "sortOrder": 1,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Piping Design Codes & Material Verification.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Piping Design Codes & Material Verification.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:34.779Z",
+      "updatedAt": "2026-10-26T12:08:34.779Z"
+    },
+    {
+      "id": "chap-c9-2",
+      "courseId": "c9",
+      "title": "Isometric Walkdown & Spool Fabrication",
+      "description": "Checking spool orientation, support placement, valve installation, and tolerance verification against piping isometrics.",
+      "sortOrder": 2,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Isometric Walkdown & Spool Fabrication.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Isometric Walkdown & Spool Fabrication.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:34.779Z",
+      "updatedAt": "2026-10-26T12:08:34.779Z"
+    },
+    {
+      "id": "chap-c9-3",
+      "courseId": "c9",
+      "title": "Pressure Testing & Flange Management",
+      "description": "Hydrostatic and pneumatic leak testing procedures, test manifold setup, torque tightening sequences, and punch list clearance.",
+      "sortOrder": 3,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Pressure Testing & Flange Management.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Pressure Testing & Flange Management.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:34.779Z",
+      "updatedAt": "2026-10-26T12:08:34.779Z"
+    },
+    {
+      "id": "chap-c9-4",
+      "courseId": "c9",
+      "title": "Pipeline Cross-Country Construction & Trenching",
+      "description": "API 1104 welding standards, stringing, ditching, lower-and-lay operations, and cathodic protection testing.",
+      "sortOrder": 4,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Pipeline Cross-Country Construction & Trenching.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Pipeline Cross-Country Construction & Trenching.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:34.779Z",
+      "updatedAt": "2026-10-26T12:08:34.779Z"
+    },
+    {
+      "id": "chap-c9-5",
+      "courseId": "c9",
+      "title": "Final Dossier Preparation & As-Built Certification",
+      "description": "Welding summary logs, hydrotest signoffs, NDT clearances, and compilation of turnover inspection dossiers.",
+      "sortOrder": 5,
+      "studyHours": 8,
+      "objectives": "Master core theoretical principles and practical inspection protocols for Final Dossier Preparation & As-Built Certification.",
+      "content": "Comprehensive hands-on curriculum, laboratory calibration, reference standards, and defect analysis for Final Dossier Preparation & As-Built Certification.",
+      "status": "published",
+      "createdBy": "acct-admin",
+      "createdAt": "2026-10-26T12:08:34.779Z",
+      "updatedAt": "2026-10-26T12:08:34.779Z"
+    }
+  ],
+  "instructors": [
+    {
+      "courseId": "c1",
+      "accountId": "acct-staff"
+    }
+  ],
+  "certificates": [],
+  "branding": {
+    "seal": "seal.png",
+    "signature": "signature.png",
+    "signatoryName": "",
+    "signatoryDesignation": ""
+  },
+  "studentAccess": {
+    "viewAvailableCourses": true,
+    "viewEnrolledCourses": true,
+    "viewChapters": true,
+    "viewMaterials": true,
+    "requestEnrolment": true,
+    "viewOwnStudyHours": true
+  },
+  "enquiries": [
+    {
+      "id": "enq-d950ce37d865",
+      "createdAt": "2026-10-27T07:54:42.230Z",
+      "fullName": "Alastair Vance",
+      "phone": "+44 7700 900888",
+      "email": "alastair.vance@example.co.uk",
+      "location": "Online Session / Web Enquiry",
+      "courseName": "Strategy Call: NDT Level II (UT, RT, MPT, LPT, VT)",
+      "message": "Booked 40-Minute FREE Technical Strategy Call for NDT Level II. Preferred Date: Mon, 2 Nov, Time: 11:30 AM.",
+      "status": "new"
+    },
+    {
+      "id": "enq-8bacf5086adf",
+      "createdAt": "2026-10-27T07:50:26.152Z",
+      "fullName": "Alastair Vance",
+      "phone": "+44 7700 900888",
+      "email": "alastair.vance@example.co.uk",
+      "location": "Online Session / Web Enquiry",
+      "courseName": "Strategy Call: NDT Level II (UT, RT, MPT, LPT, VT)",
+      "message": "Booked 40-Minute FREE Technical Strategy Call for NDT Level II. Preferred Date: Mon, 2 Nov, Time: 11:30 AM.",
+      "status": "new"
+    },
+    {
+      "id": "enq-b31c397dff39",
+      "createdAt": "2026-10-26T09:12:51.177Z",
+      "fullName": "A M ChethN",
+      "phone": "6361992599",
+      "email": "qspiders2120@gmail.com",
+      "location": "BANGLAORE",
+      "courseId": "c2",
+      "courseName": "QA & QC Course",
+      "status": "new"
+    }
+  ],
+  "newsletter": [
+    {
+      "id": "sub-e5a453a1",
+      "email": "test@example.co.uk",
+      "createdAt": "2026-10-27T05:37:20.869Z",
+      "active": true
+    }
+  ],
+  "articles": [
+    {
+      "id": "b1",
+      "slug": "exploring-the-top-non-destructive-testing-ndtmethods",
+      "title": "Exploring the Top Non-Destructive Testing (NDT) Methods",
+      "excerpt": "Non-destructive testing (NDT) methods play a crucial role in ensuring structural integrity without damaging components. Learn about UT, RT, MT, PT, and VT.",
+      "content": "Non-Destructive Testing (NDT) comprises a set of analysis techniques used in science and industry to evaluate the properties of a material, component, or system without causing damage. \n\nAt Savvy Training Institute, our ASNT Level 2 program trains students in the five primary methods:\n- **Visual Testing (VT)**: Surface flaw analysis, alignment, and weld profile checks.\n- **Liquid Penetrant Testing (LPT)**: Detecting surface-breaking cracks using dye penetrants.\n- **Magnetic Particle Testing (MPT)**: Surface and near-surface discontinuity inspection in ferromagnetic metals.\n- **Ultrasonic Testing (UT)**: Using high-frequency sound waves to measure wall thickness and locate internal voids.\n- **Radiographic Testing (RT)**: Internal structure analysis using X-rays and Gamma radiation.",
+      "category": "NDT Techniques",
+      "author": "Feroz Alam",
+      "featuredImage": "/images/library/inspection.jpg",
+      "published": true,
+      "createdAt": "2025-04-10",
+      "updatedAt": "2025-04-10"
+    },
+    {
+      "id": "b2",
+      "slug": "radiographic-testing-rt-a-comprehensive-overview",
+      "title": "Radiographic Testing (RT): A Comprehensive Industrial Guide",
+      "excerpt": "Discover how Radiographic Testing utilizes X-rays and Gamma rays to inspect internal material structures and weld integrity.",
+      "content": "Radiographic Testing (RT) is one of the most critical NDT inspection techniques used in pipeline construction, pressure vessel fabrication, and aerospace engineering. \n\nBy passing radiation through an object onto industrial film or digital sensors, inspectors can detect internal voids, porosity, incomplete penetration, and micro-cracks. Understanding film density, sensitivity, and radiation safety protocols is central to becoming a certified RTFI technician.",
+      "category": "NDT Techniques",
+      "author": "Md Javed",
+      "featuredImage": "/images/library/piping.jpg",
+      "published": true,
+      "createdAt": "2025-04-18",
+      "updatedAt": "2025-04-18"
+    },
+    {
+      "id": "b3",
+      "slug": "complete-guide-to-ndt-level-ii-certification-requirements-training-and-career-opportunities",
+      "title": "Complete Guide to NDT Level II Certification: Requirements & Career Growth",
+      "excerpt": "Everything you need to know about eligibility, course duration, syllabus, and global career opportunities in NDT Level 2.",
+      "content": "NDT Level II certification qualifies technicians to set up and calibrate inspection equipment, perform tests according to written procedures, evaluate and record test results, and supervise Level I technicians. \n\nDemand for certified ASNT Level II inspectors is surging across oil & gas refineries, aerospace manufacturing, shipyards, and major infrastructure projects both in India and abroad.",
+      "category": "Career Advice",
+      "author": "Feroz Alam",
+      "featuredImage": "/images/library/inspection.jpg",
+      "published": true,
+      "createdAt": "2025-05-02",
+      "updatedAt": "2025-05-02"
+    },
+    {
+      "id": "b4",
+      "slug": "qa-qc-welding-inspection-asme-section-ix-and-aws-d1-1",
+      "title": "QA/QC Welding Inspection: Interpreting ASME Section IX & AWS D1.1",
+      "excerpt": "A practical guide for mechanical and QA/QC inspectors on reviewing Welding Procedure Specifications (WPS), Procedure Qualification Records (PQR), and Welder Qualifications.",
+      "content": "Quality Assurance and Quality Control in welding fabrication hinges upon disciplined code interpretation. Whether working on pressure vessels under ASME Section IX or structural steel under AWS D1.1, the welding inspector must ensure that every weld bead conforms to qualified procedures.\n\nKey responsibilities covered during Savvy’s QA/QC certification track include:\n- **Welding Procedure Specifications (WPS)**: Reviewing essential variables (base metal P-numbers, filler metal F-numbers, preheat, and interpass temperatures).\n- **Procedure Qualification Records (PQR)**: Validating mechanical test results including transverse tensile, guided bend, and Charpy V-notch impact tests.\n- **Welder Performance Qualification (WPQ)**: Verifying that individual welders maintain current qualification tickets for specific positions (1G through 6G/6GR).\n- **Weld Joint Visual & NDT Surveillance**: Identifying surface imperfections such as undercut, porosity, overlap, and excessive reinforcement before hydrostatic pressure testing.",
+      "category": "QA & QC Inspection",
+      "author": "Tabrej Alam",
+      "featuredImage": "/images/library/inspection.jpg",
+      "published": true,
+      "createdAt": "2025-05-15",
+      "updatedAt": "2025-05-15"
+    },
+    {
+      "id": "b5",
+      "slug": "ultrasonic-testing-dac-curves-and-defect-characterization",
+      "title": "Ultrasonic Testing: Constructing DAC Curves & Sizing Planar Discontinuities",
+      "excerpt": "Step-by-step guidance on constructing Distance Amplitude Correction (DAC) curves on IIW calibration blocks to evaluate internal planar and volumetric flaws.",
+      "content": "In modern Ultrasonic Testing (UT), compensating for acoustic attenuation and beam spreading across varying material depths is essential for accurate flaw sizing. \n\nA Distance Amplitude Correction (DAC) curve links the peak echo amplitudes from identical reference reflectors (such as side-drilled holes) at different depths in a calibration block:\n- **Calibrating Primary Reference Level**: Using standard V1 and V2 blocks to establish the reference curve across the expected sound path range.\n- **Differentiating Discontinuity Shapes**: Distinguishing volumetric flaws (porosity, slag inclusions) that exhibit smooth acoustic reflection from planar flaws (cracks, incomplete fusion) that produce sharp, directive echo signals.\n- **Application of 6dB & 20dB Drop Methods**: Accurately measuring defect length and vertical height to assess code compliance against ASME Section V Article 4 acceptance tables.",
+      "category": "NDT Techniques",
+      "author": "Md Javed",
+      "featuredImage": "/images/library/piping.jpg",
+      "published": true,
+      "createdAt": "2025-06-02",
+      "updatedAt": "2025-06-02"
+    },
+    {
+      "id": "b6",
+      "slug": "industrial-safety-and-hazard-identification-in-refineries",
+      "title": "Hazard Identification & Risk Assessment (HIRA) in Petrochemical Plants",
+      "excerpt": "Comprehensive safety engineering protocols covering Job Safety Analysis (JSA), Permit to Work (PTW) workflows, and industrial plant hazard mitigation.",
+      "content": "In high-hazard environments like petroleum refineries, offshore platforms, and chemical manufacturing facilities, systematic hazard identification saves lives and prevents catastrophic plant downtime.\n\nAt Savvy Training Institute, our Industrial Safety and HSE curriculum instructs officers on:\n- **Hazard Identification & Risk Assessment (HIRA)**: Evaluating likelihood and consequence across physical, chemical, and ergonomic hazards.\n- **Permit to Work (PTW) Governance**: Executing rigorous permit controls for hot work, confined space entry, working at height, and electrical isolation (LOTO).\n- **Radiation Safety in NDT**: Establishing restricted boundary cordons, calculating Inverse Square Law safe distances, and monitoring personnel dosimeters during active radiographic exposure drills.",
+      "category": "Industrial Safety",
+      "author": "Feroz Alam",
+      "featuredImage": "/images/library/safety-drill.jpg",
+      "published": true,
+      "createdAt": "2025-06-20",
+      "updatedAt": "2025-06-20"
+    },
+    {
+      "id": "b7",
+      "slug": "revit-mep-3d-coordination-and-bim-clash-detection",
+      "title": "BIM Coordination for MEP Engineers: Navisworks Clash Detection & Revit Modeling",
+      "excerpt": "How modern 3D Building Information Modeling (BIM) workflows eliminate costly site rework between HVAC ductwork, electrical trays, and plumbing services.",
+      "content": "Building Information Modeling (BIM) has revolutionized MEP engineering by replacing flat 2D drawings with intelligent, data-rich 3D parametric models. \n\nKey competencies taught in Savvy’s Autodesk Revit MEP program include:\n- **Parametric Service Routing**: Designing complex HVAC duct layouts, chilled water piping, sanitary drainage slopes, and electrical cable raceways.\n- **Clash Detection in Navisworks**: Identifying hard clashes (duct intersecting structural beams) and soft clearance clashes (insufficient maintenance access) before fabrication.\n- **Bill of Quantities (BOQ) Generation**: Extracting accurate schedules for pipe lengths, duct sheet metal weights, fittings, and diffusers directly from the coordinated Revit model.",
+      "category": "MEP Engineering",
+      "author": "Deepak Kumar",
+      "featuredImage": "/images/library/workshop.jpg",
+      "published": true,
+      "createdAt": "2025-07-04",
+      "updatedAt": "2025-07-04"
+    }
+  ]
+}

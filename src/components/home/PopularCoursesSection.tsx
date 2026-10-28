@@ -1,0 +1,353 @@
+'use client';
+
+import React, { useState, useMemo } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { ArrowRight, Star, ShieldCheck, Award, Wrench, CheckCircle2 } from 'lucide-react';
+import type { Course } from '@/lib/types';
+import { useCurrency } from '@/lib/currency';
+import { SavvyLogo } from '@/components/brand/SavvyLogo';
+
+interface PopularCoursesSectionProps {
+  courses: Course[];
+}
+
+export function PopularCoursesSection({ courses }: PopularCoursesSectionProps) {
+  const { currency, getCoursePriceDisplay } = useCurrency();
+  const [selectedFilter, setSelectedFilter] = useState('All');
+
+  const filterTabs = ['All', 'NDT Inspection', 'QA/QC Mechanical', 'MEP & BIM', 'Safety & HSE'];
+
+  // Filtered courses for full catalog grid below
+  const filteredCourses = useMemo(() => {
+    if (selectedFilter === 'All') return courses.slice(0, 6);
+    const q = selectedFilter.toLowerCase();
+    return courses.filter((c) => {
+      const cat = (c.category || '').toLowerCase();
+      const title = c.title.toLowerCase();
+      if (q.includes('ndt')) return cat.includes('ndt') || title.includes('ndt');
+      if (q.includes('qa/qc')) return cat.includes('qa') || cat.includes('qc') || title.includes('qa') || title.includes('qc');
+      if (q.includes('mep')) return cat.includes('mep') || cat.includes('bim') || title.includes('mep') || title.includes('revit');
+      if (q.includes('safety') || q.includes('hse')) return cat.includes('safety') || cat.includes('hse') || title.includes('safety');
+      return true;
+    }).slice(0, 6);
+  }, [courses, selectedFilter]);
+
+  // Coursera "New and popular" 3 columns mapping
+  const ndtCourse = courses.find((c) => c.slug === 'ndt-level-2-course' || c.id === 'c1') || courses[0];
+  const qaqcCourse = courses.find((c) => c.slug === 'qa-and-qc-course' || c.id === 'c2') || courses[1];
+  const revitCourse = courses.find((c) => c.title.toLowerCase().includes('revit') || c.id === 'c3') || courses[2];
+  const cswipCourse = courses.find((c) => c.title.toLowerCase().includes('cswip') || c.id === 'c6') || courses[3];
+  const hvacCourse = courses.find((c) => c.title.toLowerCase().includes('hvac') || c.id === 'c4') || courses[4];
+  const safetyCourse = courses.find((c) => c.title.toLowerCase().includes('safety') || c.id === 'c5') || courses[5];
+
+  const popularColumns = [
+    {
+      title: 'Most popular',
+      href: '/courses?sort=featured',
+      items: [
+        {
+          course: ndtCourse,
+          partner: 'ASNT SNT-TC-1A',
+          title: ndtCourse?.title || 'NDT Level II Course (UT, RT, MPT, LPT, VT)',
+          badge: 'NDT',
+          type: 'Professional Certificate',
+          rating: '4.9',
+          image: ndtCourse?.featured_image || '/images/course/ndt-level-2-course.png',
+        },
+        {
+          course: qaqcCourse,
+          partner: 'ASME Section V & IX',
+          title: qaqcCourse?.title || 'QA & QC Mechanical & Piping Inspection',
+          badge: 'QA/QC',
+          type: 'Professional Certificate',
+          rating: '4.8',
+          image: qaqcCourse?.featured_image || '/images/course/qa-and-qc-course.png',
+        },
+      ],
+    },
+    {
+      title: 'Hot new releases',
+      href: '/courses?category=cat2',
+      items: [
+        {
+          course: revitCourse,
+          partner: 'Autodesk Revit BIM',
+          title: revitCourse?.title || 'Revit MEP & BIM 3D Engineering Design',
+          badge: 'BIM',
+          type: 'Professional Certificate',
+          rating: '4.8',
+          image: revitCourse?.featured_image || '/images/course/revit-mep-training-course-fees.png',
+        },
+        {
+          course: cswipCourse,
+          partner: 'TWI / CSWIP UK',
+          title: cswipCourse?.title || 'CSWIP 3.1 Welding Inspector Preparation',
+          badge: 'CSWIP',
+          type: 'Professional Certificate',
+          rating: '4.9',
+          image: cswipCourse?.featured_image || '/images/course/cswip-3-1-course.png',
+        },
+      ],
+    },
+    {
+      title: 'Trending technical courses',
+      href: '/courses',
+      items: [
+        {
+          course: hvacCourse,
+          partner: 'ASHRAE / HVAC Labs',
+          title: hvacCourse?.title || 'HVAC Design & Cleanroom Engineering',
+          badge: 'HVAC',
+          type: 'Professional Certificate',
+          rating: '4.7',
+          image: hvacCourse?.featured_image || '/images/course/hvac-course.png',
+        },
+        {
+          course: safetyCourse,
+          partner: 'IOSH / NEBOSH Framework',
+          title: safetyCourse?.title || 'Industrial Fire & Safety (HSE) Engineering',
+          badge: 'HSE',
+          type: 'Specialization',
+          rating: '4.8',
+          image: safetyCourse?.featured_image || '/images/course/fire-safety-course.png',
+        },
+      ],
+    },
+  ];
+
+  return (
+    <section className="py-12 sm:py-16 bg-white border-b border-[#e2e8f0]">
+      <div className="site-container">
+        {/* ========================================================= */}
+        {/* 1. COURSERA EXACT: "New and popular" 3-Column Showcase    */}
+        {/* ========================================================= */}
+        <div className="mb-16">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1F1F1F] tracking-tight mb-6">
+            New and popular
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {popularColumns.map((col, colIdx) => {
+              const panel =
+                colIdx === 0
+                  ? 'bg-[#eef6ff] border-[#dbe7f7]'
+                  : colIdx === 1
+                    ? 'bg-[#f3faf4] border-[#d7efe0]'
+                    : 'bg-[#fff8ef] border-[#f3e4cc]';
+              return (
+              <div
+                key={colIdx}
+                className={`${panel} rounded-[24px] p-4 sm:p-5 border flex flex-col justify-between`}
+              >
+                <div>
+                  {/* Column Header Link with Arrow */}
+                  <div className="mb-3.5">
+                    <Link
+                      href={col.href}
+                      className="inline-flex items-center gap-1.5 text-sm sm:text-base font-bold text-[#1F1F1F] hover:text-[#0056D2] group transition-colors"
+                    >
+                      <span>{col.title}</span>
+                      <ArrowRight className="w-4 h-4 text-[#1F1F1F] group-hover:text-[#0056D2] group-hover:translate-x-1 transition-all" />
+                    </Link>
+                  </div>
+
+                  {/* Course Cards Inside Column */}
+                  <div className="flex flex-col gap-3">
+                    {col.items.map((item, itemIdx) => {
+                      const courseTarget = item.course ? `/courses/${item.course.slug || item.course.id}` : '/courses';
+
+                      return (
+                        <Link
+                          key={itemIdx}
+                          href={courseTarget}
+                          className="group bg-white rounded-2xl p-3 border border-white shadow-xs hover:shadow-md transition-all flex items-center gap-3.5"
+                        >
+                          {/* Square Thumbnail with Badge Overlay */}
+                          <div className="relative w-[72px] h-[72px] rounded-xl overflow-hidden shrink-0 bg-[#f4f7fb]">
+                            <Image
+                              src={item.image}
+                              alt={item.title}
+                              fill
+                              sizes="80px"
+                              className="object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                            <div className="absolute bottom-0 left-0 right-0 bg-[#0056D2] text-[8px] font-extrabold text-white text-center py-0.5 uppercase tracking-wider">
+                              {item.badge}
+                            </div>
+                          </div>
+
+                          {/* Details */}
+                          <div className="flex-1 min-w-0">
+                            {/* Partner Row */}
+                            <div className="flex items-center gap-1 text-[11px] font-medium text-[#565656] truncate">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#0056D2]" />
+                              <span className="truncate">{item.partner}</span>
+                            </div>
+
+                            {/* Course Title */}
+                            <h3 className="text-xs sm:text-[13px] font-bold text-[#1F1F1F] group-hover:text-[#0056D2] transition-colors line-clamp-2 mt-0.5 leading-snug">
+                              {item.title}
+                            </h3>
+
+                            {/* Format & Rating */}
+                            <div className="flex items-center gap-1.5 text-[11px] text-[#565656] mt-1">
+                              <span>{item.type}</span>
+                              <span>·</span>
+                              <div className="flex items-center gap-0.5 text-[#1F1F1F] font-bold">
+                                <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+                                <span>{item.rating}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* ========================================================= */}
+        {/* 2. Full Course Catalogue Grid with Category Filter Tabs    */}
+        {/* ========================================================= */}
+        <div className="pt-8 border-t border-[#e2e8f0]">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-wider text-[#0056D2]">
+                Explore All Programmes
+              </span>
+              <h2 className="text-xl sm:text-2xl font-extrabold text-[#1F1F1F] tracking-tight mt-1">
+                Specialized Professional Certifications
+              </h2>
+            </div>
+
+            <Link
+              href="/courses"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0056D2] hover:text-[#00419e] transition-colors shrink-0"
+            >
+              <span>View Full Directory</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+
+          {/* Coursera-style Filter Tabs */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 mb-8 scrollbar-none">
+            {filterTabs.map((tab) => (
+              <button
+                key={tab}
+                type="button"
+                onClick={() => setSelectedFilter(tab)}
+                className={`px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
+                  selectedFilter === tab
+                    ? 'bg-[#0056D2] text-white shadow-xs'
+                    : 'bg-white text-[#565656] border border-[#e2e8f0] hover:border-[#0056D2]/50 hover:text-[#1F1F1F]'
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {filteredCourses.map((course) => {
+              const priceInfo = getCoursePriceDisplay(course, currency);
+
+              return (
+                <div
+                  key={course.id}
+                  className="group flex flex-col bg-white rounded-2xl border border-[#e2e8f0] overflow-hidden hover:shadow-lg hover:border-[#0056D2]/50 transition-all duration-300 hover:-translate-y-1"
+                >
+                  {/* Course Image */}
+                  <div className="relative aspect-[16/10] bg-[#0A1220] overflow-hidden flex items-center justify-center">
+                    {course.featured_image ? (
+                      <Image
+                        src={course.featured_image}
+                        alt={course.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-gradient-to-tr from-[#003e9a] to-[#0056D2] flex flex-col justify-end p-5 text-white">
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-[#F59E0B]">
+                          {course.category || 'Certification'}
+                        </span>
+                        <h3 className="text-base font-bold text-white mt-1 leading-snug line-clamp-1">
+                          {course.title}
+                        </h3>
+                      </div>
+                    )}
+
+                    <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md text-[10px] font-bold text-[#0056D2] shadow-2xs z-10">
+                      Professional Certificate
+                    </div>
+                  </div>
+
+                  {/* Card Content Body */}
+                  <div className="p-5 sm:p-6 flex flex-col flex-1 justify-between">
+                    <div>
+                      {/* Organization Tag */}
+                      <div className="flex items-center gap-2 mb-2">
+                        <div className="w-5 h-5 rounded-full overflow-hidden border border-[#e2e8f0] p-0.5 shrink-0 bg-white">
+                          <SavvyLogo markClassName="w-full h-full object-contain" />
+                        </div>
+                        <span className="text-[11px] font-bold text-[#565656] uppercase tracking-wider truncate">
+                          Savvy Institute · UK Code Standards
+                        </span>
+                      </div>
+
+                      {/* Course Title */}
+                      <h3 className="text-base font-bold text-[#1F1F1F] group-hover:text-[#0056D2] transition-colors leading-snug line-clamp-2 min-h-[44px]">
+                        <Link href={`/courses/${course.slug || course.id}`}>
+                          {course.title}
+                        </Link>
+                      </h3>
+
+                      <p className="text-xs text-[#565656] line-clamp-2 mt-2 leading-relaxed font-normal">
+                        {course.short_description || course.description}
+                      </p>
+                    </div>
+
+                    {/* Price & Action Button */}
+                    <div className="mt-5 pt-4 border-t border-[#e2e8f0] flex items-center justify-between gap-3">
+                      <div className="flex flex-col">
+                        <span className="text-[10px] text-[#565656] uppercase font-semibold">
+                          Tuition Fee
+                        </span>
+                        <span className="text-base font-extrabold text-[#0056D2]">
+                          {priceInfo.formatted}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        <Link
+                          href={`/courses/${course.slug || course.id}`}
+                          className="px-3 py-1.5 rounded-lg border border-[#e2e8f0] text-xs font-semibold text-[#1F1F1F] hover:border-[#0056D2] hover:text-[#0056D2] transition-colors"
+                        >
+                          Syllabus
+                        </Link>
+                        <Link
+                          href={`/contact-us?course=${encodeURIComponent(course.slug || course.id)}&courseName=${encodeURIComponent(course.title)}`}
+                          className="inline-flex items-center gap-1 px-4 py-1.5 rounded-lg bg-[#0056D2] text-white text-xs font-bold hover:bg-[#00419e] transition-colors shadow-2xs"
+                        >
+                          <span>Enquire</span>
+                          <ArrowRight className="w-3 h-3 text-white" />
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
