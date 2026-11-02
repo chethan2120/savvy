@@ -54,7 +54,7 @@ export const CertificateDocument: React.FC<{ cert: CertificateFace; setupHints?:
 
   useEffect(() => {
     let cancelled = false;
-    QRCode.toDataURL(url, { margin: 0, width: 320, errorCorrectionLevel: 'M', color: { dark: '#102B46ff', light: '#ffffffff' } })
+    QRCode.toDataURL(url, { margin: 0, width: 320, errorCorrectionLevel: 'M', color: { dark: '#30262Bff', light: '#ffffffff' } })
       .then((dataUrl) => {
         if (!cancelled) setQr(dataUrl);
       })
@@ -73,9 +73,9 @@ export const CertificateDocument: React.FC<{ cert: CertificateFace; setupHints?:
   return (
     <div
       id="certificate-print"
-      className={`bg-[#fbfbf9] text-[#102B46] px-6 py-8 sm:px-10 sm:py-10 md:px-14 md:py-12 border-[10px] border-double ${revoked ? 'border-red-700' : 'border-[#00543d]'}`}
+      className={`bg-[#fbfbf9] text-[#30262B] px-6 py-8 sm:px-10 sm:py-10 md:px-14 md:py-12 border-[10px] border-double ${revoked ? 'border-red-700' : 'border-[#641B38]'}`}
     >
-      <div className="border border-[#00543d]/25 px-4 py-8 sm:px-8 md:px-10">
+      <div className="border border-[#641B38]/25 px-4 py-8 sm:px-8 md:px-10">
         {revoked && (
           <p className="mb-6 text-center text-[11px] font-semibold uppercase tracking-[0.22em] text-red-700">
             Revoked — this certificate is not valid
@@ -84,15 +84,15 @@ export const CertificateDocument: React.FC<{ cert: CertificateFace; setupHints?:
         <div className="flex justify-center">
           <SavvyLogo markClassName="mx-auto h-28 w-28 shrink-0" />
         </div>
-        <h2 className="mt-8 text-center font-serif text-3xl font-normal tracking-wide text-[#102B46] md:text-4xl">
+        <h2 className="mt-8 text-center font-serif text-3xl font-normal tracking-wide text-[#30262B] md:text-4xl">
           Certificate of Completion
         </h2>
-        <p className="mt-6 text-center text-xs uppercase tracking-[0.18em] text-[#102B46]/70">This is to certify that</p>
-        <p className="mt-3 text-center font-serif text-3xl text-[#102B46] md:text-4xl">{cert.student_name}</p>
-        <div className="mx-auto mt-3 h-px w-40 bg-[#00543d]/50" />
-        <p className="mt-5 text-center text-sm text-[#102B46]/80">has successfully completed the course</p>
-        <p className="mt-2 text-center text-xl font-semibold text-[#00543d]">{cert.course_title}</p>
-        {cert.grade ? <p className="mt-2 text-center text-sm text-[#102B46]/70">Grade {cert.grade}</p> : null}
+        <p className="mt-6 text-center text-xs uppercase tracking-[0.18em] text-[#30262B]/70">This is to certify that</p>
+        <p className="mt-3 text-center font-serif text-3xl text-[#30262B] md:text-4xl">{cert.student_name}</p>
+        <div className="mx-auto mt-3 h-px w-40 bg-[#641B38]/50" />
+        <p className="mt-5 text-center text-sm text-[#30262B]/80">has successfully completed the course</p>
+        <p className="mt-2 text-center text-xl font-semibold text-[#641B38]">{cert.course_title}</p>
+        {cert.grade ? <p className="mt-2 text-center text-sm text-[#30262B]/70">Grade {cert.grade}</p> : null}
 
         <dl className="mt-8 flex flex-wrap items-start justify-center gap-x-10 gap-y-4 text-center">
           <Field k="Certificate No." v={cert.certificate_no} />
@@ -111,13 +111,13 @@ export const CertificateDocument: React.FC<{ cert: CertificateFace; setupHints?:
             ) : (
               <span className="h-16" />
             )}
-            <span className="w-40 border-t border-[#102B46]/30" />
-            {identity.signatoryName ? <span className="text-sm text-[#102B46]">{identity.signatoryName}</span> : null}
-            <span className="text-[10px] uppercase tracking-[0.14em] text-[#102B46]/60">
+            <span className="w-40 border-t border-[#30262B]/30" />
+            {identity.signatoryName ? <span className="text-sm text-[#30262B]">{identity.signatoryName}</span> : null}
+            <span className="text-[10px] uppercase tracking-[0.14em] text-[#30262B]/60">
               {identity.signatoryDesignation || (identity.hasSignature ? 'Authorized signatory' : '')}
             </span>
             {setupHints && !identity.hasSignature ? (
-              <span className="max-w-[12rem] text-center text-[10px] text-[#102B46]/55">Upload the authorized signature in Account Settings.</span>
+              <span className="max-w-[12rem] text-center text-[10px] text-[#30262B]/55">Upload the authorized signature in Account Settings.</span>
             ) : null}
           </div>
 
@@ -126,9 +126,9 @@ export const CertificateDocument: React.FC<{ cert: CertificateFace; setupHints?:
               // eslint-disable-next-line @next/next/no-img-element
               <img src={qr} alt={`QR code to verify certificate ${cert.certificate_no}`} className="h-20 w-20" />
             ) : (
-              <div className="h-20 w-20 border border-[#00543d]/30" />
+              <div className="h-20 w-20 border border-[#641B38]/30" />
             )}
-            <span className="text-center text-[8px] uppercase leading-tight tracking-wider text-[#102B46]/50">
+            <span className="text-center text-[8px] uppercase leading-tight tracking-wider text-[#30262B]/50">
               Scan to verify
             </span>
           </div>
@@ -140,9 +140,9 @@ export const CertificateDocument: React.FC<{ cert: CertificateFace; setupHints?:
             ) : (
               <span className="h-20 w-20" />
             )}
-            <span className="text-[10px] uppercase tracking-[0.14em] text-[#102B46]/60">{identity.hasSeal ? 'Institute seal' : ''}</span>
+            <span className="text-[10px] uppercase tracking-[0.14em] text-[#30262B]/60">{identity.hasSeal ? 'Institute seal' : ''}</span>
             {setupHints && !identity.hasSeal ? (
-              <span className="max-w-[12rem] text-center text-[10px] text-[#102B46]/55">Upload the institute seal in Account Settings.</span>
+              <span className="max-w-[12rem] text-center text-[10px] text-[#30262B]/55">Upload the institute seal in Account Settings.</span>
             ) : null}
           </div>
         </div>

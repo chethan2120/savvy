@@ -300,8 +300,8 @@ export default function StudentPortalPage() {
 
   if (checking || !authed) {
     return (
-      <div className="min-h-screen bg-[#f3f5fb] flex items-center justify-center gap-2 text-sm text-[#565656]">
-        <Loader2 className="w-5 h-5 animate-spin text-[#B14B6C]" />
+      <div className="min-h-screen bg-[#f3f5fb] flex items-center justify-center gap-2 text-sm text-[#30262B]">
+        <Loader2 className="w-5 h-5 animate-spin text-[#B83268]" />
         <span>{checking ? 'Authenticating student portal...' : 'Redirecting to login...'}</span>
       </div>
     );
@@ -310,7 +310,7 @@ export default function StudentPortalPage() {
   const watermark = `${profile?.enrollment_no ?? 'SAV'} • ${studentName}`.trim();
 
   return (
-    <div className="min-h-screen bg-[#F7F8FA] text-[#010101] flex flex-col font-sans antialiased">
+    <div className="min-h-screen bg-[#F7F8FA] text-[#30262B] flex flex-col font-sans antialiased">
       {/* ========================================================= */}
       {/* 1. TOP HEADER (Matches Reference Image 3)                 */}
       {/* ========================================================= */}
@@ -322,7 +322,7 @@ export default function StudentPortalPage() {
               type="button"
               onClick={() => setSidebarOpen((prev) => !prev)}
               aria-label="Toggle navigation menu"
-              className="lg:hidden p-1.5 rounded-lg text-[#1F1F1F] hover:bg-[#F3F5FB] transition-colors"
+              className="lg:hidden p-1.5 rounded-lg text-[#641B38] hover:bg-[#F3F5FB] transition-colors"
             >
               <Menu className="w-5 h-5" />
             </button>
@@ -332,7 +332,7 @@ export default function StudentPortalPage() {
                 <SavvyLogo markClassName="h-full w-full object-contain" />
               </div>
               <div className="flex flex-col">
-                <span className="font-sans text-base sm:text-lg font-bold tracking-tight text-[#1F1F1F] leading-none uppercase">
+                <span className="font-sans text-base sm:text-lg font-bold tracking-tight text-[#641B38] leading-none uppercase">
                   SAVVY
                 </span>
                 <span className="text-[9px] font-bold uppercase tracking-wider text-[#687587] mt-0.5">
@@ -350,15 +350,15 @@ export default function StudentPortalPage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search courses, assignments, or anything..."
-              className="w-full pl-9 pr-4 py-2 rounded-xl border border-[#F0E2E7] bg-[#FBFBFC] hover:bg-white text-xs text-[#010101] placeholder-[#A08B94] focus:outline-none focus:border-[#00543d] focus:bg-white transition-all shadow-2xs"
+              className="w-full pl-9 pr-4 py-2 rounded-xl border border-[#EAD9E0] bg-[#FBFBFC] hover:bg-white text-xs text-[#30262B] placeholder-[#A08B94] focus:outline-none focus:border-[#641B38] focus:bg-white transition-all shadow-2xs"
             />
           </div>
 
           {/* Right: Date, Notifications, User Profile Menu */}
           <div className="flex items-center gap-3 sm:gap-4">
             {/* Formatted Current Date */}
-            <div className="hidden sm:flex items-center gap-1.5 text-xs font-semibold text-[#565656] bg-[#F7F8FA] border border-[#E5E7EB] px-3 py-1.5 rounded-xl">
-              <Calendar className="w-3.5 h-3.5 text-[#00543d]" />
+            <div className="hidden sm:flex items-center gap-1.5 text-xs font-semibold text-[#30262B] bg-[#F7F8FA] border border-[#E5E7EB] px-3 py-1.5 rounded-xl">
+              <Calendar className="w-3.5 h-3.5 text-[#641B38]" />
               <span>{formattedDate}</span>
             </div>
 
@@ -368,7 +368,7 @@ export default function StudentPortalPage() {
                 type="button"
                 onClick={() => setNotificationsOpen((prev) => !prev)}
                 aria-label="View notifications"
-                className="relative p-2 rounded-xl text-[#1F1F1F] hover:bg-[#F3F5FB] transition-colors focus:outline-none"
+                className="relative p-2 rounded-xl text-[#641B38] hover:bg-[#F3F5FB] transition-colors focus:outline-none"
               >
                 <Bell className="w-4 h-4" />
                 {unreadNotifs > 0 && (
@@ -381,10 +381,10 @@ export default function StudentPortalPage() {
               {notificationsOpen && (
                 <div className="absolute right-0 mt-2 w-80 rounded-2xl bg-white border border-[#E5E7EB] shadow-[0_12px_36px_rgba(0,0,0,0.12)] p-4 z-50 animate-in fade-in zoom-in-95">
                   <div className="flex items-center justify-between pb-2.5 border-b border-[#E5E7EB] mb-2.5">
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#1F1F1F]">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#641B38]">
                       Notifications
                     </h4>
-                    <span className="text-[11px] font-semibold text-[#00543d]">
+                    <span className="text-[11px] font-semibold text-[#641B38]">
                       {notifications.length} Total
                     </span>
                   </div>
@@ -395,8 +395,8 @@ export default function StudentPortalPage() {
                     ) : (
                       notifications.slice(0, 5).map((n) => (
                         <div key={n.id} className="p-2.5 rounded-xl bg-[#F7F8FA] border border-[#E5E7EB] text-xs">
-                          <p className="font-semibold text-[#1F1F1F]">{n.title}</p>
-                          <p className="text-[11px] text-[#565656] mt-0.5 leading-snug">{n.body}</p>
+                          <p className="font-semibold text-[#641B38]">{n.title}</p>
+                          <p className="text-[11px] text-[#30262B] mt-0.5 leading-snug">{n.body}</p>
                           <span className="text-[10px] text-[#A08B94] block mt-1">
                             {new Date(n.createdAt).toLocaleDateString()}
                           </span>
@@ -415,7 +415,7 @@ export default function StudentPortalPage() {
                 onClick={() => setUserMenuOpen((prev) => !prev)}
                 className="flex items-center gap-2 pl-1 pr-2 py-1 rounded-full hover:bg-[#F3F5FB] transition-all cursor-pointer"
               >
-                <div className="w-8 h-8 rounded-full bg-[#00543d] text-white flex items-center justify-center text-xs font-bold shadow-xs">
+                <div className="w-8 h-8 rounded-full bg-[#641B38] text-white flex items-center justify-center text-xs font-bold shadow-xs">
                   {account?.photo ? (
                     <img src="/api/photos" alt={studentName} className="w-full h-full object-cover rounded-full" />
                   ) : (
@@ -423,10 +423,10 @@ export default function StudentPortalPage() {
                   )}
                 </div>
                 <div className="hidden md:flex flex-col text-left">
-                  <span className="text-xs font-bold text-[#1F1F1F] leading-none truncate max-w-[120px]">
+                  <span className="text-xs font-bold text-[#641B38] leading-none truncate max-w-[120px]">
                     {studentName}
                   </span>
-                  <span className="text-[10px] font-semibold text-[#00543d] mt-0.5 leading-none">
+                  <span className="text-[10px] font-semibold text-[#641B38] mt-0.5 leading-none">
                     Student
                   </span>
                 </div>
@@ -436,21 +436,21 @@ export default function StudentPortalPage() {
               {userMenuOpen && (
                 <div className="absolute right-0 mt-2 w-52 rounded-2xl bg-white border border-[#E5E7EB] shadow-[0_12px_36px_rgba(0,0,0,0.12)] p-2 z-50 animate-in fade-in zoom-in-95 text-xs">
                   <div className="px-3 py-2 border-b border-[#E5E7EB] mb-1">
-                    <p className="font-bold text-[#1F1F1F] truncate">{studentName}</p>
+                    <p className="font-bold text-[#641B38] truncate">{studentName}</p>
                     <p className="text-[11px] text-[#A08B94] truncate">{account?.email || 'Student Portal'}</p>
                   </div>
                   <button
                     onClick={() => { openTab('profile'); setUserMenuOpen(false); }}
-                    className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-[#1F1F1F] hover:bg-[#F3F5FB] transition-colors"
+                    className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-[#641B38] hover:bg-[#F3F5FB] transition-colors"
                   >
-                    <User className="w-3.5 h-3.5 text-[#00543d]" />
+                    <User className="w-3.5 h-3.5 text-[#641B38]" />
                     <span>My Profile</span>
                   </button>
                   <button
                     onClick={() => { openTab('settings'); setUserMenuOpen(false); }}
-                    className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-[#1F1F1F] hover:bg-[#F3F5FB] transition-colors"
+                    className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-[#641B38] hover:bg-[#F3F5FB] transition-colors"
                   >
-                    <Settings className="w-3.5 h-3.5 text-[#00543d]" />
+                    <Settings className="w-3.5 h-3.5 text-[#641B38]" />
                     <span>Account Settings</span>
                   </button>
                   <div className="border-t border-[#E5E7EB] my-1" />
@@ -483,7 +483,7 @@ export default function StudentPortalPage() {
           <div className="flex flex-col gap-6">
             {/* Mobile close toggle */}
             <div className="flex items-center justify-between lg:hidden pb-2 border-b border-[#E5E7EB]">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#1F1F1F]">Menu</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-[#641B38]">Menu</span>
               <button onClick={() => setSidebarOpen(false)} className="p-1 rounded-lg text-[#A08B94] hover:text-black">
                 <X className="w-5 h-5" />
               </button>
@@ -573,10 +573,10 @@ export default function StudentPortalPage() {
               {/* 1. Welcome Greeting Header */}
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-[#E5E7EB]">
                 <div>
-                  <h1 className="font-sans text-2xl sm:text-3xl font-bold tracking-tight text-[#1F1F1F]">
+                  <h1 className="font-sans text-2xl sm:text-3xl font-bold tracking-tight text-[#641B38]">
                     {greeting}, {studentName}
                   </h1>
-                  <p className="text-xs sm:text-sm text-[#565656] mt-0.5">
+                  <p className="text-xs sm:text-sm text-[#30262B] mt-0.5">
                     Keep learning, keep growing. You&rsquo;re doing great!
                   </p>
                 </div>
@@ -594,7 +594,7 @@ export default function StudentPortalPage() {
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5">
                 {/* Metric 1: My Courses */}
                 <DashboardMetricCard
-                  icon={<BookOpen className="w-5 h-5 text-[#00543d]" />}
+                  icon={<BookOpen className="w-5 h-5 text-[#641B38]" />}
                   iconBg="bg-[#E6F4EA]"
                   title="My Courses"
                   value={courses.length}
@@ -638,8 +638,8 @@ export default function StudentPortalPage() {
 
                 {/* Metric 5: Profile Progress */}
                 <DashboardMetricCard
-                  icon={<User className="w-5 h-5 text-[#B14B6C]" />}
-                  iconBg="bg-[#FBEAF0]"
+                  icon={<User className="w-5 h-5 text-[#B83268]" />}
+                  iconBg="bg-[#F8EDF1]"
                   title="Profile Progress"
                   value={`${profileProgress}%`}
                   subtitle="Complete Your Profile"
@@ -656,14 +656,14 @@ export default function StudentPortalPage() {
                   <div className="bg-white rounded-2xl border border-[#E5E7EB] p-5 shadow-xs">
                     <div className="flex items-center justify-between pb-3 mb-4 border-b border-[#E5E7EB]">
                       <div className="flex items-center gap-2">
-                        <BookOpen className="w-4 h-4 text-[#00543d]" />
-                        <h2 className="text-sm sm:text-base font-bold text-[#1F1F1F]">
+                        <BookOpen className="w-4 h-4 text-[#641B38]" />
+                        <h2 className="text-sm sm:text-base font-bold text-[#641B38]">
                           My Courses
                         </h2>
                       </div>
                       <button
                         onClick={() => openTab('courses')}
-                        className="text-xs font-semibold text-[#00543d] hover:underline flex items-center gap-1"
+                        className="text-xs font-semibold text-[#641B38] hover:underline flex items-center gap-1"
                       >
                         <span>View All Courses</span>
                         <ChevronRight className="w-3.5 h-3.5" />
@@ -677,7 +677,7 @@ export default function StudentPortalPage() {
                           <p>You have not enrolled in any programmes yet.</p>
                           <button
                             onClick={() => openTab('courses')}
-                            className="mt-3 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#00543d] text-white text-xs font-semibold hover:bg-[#004230]"
+                            className="mt-3 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#641B38] text-white text-xs font-semibold hover:bg-[#641B38]"
                           >
                             Explore Courses
                           </button>
@@ -686,11 +686,11 @@ export default function StudentPortalPage() {
                         courses.map((c, idx) => (
                           <div
                             key={c.course_id || idx}
-                            className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl border border-[#E5E7EB] hover:border-[#00543d]/40 hover:bg-[#FBFBFC] transition-all bg-white"
+                            className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl border border-[#E5E7EB] hover:border-[#641B38]/40 hover:bg-[#FBFBFC] transition-all bg-white"
                           >
                             {/* Course Left: Thumbnail + Title + Meta */}
                             <div className="flex items-start gap-3.5 min-w-0">
-                              <div className="relative w-12 h-12 rounded-xl bg-[#1F1F1F] text-white flex items-center justify-center shrink-0 overflow-hidden shadow-2xs">
+                              <div className="relative w-12 h-12 rounded-xl bg-[#641B38] text-white flex items-center justify-center shrink-0 overflow-hidden shadow-2xs">
                                 {c.featured_image ? (
                                   <Image src={c.featured_image} alt={c.title} fill className="object-cover" />
                                 ) : (
@@ -699,10 +699,10 @@ export default function StudentPortalPage() {
                               </div>
                               <div className="flex flex-col min-w-0">
                                 <div className="flex items-center gap-2 flex-wrap">
-                                  <h3 className="text-xs sm:text-sm font-bold text-[#1F1F1F] truncate">
+                                  <h3 className="text-xs sm:text-sm font-bold text-[#641B38] truncate">
                                     {c.title}
                                   </h3>
-                                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#E6F4EA] text-[#00543d]">
+                                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#E6F4EA] text-[#641B38]">
                                     In Progress
                                   </span>
                                 </div>
@@ -713,11 +713,11 @@ export default function StudentPortalPage() {
                                 <div className="flex items-center gap-2 mt-2 w-full max-w-xs">
                                   <div className="flex-1 h-1.5 rounded-full bg-[#E5E7EB] overflow-hidden">
                                     <div
-                                      className="h-full bg-[#00543d] rounded-full"
+                                      className="h-full bg-[#641B38] rounded-full"
                                       style={{ width: `${(idx * 25 + 45) % 100}%` }}
                                     />
                                   </div>
-                                  <span className="text-[10px] font-bold text-[#565656]">
+                                  <span className="text-[10px] font-bold text-[#30262B]">
                                     {(idx * 25 + 45) % 100}%
                                   </span>
                                 </div>
@@ -728,13 +728,13 @@ export default function StudentPortalPage() {
                             <div className="flex items-center gap-2 self-end sm:self-auto shrink-0">
                               <Link
                                 href={`/student/courses/${c.course_id}`}
-                                className="px-4 py-2 rounded-xl bg-[#00543d] hover:bg-[#004230] text-white text-xs font-bold transition-all shadow-xs"
+                                className="px-4 py-2 rounded-xl bg-[#641B38] hover:bg-[#641B38] text-white text-xs font-bold transition-all shadow-xs"
                               >
                                 Continue
                               </Link>
                               <Link
                                 href={`/student/courses/${c.course_id}`}
-                                className="px-3 py-2 text-xs font-semibold text-[#687587] hover:text-[#1F1F1F]"
+                                className="px-3 py-2 text-xs font-semibold text-[#687587] hover:text-[#641B38]"
                               >
                                 View Details →
                               </Link>
@@ -749,14 +749,14 @@ export default function StudentPortalPage() {
                   <div className="bg-white rounded-2xl border border-[#E5E7EB] p-5 shadow-xs">
                     <div className="flex items-center justify-between pb-3 mb-4 border-b border-[#E5E7EB]">
                       <div className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4 text-[#00543d]" />
-                        <h2 className="text-sm sm:text-base font-bold text-[#1F1F1F]">
+                        <Calendar className="w-4 h-4 text-[#641B38]" />
+                        <h2 className="text-sm sm:text-base font-bold text-[#641B38]">
                           Upcoming Schedule
                         </h2>
                       </div>
                       <button
                         onClick={() => openTab('attendance')}
-                        className="text-xs font-semibold text-[#00543d] hover:underline flex items-center gap-1"
+                        className="text-xs font-semibold text-[#641B38] hover:underline flex items-center gap-1"
                       >
                         <span>View Calendar</span>
                         <ChevronRight className="w-3.5 h-3.5" />
@@ -806,8 +806,8 @@ export default function StudentPortalPage() {
                   {/* Card: Quick Actions (2x2 Grid from Reference Image 3) */}
                   <div className="bg-white rounded-2xl border border-[#E5E7EB] p-5 shadow-xs">
                     <div className="flex items-center gap-2 pb-3 mb-4 border-b border-[#E5E7EB]">
-                      <Zap className="w-4 h-4 text-[#00543d]" />
-                      <h2 className="text-sm sm:text-base font-bold text-[#1F1F1F]">
+                      <Zap className="w-4 h-4 text-[#641B38]" />
+                      <h2 className="text-sm sm:text-base font-bold text-[#641B38]">
                         Quick Actions
                       </h2>
                     </div>
@@ -815,42 +815,42 @@ export default function StudentPortalPage() {
                     <div className="grid grid-cols-2 gap-2.5">
                       <button
                         onClick={() => openTab('courses')}
-                        className="p-3.5 rounded-xl border border-[#E5E7EB] hover:border-[#00543d] hover:bg-[#F7F8FA] transition-all flex flex-col items-center text-center gap-2 group"
+                        className="p-3.5 rounded-xl border border-[#E5E7EB] hover:border-[#641B38] hover:bg-[#F7F8FA] transition-all flex flex-col items-center text-center gap-2 group"
                       >
-                        <div className="w-9 h-9 rounded-xl bg-[#E6F4EA] flex items-center justify-center text-[#00543d] group-hover:scale-110 transition-transform">
+                        <div className="w-9 h-9 rounded-xl bg-[#E6F4EA] flex items-center justify-center text-[#641B38] group-hover:scale-110 transition-transform">
                           <BookOpen className="w-4 h-4" />
                         </div>
-                        <span className="text-xs font-bold text-[#1F1F1F]">View My Courses</span>
+                        <span className="text-xs font-bold text-[#641B38]">View My Courses</span>
                       </button>
 
                       <button
                         onClick={() => openTab('assignments')}
-                        className="p-3.5 rounded-xl border border-[#E5E7EB] hover:border-[#00543d] hover:bg-[#F7F8FA] transition-all flex flex-col items-center text-center gap-2 group"
+                        className="p-3.5 rounded-xl border border-[#E5E7EB] hover:border-[#641B38] hover:bg-[#F7F8FA] transition-all flex flex-col items-center text-center gap-2 group"
                       >
                         <div className="w-9 h-9 rounded-xl bg-amber-50 flex items-center justify-center text-amber-700 group-hover:scale-110 transition-transform">
                           <FileText className="w-4 h-4" />
                         </div>
-                        <span className="text-xs font-bold text-[#1F1F1F]">Submit Assignment</span>
+                        <span className="text-xs font-bold text-[#641B38]">Submit Assignment</span>
                       </button>
 
                       <button
                         onClick={() => openTab('attendance')}
-                        className="p-3.5 rounded-xl border border-[#E5E7EB] hover:border-[#00543d] hover:bg-[#F7F8FA] transition-all flex flex-col items-center text-center gap-2 group"
+                        className="p-3.5 rounded-xl border border-[#E5E7EB] hover:border-[#641B38] hover:bg-[#F7F8FA] transition-all flex flex-col items-center text-center gap-2 group"
                       >
                         <div className="w-9 h-9 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-700 group-hover:scale-110 transition-transform">
                           <CalendarCheck className="w-4 h-4" />
                         </div>
-                        <span className="text-xs font-bold text-[#1F1F1F]">Mark Attendance</span>
+                        <span className="text-xs font-bold text-[#641B38]">Mark Attendance</span>
                       </button>
 
                       <button
                         onClick={() => openTab('certificates')}
-                        className="p-3.5 rounded-xl border border-[#E5E7EB] hover:border-[#B14B6C] hover:bg-[#F7F8FA] transition-all flex flex-col items-center text-center gap-2 group cursor-pointer"
+                        className="p-3.5 rounded-xl border border-[#E5E7EB] hover:border-[#B83268] hover:bg-[#F7F8FA] transition-all flex flex-col items-center text-center gap-2 group cursor-pointer"
                       >
-                        <div className="w-9 h-9 rounded-xl bg-[#FBEAF0] flex items-center justify-center text-[#B14B6C] group-hover:scale-110 transition-transform">
+                        <div className="w-9 h-9 rounded-xl bg-[#F8EDF1] flex items-center justify-center text-[#B83268] group-hover:scale-110 transition-transform">
                           <Download className="w-4 h-4" />
                         </div>
-                        <span className="text-xs font-bold text-[#1F1F1F]">Download Certificate</span>
+                        <span className="text-xs font-bold text-[#641B38]">Download Certificate</span>
                       </button>
                     </div>
                   </div>
@@ -859,14 +859,14 @@ export default function StudentPortalPage() {
                   <div className="bg-white rounded-2xl border border-[#E5E7EB] p-5 shadow-xs">
                     <div className="flex items-center justify-between pb-3 mb-4 border-b border-[#E5E7EB]">
                       <div className="flex items-center gap-2">
-                        <Clock className="w-4 h-4 text-[#00543d]" />
-                        <h2 className="text-sm sm:text-base font-bold text-[#1F1F1F]">
+                        <Clock className="w-4 h-4 text-[#641B38]" />
+                        <h2 className="text-sm sm:text-base font-bold text-[#641B38]">
                           Recent Activity
                         </h2>
                       </div>
                       <button
                         onClick={() => openTab('grades')}
-                        className="text-xs font-semibold text-[#00543d] hover:underline"
+                        className="text-xs font-semibold text-[#641B38] hover:underline"
                       >
                         View All →
                       </button>
@@ -881,8 +881,8 @@ export default function StudentPortalPage() {
                         time="2 hours ago"
                       />
                       <ActivityTimelineItem
-                        icon={<PlayCircle className="w-3.5 h-3.5 text-[#B14B6C]" />}
-                        iconBg="bg-[#FBEAF0]"
+                        icon={<PlayCircle className="w-3.5 h-3.5 text-[#B83268]" />}
+                        iconBg="bg-[#F8EDF1]"
                         title="New lesson available"
                         detail="Ultrasonic Testing Calibration Procedure"
                         time="1 day ago"
@@ -911,8 +911,8 @@ export default function StudentPortalPage() {
                 {/* Progress Gauge Card */}
                 <div className="bg-white rounded-2xl border border-[#E5E7EB] p-5 shadow-xs flex flex-col justify-between">
                   <div>
-                    <h3 className="text-xs font-bold uppercase tracking-wider text-[#1F1F1F] mb-4 flex items-center gap-2">
-                      <GraduationCap className="w-4 h-4 text-[#00543d]" />
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-[#641B38] mb-4 flex items-center gap-2">
+                      <GraduationCap className="w-4 h-4 text-[#641B38]" />
                       <span>Your Progress</span>
                     </h3>
 
@@ -928,7 +928,7 @@ export default function StudentPortalPage() {
                             d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                           />
                           <path
-                            className="text-[#00543d]"
+                            className="text-[#641B38]"
                             strokeDasharray="35, 100"
                             strokeWidth="3.5"
                             strokeLinecap="round"
@@ -938,12 +938,12 @@ export default function StudentPortalPage() {
                           />
                         </svg>
                         <div className="absolute inset-0 flex items-center justify-center">
-                          <span className="text-sm font-extrabold text-[#1F1F1F]">35%</span>
+                          <span className="text-sm font-extrabold text-[#641B38]">35%</span>
                         </div>
                       </div>
 
                       <div className="flex flex-col">
-                        <span className="text-xs font-bold text-[#1F1F1F]">
+                        <span className="text-xs font-bold text-[#641B38]">
                           Overall Course Completion
                         </span>
                         <span className="text-[11px] text-[#A08B94] mt-0.5">
@@ -955,7 +955,7 @@ export default function StudentPortalPage() {
 
                   <button
                     onClick={() => openTab('grades')}
-                    className="mt-4 pt-3 border-t border-[#E5E7EB] text-left text-xs font-bold text-[#00543d] hover:underline"
+                    className="mt-4 pt-3 border-t border-[#E5E7EB] text-left text-xs font-bold text-[#641B38] hover:underline"
                   >
                     View Progress Report →
                   </button>
@@ -965,11 +965,11 @@ export default function StudentPortalPage() {
                 <div className="bg-white rounded-2xl border border-[#E5E7EB] p-5 shadow-xs flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between pb-2 mb-3 border-b border-[#E5E7EB]">
-                      <h3 className="text-xs font-bold uppercase tracking-wider text-[#1F1F1F] flex items-center gap-1.5">
-                        <Bell className="w-3.5 h-3.5 text-[#00543d]" />
+                      <h3 className="text-xs font-bold uppercase tracking-wider text-[#641B38] flex items-center gap-1.5">
+                        <Bell className="w-3.5 h-3.5 text-[#641B38]" />
                         <span>Recent Announcements</span>
                       </h3>
-                      <button onClick={() => openTab('courses')} className="text-[11px] text-[#00543d] font-semibold hover:underline">
+                      <button onClick={() => openTab('courses')} className="text-[11px] text-[#641B38] font-semibold hover:underline">
                         View All →
                       </button>
                     </div>
@@ -978,8 +978,8 @@ export default function StudentPortalPage() {
                       {announcements.length > 0 ? (
                         announcements.slice(0, 3).map((ann) => (
                           <div key={ann.id} className="pb-2 border-b border-[#E5E7EB]/60 last:border-0 last:pb-0">
-                            <p className="font-bold text-[#1F1F1F] line-clamp-1">{ann.title}</p>
-                            <p className="text-[11px] text-[#565656] line-clamp-1 mt-0.5">{ann.content}</p>
+                            <p className="font-bold text-[#641B38] line-clamp-1">{ann.title}</p>
+                            <p className="text-[11px] text-[#30262B] line-clamp-1 mt-0.5">{ann.content}</p>
                             <span className="text-[10px] text-[#A08B94] mt-1 block">
                               {new Date(ann.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
                             </span>
@@ -988,15 +988,15 @@ export default function StudentPortalPage() {
                       ) : (
                         <>
                           <div className="pb-2 border-b border-[#E5E7EB]/60">
-                            <p className="font-bold text-[#1F1F1F]">New Course Added: Revit MEP 3D BIM</p>
+                            <p className="font-bold text-[#641B38]">New Course Added: Revit MEP 3D BIM</p>
                             <span className="text-[10px] text-[#A08B94] mt-0.5 block">24 Oct 2025</span>
                           </div>
                           <div className="pb-2 border-b border-[#E5E7EB]/60">
-                            <p className="font-bold text-[#1F1F1F]">Practical Lab Flaw Detector Calibration</p>
+                            <p className="font-bold text-[#641B38]">Practical Lab Flaw Detector Calibration</p>
                             <span className="text-[10px] text-[#A08B94] mt-0.5 block">22 Oct 2025</span>
                           </div>
                           <div>
-                            <p className="font-bold text-[#1F1F1F]">Exam Submission &amp; Credential Verification</p>
+                            <p className="font-bold text-[#641B38]">Exam Submission &amp; Credential Verification</p>
                             <span className="text-[10px] text-[#A08B94] mt-0.5 block">20 Oct 2025</span>
                           </div>
                         </>
@@ -1006,7 +1006,7 @@ export default function StudentPortalPage() {
                 </div>
 
                 {/* Inspirational Ad Banner Card */}
-                <div className="rounded-2xl p-6 bg-gradient-to-br from-[#7A2E49] via-[#B14B6C] to-[#E7A0B6] text-white flex flex-col justify-between shadow-xs relative overflow-hidden">
+                <div className="rounded-2xl p-6 bg-[#641B38] text-white flex flex-col justify-between shadow-xs relative overflow-hidden">
                   <div
                     aria-hidden="true"
                     className="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-2xl pointer-events-none"
@@ -1025,7 +1025,7 @@ export default function StudentPortalPage() {
 
                   <Link
                     href="/courses"
-                    className="mt-4 self-start inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white text-[#B14B6C] hover:bg-[#F3F5FB] text-xs font-bold transition-all shadow-sm active:scale-98"
+                    className="mt-4 self-start inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white text-[#B83268] hover:bg-[#F3F5FB] text-xs font-bold transition-all shadow-sm active:scale-98"
                   >
                     <span>Explore Programmes</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -1042,12 +1042,12 @@ export default function StudentPortalPage() {
             <div className="flex flex-col gap-6">
               <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB]">
                 <div>
-                  <h1 className="text-xl font-bold text-[#1F1F1F]">My Enrolled Courses</h1>
+                  <h1 className="text-xl font-bold text-[#641B38]">My Enrolled Courses</h1>
                   <p className="text-xs text-[#A08B94] mt-0.5">Manage your active qualifications and syllabus progression.</p>
                 </div>
                 <button
                   onClick={() => openTab('dashboard')}
-                  className="text-xs font-semibold text-[#00543d] hover:underline"
+                  className="text-xs font-semibold text-[#641B38] hover:underline"
                 >
                   ← Back to Dashboard
                 </button>
@@ -1078,12 +1078,12 @@ export default function StudentPortalPage() {
             <div className="flex flex-col gap-6">
               <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB]">
                 <div>
-                  <h1 className="text-xl font-bold text-[#1F1F1F]">Assignments &amp; Course Materials</h1>
+                  <h1 className="text-xl font-bold text-[#641B38]">Assignments &amp; Course Materials</h1>
                   <p className="text-xs text-[#A08B94] mt-0.5">Access lecture notes, assignments, and practical flaw test manuals.</p>
                 </div>
                 <button
                   onClick={() => openTab('dashboard')}
-                  className="text-xs font-semibold text-[#00543d] hover:underline"
+                  className="text-xs font-semibold text-[#641B38] hover:underline"
                 >
                   ← Back to Dashboard
                 </button>
@@ -1092,7 +1092,7 @@ export default function StudentPortalPage() {
               {notes.length === 0 ? (
                 <div className="bg-white rounded-2xl border border-[#E5E7EB] p-8 text-center text-xs text-[#A08B94]">
                   <FileText className="w-8 h-8 text-[#A08B94] mx-auto mb-2" />
-                  <p className="font-semibold text-[#1F1F1F]">No pending assignments or notes.</p>
+                  <p className="font-semibold text-[#641B38]">No pending assignments or notes.</p>
                   <p className="mt-1">Course notes appear here as soon as published by your instructors.</p>
                 </div>
               ) : (
@@ -1105,12 +1105,12 @@ export default function StudentPortalPage() {
 
               {videos.length > 0 && (
                 <div className="mt-6 flex flex-col gap-4">
-                  <h3 className="text-sm font-bold text-[#1F1F1F]">Video Lesson Previews</h3>
+                  <h3 className="text-sm font-bold text-[#641B38]">Video Lesson Previews</h3>
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                     {videos.map((v) => (
                       <div key={v.id} className="border border-[#E5E7EB] rounded-2xl p-4 bg-white flex flex-col gap-3">
                         <div className="flex items-start justify-between gap-3">
-                          <span className="text-xs font-bold text-[#1F1F1F]">{v.title}</span>
+                          <span className="text-xs font-bold text-[#641B38]">{v.title}</span>
                           {v.duration && (
                             <span className="text-[11px] text-[#A08B94] flex items-center gap-1">
                               <Clock className="w-3 h-3" /> {v.duration}
@@ -1133,12 +1133,12 @@ export default function StudentPortalPage() {
             <div className="flex flex-col gap-6">
               <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB]">
                 <div>
-                  <h1 className="text-xl font-bold text-[#1F1F1F]">Student Attendance</h1>
+                  <h1 className="text-xl font-bold text-[#641B38]">Student Attendance</h1>
                   <p className="text-xs text-[#A08B94] mt-0.5">View your punch history and verified classroom attendance record.</p>
                 </div>
                 <button
                   onClick={() => openTab('dashboard')}
-                  className="text-xs font-semibold text-[#00543d] hover:underline"
+                  className="text-xs font-semibold text-[#641B38] hover:underline"
                 >
                   ← Back to Dashboard
                 </button>
@@ -1159,12 +1159,12 @@ export default function StudentPortalPage() {
             <div className="flex flex-col gap-6">
               <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB]">
                 <div>
-                  <h1 className="text-xl font-bold text-[#1F1F1F]">Grades &amp; Study Hours</h1>
+                  <h1 className="text-xl font-bold text-[#641B38]">Grades &amp; Study Hours</h1>
                   <p className="text-xs text-[#A08B94] mt-0.5">Track accredited study hours, inspection practicals, and module grades.</p>
                 </div>
                 <button
                   onClick={() => openTab('dashboard')}
-                  className="text-xs font-semibold text-[#00543d] hover:underline"
+                  className="text-xs font-semibold text-[#641B38] hover:underline"
                 >
                   ← Back to Dashboard
                 </button>
@@ -1188,12 +1188,12 @@ export default function StudentPortalPage() {
             <div className="flex flex-col gap-6">
               <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB]">
                 <div>
-                  <h1 className="text-xl font-bold text-[#1F1F1F]">Certificates &amp; Credentials</h1>
+                  <h1 className="text-xl font-bold text-[#641B38]">Certificates &amp; Credentials</h1>
                   <p className="text-xs text-[#A08B94] mt-0.5">Download verifiable qualifications and digital credential records.</p>
                 </div>
                 <button
                   onClick={() => openTab('dashboard')}
-                  className="text-xs font-semibold text-[#00543d] hover:underline"
+                  className="text-xs font-semibold text-[#641B38] hover:underline"
                 >
                   ← Back to Dashboard
                 </button>
@@ -1218,7 +1218,7 @@ export default function StudentPortalPage() {
             <div className="flex flex-col gap-6">
               <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB]">
                 <div>
-                  <h1 className="text-xl font-bold text-[#1F1F1F]">
+                  <h1 className="text-xl font-bold text-[#641B38]">
                     {tab === 'profile' ? 'Student Profile' : 'Account Settings'}
                   </h1>
                   <p className="text-xs text-[#A08B94] mt-0.5">
@@ -1227,7 +1227,7 @@ export default function StudentPortalPage() {
                 </div>
                 <button
                   onClick={() => openTab('dashboard')}
-                  className="text-xs font-semibold text-[#00543d] hover:underline"
+                  className="text-xs font-semibold text-[#641B38] hover:underline"
                 >
                   ← Back to Dashboard
                 </button>
@@ -1246,13 +1246,13 @@ export default function StudentPortalPage() {
       <footer className="bg-white border-t border-[#E5E7EB] py-4 px-6 text-xs text-[#687587] mt-auto">
         <div className="max-w-[1600px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-[#1F1F1F]">Savvy Training Institute</span>
+            <span className="font-semibold text-[#641B38]">Savvy Training Institute</span>
             <span className="text-[#A08B94]">|</span>
             <span>Empowering Learners. Building Futures.</span>
           </div>
           <div>
             <span>Designed and Maintained by </span>
-            <a href="https://webnxt.co/" target="_blank" rel="noopener noreferrer" className="font-bold text-[#00543d] hover:underline">
+            <a href="https://webnxt.co/" target="_blank" rel="noopener noreferrer" className="font-bold text-[#641B38] hover:underline">
               WebNxt
             </a>
           </div>
@@ -1288,7 +1288,7 @@ function SidebarNavLink({
       onClick={onClick}
       className={`
         w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer text-left
-        ${active ? 'bg-[#00543d] text-white shadow-xs' : 'text-[#243247] hover:bg-[#F3F5FB] hover:text-[#1F1F1F]'}
+        ${active ? 'bg-[#641B38] text-white shadow-xs' : 'text-[#243247] hover:bg-[#F3F5FB] hover:text-[#641B38]'}
       `}
     >
       <div className="flex items-center gap-3 min-w-0">
@@ -1335,17 +1335,17 @@ function DashboardMetricCard({
         <span className="text-[11px] font-semibold text-[#A08B94] block">
           {title}
         </span>
-        <div className="text-2xl font-extrabold text-[#1F1F1F] tracking-tight mt-0.5">
+        <div className="text-2xl font-extrabold text-[#641B38] tracking-tight mt-0.5">
           {value}
         </div>
-        <span className="text-[11px] font-medium text-[#565656] block mt-0.5">
+        <span className="text-[11px] font-medium text-[#30262B] block mt-0.5">
           {subtitle}
         </span>
       </div>
       <button
         type="button"
         onClick={onAction}
-        className="mt-3 pt-2.5 border-t border-[#E5E7EB]/70 text-left text-[11px] font-bold text-[#00543d] hover:underline flex items-center justify-between group"
+        className="mt-3 pt-2.5 border-t border-[#E5E7EB]/70 text-left text-[11px] font-bold text-[#641B38] hover:underline flex items-center justify-between group"
       >
         <span>{actionText}</span>
       </button>
@@ -1371,12 +1371,12 @@ function ScheduleItem({
   return (
     <div className="flex items-center justify-between gap-3 p-3 rounded-xl border border-[#E5E7EB] hover:bg-[#FBFBFC] transition-colors">
       <div className="flex items-center gap-3 min-w-0">
-        <div className="w-11 h-11 rounded-xl bg-[#F7F8FA] border border-[#E5E7EB] flex flex-col items-center justify-center shrink-0 text-[#1F1F1F]">
+        <div className="w-11 h-11 rounded-xl bg-[#F7F8FA] border border-[#E5E7EB] flex flex-col items-center justify-center shrink-0 text-[#641B38]">
           <span className="text-xs font-extrabold leading-none">{day}</span>
           <span className="text-[9px] uppercase font-bold text-[#A08B94] leading-tight mt-0.5">{month}</span>
         </div>
         <div className="flex flex-col min-w-0">
-          <span className="text-xs font-bold text-[#1F1F1F] truncate">{title}</span>
+          <span className="text-xs font-bold text-[#641B38] truncate">{title}</span>
           <span className="text-[11px] text-[#A08B94] mt-0.5">{time} · {type}</span>
         </div>
       </div>
@@ -1411,7 +1411,7 @@ function ActivityTimelineItem({
         {icon}
       </div>
       <div className="flex flex-col min-w-0 flex-1">
-        <span className="text-xs font-bold text-[#1F1F1F] leading-snug">{title}</span>
+        <span className="text-xs font-bold text-[#641B38] leading-snug">{title}</span>
         <span className="text-[11px] text-[#687587] truncate">{detail}</span>
       </div>
       <span className="text-[10px] text-[#A08B94] shrink-0 whitespace-nowrap">{time}</span>
@@ -1439,7 +1439,7 @@ function CourseSection({
     <section className="bg-white rounded-2xl border border-[#E5E7EB] overflow-hidden shadow-xs">
       <header className="px-5 py-4 border-b border-[#E5E7EB] flex flex-wrap items-start justify-between gap-3">
         <div className="flex flex-col gap-1">
-          <h2 className="text-base font-bold text-[#1F1F1F]">{course.title}</h2>
+          <h2 className="text-base font-bold text-[#641B38]">{course.title}</h2>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-[#A08B94]">
             <span className="capitalize">{course.status}</span>
             {course.duration && <span>{course.duration}</span>}
@@ -1462,14 +1462,14 @@ function CourseSection({
 
         {videos.length > 0 && (
           <div className="flex flex-col gap-3">
-            <h3 className="text-xs font-bold text-[#1F1F1F] uppercase tracking-wider flex items-center gap-2">
-              <PlayCircle className="w-4 h-4 text-[#B14B6C]" /> Video Lessons
+            <h3 className="text-xs font-bold text-[#641B38] uppercase tracking-wider flex items-center gap-2">
+              <PlayCircle className="w-4 h-4 text-[#B83268]" /> Video Lessons
             </h3>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {videos.map((v) => (
                 <div key={v.id} className="border border-[#E5E7EB] rounded-xl p-4 bg-[#F7F8FA] flex flex-col gap-3">
                   <div className="flex items-start justify-between gap-3">
-                    <span className="text-xs font-bold text-[#1F1F1F]">{v.title}</span>
+                    <span className="text-xs font-bold text-[#641B38]">{v.title}</span>
                     {v.duration && (
                       <span className="text-[11px] text-[#A08B94] flex items-center gap-1">
                         <Clock className="w-3 h-3" /> {v.duration}
@@ -1485,8 +1485,8 @@ function CourseSection({
 
         {notes.length > 0 && (
           <div className="flex flex-col gap-3">
-            <h3 className="text-xs font-bold text-[#1F1F1F] uppercase tracking-wider flex items-center gap-2">
-              <FileText className="w-4 h-4 text-[#00543d]" /> Notes &amp; Syllabi
+            <h3 className="text-xs font-bold text-[#641B38] uppercase tracking-wider flex items-center gap-2">
+              <FileText className="w-4 h-4 text-[#641B38]" /> Notes &amp; Syllabi
             </h3>
             <div className="flex flex-col gap-2">
               {notes.map((n) => <NoteRow key={n.id} material={n} />)}
@@ -1513,7 +1513,7 @@ function NoteRow({ material, courseName }: { material: CourseMaterial; courseNam
               {courseName}
             </span>
           )}
-          <span className="text-xs font-bold text-[#1F1F1F]">{material.title}</span>
+          <span className="text-xs font-bold text-[#641B38]">{material.title}</span>
           {material.description && (
             <span className="text-[11px] text-[#A08B94] truncate">{material.description}</span>
           )}
@@ -1547,24 +1547,24 @@ function CertificateCard({ cert, onPreview }: { cert: Certificate; onPreview: ()
       <div className="flex items-start justify-between gap-3">
         <div className="flex flex-col gap-1">
           <span className="text-xs uppercase tracking-wider text-[#A08B94] font-semibold">{cert.course_title}</span>
-          <span className="text-base font-bold text-[#1F1F1F]">{cert.student_name}</span>
+          <span className="text-base font-bold text-[#641B38]">{cert.student_name}</span>
         </div>
-        <span className={`shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full ${cert.revoked_at ? 'bg-red-50 text-red-700' : 'bg-[#E6F4EA] text-[#00543d]'}`}>
+        <span className={`shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full ${cert.revoked_at ? 'bg-red-50 text-red-700' : 'bg-[#E6F4EA] text-[#641B38]'}`}>
           {cert.revoked_at ? 'Revoked' : `Grade ${cert.grade}`}
         </span>
       </div>
       <dl className="grid grid-cols-2 gap-y-2 gap-x-3 text-xs">
-        <div><dt className="text-[#A08B94]">Certificate No.</dt><dd className="font-semibold text-[#1F1F1F]">{cert.certificate_no}</dd></div>
-        <div><dt className="text-[#A08B94]">Issued Date</dt><dd className="font-semibold text-[#1F1F1F]">{fmtDate(cert.issue_date)}</dd></div>
-        {cert.expiry_date && <div><dt className="text-[#A08B94]">Valid Until</dt><dd className="font-semibold text-[#1F1F1F]">{fmtDate(cert.expiry_date)}</dd></div>}
-        {cert.instructor_name && <div><dt className="text-[#A08B94]">Examiner</dt><dd className="font-semibold text-[#1F1F1F]">{cert.instructor_name}</dd></div>}
+        <div><dt className="text-[#A08B94]">Certificate No.</dt><dd className="font-semibold text-[#641B38]">{cert.certificate_no}</dd></div>
+        <div><dt className="text-[#A08B94]">Issued Date</dt><dd className="font-semibold text-[#641B38]">{fmtDate(cert.issue_date)}</dd></div>
+        {cert.expiry_date && <div><dt className="text-[#A08B94]">Valid Until</dt><dd className="font-semibold text-[#641B38]">{fmtDate(cert.expiry_date)}</dd></div>}
+        {cert.instructor_name && <div><dt className="text-[#A08B94]">Examiner</dt><dd className="font-semibold text-[#641B38]">{cert.instructor_name}</dd></div>}
       </dl>
       <div className="flex flex-wrap gap-2 mt-auto pt-2 border-t border-[#E5E7EB]">
-        <button onClick={save} disabled={saving || Boolean(cert.revoked_at)} className="px-4 py-2 rounded-xl bg-[#00543d] hover:bg-[#004230] text-white text-xs font-bold flex items-center gap-1.5 transition-all">
+        <button onClick={save} disabled={saving || Boolean(cert.revoked_at)} className="px-4 py-2 rounded-xl bg-[#641B38] hover:bg-[#641B38] text-white text-xs font-bold flex items-center gap-1.5 transition-all">
           {saving ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Download className="w-3.5 h-3.5" />}
           Download
         </button>
-        <button onClick={onPreview} className="px-4 py-2 rounded-xl border border-[#E5E7EB] hover:bg-[#F7F8FA] text-[#1F1F1F] text-xs font-bold flex items-center gap-1.5 transition-all">
+        <button onClick={onPreview} className="px-4 py-2 rounded-xl border border-[#E5E7EB] hover:bg-[#F7F8FA] text-[#641B38] text-xs font-bold flex items-center gap-1.5 transition-all">
           <Printer className="w-3.5 h-3.5" /> Preview &amp; Print
         </button>
       </div>
@@ -1577,10 +1577,10 @@ function CertificatePrint({ cert, onClose }: { cert: Certificate; onClose: () =>
     <div className="fixed inset-0 z-[100] bg-black/60 flex items-center justify-center p-4 overflow-y-auto print:bg-white print:p-0 print:static backdrop-blur-xs">
       <div className="relative w-full max-w-3xl my-auto">
         <div className="flex justify-end gap-2 mb-3 print:hidden">
-          <button onClick={() => window.print()} className="px-4 py-2 rounded-xl bg-[#00543d] text-white text-xs font-bold flex items-center gap-1.5">
+          <button onClick={() => window.print()} className="px-4 py-2 rounded-xl bg-[#641B38] text-white text-xs font-bold flex items-center gap-1.5">
             <Printer className="w-3.5 h-3.5" /> Print
           </button>
-          <button onClick={onClose} className="px-4 py-2 rounded-xl bg-white border border-[#E5E7EB] text-[#1F1F1F] text-xs font-bold flex items-center gap-1.5">
+          <button onClick={onClose} className="px-4 py-2 rounded-xl bg-white border border-[#E5E7EB] text-[#641B38] text-xs font-bold flex items-center gap-1.5">
             <X className="w-3.5 h-3.5" /> Close
           </button>
         </div>

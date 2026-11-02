@@ -1,7 +1,7 @@
 import React from 'react';
 
 /**
- * The institute seal. The enamel is rose; the gold, lettering and monogram stay.
+ * The institute seal. The enamel is burgundy; the gold, lettering and monogram stay.
  */
 export const SavvyLogo: React.FC<{
   tone?: 'ink' | 'light';

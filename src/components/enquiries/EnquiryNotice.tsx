@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { careerAvailability, careerSpecialisms, mentorshipServices } from '@/lib/academy-content';
 
-const fieldClass = 'w-full rounded-xl border border-[#F0E2E7] bg-white px-3 py-2.5 text-sm text-[#1F1F1F] focus:border-[#B14B6C] focus:outline-none focus:ring-2 focus:ring-[#B14B6C]/15';
+const fieldClass = 'w-full rounded-xl border border-[#EAD9E0] bg-white px-3 py-2.5 text-sm text-[#641B38] focus:border-[#B83268] focus:outline-none focus:ring-2 focus:ring-[#B83268]/15';
 
 function Shell({
   title,
@@ -19,14 +19,14 @@ function Shell({
   message: string;
 }) {
   return (
-    <form onSubmit={onSubmit} className="rounded-3xl border border-[#F0E2E7] bg-white p-6 sm:p-8 shadow-sm flex flex-col gap-4">
-      <h2 className="text-xl font-semibold text-[#1F1F1F]">{title}</h2>
+    <form onSubmit={onSubmit} className="rounded-3xl border border-[#EAD9E0] bg-white p-6 sm:p-8 shadow-sm flex flex-col gap-4">
+      <h2 className="text-xl font-semibold text-[#641B38]">{title}</h2>
       <input name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
       {children}
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="mt-2 inline-flex items-center justify-center rounded-full bg-[#B14B6C] px-5 py-3 text-sm font-semibold text-white hover:bg-[#8E3854] disabled:opacity-60"
+        className="mt-2 inline-flex items-center justify-center rounded-full bg-[#B83268] px-5 py-3 text-sm font-semibold text-white hover:bg-[#641B38] disabled:opacity-60"
       >
         {status === 'loading' ? 'Sending…' : 'Submit'}
       </button>
@@ -68,31 +68,31 @@ export function CareerEnquiryForm() {
   return (
     <Shell title="Submit your CV" onSubmit={onSubmit} status={status} message={message}>
       <input type="hidden" name="category" value="career" />
-      <label className="text-sm font-semibold text-[#1F1F1F]">Full name
+      <label className="text-sm font-semibold text-[#641B38]">Full name
         <input name="fullName" required className={`${fieldClass} mt-1`} />
       </label>
-      <label className="text-sm font-semibold text-[#1F1F1F]">Email
+      <label className="text-sm font-semibold text-[#641B38]">Email
         <input name="email" type="email" required className={`${fieldClass} mt-1`} />
       </label>
-      <label className="text-sm font-semibold text-[#1F1F1F]">Contact number <span className="font-normal text-[#687587]">(optional)</span>
+      <label className="text-sm font-semibold text-[#641B38]">Contact number <span className="font-normal text-[#687587]">(optional)</span>
         <input name="phone" className={`${fieldClass} mt-1`} />
       </label>
-      <label className="text-sm font-semibold text-[#1F1F1F]">Location
+      <label className="text-sm font-semibold text-[#641B38]">Location
         <input name="location" required className={`${fieldClass} mt-1`} />
       </label>
-      <label className="text-sm font-semibold text-[#1F1F1F]">Specialism
+      <label className="text-sm font-semibold text-[#641B38]">Specialism
         <select name="specialism" required className={`${fieldClass} mt-1`} defaultValue="">
           <option value="" disabled>Choose a specialism</option>
           {careerSpecialisms.map((item) => <option key={item}>{item}</option>)}
         </select>
       </label>
-      <label className="text-sm font-semibold text-[#1F1F1F]">Availability
+      <label className="text-sm font-semibold text-[#641B38]">Availability
         <select name="availability" required className={`${fieldClass} mt-1`} defaultValue="">
           <option value="" disabled>Choose availability</option>
           {careerAvailability.map((item) => <option key={item}>{item}</option>)}
         </select>
       </label>
-      <label className="text-sm font-semibold text-[#1F1F1F]">CV (PDF or Word, up to 5 MB)
+      <label className="text-sm font-semibold text-[#641B38]">CV (PDF or Word, up to 5 MB)
         <input name="cv" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required className={`${fieldClass} mt-1`} />
       </label>
     </Shell>
@@ -140,22 +140,22 @@ export function MentorshipEnquiryForm() {
 
   return (
     <Shell title="Request support" onSubmit={onSubmit} status={status} message={message}>
-      <label className="text-sm font-semibold text-[#1F1F1F]">Full name
+      <label className="text-sm font-semibold text-[#641B38]">Full name
         <input name="fullName" required className={`${fieldClass} mt-1`} />
       </label>
-      <label className="text-sm font-semibold text-[#1F1F1F]">Email
+      <label className="text-sm font-semibold text-[#641B38]">Email
         <input name="email" type="email" required className={`${fieldClass} mt-1`} />
       </label>
-      <label className="text-sm font-semibold text-[#1F1F1F]">Contact number
+      <label className="text-sm font-semibold text-[#641B38]">Contact number
         <input name="phone" required className={`${fieldClass} mt-1`} />
       </label>
-      <label className="text-sm font-semibold text-[#1F1F1F]">Type of support required
+      <label className="text-sm font-semibold text-[#641B38]">Type of support required
         <select name="supportType" required className={`${fieldClass} mt-1`} defaultValue="">
           <option value="" disabled>I need help with</option>
           {mentorshipServices.map((item) => <option key={item.option}>{item.option}</option>)}
         </select>
       </label>
-      <label className="text-sm font-semibold text-[#1F1F1F]">Business plans or requirements
+      <label className="text-sm font-semibold text-[#641B38]">Business plans or requirements
         <textarea name="message" required rows={5} className={`${fieldClass} mt-1`} />
       </label>
     </Shell>

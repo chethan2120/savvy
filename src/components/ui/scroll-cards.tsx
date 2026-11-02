@@ -44,7 +44,7 @@ const Card: FC<iCardProps> = ({
 				style={{ backgroundColor: color }}
 			>
 				{/* Dark overlay scrim for pristine readability */}
-				<div className="absolute inset-0 bg-[#5C2038]/75 z-10 backdrop-blur-[2px]" />
+				<div className="absolute inset-0 bg-[#641B38]/75 z-10 backdrop-blur-[2px]" />
 
 				<span className="font-bold relative text-4xl sm:text-5xl md:text-6xl mt-4 z-20 text-center">
 					<span

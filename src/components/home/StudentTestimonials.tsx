@@ -50,14 +50,14 @@ export function StudentTestimonials({ testimonials }: { testimonials: PublicTest
   }
 
   return (
-    <section className="border-b border-[#F0E2E7] bg-[#FBF6F8] py-16 sm:py-20" aria-label="Testimonials">
+    <section className="border-b border-[#EAD9E0] bg-[#F8EDF1] py-16 sm:py-20" aria-label="Testimonials">
       <div className="site-container max-w-4xl">
-        <h2 className="text-[#1F1F1F]">Testimonials</h2>
-        <p className="mt-3 max-w-2xl text-[#565656]">
+        <h2 className="text-[#641B38]">Testimonials</h2>
+        <p className="mt-3 max-w-2xl text-[#30262B]">
           Only comments that have been approved are shown here.
         </p>
         {count === 0 || !current ? (
-          <p className="mt-8 rounded-3xl border border-[#F0D5DE] bg-white px-6 py-10 text-[#565656]">
+          <p className="mt-8 rounded-3xl border border-[#EAD9E0] bg-white px-6 py-10 text-[#30262B]">
             Approved student comments will appear here.
           </p>
         ) : (
@@ -77,10 +77,10 @@ export function StudentTestimonials({ testimonials }: { testimonials: PublicTest
             {count > 1 && (
               <div className="mt-5 flex items-center justify-between gap-4">
                 <div className="flex gap-2">
-                  <button type="button" onClick={() => go(-1)} className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#F0D5DE] bg-white text-[#B14B6C]" aria-label="Previous testimonial">
+                  <button type="button" onClick={() => go(-1)} className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#EAD9E0] bg-white text-[#B83268]" aria-label="Previous testimonial">
                     <ChevronLeft className="h-5 w-5" />
                   </button>
-                  <button type="button" onClick={() => go(1)} className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#F0D5DE] bg-white text-[#B14B6C]" aria-label="Next testimonial">
+                  <button type="button" onClick={() => go(1)} className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#EAD9E0] bg-white text-[#B83268]" aria-label="Next testimonial">
                     <ChevronRight className="h-5 w-5" />
                   </button>
                 </div>
@@ -92,7 +92,7 @@ export function StudentTestimonials({ testimonials }: { testimonials: PublicTest
                       aria-label={`Show testimonial ${itemIndex + 1}`}
                       aria-current={itemIndex === index}
                       onClick={() => setIndex(itemIndex)}
-                      className={`h-2.5 rounded-full ${itemIndex === index ? 'w-8 bg-[#B14B6C]' : 'w-2.5 bg-[#c5d4ea]'}`}
+                      className={`h-2.5 rounded-full ${itemIndex === index ? 'w-8 bg-[#B83268]' : 'w-2.5 bg-[#c5d4ea]'}`}
                     />
                   ))}
                 </div>
@@ -118,7 +118,7 @@ function TestimonialCard({
   const rating = item.rating && item.rating >= 1 && item.rating <= 5 ? item.rating : null;
   return (
     <article
-      className={`rounded-3xl border border-[#F0D5DE] bg-white p-6 shadow-sm sm:p-8 ${reducedMotion ? '' : 'course-detail-in'}`}
+      className={`rounded-3xl border border-[#EAD9E0] bg-white p-6 shadow-sm sm:p-8 ${reducedMotion ? '' : 'course-detail-in'}`}
       onTouchStart={(event) => setStartX(event.changedTouches[0]?.clientX ?? null)}
       onTouchEnd={(event) => {
         if (startX == null) return;
@@ -127,22 +127,22 @@ function TestimonialCard({
       }}
     >
       <div className="flex items-center gap-4">
-        <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#FBEAF0] text-sm font-semibold text-[#B14B6C]" aria-hidden="true">
+        <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#F8EDF1] text-sm font-semibold text-[#B83268]" aria-hidden="true">
           {initials(item.name)}
         </span>
         <div>
-          <p className="text-lg font-semibold text-[#1F1F1F]">{item.name}</p>
-          {item.course && <p className="text-sm text-[#565656]">{item.course}</p>}
+          <p className="text-lg font-semibold text-[#641B38]">{item.name}</p>
+          {item.course && <p className="text-sm text-[#30262B]">{item.course}</p>}
         </div>
       </div>
       {rating && (
-        <p className="mt-4 flex items-center gap-1 text-[#B14B6C]" aria-label={`${rating} out of 5 stars`}>
+        <p className="mt-4 flex items-center gap-1 text-[#B83268]" aria-label={`${rating} out of 5 stars`}>
           {Array.from({ length: rating }, (_, star) => (
-            <Star key={star} className="h-4 w-4 fill-[#B14B6C]" aria-hidden="true" />
+            <Star key={star} className="h-4 w-4 fill-[#B83268]" aria-hidden="true" />
           ))}
         </p>
       )}
-      <p className="mt-4 text-base leading-relaxed text-[#1F1F1F]">{item.quote}</p>
+      <p className="mt-4 text-base leading-relaxed text-[#641B38]">{item.quote}</p>
     </article>
   );
 }

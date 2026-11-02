@@ -64,7 +64,7 @@ export default function BlogDetailsPage({ params }: BlogDetailsPageProps) {
   return (
     <div className="bg-white pb-24">
       {/* Article Header */}
-      <section className="bg-gradient-to-br from-[#7A2E49] via-[#B14B6C] to-[#E7A0B6] text-white pt-12 pb-16 border-b border-[#B14B6C]/30">
+      <section className="bg-[#641B38] text-white pt-12 pb-16 border-b border-[#B83268]/30">
         <div className="site-container max-w-3xl">
           <Link
             href="/blogs"
@@ -99,20 +99,20 @@ export default function BlogDetailsPage({ params }: BlogDetailsPageProps) {
 
       {/* Article Content */}
       <div className="site-container max-w-3xl mt-12">
-        <article className="bg-white rounded-3xl p-8 sm:p-12 border border-[#F0E2E7] shadow-xs">
-          <div className="prose prose-sm sm:prose lg:prose-lg text-[#565656] leading-relaxed max-w-none whitespace-pre-line font-normal">
+        <article className="bg-white rounded-3xl p-8 sm:p-12 border border-[#EAD9E0] shadow-xs">
+          <div className="prose prose-sm sm:prose lg:prose-lg text-[#30262B] leading-relaxed max-w-none whitespace-pre-line font-normal">
             {post.content}
           </div>
 
           {/* Author Box */}
-          <div className="mt-12 pt-8 border-t border-[#F0E2E7] flex items-center gap-4">
-            <div className="h-12 w-12 rounded-full bg-[#B14B6C] text-white font-bold text-lg flex items-center justify-center shrink-0">
+          <div className="mt-12 pt-8 border-t border-[#EAD9E0] flex items-center gap-4">
+            <div className="h-12 w-12 rounded-full bg-[#B83268] text-white font-bold text-lg flex items-center justify-center shrink-0">
               {post.author_name.slice(0, 1)}
             </div>
             <div>
               <div className="text-xs text-[#A08B94]">Article Contributor</div>
-              <div className="text-sm font-bold text-[#1F1F1F]">{post.author_name}</div>
-              <div className="text-xs text-[#565656] mt-0.5">Faculty, Savvy Training Institute</div>
+              <div className="text-sm font-bold text-[#641B38]">{post.author_name}</div>
+              <div className="text-xs text-[#30262B] mt-0.5">Faculty, Savvy Training Institute</div>
             </div>
           </div>
         </article>
@@ -120,7 +120,7 @@ export default function BlogDetailsPage({ params }: BlogDetailsPageProps) {
         {/* Related Articles */}
         {related.length > 0 && (
           <div className="mt-14">
-            <h3 className="text-lg font-bold text-[#1F1F1F] mb-6">
+            <h3 className="text-lg font-bold text-[#641B38] mb-6">
               Related Technical Guides
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -128,17 +128,17 @@ export default function BlogDetailsPage({ params }: BlogDetailsPageProps) {
                 <Link
                   key={item.id}
                   href={`/blogs/${item.slug}`}
-                  className="group p-6 rounded-2xl bg-white border border-[#F0E2E7] hover:border-[#B14B6C]/40 hover:shadow-xs transition-all"
+                  className="group p-6 rounded-2xl bg-white border border-[#EAD9E0] hover:border-[#B83268]/40 hover:shadow-xs transition-all"
                 >
-                  <span className="text-[10px] font-bold text-[#B14B6C] uppercase tracking-wider">
+                  <span className="text-[10px] font-bold text-[#B83268] uppercase tracking-wider">
                     {item.category_name}
                   </span>
-                  <h4 className="text-sm font-bold text-[#1F1F1F] group-hover:text-[#B14B6C] mt-1 leading-snug line-clamp-2">
+                  <h4 className="text-sm font-bold text-[#641B38] group-hover:text-[#B83268] mt-1 leading-snug line-clamp-2">
                     {item.title}
                   </h4>
-                  <div className="mt-4 pt-3 border-t border-[#F0E2E7] flex items-center justify-between text-xs text-[#565656]">
+                  <div className="mt-4 pt-3 border-t border-[#EAD9E0] flex items-center justify-between text-xs text-[#30262B]">
                     <span>{new Date(item.published_at).toLocaleDateString('en-GB', { dateStyle: 'medium' })}</span>
-                    <span className="text-[#B14B6C] font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                    <span className="text-[#B83268] font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                       <span>Read</span>
                       <ArrowRight className="w-3 h-3" />
                     </span>

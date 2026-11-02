@@ -52,18 +52,18 @@ export function PopularCoursesSection({ courses, children }: PopularCoursesSecti
         {/* 1. COURSERA EXACT: "New and popular" 3-Column Showcase    */}
         {/* ========================================================= */}
         <div className="mb-16">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1F1F1F] tracking-tight mb-6">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#641B38] tracking-tight mb-6">
             New and popular
           </h2>
 
           <div className="reveal-stagger grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {popularColumns.map((col, colIdx) => {
-              const panel =
-                colIdx === 0
-                  ? 'bg-[#eef6ff] border-[#dbe7f7]'
-                  : colIdx === 1
-                    ? 'bg-[#f3faf4] border-[#d7efe0]'
-                    : 'bg-[#fff8ef] border-[#f3e4cc]';
+              const panels = [
+                'bg-[#F8EDF1] border-[#E8A6BC]',
+                'bg-white border-[#EAD9E0]',
+                'bg-[#FCF8F7] border-[#EAD9E0]',
+              ];
+              const panel = panels[colIdx % panels.length];
               return (
               <div
                 key={colIdx}
@@ -74,10 +74,10 @@ export function PopularCoursesSection({ courses, children }: PopularCoursesSecti
                   <div className="mb-3.5">
                     <Link
                       href={col.href}
-                      className="inline-flex items-center gap-1.5 text-sm sm:text-base font-bold text-[#1F1F1F] hover:text-[#B14B6C] group transition-colors"
+                      className="inline-flex items-center gap-1.5 text-sm sm:text-base font-bold text-[#641B38] hover:text-[#B83268] group transition-colors"
                     >
                       <span>{col.title}</span>
-                      <ArrowRight className="w-4 h-4 text-[#1F1F1F] group-hover:text-[#B14B6C] group-hover:translate-x-1 transition-all" />
+                      <ArrowRight className="w-4 h-4 text-[#641B38] group-hover:text-[#B83268] group-hover:translate-x-1 transition-all" />
                     </Link>
                   </div>
 
@@ -90,7 +90,7 @@ export function PopularCoursesSection({ courses, children }: PopularCoursesSecti
                         <Link
                           key={itemIdx}
                           href={courseTarget}
-                          className="group bg-white rounded-2xl p-3 border border-white shadow-xs hover:shadow-md transition-all flex items-center gap-3.5"
+                          className="group flex items-center gap-3.5 rounded-2xl border border-[#EAD9E0] bg-white p-3 shadow-xs transition-all hover:shadow-md"
                         >
                           {/* Square Thumbnail with Badge Overlay */}
                           <div className="relative w-[72px] h-[72px] rounded-xl overflow-hidden shrink-0 bg-[#f4f7fb]">
@@ -103,11 +103,11 @@ export function PopularCoursesSection({ courses, children }: PopularCoursesSecti
                                 className="object-cover group-hover:scale-105 transition-transform duration-300"
                               />
                             ) : (
-                              <div className="flex h-full w-full items-center justify-center bg-[#FBEAF0] text-xs font-bold text-[#B14B6C]">
+                              <div className="flex h-full w-full items-center justify-center bg-[#F8EDF1] text-xs font-bold text-[#B83268]">
                                 {item.badge.slice(0, 2)}
                               </div>
                             )}
-                            <div className="absolute bottom-0 left-0 right-0 bg-[#B14B6C] text-[8px] font-extrabold text-white text-center py-0.5 uppercase tracking-wider">
+                            <div className="absolute bottom-0 left-0 right-0 bg-[#B83268] text-[8px] font-extrabold text-white text-center py-0.5 uppercase tracking-wider">
                               {item.badge}
                             </div>
                           </div>
@@ -115,23 +115,23 @@ export function PopularCoursesSection({ courses, children }: PopularCoursesSecti
                           {/* Details */}
                           <div className="flex-1 min-w-0">
                             {/* Partner Row */}
-                            <div className="flex items-center gap-1 text-[11px] font-medium text-[#565656] truncate">
-                              <span className="w-1.5 h-1.5 rounded-full bg-[#B14B6C]" />
+                            <div className="flex items-center gap-1 text-[11px] font-medium text-[#30262B] truncate">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#B83268]" />
                               <span className="truncate">{item.partner}</span>
                             </div>
 
                             {/* Course Title */}
-                            <h3 className="text-xs sm:text-[13px] font-bold text-[#1F1F1F] group-hover:text-[#B14B6C] transition-colors line-clamp-2 mt-0.5 leading-snug">
+                            <h3 className="text-xs sm:text-[13px] font-bold text-[#641B38] group-hover:text-[#B83268] transition-colors line-clamp-2 mt-0.5 leading-snug">
                               {item.title}
                             </h3>
 
                             {/* Format & Rating */}
-                            <div className="flex items-center gap-1.5 text-[11px] text-[#565656] mt-1">
+                            <div className="flex items-center gap-1.5 text-[11px] text-[#30262B] mt-1">
                               <span>{item.type}</span>
                               {item.rating && (
                                 <>
                                   <span>·</span>
-                                  <div className="flex items-center gap-0.5 text-[#1F1F1F] font-bold">
+                                  <div className="flex items-center gap-0.5 text-[#641B38] font-bold">
                                     <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
                                     <span>{item.rating}</span>
                                   </div>
@@ -152,7 +152,7 @@ export function PopularCoursesSection({ courses, children }: PopularCoursesSecti
       </div>
     </section>
     {children}
-    <section className="border-b border-[#F0E2E7] bg-white py-12 sm:py-16">
+    <section className="border-b border-[#EAD9E0] bg-white py-12 sm:py-16">
       <div className="site-container">
         {/* ========================================================= */}
         {/* 2. Full Course Catalogue Grid with Category Filter Tabs    */}
@@ -160,17 +160,17 @@ export function PopularCoursesSection({ courses, children }: PopularCoursesSecti
         <div>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#B14B6C]">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#B83268]">
                 Explore All Programmes
               </span>
-              <h2 className="text-xl sm:text-2xl font-extrabold text-[#1F1F1F] tracking-tight mt-1">
+              <h2 className="text-xl sm:text-2xl font-extrabold text-[#641B38] tracking-tight mt-1">
                 Specialized Professional Certifications
               </h2>
             </div>
 
             <Link
               href="/courses"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#B14B6C] hover:text-[#8E3854] transition-colors shrink-0"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#B83268] hover:text-[#641B38] transition-colors shrink-0"
             >
               <span>View Full Directory</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -186,8 +186,8 @@ export function PopularCoursesSection({ courses, children }: PopularCoursesSecti
                 onClick={() => setSelectedFilter(tab)}
                 className={`px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
                   selectedFilter === tab
-                    ? 'bg-[#B14B6C] text-white shadow-xs'
-                    : 'bg-white text-[#565656] border border-[#F0E2E7] hover:border-[#B14B6C]/50 hover:text-[#1F1F1F]'
+                    ? 'bg-[#B83268] text-white shadow-xs'
+                    : 'bg-white text-[#30262B] border border-[#EAD9E0] hover:border-[#B83268]/50 hover:text-[#641B38]'
                 }`}
               >
                 {tab}
@@ -203,7 +203,7 @@ export function PopularCoursesSection({ courses, children }: PopularCoursesSecti
               return (
                 <div
                   key={course.id}
-                  className="group flex flex-col bg-white rounded-2xl border border-[#F0E2E7] overflow-hidden hover:shadow-lg hover:border-[#B14B6C]/50 transition-all duration-300 hover:-translate-y-1"
+                  className="group flex flex-col overflow-hidden rounded-2xl border border-[#EAD9E0] border-t-4 border-t-[#B83268] bg-white shadow-sm transition-all duration-300 hover:border-[#B83268]/40 hover:shadow-md"
                 >
                   {/* Course Image */}
                   <div className="relative aspect-[16/10] bg-[#3A2030] overflow-hidden flex items-center justify-center">
@@ -217,7 +217,7 @@ export function PopularCoursesSection({ courses, children }: PopularCoursesSecti
                         loading="lazy"
                       />
                     ) : (
-                      <div className="absolute inset-0 bg-gradient-to-tr from-[#7A2E49] to-[#B14B6C] flex flex-col justify-end p-5 text-white">
+                      <div className="absolute inset-0 bg-[#641B38] flex flex-col justify-end p-5 text-white">
                         <span className="text-[10px] font-bold uppercase tracking-widest text-[#F59E0B]">
                           {course.category || 'Certification'}
                         </span>
@@ -227,7 +227,7 @@ export function PopularCoursesSection({ courses, children }: PopularCoursesSecti
                       </div>
                     )}
 
-                    <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md text-[10px] font-bold text-[#B14B6C] shadow-2xs z-10">
+                    <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md text-[10px] font-bold text-[#B83268] shadow-2xs z-10">
                       Professional Certificate
                     </div>
                   </div>
@@ -237,34 +237,34 @@ export function PopularCoursesSection({ courses, children }: PopularCoursesSecti
                     <div>
                       {/* Organization Tag */}
                       <div className="flex items-center gap-2 mb-2">
-                        <div className="w-5 h-5 rounded-full overflow-hidden border border-[#F0E2E7] p-0.5 shrink-0 bg-white">
+                        <div className="w-5 h-5 rounded-full overflow-hidden border border-[#EAD9E0] p-0.5 shrink-0 bg-white">
                           <SavvyLogo markClassName="w-full h-full object-contain" />
                         </div>
-                        <span className="text-[11px] font-bold text-[#565656] uppercase tracking-wider truncate">
+                        <span className="text-[11px] font-bold text-[#30262B] uppercase tracking-wider truncate">
                           Savvy Institute · UK Code Standards
                         </span>
                       </div>
 
                       {/* Course Title */}
-                      <h3 className="text-base font-bold text-[#1F1F1F] group-hover:text-[#B14B6C] transition-colors leading-snug line-clamp-2 min-h-[44px]">
+                      <h3 className="text-base font-bold text-[#641B38] group-hover:text-[#B83268] transition-colors leading-snug line-clamp-2 min-h-[44px]">
                         <Link href={`/courses/${course.slug || course.id}`}>
                           {course.title}
                         </Link>
                       </h3>
 
-                      <p className="text-xs text-[#565656] line-clamp-2 mt-2 leading-relaxed font-normal">
+                      <p className="text-xs text-[#30262B] line-clamp-2 mt-2 leading-relaxed font-normal">
                         {course.short_description || course.description}
                       </p>
                     </div>
 
                     {/* Price & Action Button */}
-                    <div className="mt-5 pt-4 border-t border-[#F0E2E7] flex items-center justify-between gap-3">
+                    <div className="-mx-5 -mb-5 mt-5 flex items-center justify-between gap-3 border-t border-[#EAD9E0] bg-[#F8EDF1] px-5 py-4 sm:-mx-6 sm:-mb-6 sm:px-6">
                       {price && (
                       <div className="flex flex-col">
-                        <span className="text-[10px] text-[#565656] uppercase font-semibold">
+                        <span className="text-[10px] text-[#30262B] uppercase font-semibold">
                           Tuition Fee
                         </span>
-                        <span className="text-base font-extrabold text-[#B14B6C]">
+                        <span className="text-base font-extrabold text-[#B83268]">
                           {price}
                         </span>
                       </div>
@@ -273,13 +273,13 @@ export function PopularCoursesSection({ courses, children }: PopularCoursesSecti
                       <div className="flex items-center gap-2">
                         <Link
                           href={`/courses/${course.slug || course.id}`}
-                          className="px-3 py-1.5 rounded-lg border border-[#F0E2E7] text-xs font-semibold text-[#1F1F1F] hover:border-[#B14B6C] hover:text-[#B14B6C] transition-colors"
+                          className="px-3 py-1.5 rounded-lg border border-[#EAD9E0] text-xs font-semibold text-[#641B38] hover:border-[#B83268] hover:text-[#B83268] transition-colors"
                         >
                           Syllabus
                         </Link>
                         <Link
                           href={`/contact-us?course=${encodeURIComponent(course.slug || course.id)}&courseName=${encodeURIComponent(course.title)}`}
-                          className="inline-flex items-center gap-1 px-4 py-1.5 rounded-lg bg-[#B14B6C] text-white text-xs font-bold hover:bg-[#8E3854] transition-colors shadow-2xs"
+                          className="inline-flex items-center gap-1 px-4 py-1.5 rounded-lg bg-[#B83268] text-white text-xs font-bold hover:bg-[#641B38] transition-colors shadow-2xs"
                         >
                           <span>Enquire</span>
                           <ArrowRight className="w-3 h-3 text-white" />

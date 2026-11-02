@@ -116,7 +116,7 @@ export function RegistrationRequests({ onPending }: { onPending?: (count: number
         </select>
       </div>
       {notice && (
-        <p role="status" className={`mt-3 rounded-lg border px-3 py-2 text-sm ${tone === 'ok' ? 'border-[#087F73]/30 bg-[#E7F3F1]' : 'border-red-200 bg-red-50 text-red-700'}`}>{notice}</p>
+        <p role="status" className={`mt-3 rounded-lg border px-3 py-2 text-sm ${tone === 'ok' ? 'border-[#B83268]/30 bg-[#E7F3F1]' : 'border-red-200 bg-red-50 text-red-700'}`}>{notice}</p>
       )}
       {loading ? (
         <p className="mt-4 flex items-center gap-2 text-sm text-muted-foreground"><Loader2 className="h-4 w-4 animate-spin" /> Loading requests</p>
@@ -143,14 +143,14 @@ export function RegistrationRequests({ onPending }: { onPending?: (count: number
                   <td className="py-3 pr-3">{row.phone || '—'}</td>
                   <td className="py-3 pr-3 whitespace-nowrap">{formatWhen(row.createdAt)}</td>
                   <td className="py-3 pr-3">
-                    <span className={`inline-flex rounded-full px-2 py-0.5 text-[11px] font-semibold capitalize ${row.status === 'approved' ? 'bg-[#E7F3F1] text-[#00543d]' : row.status === 'rejected' ? 'bg-red-50 text-red-700' : 'bg-[#F6F4EE] text-[#102B46]'}`}>{row.status}</span>
+                    <span className={`inline-flex rounded-full px-2 py-0.5 text-[11px] font-semibold capitalize ${row.status === 'approved' ? 'bg-[#E7F3F1] text-[#641B38]' : row.status === 'rejected' ? 'bg-red-50 text-red-700' : 'bg-[#FCF8F7] text-[#30262B]'}`}>{row.status}</span>
                   </td>
                   <td className="py-3">
                     <div className="flex flex-wrap gap-2">
-                      <button type="button" className="text-[#087F73] underline" onClick={() => setSelected(row)}>View</button>
+                      <button type="button" className="text-[#B83268] underline" onClick={() => setSelected(row)}>View</button>
                       {row.status === 'pending' && (
                         <>
-                          <button type="button" className="text-[#087F73] underline disabled:opacity-50" disabled={busyId === row.id} onClick={() => review(row, 'approve')}>{busyId === row.id ? 'Saving' : 'Approve'}</button>
+                          <button type="button" className="text-[#B83268] underline disabled:opacity-50" disabled={busyId === row.id} onClick={() => review(row, 'approve')}>{busyId === row.id ? 'Saving' : 'Approve'}</button>
                           <button type="button" className="text-red-700 underline disabled:opacity-50" disabled={busyId === row.id} onClick={() => review(row, 'reject')}>Reject</button>
                         </>
                       )}
@@ -185,7 +185,7 @@ export function RegistrationRequests({ onPending }: { onPending?: (count: number
               <button type="button" className="rounded-lg border border-border px-3 py-2 text-sm" onClick={() => setSelected(null)}>Close</button>
               {selected.status === 'pending' && (
                 <>
-                  <button type="button" className="rounded-lg bg-[#087F73] px-3 py-2 text-sm font-semibold text-white disabled:opacity-50" disabled={busyId === selected.id} onClick={() => review(selected, 'approve')}>Approve</button>
+                  <button type="button" className="rounded-lg bg-[#B83268] px-3 py-2 text-sm font-semibold text-white disabled:opacity-50" disabled={busyId === selected.id} onClick={() => review(selected, 'approve')}>Approve</button>
                   <button type="button" className="rounded-lg border border-red-200 px-3 py-2 text-sm text-red-700 disabled:opacity-50" disabled={busyId === selected.id} onClick={() => review(selected, 'reject')}>Reject</button>
                 </>
               )}

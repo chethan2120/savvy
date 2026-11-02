@@ -20,7 +20,7 @@ export function CourseCard({ course }: CourseCardProps) {
   const hasImage = Boolean(course.featured_image) && !imgError;
 
   return (
-    <div className="group flex flex-col bg-white rounded-2xl border border-[#F0E2E7] overflow-hidden shadow-xs hover:shadow-lg hover:border-[#B14B6C]/50 transition-all duration-300">
+    <div className="group flex flex-col overflow-hidden rounded-2xl border border-[#EAD9E0] border-t-4 border-t-[#B83268] bg-white shadow-sm transition-all duration-300 hover:shadow-md">
       {/* Course Image */}
       <div className="relative aspect-[16/10] bg-[#3A2030] overflow-hidden flex items-center justify-center">
         {hasImage ? (
@@ -35,7 +35,7 @@ export function CourseCard({ course }: CourseCardProps) {
           />
         ) : (
           /* Fallback pattern only when no image exists or load fails */
-          <div className="absolute inset-0 bg-gradient-to-tr from-[#7A2E49] to-[#B14B6C] flex flex-col justify-end p-5 text-white">
+          <div className="absolute inset-0 bg-[#641B38] flex flex-col justify-end p-5 text-white">
             <span className="text-[10px] font-bold uppercase tracking-widest text-[#F59E0B]">
               {course.category || 'Certification Programme'}
             </span>
@@ -47,7 +47,7 @@ export function CourseCard({ course }: CourseCardProps) {
 
         {/* Category Pill Tag */}
         {course.category && (
-          <div className="absolute top-3.5 left-3.5 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-sm text-[10px] font-bold text-[#B14B6C] shadow-sm z-10">
+          <div className="absolute top-3.5 left-3.5 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-sm text-[10px] font-bold text-[#B83268] shadow-sm z-10">
             {course.category}
           </div>
         )}
@@ -63,33 +63,33 @@ export function CourseCard({ course }: CourseCardProps) {
       {/* Card Content Body */}
       <div className="p-6 flex flex-col flex-1 justify-between">
         <div>
-          <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#B14B6C] uppercase tracking-wider mb-1.5">
+          <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#B83268] uppercase tracking-wider mb-1.5">
             <span>Savvy Institute</span>
             <span>•</span>
             <span>UK Code Standards</span>
           </div>
 
-          <h3 className="text-base sm:text-lg font-bold text-[#1F1F1F] group-hover:text-[#B14B6C] transition-colors leading-snug">
+          <h3 className="text-base sm:text-lg font-bold text-[#641B38] group-hover:text-[#B83268] transition-colors leading-snug">
             <Link href={`/courses/${course.slug || course.id}`}>
               {course.title}
             </Link>
           </h3>
 
-          <p className="text-xs text-[#565656] line-clamp-2 mt-2 leading-relaxed font-normal">
+          <p className="text-xs text-[#30262B] line-clamp-2 mt-2 leading-relaxed font-normal">
             {course.short_description || course.description}
           </p>
 
           {/* Metadata badges */}
-          <div className="flex flex-wrap items-center gap-3 mt-4 pt-4 border-t border-[#F0E2E7] text-xs text-[#1F1F1F]">
+          <div className="flex flex-wrap items-center gap-3 mt-4 pt-4 border-t border-[#EAD9E0] text-xs text-[#641B38]">
             {course.duration && (
-              <div className="flex items-center gap-1.5 text-[#565656]">
-                <Clock className="w-3.5 h-3.5 text-[#B14B6C]" />
+              <div className="flex items-center gap-1.5 text-[#30262B]">
+                <Clock className="w-3.5 h-3.5 text-[#B83268]" />
                 <span>{course.duration}</span>
               </div>
             )}
             {course.certification && (
-              <div className="flex items-center gap-1.5 text-[#565656] line-clamp-1">
-                <Award className="w-3.5 h-3.5 text-[#B14B6C]" />
+              <div className="flex items-center gap-1.5 text-[#30262B] line-clamp-1">
+                <Award className="w-3.5 h-3.5 text-[#B83268]" />
                 <span className="truncate max-w-[180px]">{course.certification}</span>
               </div>
             )}
@@ -97,13 +97,13 @@ export function CourseCard({ course }: CourseCardProps) {
         </div>
 
         {/* Price & Action */}
-        <div className="mt-6 pt-4 border-t border-[#F0E2E7] flex items-center justify-between gap-3">
+        <div className="-mx-6 -mb-6 mt-6 flex items-center justify-between gap-3 border-t border-[#EAD9E0] bg-[#F8EDF1] px-6 py-4">
           {price && (
           <div className="flex flex-col">
-            <span className="text-[10px] text-[#565656] uppercase font-semibold">
+            <span className="text-[10px] text-[#30262B] uppercase font-semibold">
               Tuition Fee
             </span>
-            <span className="text-base font-bold text-[#B14B6C]">
+            <span className="text-base font-bold text-[#B83268]">
               {price}
             </span>
           </div>
@@ -111,7 +111,7 @@ export function CourseCard({ course }: CourseCardProps) {
 
           <Link
             href={`/courses/${course.slug || course.id}`}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#B14B6C] text-white text-xs font-bold hover:bg-[#8E3854] transition-colors shadow-sm"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#B83268] text-white text-xs font-bold hover:bg-[#641B38] transition-colors shadow-sm"
           >
             <span>View Course</span>
             <ArrowRight className="w-3 h-3 text-white" />

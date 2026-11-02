@@ -321,7 +321,7 @@ export default function AdminPage() {
               aria-label="User account menu"
               className="flex items-center gap-2 p-0.5 rounded-full hover:ring-2 hover:ring-forest/30 transition-all focus-visible:outline-none"
             >
-              <div className="w-9 h-9 rounded-full bg-[#00543d] text-white text-xs font-bold flex items-center justify-center shadow-xs">
+              <div className="w-9 h-9 rounded-full bg-[#641B38] text-white text-xs font-bold flex items-center justify-center shadow-xs">
                 SA
               </div>
             </button>
@@ -382,7 +382,7 @@ export default function AdminPage() {
               onClick={() => { selectTab('overview'); setMobileMenuOpen(false); }}
               className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all ${
                 activeTab === 'overview'
-                  ? 'bg-[#00543d] text-white shadow-xs'
+                  ? 'bg-[#641B38] text-white shadow-xs'
                   : 'text-foreground hover:bg-muted/70'
               }`}
             >
@@ -413,7 +413,7 @@ export default function AdminPage() {
                     type="button"
                     onClick={() => { selectTab('accounts'); setMobileMenuOpen(false); }}
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
-                      activeTab === 'accounts' ? 'bg-[#00543d]/10 text-[#00543d] font-bold' : 'text-foreground/80 hover:bg-muted/70'
+                      activeTab === 'accounts' ? 'bg-[#641B38]/10 text-[#641B38] font-bold' : 'text-foreground/80 hover:bg-muted/70'
                     }`}
                   >
                     <span>User Management</span>
@@ -422,7 +422,7 @@ export default function AdminPage() {
                     type="button"
                     onClick={() => { selectTab('approvals'); setMobileMenuOpen(false); }}
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
-                      activeTab === 'approvals' ? 'bg-[#00543d]/10 text-[#00543d] font-bold' : 'text-foreground/80 hover:bg-muted/70'
+                      activeTab === 'approvals' ? 'bg-[#641B38]/10 text-[#641B38] font-bold' : 'text-foreground/80 hover:bg-muted/70'
                     }`}
                   >
                     <span>Students</span>
@@ -431,7 +431,7 @@ export default function AdminPage() {
                     type="button"
                     onClick={() => { selectTab('staff'); setMobileMenuOpen(false); }}
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
-                      activeTab === 'staff' ? 'bg-[#00543d]/10 text-[#00543d] font-bold' : 'text-foreground/80 hover:bg-muted/70'
+                      activeTab === 'staff' ? 'bg-[#641B38]/10 text-[#641B38] font-bold' : 'text-foreground/80 hover:bg-muted/70'
                     }`}
                   >
                     <span>Staff</span>
@@ -463,7 +463,7 @@ export default function AdminPage() {
                     type="button"
                     onClick={() => { selectTab('registrations'); setMobileMenuOpen(false); }}
                     className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
-                      activeTab === 'registrations' ? 'bg-[#00543d]/10 text-[#00543d] font-bold' : 'text-foreground/80 hover:bg-muted/70'
+                      activeTab === 'registrations' ? 'bg-[#641B38]/10 text-[#641B38] font-bold' : 'text-foreground/80 hover:bg-muted/70'
                     }`}
                   >
                     <span>Registration Requests</span>
@@ -477,7 +477,7 @@ export default function AdminPage() {
                     type="button"
                     onClick={() => { selectTab('applications'); setMobileMenuOpen(false); }}
                     className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
-                      activeTab === 'applications' ? 'bg-[#00543d]/10 text-[#00543d] font-bold' : 'text-foreground/80 hover:bg-muted/70'
+                      activeTab === 'applications' ? 'bg-[#641B38]/10 text-[#641B38] font-bold' : 'text-foreground/80 hover:bg-muted/70'
                     }`}
                   >
                     <span>Applications</span>
@@ -491,7 +491,7 @@ export default function AdminPage() {
                     type="button"
                     onClick={() => { selectTab('students'); setMobileMenuOpen(false); }}
                     className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
-                      activeTab === 'students' ? 'bg-[#00543d]/10 text-[#00543d] font-bold' : 'text-foreground/80 hover:bg-muted/70'
+                      activeTab === 'students' ? 'bg-[#641B38]/10 text-[#641B38] font-bold' : 'text-foreground/80 hover:bg-muted/70'
                     }`}
                   >
                     <span>Enrolments</span>
@@ -526,7 +526,7 @@ export default function AdminPage() {
                     type="button"
                     onClick={() => { selectTab('courseAdmin'); setMobileMenuOpen(false); }}
                     className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
-                      activeTab === 'courseAdmin' ? 'bg-[#00543d]/10 text-[#00543d] font-bold' : 'text-foreground/80 hover:bg-muted/70'
+                      activeTab === 'courseAdmin' ? 'bg-[#641B38]/10 text-[#641B38] font-bold' : 'text-foreground/80 hover:bg-muted/70'
                     }`}
                   >
                     <span>Courses</span>
@@ -538,7 +538,7 @@ export default function AdminPage() {
                     type="button"
                     onClick={() => { selectTab('programs'); setMobileMenuOpen(false); }}
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
-                      activeTab === 'programs' ? 'bg-[#00543d]/10 text-[#00543d] font-bold' : 'text-foreground/80 hover:bg-muted/70'
+                      activeTab === 'programs' ? 'bg-[#641B38]/10 text-[#641B38] font-bold' : 'text-foreground/80 hover:bg-muted/70'
                     }`}
                   >
                     <span>Certified Programs</span>
@@ -547,7 +547,7 @@ export default function AdminPage() {
                     type="button"
                     onClick={() => { selectTab('materials'); setMobileMenuOpen(false); }}
                     className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
-                      activeTab === 'materials' ? 'bg-[#00543d]/10 text-[#00543d] font-bold' : 'text-foreground/80 hover:bg-muted/70'
+                      activeTab === 'materials' ? 'bg-[#641B38]/10 text-[#641B38] font-bold' : 'text-foreground/80 hover:bg-muted/70'
                     }`}
                   >
                     <span>Course Material</span>
@@ -559,7 +559,7 @@ export default function AdminPage() {
                     type="button"
                     onClick={() => { selectTab('attendance'); setMobileMenuOpen(false); }}
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
-                      activeTab === 'attendance' ? 'bg-[#00543d]/10 text-[#00543d] font-bold' : 'text-foreground/80 hover:bg-muted/70'
+                      activeTab === 'attendance' ? 'bg-[#641B38]/10 text-[#641B38] font-bold' : 'text-foreground/80 hover:bg-muted/70'
                     }`}
                   >
                     <span>Attendance</span>
@@ -591,7 +591,7 @@ export default function AdminPage() {
                     type="button"
                     onClick={() => { selectTab('certificates'); setMobileMenuOpen(false); }}
                     className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
-                      activeTab === 'certificates' ? 'bg-[#00543d]/10 text-[#00543d] font-bold' : 'text-foreground/80 hover:bg-muted/70'
+                      activeTab === 'certificates' ? 'bg-[#641B38]/10 text-[#641B38] font-bold' : 'text-foreground/80 hover:bg-muted/70'
                     }`}
                   >
                     <span>Certificates</span>
@@ -626,7 +626,7 @@ export default function AdminPage() {
                     type="button"
                     onClick={() => { selectTab('contacts'); setMobileMenuOpen(false); }}
                     className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
-                      activeTab === 'contacts' ? 'bg-[#00543d]/10 text-[#00543d] font-bold' : 'text-foreground/80 hover:bg-muted/70'
+                      activeTab === 'contacts' ? 'bg-[#641B38]/10 text-[#641B38] font-bold' : 'text-foreground/80 hover:bg-muted/70'
                     }`}
                   >
                     <span>Contact Info</span>
@@ -638,7 +638,7 @@ export default function AdminPage() {
                     type="button"
                     onClick={() => { selectTab('website'); setMobileMenuOpen(false); }}
                     className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
-                      activeTab === 'website' ? 'bg-[#00543d]/10 text-[#00543d] font-bold' : 'text-foreground/80 hover:bg-muted/70'
+                      activeTab === 'website' ? 'bg-[#641B38]/10 text-[#641B38] font-bold' : 'text-foreground/80 hover:bg-muted/70'
                     }`}
                   >
                     <span>Website</span>
@@ -647,7 +647,7 @@ export default function AdminPage() {
                     type="button"
                     onClick={() => { selectTab('community'); setMobileMenuOpen(false); }}
                     className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
-                      activeTab === 'community' ? 'bg-[#00543d]/10 text-[#00543d] font-bold' : 'text-foreground/80 hover:bg-muted/70'
+                      activeTab === 'community' ? 'bg-[#641B38]/10 text-[#641B38] font-bold' : 'text-foreground/80 hover:bg-muted/70'
                     }`}
                   >
                     <span>Community</span>
@@ -656,7 +656,7 @@ export default function AdminPage() {
                     type="button"
                     onClick={() => { selectTab('blogs'); setMobileMenuOpen(false); }}
                     className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
-                      activeTab === 'blogs' ? 'bg-[#00543d]/10 text-[#00543d] font-bold' : 'text-foreground/80 hover:bg-muted/70'
+                      activeTab === 'blogs' ? 'bg-[#641B38]/10 text-[#641B38] font-bold' : 'text-foreground/80 hover:bg-muted/70'
                     }`}
                   >
                     <span>Articles</span>
@@ -689,7 +689,7 @@ export default function AdminPage() {
                     type="button"
                     onClick={() => { selectTab('settings'); setMobileMenuOpen(false); }}
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
-                      activeTab === 'settings' ? 'bg-[#00543d]/10 text-[#00543d] font-bold' : 'text-foreground/80 hover:bg-muted/70'
+                      activeTab === 'settings' ? 'bg-[#641B38]/10 text-[#641B38] font-bold' : 'text-foreground/80 hover:bg-muted/70'
                     }`}
                   >
                     <span>Website Settings</span>
@@ -698,7 +698,7 @@ export default function AdminPage() {
                     type="button"
                     onClick={() => { selectTab('profile'); setMobileMenuOpen(false); }}
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
-                      activeTab === 'profile' ? 'bg-[#00543d]/10 text-[#00543d] font-bold' : 'text-foreground/80 hover:bg-muted/70'
+                      activeTab === 'profile' ? 'bg-[#641B38]/10 text-[#641B38] font-bold' : 'text-foreground/80 hover:bg-muted/70'
                     }`}
                   >
                     <span>Branding &amp; Profile</span>
@@ -707,7 +707,7 @@ export default function AdminPage() {
                     type="button"
                     onClick={() => { selectTab('reports'); setMobileMenuOpen(false); }}
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
-                      activeTab === 'reports' ? 'bg-[#00543d]/10 text-[#00543d] font-bold' : 'text-foreground/80 hover:bg-muted/70'
+                      activeTab === 'reports' ? 'bg-[#641B38]/10 text-[#641B38] font-bold' : 'text-foreground/80 hover:bg-muted/70'
                     }`}
                   >
                     <span>Reports</span>
@@ -716,7 +716,7 @@ export default function AdminPage() {
                     type="button"
                     onClick={() => { selectTab('audit'); setMobileMenuOpen(false); }}
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
-                      activeTab === 'audit' ? 'bg-[#00543d]/10 text-[#00543d] font-bold' : 'text-foreground/80 hover:bg-muted/70'
+                      activeTab === 'audit' ? 'bg-[#641B38]/10 text-[#641B38] font-bold' : 'text-foreground/80 hover:bg-muted/70'
                     }`}
                   >
                     <span>Audit Logs</span>
@@ -844,11 +844,11 @@ export default function AdminPage() {
                 {/* 3. Active Staff */}
                 <div
                   onClick={() => selectTab('staff')}
-                  className="bg-white p-4 rounded-2xl border border-border hover:border-[#E7A0B6] hover:shadow-sm cursor-pointer transition-all flex flex-col justify-between"
+                  className="bg-white p-4 rounded-2xl border border-border hover:border-[#E8A6BC] hover:shadow-sm cursor-pointer transition-all flex flex-col justify-between"
                 >
                   <div className="text-[11px] font-semibold text-muted-foreground">Active Staff</div>
                   <div className="mt-2 text-2xl font-bold text-foreground">38</div>
-                  <div className="mt-2 flex items-center gap-1 text-[10px] font-bold text-[#8E3854] bg-[#FBEAF0] px-2 py-0.5 rounded-full w-fit">
+                  <div className="mt-2 flex items-center gap-1 text-[10px] font-bold text-[#641B38] bg-[#F8EDF1] px-2 py-0.5 rounded-full w-fit">
                     <CheckCircle2 className="w-3 h-3" />
                     <span>Full capacity</span>
                   </div>
@@ -960,7 +960,7 @@ export default function AdminPage() {
                   <div className="flex items-center gap-4">
                     <div className="flex items-center gap-3 text-xs font-medium">
                       <div className="flex items-center gap-1.5">
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#00543d]" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#641B38]" />
                         <span className="text-foreground">Students</span>
                       </div>
                       <div className="flex items-center gap-1.5">
@@ -979,8 +979,8 @@ export default function AdminPage() {
                   <svg className="w-full h-full overflow-visible" viewBox="0 0 700 200" preserveAspectRatio="none">
                     <defs>
                       <linearGradient id="studentGradient" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#00543d" stopOpacity="0.25" />
-                        <stop offset="100%" stopColor="#00543d" stopOpacity="0.0" />
+                        <stop offset="0%" stopColor="#641B38" stopOpacity="0.25" />
+                        <stop offset="100%" stopColor="#641B38" stopOpacity="0.0" />
                       </linearGradient>
                       <linearGradient id="enrolmentGradient" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="0%" stopColor="#C8A45D" stopOpacity="0.2" />
@@ -992,7 +992,7 @@ export default function AdminPage() {
                     <line x1="0" y1="40" x2="700" y2="40" stroke="#f1f5f9" strokeWidth="1" strokeDasharray="4 4" />
                     <line x1="0" y1="90" x2="700" y2="90" stroke="#f1f5f9" strokeWidth="1" strokeDasharray="4 4" />
                     <line x1="0" y1="140" x2="700" y2="140" stroke="#f1f5f9" strokeWidth="1" strokeDasharray="4 4" />
-                    <line x1="0" y1="190" x2="700" y2="190" stroke="#F0E2E7" strokeWidth="1" />
+                    <line x1="0" y1="190" x2="700" y2="190" stroke="#EAD9E0" strokeWidth="1" />
 
                     {/* Area under lines */}
                     <path
@@ -1004,11 +1004,11 @@ export default function AdminPage() {
                       fill="url(#enrolmentGradient)"
                     />
 
-                    {/* Students Line (Green #00543d) */}
+                    {/* Students Line (Green #641B38) */}
                     <path
                       d="M 20 160 Q 150 140 280 110 T 560 60 T 680 40"
                       fill="none"
-                      stroke="#00543d"
+                      stroke="#641B38"
                       strokeWidth="3"
                     />
 
@@ -1021,12 +1021,12 @@ export default function AdminPage() {
                     />
 
                     {/* Student Data Points */}
-                    <circle cx="20" cy="160" r="4" fill="#00543d" />
-                    <circle cx="150" cy="140" r="4" fill="#00543d" />
-                    <circle cx="280" cy="110" r="4" fill="#00543d" />
-                    <circle cx="420" cy="85" r="4" fill="#00543d" />
-                    <circle cx="560" cy="60" r="4" fill="#00543d" />
-                    <circle cx="680" cy="40" r="5" fill="#00543d" stroke="#ffffff" strokeWidth="2" />
+                    <circle cx="20" cy="160" r="4" fill="#641B38" />
+                    <circle cx="150" cy="140" r="4" fill="#641B38" />
+                    <circle cx="280" cy="110" r="4" fill="#641B38" />
+                    <circle cx="420" cy="85" r="4" fill="#641B38" />
+                    <circle cx="560" cy="60" r="4" fill="#641B38" />
+                    <circle cx="680" cy="40" r="5" fill="#641B38" stroke="#ffffff" strokeWidth="2" />
 
                     {/* Enrolment Data Points */}
                     <circle cx="20" cy="175" r="4" fill="#C8A45D" />
@@ -1133,7 +1133,7 @@ export default function AdminPage() {
                 </div>
 
                 {/* Educational Graphic Card / Savvy Accreditation Badge */}
-                <div className="bg-gradient-to-br from-[#5C2038] to-[#8E3854] rounded-2xl p-6 text-white flex flex-col justify-between shadow-md relative overflow-hidden">
+                <div className="bg-[#641B38] rounded-2xl p-6 text-white flex flex-col justify-between shadow-md relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-[#C8A45D]/10 rounded-full blur-2xl pointer-events-none" />
                   <div>
                     <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#C8A45D]/20 text-[#C8A45D] text-[10px] font-bold uppercase tracking-wider mb-3">
@@ -1184,7 +1184,7 @@ export default function AdminPage() {
 
                   <div className="flex items-center justify-between p-3 rounded-xl bg-[#F8FAFC] border border-border">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-[#F8D5E2] text-[#7A2E49] flex items-center justify-center font-bold text-xs shrink-0">
+                      <div className="w-8 h-8 rounded-full bg-[#E8A6BC] text-[#641B38] flex items-center justify-center font-bold text-xs shrink-0">
                         <BookOpen className="w-4 h-4" />
                       </div>
                       <div>

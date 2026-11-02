@@ -96,7 +96,7 @@ export default function StaffPage() {
       <div className="site-container grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-6 pt-8">
         <nav className="flex lg:flex-col gap-1 overflow-x-auto">
           {tabs.map((item) => (
-            <button key={item.id} onClick={() => { setTab(item.id); window.history.replaceState(null, '', `#${item.id}`); }} className={`px-3.5 py-2.5 rounded-lg text-xs text-left whitespace-nowrap ${tab === item.id ? 'bg-forest text-white' : 'text-[#102B46] hover:bg-white'}`}>
+            <button key={item.id} onClick={() => { setTab(item.id); window.history.replaceState(null, '', `#${item.id}`); }} className={`px-3.5 py-2.5 rounded-lg text-xs text-left whitespace-nowrap ${tab === item.id ? 'bg-forest text-white' : 'text-[#30262B] hover:bg-white'}`}>
               {item.label}
             </button>
           ))}

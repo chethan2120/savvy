@@ -93,7 +93,7 @@ export function CourseDetailPage({ role, courseId }: { role: Role; courseId: str
       <div className="site-container grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-6 py-6">
         <nav className="flex lg:flex-col gap-1 overflow-x-auto" aria-label="Dashboard">
           {links.map(([href, label]) => (
-            <Link key={href} href={href} className={`rounded-lg px-3.5 py-2.5 text-xs whitespace-nowrap ${href === back ? 'bg-forest text-white' : 'text-[#102B46] hover:bg-white'}`}>{label}</Link>
+            <Link key={href} href={href} className={`rounded-lg px-3.5 py-2.5 text-xs whitespace-nowrap ${href === back ? 'bg-forest text-white' : 'text-[#30262B] hover:bg-white'}`}>{label}</Link>
           ))}
         </nav>
         <main>
@@ -361,7 +361,7 @@ export function CertificateDesk() {
       <h2 className="text-lg font-semibold">Certificates</h2>
       <p className="text-sm text-muted-foreground">Issue a certificate only for a student who is enrolled in the course. Leave the completion date empty when it has not been recorded.</p>
       {(!identity.hasSeal || !identity.hasSignature) && (
-        <p className="mt-3 rounded-lg border border-[#D9AD55] bg-[#F6F4EE] px-3 py-2 text-sm text-[#102B46]">
+        <p className="mt-3 rounded-lg border border-[#D9AD55] bg-[#FCF8F7] px-3 py-2 text-sm text-[#30262B]">
           The official certificate still needs {identity.hasSeal ? '' : 'an institute seal'}{!identity.hasSeal && !identity.hasSignature ? ' and ' : ''}{identity.hasSignature ? '' : 'an authorized signature'}. Upload them in Account Settings before treating a download as the final signed copy. Preview remains available.
         </p>
       )}
@@ -393,7 +393,7 @@ export function CertificateDesk() {
               <span className="font-medium">{row.studentName}</span>
               <span className="text-muted-foreground"> · {row.courseTitle} · {row.number} · Issued {row.issueDate.slice(0, 10)}</span>
               {!row.completionDate && <span className="text-muted-foreground"> · Completion date not recorded</span>}
-              <span className={`ml-2 inline-flex rounded-full px-2 py-0.5 text-[11px] font-semibold ${row.status === 'revoked' ? 'bg-red-50 text-red-700' : 'bg-[#E7F3F1] text-[#00543d]'}`}>{row.status === 'revoked' ? 'Revoked' : 'Issued'}</span>
+              <span className={`ml-2 inline-flex rounded-full px-2 py-0.5 text-[11px] font-semibold ${row.status === 'revoked' ? 'bg-red-50 text-red-700' : 'bg-[#E7F3F1] text-[#641B38]'}`}>{row.status === 'revoked' ? 'Revoked' : 'Issued'}</span>
             </span>
             <span className="flex gap-3">
               <button type="button" className="text-forest underline" onClick={() => setPreview(row)}>Preview</button>

@@ -140,26 +140,26 @@ function CoursesCatalogueContent() {
   };
 
   return (
-    <div className="py-12 sm:py-16 bg-white border-b border-[#F0E2E7]">
+    <div className="py-12 sm:py-16 bg-white border-b border-[#EAD9E0]">
       <div className="site-container">
         {/* Header Breadcrumb & Title */}
         <div className="max-w-3xl mb-10">
-          <div className="flex items-center gap-2 text-xs text-[#565656] mb-2 font-medium">
+          <div className="flex items-center gap-2 text-xs text-[#30262B] mb-2 font-medium">
             <span>Home</span>
             <ChevronRight className="w-3.5 h-3.5" />
-            <span className="text-[#B14B6C] font-bold">Explore Courses</span>
+            <span className="text-[#B83268] font-bold">Explore Courses</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#1F1F1F] tracking-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#641B38] tracking-tight">
             Professional Course Catalogue
           </h1>
-          <p className="text-sm sm:text-base text-[#565656] mt-3 leading-relaxed font-normal">
+          <p className="text-sm sm:text-base text-[#30262B] mt-3 leading-relaxed font-normal">
             Discover verified technical qualifications structured around global ASME, ASNT, ISO and British standards. Real instrumentation training and digital credentials.
           </p>
         </div>
 
         {/* Search, Filter & Currency Controls Bar */}
-        <div className="bg-white rounded-2xl p-5 border border-[#F0E2E7] shadow-xs mb-10 flex flex-col gap-4">
+        <div className="bg-white rounded-2xl p-5 border border-[#EAD9E0] shadow-xs mb-10 flex flex-col gap-4">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
             {/* Search Input */}
             <div className="relative flex-1">
@@ -172,13 +172,13 @@ function CoursesCatalogueContent() {
                   setPage(1);
                 }}
                 placeholder="Search courses by name, code or technical discipline..."
-                className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-[#F0E2E7] bg-white text-sm text-[#1F1F1F] placeholder-[#A08B94] focus:outline-none focus:border-[#B14B6C] transition-colors"
+                className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-[#EAD9E0] bg-white text-sm text-[#641B38] placeholder-[#A08B94] focus:outline-none focus:border-[#B83268] transition-colors"
               />
               {searchQuery && (
                 <button
                   type="button"
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#A08B94] hover:text-[#B14B6C]"
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#A08B94] hover:text-[#B83268]"
                   aria-label="Clear search"
                 >
                   <X className="w-4 h-4" />
@@ -198,7 +198,7 @@ function CoursesCatalogueContent() {
                   id="course-sort-select"
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as any)}
-                  className="px-3 py-2 rounded-xl border border-[#F0E2E7] bg-white text-xs font-semibold text-[#1F1F1F] focus:outline-none cursor-pointer"
+                  className="px-3 py-2 rounded-xl border border-[#EAD9E0] bg-white text-xs font-semibold text-[#641B38] focus:outline-none cursor-pointer"
                 >
                   <option value="featured">Recommended / Featured</option>
                   <option value="name-asc">Title: A to Z</option>
@@ -211,8 +211,8 @@ function CoursesCatalogueContent() {
           </div>
 
           {/* Category Tabs Filter */}
-          <div className="flex items-center gap-2 overflow-x-auto pt-3 border-t border-[#F0E2E7] no-scrollbar">
-            <span className="text-xs font-bold text-[#565656] shrink-0 mr-1">
+          <div className="flex items-center gap-2 overflow-x-auto pt-3 border-t border-[#EAD9E0] no-scrollbar">
+            <span className="text-xs font-bold text-[#30262B] shrink-0 mr-1">
               Category:
             </span>
             <button
@@ -223,8 +223,8 @@ function CoursesCatalogueContent() {
               }}
               className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-colors ${
                 selectedCategory === 'all'
-                  ? 'bg-[#B14B6C] text-white shadow-xs'
-                  : 'bg-white text-[#565656] border border-[#F0E2E7] hover:border-[#B14B6C]/50'
+                  ? 'bg-[#B83268] text-white shadow-xs'
+                  : 'bg-white text-[#30262B] border border-[#EAD9E0] hover:border-[#B83268]/50'
               }`}
             >
               All Courses ({courses.length})
@@ -240,8 +240,8 @@ function CoursesCatalogueContent() {
                 }}
                 className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-colors ${
                   selectedCategory === cat.id
-                    ? 'bg-[#B14B6C] text-white shadow-xs'
-                    : 'bg-white text-[#565656] border border-[#F0E2E7] hover:border-[#B14B6C]/50'
+                    ? 'bg-[#B83268] text-white shadow-xs'
+                    : 'bg-white text-[#30262B] border border-[#EAD9E0] hover:border-[#B83268]/50'
                 }`}
               >
                 {cat.name} ({cat.courseCount})
@@ -252,7 +252,7 @@ function CoursesCatalogueContent() {
 
         {/* Active Filters Summary */}
         {(searchQuery || selectedCategory !== 'all') && (
-          <div className="flex items-center justify-between gap-4 mb-6 text-xs text-[#565656]">
+          <div className="flex items-center justify-between gap-4 mb-6 text-xs text-[#30262B]">
             <div>
               Showing {filteredAndSorted.length} matching result
               {filteredAndSorted.length === 1 ? '' : 's'}
@@ -261,7 +261,7 @@ function CoursesCatalogueContent() {
             <button
               type="button"
               onClick={resetFilters}
-              className="text-[#B14B6C] font-semibold hover:underline"
+              className="text-[#B83268] font-semibold hover:underline"
             >
               Clear all filters
             </button>
@@ -274,13 +274,13 @@ function CoursesCatalogueContent() {
             {Array.from({ length: 6 }).map((_, i) => (
               <div
                 key={i}
-                className="bg-white rounded-2xl border border-[#F0E2E7] overflow-hidden p-6 flex flex-col gap-4 animate-pulse"
+                className="bg-white rounded-2xl border border-[#EAD9E0] overflow-hidden p-6 flex flex-col gap-4 animate-pulse"
               >
                 <div className="aspect-[16/10] bg-slate-100 rounded-xl" />
                 <div className="h-5 bg-slate-100 rounded w-3/4" />
                 <div className="h-3 bg-slate-100 rounded w-full" />
                 <div className="h-3 bg-slate-100 rounded w-2/3" />
-                <div className="mt-4 pt-4 border-t border-[#F0E2E7] flex justify-between items-center">
+                <div className="mt-4 pt-4 border-t border-[#EAD9E0] flex justify-between items-center">
                   <div className="h-4 bg-slate-100 rounded w-20" />
                   <div className="h-8 bg-slate-100 rounded-full w-24" />
                 </div>
@@ -299,7 +299,7 @@ function CoursesCatalogueContent() {
             <button
               type="button"
               onClick={loadData}
-              className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#B14B6C] text-white text-xs font-bold hover:bg-[#8E3854] transition-colors"
+              className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#B83268] text-white text-xs font-bold hover:bg-[#641B38] transition-colors"
             >
               <RefreshCw className="w-3.5 h-3.5" />
               <span>Retry Request</span>
@@ -309,18 +309,18 @@ function CoursesCatalogueContent() {
 
         {/* Empty State */}
         {!loading && !error && filteredAndSorted.length === 0 && (
-          <div className="rounded-2xl border border-[#F0E2E7] bg-white p-14 text-center max-w-md mx-auto">
+          <div className="rounded-2xl border border-[#EAD9E0] bg-white p-14 text-center max-w-md mx-auto">
             <BookOpen className="w-12 h-12 text-[#A08B94] mx-auto mb-4" />
-            <h3 className="text-base font-bold text-[#1F1F1F]">
+            <h3 className="text-base font-bold text-[#641B38]">
               No Courses Found
             </h3>
-            <p className="text-xs text-[#565656] mt-2 leading-relaxed">
+            <p className="text-xs text-[#30262B] mt-2 leading-relaxed">
               We could not find any active courses matching your criteria. Try adjusting your search term or category filter.
             </p>
             <button
               type="button"
               onClick={resetFilters}
-              className="mt-6 px-5 py-2.5 rounded-full bg-[#B14B6C] text-white text-xs font-bold hover:bg-[#8E3854] transition-colors"
+              className="mt-6 px-5 py-2.5 rounded-full bg-[#B83268] text-white text-xs font-bold hover:bg-[#641B38] transition-colors"
             >
               Reset Filters
             </button>
@@ -343,7 +343,7 @@ function CoursesCatalogueContent() {
                   type="button"
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
                   disabled={page === 1}
-                  className="px-4 py-2 rounded-lg border border-[#F0E2E7] bg-white text-xs font-semibold text-[#1F1F1F] disabled:opacity-40 hover:bg-slate-50"
+                  className="px-4 py-2 rounded-lg border border-[#EAD9E0] bg-white text-xs font-semibold text-[#641B38] disabled:opacity-40 hover:bg-slate-50"
                 >
                   Previous
                 </button>
@@ -355,8 +355,8 @@ function CoursesCatalogueContent() {
                     onClick={() => setPage(idx + 1)}
                     className={`h-9 w-9 rounded-lg text-xs font-bold transition-colors ${
                       page === idx + 1
-                        ? 'bg-[#B14B6C] text-white'
-                        : 'border border-[#F0E2E7] bg-white text-[#1F1F1F] hover:bg-slate-50'
+                        ? 'bg-[#B83268] text-white'
+                        : 'border border-[#EAD9E0] bg-white text-[#641B38] hover:bg-slate-50'
                     }`}
                   >
                     {idx + 1}
@@ -367,7 +367,7 @@ function CoursesCatalogueContent() {
                   type="button"
                   onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                   disabled={page === totalPages}
-                  className="px-4 py-2 rounded-lg border border-[#F0E2E7] bg-white text-xs font-semibold text-[#1F1F1F] disabled:opacity-40 hover:bg-slate-50"
+                  className="px-4 py-2 rounded-lg border border-[#EAD9E0] bg-white text-xs font-semibold text-[#641B38] disabled:opacity-40 hover:bg-slate-50"
                 >
                   Next
                 </button>

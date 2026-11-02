@@ -260,58 +260,58 @@ function ContactPageContent() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           {/* Left Column (5 cols): Institute Information & Assurance */}
           <div className="lg:col-span-5 flex flex-col gap-6">
-            <div className="bg-white rounded-3xl p-8 border border-[#F0E2E7] shadow-xs">
-              <h2 className="text-xl font-bold text-[#1F1F1F] mb-2">
+            <div className="bg-white rounded-3xl p-8 border border-[#EAD9E0] shadow-xs">
+              <h2 className="text-xl font-bold text-[#641B38] mb-2">
                 Admissions Office
               </h2>
-              <p className="text-xs text-[#565656] leading-relaxed mb-6 font-normal">
+              <p className="text-xs text-[#30262B] leading-relaxed mb-6 font-normal">
                 Our advisors assist students and corporate sponsors across India, the UK, the Middle East, and internationally.
               </p>
 
-              <div className="flex flex-col gap-5 text-xs text-[#565656]">
+              <div className="flex flex-col gap-5 text-xs text-[#30262B]">
                 <div className="flex items-start gap-3.5">
-                  <div className="h-9 w-9 rounded-xl bg-[#FBEAF0] border border-[#B14B6C]/20 shadow-2xs flex items-center justify-center shrink-0 text-[#B14B6C]">
-                    <MapPin className="w-4 h-4 text-[#B14B6C]" />
+                  <div className="h-9 w-9 rounded-xl bg-[#F8EDF1] border border-[#B83268]/20 shadow-2xs flex items-center justify-center shrink-0 text-[#B83268]">
+                    <MapPin className="w-4 h-4 text-[#B83268]" />
                   </div>
                   <div>
-                    <strong className="block text-[#1F1F1F]">Training Centre Location</strong>
-                    <span className="text-[#565656] leading-relaxed block mt-0.5 font-normal">
+                    <strong className="block text-[#641B38]">Training Centre Location</strong>
+                    <span className="text-[#30262B] leading-relaxed block mt-0.5 font-normal">
                       Savvy Training Institute, Main Training Complex, Bengaluru, Karnataka, India
                     </span>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3.5">
-                  <div className="h-9 w-9 rounded-xl bg-[#FBEAF0] border border-[#B14B6C]/20 shadow-2xs flex items-center justify-center shrink-0 text-[#B14B6C]">
-                    <Phone className="w-4 h-4 text-[#B14B6C]" />
+                  <div className="h-9 w-9 rounded-xl bg-[#F8EDF1] border border-[#B83268]/20 shadow-2xs flex items-center justify-center shrink-0 text-[#B83268]">
+                    <Phone className="w-4 h-4 text-[#B83268]" />
                   </div>
                   <div>
-                    <strong className="block text-[#1F1F1F]">Phone &amp; WhatsApp</strong>
-                    <span className="text-[#565656] leading-relaxed block mt-0.5 font-normal">
+                    <strong className="block text-[#641B38]">Phone &amp; WhatsApp</strong>
+                    <span className="text-[#30262B] leading-relaxed block mt-0.5 font-normal">
                       +91 90000 12345 / 919000012345
                     </span>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3.5">
-                  <div className="h-9 w-9 rounded-xl bg-[#FBEAF0] border border-[#B14B6C]/20 shadow-2xs flex items-center justify-center shrink-0 text-[#B14B6C]">
-                    <Mail className="w-4 h-4 text-[#B14B6C]" />
+                  <div className="h-9 w-9 rounded-xl bg-[#F8EDF1] border border-[#B83268]/20 shadow-2xs flex items-center justify-center shrink-0 text-[#B83268]">
+                    <Mail className="w-4 h-4 text-[#B83268]" />
                   </div>
                   <div>
-                    <strong className="block text-[#1F1F1F]">Admissions Enquiries</strong>
-                    <span className="text-[#565656] leading-relaxed block mt-0.5 font-normal">
+                    <strong className="block text-[#641B38]">Admissions Enquiries</strong>
+                    <span className="text-[#30262B] leading-relaxed block mt-0.5 font-normal">
                       admissions@savvytraining.example
                     </span>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3.5">
-                  <div className="h-9 w-9 rounded-xl bg-[#FBEAF0] border border-[#B14B6C]/20 shadow-2xs flex items-center justify-center shrink-0 text-[#B14B6C]">
-                    <Clock className="w-4 h-4 text-[#B14B6C]" />
+                  <div className="h-9 w-9 rounded-xl bg-[#F8EDF1] border border-[#B83268]/20 shadow-2xs flex items-center justify-center shrink-0 text-[#B83268]">
+                    <Clock className="w-4 h-4 text-[#B83268]" />
                   </div>
                   <div>
-                    <strong className="block text-[#1F1F1F]">Office &amp; Lab Hours</strong>
-                    <span className="text-[#565656] leading-relaxed block mt-0.5 font-normal">
+                    <strong className="block text-[#641B38]">Office &amp; Lab Hours</strong>
+                    <span className="text-[#30262B] leading-relaxed block mt-0.5 font-normal">
                       Monday to Saturday: 09:00 AM – 06:30 PM (IST)
                     </span>
                   </div>
@@ -320,7 +320,7 @@ function ContactPageContent() {
             </div>
 
             {/* Quality & Security Note */}
-            <div className="bg-gradient-to-br from-[#7A2E49] via-[#B14B6C] to-[#E7A0B6] rounded-3xl p-8 text-white shadow-md border border-[#B14B6C]/30">
+            <div className="bg-[#641B38] rounded-3xl p-8 text-white shadow-md border border-[#B83268]/30">
               <div className="flex items-center gap-3 mb-3">
                 <ShieldCheck className="w-6 h-6 text-emerald-300" />
                 <h3 className="text-sm font-bold">Privacy &amp; Verification</h3>
@@ -333,11 +333,11 @@ function ContactPageContent() {
 
           {/* Right Column (7 cols): Properly Labelled Contact Form */}
           <div className="lg:col-span-7">
-            <div className="bg-white rounded-3xl p-8 sm:p-10 border border-[#F0E2E7] shadow-xs">
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1F1F1F] mb-1">
+            <div className="bg-white rounded-3xl p-8 sm:p-10 border border-[#EAD9E0] shadow-xs">
+              <h2 className="text-xl sm:text-2xl font-bold text-[#641B38] mb-1">
                 Course Enquiry Form
               </h2>
-              <p className="text-xs text-[#565656] mb-8 font-normal">
+              <p className="text-xs text-[#30262B] mb-8 font-normal">
                 Fields marked with an asterisk (<span className="text-rose-500">*</span>) are required.
               </p>
 
@@ -380,7 +380,7 @@ function ContactPageContent() {
 
                 {/* 1. Full Name */}
                 <div>
-                  <label htmlFor="fullName" className="block text-xs font-bold text-[#1F1F1F] mb-1.5">
+                  <label htmlFor="fullName" className="block text-xs font-bold text-[#641B38] mb-1.5">
                     Full Name <span className="text-rose-500">*</span>
                   </label>
                   <input
@@ -394,10 +394,10 @@ function ContactPageContent() {
                     placeholder="e.g. Alexander Wright"
                     required
                     disabled={status === 'submitting'}
-                    className={`w-full px-4 py-3 rounded-xl border text-sm text-[#1F1F1F] placeholder-[#A08B94] transition-colors focus:outline-none ${
+                    className={`w-full px-4 py-3 rounded-xl border text-sm text-[#641B38] placeholder-[#A08B94] transition-colors focus:outline-none ${
                       errors.fullName
                         ? 'border-rose-400 bg-rose-50/40 focus:border-rose-500'
-                        : 'border-[#F0E2E7] bg-white focus:border-[#B14B6C] focus:ring-1 focus:ring-[#B14B6C]'
+                        : 'border-[#EAD9E0] bg-white focus:border-[#B83268] focus:ring-1 focus:ring-[#B83268]'
                     }`}
                   />
                   {errors.fullName && (
@@ -409,7 +409,7 @@ function ContactPageContent() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   {/* Contact Number */}
                   <div>
-                    <label htmlFor="phone" className="block text-xs font-bold text-[#1F1F1F] mb-1.5">
+                    <label htmlFor="phone" className="block text-xs font-bold text-[#641B38] mb-1.5">
                       Contact Number <span className="text-rose-500">*</span>
                     </label>
                     <input
@@ -423,10 +423,10 @@ function ContactPageContent() {
                       placeholder="e.g. +44 7700 900077 or +91 98765 43210"
                       required
                       disabled={status === 'submitting'}
-                      className={`w-full px-4 py-3 rounded-xl border text-sm text-[#1F1F1F] placeholder-[#A08B94] transition-colors focus:outline-none ${
+                      className={`w-full px-4 py-3 rounded-xl border text-sm text-[#641B38] placeholder-[#A08B94] transition-colors focus:outline-none ${
                         errors.phone
                           ? 'border-rose-400 bg-rose-50/40 focus:border-rose-500'
-                          : 'border-[#F0E2E7] bg-white focus:border-[#B14B6C] focus:ring-1 focus:ring-[#B14B6C]'
+                          : 'border-[#EAD9E0] bg-white focus:border-[#B83268] focus:ring-1 focus:ring-[#B83268]'
                       }`}
                     />
                     {errors.phone && (
@@ -436,7 +436,7 @@ function ContactPageContent() {
 
                   {/* Email Address */}
                   <div>
-                    <label htmlFor="email" className="block text-xs font-bold text-[#1F1F1F] mb-1.5">
+                    <label htmlFor="email" className="block text-xs font-bold text-[#641B38] mb-1.5">
                       Email Address <span className="text-rose-500">*</span>
                     </label>
                     <input
@@ -450,10 +450,10 @@ function ContactPageContent() {
                       placeholder="e.g. alexander@example.com"
                       required
                       disabled={status === 'submitting'}
-                      className={`w-full px-4 py-3 rounded-xl border text-sm text-[#1F1F1F] placeholder-[#A08B94] transition-colors focus:outline-none ${
+                      className={`w-full px-4 py-3 rounded-xl border text-sm text-[#641B38] placeholder-[#A08B94] transition-colors focus:outline-none ${
                         errors.email
                           ? 'border-rose-400 bg-rose-50/40 focus:border-rose-500'
-                          : 'border-[#F0E2E7] bg-white focus:border-[#B14B6C] focus:ring-1 focus:ring-[#B14B6C]'
+                          : 'border-[#EAD9E0] bg-white focus:border-[#B83268] focus:ring-1 focus:ring-[#B83268]'
                       }`}
                     />
                     {errors.email && (
@@ -464,7 +464,7 @@ function ContactPageContent() {
 
                 {/* 4. Location (Typed text input) */}
                 <div>
-                  <label htmlFor="location" className="block text-xs font-bold text-[#1F1F1F] mb-1.5">
+                  <label htmlFor="location" className="block text-xs font-bold text-[#641B38] mb-1.5">
                     Your Location (City, Country) <span className="text-rose-500">*</span>
                   </label>
                   <input
@@ -478,10 +478,10 @@ function ContactPageContent() {
                     placeholder="e.g. London, United Kingdom or Bengaluru, India"
                     required
                     disabled={status === 'submitting'}
-                    className={`w-full px-4 py-3 rounded-xl border text-sm text-[#1F1F1F] placeholder-[#A08B94] transition-colors focus:outline-none ${
+                    className={`w-full px-4 py-3 rounded-xl border text-sm text-[#641B38] placeholder-[#A08B94] transition-colors focus:outline-none ${
                       errors.location
                         ? 'border-rose-400 bg-rose-50/40 focus:border-rose-500'
-                        : 'border-[#F0E2E7] bg-white focus:border-[#B14B6C] focus:ring-1 focus:ring-[#B14B6C]'
+                        : 'border-[#EAD9E0] bg-white focus:border-[#B83268] focus:ring-1 focus:ring-[#B83268]'
                     }`}
                   />
                   {errors.location && (
@@ -491,7 +491,7 @@ function ContactPageContent() {
 
                 {/* 5. Course of Interest Dropdown */}
                 <div>
-                  <label htmlFor="course" className="block text-xs font-bold text-[#1F1F1F] mb-1.5">
+                  <label htmlFor="course" className="block text-xs font-bold text-[#641B38] mb-1.5">
                     Course or shop item <span className="text-rose-500">*</span>
                   </label>
                   <select
@@ -503,10 +503,10 @@ function ContactPageContent() {
                     }}
                     required
                     disabled={status === 'submitting'}
-                    className={`w-full px-4 py-3 rounded-xl border text-sm text-[#1F1F1F] transition-colors focus:outline-none cursor-pointer ${
+                    className={`w-full px-4 py-3 rounded-xl border text-sm text-[#641B38] transition-colors focus:outline-none cursor-pointer ${
                       errors.course
                         ? 'border-rose-400 bg-rose-50/40 focus:border-rose-500'
-                        : 'border-[#F0E2E7] bg-white focus:border-[#B14B6C] focus:ring-1 focus:ring-[#B14B6C]'
+                        : 'border-[#EAD9E0] bg-white focus:border-[#B83268] focus:ring-1 focus:ring-[#B83268]'
                     }`}
                   >
                     <option value="">— Select a Course —</option>
@@ -531,7 +531,7 @@ function ContactPageContent() {
                 {/* 6. Other Course Text Input (Revealed when 'other' is selected) */}
                 {selectedCourse === 'other' && (
                   <div className="anim-pop-in">
-                    <label htmlFor="otherCourse" className="block text-xs font-bold text-[#1F1F1F] mb-1.5">
+                    <label htmlFor="otherCourse" className="block text-xs font-bold text-[#641B38] mb-1.5">
                       Specify Requested Course / Qualification <span className="text-rose-500">*</span>
                     </label>
                     <input
@@ -545,10 +545,10 @@ function ContactPageContent() {
                       placeholder="e.g. Advanced Phased Array (PAUT) or API 510 Pressure Vessel Inspector"
                       required
                       disabled={status === 'submitting'}
-                      className={`w-full px-4 py-3 rounded-xl border text-sm text-[#1F1F1F] placeholder-[#A08B94] transition-colors focus:outline-none ${
+                      className={`w-full px-4 py-3 rounded-xl border text-sm text-[#641B38] placeholder-[#A08B94] transition-colors focus:outline-none ${
                         errors.otherCourse
                           ? 'border-rose-400 bg-rose-50/40 focus:border-rose-500'
-                          : 'border-[#F0E2E7] bg-white focus:border-[#B14B6C] focus:ring-1 focus:ring-[#B14B6C]'
+                          : 'border-[#EAD9E0] bg-white focus:border-[#B83268] focus:ring-1 focus:ring-[#B83268]'
                       }`}
                     />
                     {errors.otherCourse && (
@@ -559,7 +559,7 @@ function ContactPageContent() {
 
                 {/* 7. Message (Optional) */}
                 <div>
-                  <label htmlFor="message" className="block text-xs font-bold text-[#1F1F1F] mb-1.5">
+                  <label htmlFor="message" className="block text-xs font-bold text-[#641B38] mb-1.5">
                     Message or Specific Questions (Optional)
                   </label>
                   <textarea
@@ -569,7 +569,7 @@ function ContactPageContent() {
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Tell us about your educational background, preferred schedule (weekday/weekend), or any specific training queries..."
                     disabled={status === 'submitting'}
-                    className="w-full px-4 py-3 rounded-xl border border-[#F0E2E7] bg-white text-sm text-[#1F1F1F] placeholder-[#A08B94] transition-colors focus:outline-none focus:border-[#B14B6C] focus:ring-1 focus:ring-[#B14B6C]"
+                    className="w-full px-4 py-3 rounded-xl border border-[#EAD9E0] bg-white text-sm text-[#641B38] placeholder-[#A08B94] transition-colors focus:outline-none focus:border-[#B83268] focus:ring-1 focus:ring-[#B83268]"
                   />
                 </div>
 
@@ -577,7 +577,7 @@ function ContactPageContent() {
                 <button
                   type="submit"
                   disabled={status === 'submitting'}
-                  className="w-full inline-flex items-center justify-center gap-2 py-4 rounded-full bg-[#B14B6C] hover:bg-[#8E3854] text-white text-sm font-bold shadow-md transition-colors disabled:opacity-50 mt-2 cursor-pointer"
+                  className="w-full inline-flex items-center justify-center gap-2 py-4 rounded-full bg-[#B83268] hover:bg-[#641B38] text-white text-sm font-bold shadow-md transition-colors disabled:opacity-50 mt-2 cursor-pointer"
                 >
                   {status === 'submitting' ? (
                     <>

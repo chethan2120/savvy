@@ -20,10 +20,8 @@ export function EditorialHero() {
   const trackRef = useRef<HTMLDivElement>(null);
   const [slideOffset, setSlideOffset] = useState(0);
 
-  // Coursera hero has 3 slide positions for smooth multi-card peeking carousel
   const totalSlides = 3;
 
-  // Auto-slide every 6 seconds unless user is hovering
   useEffect(() => {
     if (isPaused) return;
     const interval = setInterval(() => {
@@ -32,7 +30,6 @@ export function EditorialHero() {
     return () => clearInterval(interval);
   }, [isPaused, totalSlides]);
 
-  // Update pixel offset dynamically whenever currentSlide changes or window resizes
   useEffect(() => {
     const updateOffset = () => {
       if (!trackRef.current) return;
@@ -59,67 +56,49 @@ export function EditorialHero() {
   return (
     <section
       data-no-reveal
-      className="bg-white pt-4 pb-6 sm:pb-10 border-b border-[#F0E2E7] relative overflow-x-clip font-sans"
+      className="relative overflow-x-clip border-b border-[#EAD9E0] bg-[#FCF8F7] pb-6 pt-4 font-sans sm:pb-10"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
       <div className="site-container relative">
-        {/* Carousel Viewport Container */}
         <div className="relative overflow-hidden">
-          {/* Slider Track with Dynamic Pixel Offset */}
           <div
             ref={trackRef}
-            className="flex gap-4 sm:gap-5 transition-transform duration-500 ease-in-out items-stretch"
-            style={{
-              transform: `translateX(-${slideOffset}px)`,
-            }}
+            className="flex items-stretch gap-4 transition-transform duration-500 ease-in-out sm:gap-5"
+            style={{ transform: `translateX(-${slideOffset}px)` }}
           >
-            {/* ========================================================= */}
-            {/* CARD 1: Light mint → lime → spring green banner          */}
-            {/* ========================================================= */}
-            <div className="w-full sm:w-[500px] lg:w-[calc(50%-12px)] xl:w-[580px] shrink-0 rounded-[28px] bg-[linear-gradient(148deg,#f7fee7_0%,#d9f99d_22%,#86efac_58%,#4ade80_100%)] text-[#14532d] p-0 flex items-stretch relative overflow-hidden shadow-[0_18px_40px_rgba(74,222,128,0.28)] border border-white/70 h-auto sm:h-[340px]">
-              <div
-                aria-hidden="true"
-                className="absolute -right-8 -top-16 w-72 h-72 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.72)_0%,transparent_68%)] blur-2xl pointer-events-none"
-              />
-              <div
-                aria-hidden="true"
-                className="absolute -left-10 -bottom-20 w-64 h-64 rounded-full bg-[radial-gradient(circle,rgba(52,211,153,0.45)_0%,transparent_70%)] blur-2xl pointer-events-none"
-              />
-
-              <div className="relative z-10 w-full flex flex-col sm:flex-row items-stretch">
-                <div className="relative z-30 w-full sm:w-[54%] flex flex-col justify-center text-left p-6 sm:p-7 lg:p-8">
+            <div className="relative flex h-auto shrink-0 items-stretch overflow-hidden rounded-[28px] border border-white/80 bg-[linear-gradient(148deg,#FCF8F7_0%,#F8EDF1_42%,#E8A6BC_100%)] p-0 text-[#641B38] shadow-[0_16px_36px_rgba(100,27,56,0.12)] sm:h-[340px] w-full sm:w-[500px] lg:w-[calc(50%-12px)] xl:w-[580px]">
+              <div className="relative z-10 flex w-full flex-col items-stretch sm:flex-row">
+                <div className="relative z-30 flex w-full flex-col justify-center p-6 text-left sm:w-[54%] sm:p-7 lg:p-8">
                   <div>
-                    <h2 className="text-xl sm:text-2xl lg:text-[25px] font-bold text-[#14532d] tracking-tight leading-[1.18] mb-2 font-sans">
+                    <h2 className="mb-2 font-sans text-xl font-bold leading-[1.18] tracking-tight text-[#641B38] sm:text-2xl lg:text-[25px]">
                       Learn it. Teach it. Certify it.
                     </h2>
-                    <p className="text-xs sm:text-[13px] text-[#166534] leading-[1.4] mb-5 font-normal font-sans line-clamp-3">
+                    <p className="mb-5 line-clamp-3 font-sans text-xs font-normal leading-[1.4] text-[#30262B] sm:text-[13px]">
                       Teaching qualifications, online beauty, massage and hairdressing courses, and accreditation to certify your own learners.
                     </p>
                   </div>
-
                   <Link
                     href="/courses"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#047857] hover:bg-[#065f46] text-white text-[13px] font-semibold tracking-normal shadow-xs transition-all hover:gap-3 group w-fit"
+                    className="group inline-flex w-fit items-center gap-2 rounded-full bg-[#B83268] px-5 py-2.5 text-[13px] font-semibold text-white shadow-xs transition-all hover:gap-3 hover:bg-[#641B38]"
                   >
                     <span>Explore courses</span>
-                    <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform" />
+                    <ArrowRight className="h-4 w-4 text-white transition-transform group-hover:translate-x-0.5" />
                   </Link>
                 </div>
-
-                <div className="relative w-full h-48 min-h-48 shrink-0 overflow-hidden sm:h-auto sm:min-h-full sm:w-[46%]">
+                <div className="relative h-48 min-h-48 w-full shrink-0 overflow-hidden sm:h-auto sm:min-h-full sm:w-[46%]">
                   <Image
                     src="/images/heroes/about-hero.jpg"
-                    alt="Engineering inspection lab"
+                    alt="Adult learners in a training session"
                     fill
                     sizes="320px"
                     className="object-cover object-center"
                     priority
                   />
                   <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between gap-2 rounded-full bg-white/95 px-3 py-1.5 shadow-md">
-                    <span className="min-w-0 truncate text-[11px] font-bold text-[#14532d]">Lisa Zaman</span>
-                    <span className="inline-flex shrink-0 items-center gap-1 text-[10px] font-bold text-[#047857]">
-                      <Award className="w-3 h-3" />
+                    <span className="min-w-0 truncate text-[11px] font-bold text-[#641B38]">Lisa Zaman</span>
+                    <span className="inline-flex shrink-0 items-center gap-1 text-[10px] font-bold text-[#B83268]">
+                      <Award className="h-3 w-3" />
                       Founder, tutor and assessor
                     </span>
                   </div>
@@ -127,41 +106,34 @@ export function EditorialHero() {
               </div>
             </div>
 
-            {/* ========================================================= */}
-            {/* CARD 2: Pure White Banner (Coursera Google Card Match)    */}
-            {/* ========================================================= */}
-            <div className="w-full sm:w-[500px] lg:w-[calc(50%-12px)] xl:w-[580px] shrink-0 rounded-[28px] bg-white text-[#1F1F1F] p-0 flex items-stretch relative overflow-hidden shadow-xs border border-[#F0E2E7] h-auto sm:h-[340px]">
-              <div className="relative z-10 w-full flex flex-col sm:flex-row items-stretch">
-                <div className="relative z-30 w-full sm:w-[54%] flex flex-col justify-center text-left p-6 sm:p-7 lg:p-8">
+            <div className="relative flex h-auto shrink-0 items-stretch overflow-hidden rounded-[28px] border border-[#EAD9E0] bg-white p-0 text-[#30262B] shadow-xs sm:h-[340px] w-full sm:w-[500px] lg:w-[calc(50%-12px)] xl:w-[580px]">
+              <div className="relative z-10 flex w-full flex-col items-stretch sm:flex-row">
+                <div className="relative z-30 flex w-full flex-col justify-center p-6 text-left sm:w-[54%] sm:p-7 lg:p-8">
                   <div>
-                    {/* Partner Header Crest */}
-                    <div className="flex items-center gap-2 mb-2">
-                      <div className="h-5 w-5 rounded-full overflow-hidden border border-[#F0E2E7] p-0.5 bg-white shadow-2xs shrink-0">
+                    <div className="mb-2 flex items-center gap-2">
+                      <div className="h-5 w-5 shrink-0 overflow-hidden rounded-full border border-[#EAD9E0] bg-white p-0.5">
                         <SavvyLogo markClassName="h-full w-full object-contain" />
                       </div>
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#B14B6C] font-sans">
+                      <span className="font-sans text-[11px] font-bold uppercase tracking-wider text-[#B83268]">
                         Teaching qualifications
                       </span>
                     </div>
-
-                    <h2 className="text-xl sm:text-[22px] lg:text-[23px] font-bold text-[#1F1F1F] tracking-tight leading-[1.18] mb-2 font-sans line-clamp-3">
+                    <h2 className="mb-2 line-clamp-3 font-sans text-xl font-bold leading-[1.18] tracking-tight text-[#641B38] sm:text-[22px] lg:text-[23px]">
                       Become a teacher, fully online
                     </h2>
-                    <p className="text-xs sm:text-[13px] text-[#565656] leading-[1.4] mb-5 font-normal font-sans line-clamp-2">
+                    <p className="mb-5 line-clamp-2 font-sans text-xs font-normal leading-[1.4] text-[#30262B] sm:text-[13px]">
                       Level 3 to Level 5 teaching qualifications, plus assessing and internal quality assurance, with live Zoom sessions.
                     </p>
                   </div>
-
                   <Link
                     href="/teaching"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#B14B6C] hover:bg-[#8E3854] text-white text-[13px] font-semibold tracking-normal shadow-xs transition-all hover:gap-3 group w-fit"
+                    className="group inline-flex w-fit items-center gap-2 rounded-full bg-[#B83268] px-5 py-2.5 text-[13px] font-semibold text-white shadow-xs transition-all hover:gap-3 hover:bg-[#641B38]"
                   >
                     <span>View qualifications</span>
-                    <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform" />
+                    <ArrowRight className="h-4 w-4 text-white transition-transform group-hover:translate-x-0.5" />
                   </Link>
                 </div>
-
-                <div className="relative w-full h-48 min-h-48 shrink-0 overflow-hidden sm:h-auto sm:min-h-full sm:w-[46%] bg-[#FBF6F8]">
+                <div className="relative h-48 min-h-48 w-full shrink-0 overflow-hidden bg-[#F8EDF1] sm:h-auto sm:min-h-full sm:w-[46%]">
                   <Image
                     src="/images/courses/award-in-education-and-training.jpg"
                     alt="A trainer speaking with adult learners in a classroom"
@@ -173,43 +145,29 @@ export function EditorialHero() {
               </div>
             </div>
 
-            {/* ========================================================= */}
-            {/* CARD 3: Vibrant Coursera Electric Blue Enterprise Card    */}
-            {/* ========================================================= */}
-            <div className="w-full sm:w-[500px] lg:w-[calc(50%-12px)] xl:w-[580px] shrink-0 rounded-[28px] bg-[linear-gradient(128deg,#7A2E49_0%,#B14B6C_42%,#D4789A_78%,#F3C3D2_100%)] text-white p-0 flex items-stretch relative overflow-hidden shadow-[0_18px_40px_rgba(177,75,108,0.28)] border border-white/25 h-auto sm:h-[340px]">
-              <div
-                aria-hidden="true"
-                className="absolute -right-8 -top-16 w-72 h-72 rounded-full bg-[radial-gradient(circle,rgba(244,114,182,0.45)_0%,transparent_65%)] blur-2xl pointer-events-none"
-              />
-              <div
-                aria-hidden="true"
-                className="absolute -right-6 -bottom-12 w-56 h-56 rounded-full bg-[radial-gradient(circle,rgba(243,195,210,0.55)_0%,transparent_68%)] blur-2xl pointer-events-none"
-              />
-
-              <div className="relative z-10 w-full flex flex-col sm:flex-row items-stretch">
-                <div className="relative z-30 w-full sm:w-[54%] flex flex-col justify-center text-left p-6 sm:p-7 lg:p-8">
+            <div className="relative flex h-auto shrink-0 items-stretch overflow-hidden rounded-[28px] border border-white/20 bg-[linear-gradient(128deg,#641B38_0%,#7A2344_58%,#B83268_100%)] p-0 text-white shadow-[0_16px_36px_rgba(100,27,56,0.22)] sm:h-[340px] w-full sm:w-[500px] lg:w-[calc(50%-12px)] xl:w-[580px]">
+              <div className="relative z-10 flex w-full flex-col items-stretch sm:flex-row">
+                <div className="relative z-30 flex w-full flex-col justify-center p-6 text-left sm:w-[54%] sm:p-7 lg:p-8">
                   <div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#B14B6C] bg-white px-2.5 py-0.5 rounded-full mb-2 inline-block font-sans shadow-2xs">
+                    <span className="mb-2 inline-block rounded-full bg-white px-2.5 py-0.5 font-sans text-[10px] font-bold uppercase tracking-wider text-[#641B38]">
                       Savvy for Business
                     </span>
-                    <h2 className="text-xl sm:text-2xl lg:text-[25px] font-bold text-white tracking-tight leading-[1.18] mb-2 font-sans line-clamp-2">
+                    <h2 className="mb-2 line-clamp-2 font-sans text-xl font-bold leading-[1.18] tracking-tight text-white sm:text-2xl lg:text-[25px]">
                       Certify your training in your own right
                     </h2>
-                    <p className="text-xs sm:text-[13px] text-white/90 leading-[1.4] mb-5 font-normal font-sans line-clamp-2">
+                    <p className="mb-5 line-clamp-2 font-sans text-xs font-normal leading-[1.4] text-white/90 sm:text-[13px]">
                       Private companies and individuals can apply. Every sector is welcome, from beauty and hair to education and business skills.
                     </p>
                   </div>
-
                   <Link
                     href="/accreditation"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white hover:bg-slate-100 text-[#B14B6C] text-[13px] font-semibold tracking-normal shadow-xs transition-all hover:gap-3 group w-fit"
+                    className="group inline-flex w-fit items-center gap-2 rounded-full bg-white px-5 py-2.5 text-[13px] font-semibold text-[#641B38] shadow-xs transition-all hover:gap-3 hover:bg-[#F8EDF1]"
                   >
                     <span>Apply for accreditation</span>
-                    <ArrowRight className="w-4 h-4 text-[#B14B6C] group-hover:translate-x-0.5 transition-transform" />
+                    <ArrowRight className="h-4 w-4 text-[#641B38] transition-transform group-hover:translate-x-0.5" />
                   </Link>
                 </div>
-
-                <div className="relative w-full h-48 min-h-48 shrink-0 overflow-hidden sm:h-auto sm:min-h-full sm:w-[46%]">
+                <div className="relative h-48 min-h-48 w-full shrink-0 overflow-hidden sm:h-auto sm:min-h-full sm:w-[46%]">
                   <Image
                     src="/images/courses/internal-quality-assurance.jpg"
                     alt="An assessor reviewing training assessment folders"
@@ -217,54 +175,49 @@ export function EditorialHero() {
                     sizes="320px"
                     className="object-cover object-center"
                   />
-                  <div className="absolute bottom-3 left-3 right-3 px-2.5 py-1.5 rounded-full bg-white/95 text-[10px] font-bold text-[#B14B6C] flex items-center justify-center gap-1 shadow-md">
-                    <ShieldCheck className="w-3 h-3 text-[#B14B6C]" />
+                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-center gap-1 rounded-full bg-white/95 px-2.5 py-1.5 text-[10px] font-bold text-[#641B38] shadow-md">
+                    <ShieldCheck className="h-3 w-3 text-[#B83268]" />
                     <span>Reviewed by Lisa</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* ========================================================= */}
-            {/* CARD 4: Verifiable Credentials & Digital Recognition     */}
-            {/* ========================================================= */}
-            <div className="w-full sm:w-[500px] lg:w-[calc(50%-12px)] xl:w-[580px] shrink-0 rounded-[28px] bg-white text-[#1F1F1F] p-6 sm:p-7 lg:p-8 flex items-center relative overflow-hidden shadow-xs border border-[#F0E2E7] h-auto sm:h-[340px]">
-              <div className="relative z-10 w-full flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div className="relative z-30 w-full sm:w-[58%] flex flex-col justify-between h-full pr-1 sm:pr-3 text-left">
+            <div className="relative flex h-auto shrink-0 items-center overflow-hidden rounded-[28px] border border-[#EAD9E0] bg-white p-6 text-[#30262B] shadow-xs sm:h-[340px] sm:p-7 lg:p-8 w-full sm:w-[500px] lg:w-[calc(50%-12px)] xl:w-[580px]">
+              <div className="relative z-10 flex w-full flex-col justify-between gap-4 sm:flex-row sm:items-center">
+                <div className="relative z-30 flex h-full w-full flex-col justify-between pr-1 text-left sm:w-[58%] sm:pr-3">
                   <div>
-                    <div className="flex items-center gap-1.5 mb-2">
-                      <Award className="w-4 h-4 text-[#B14B6C]" />
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#B14B6C] font-sans">
+                    <div className="mb-2 flex items-center gap-1.5">
+                      <Award className="h-4 w-4 text-[#B83268]" />
+                      <span className="font-sans text-[11px] font-bold uppercase tracking-wider text-[#B83268]">
                         Authorized Credentials
                       </span>
                     </div>
-                    <h2 className="text-xl sm:text-[22px] lg:text-[23px] font-bold text-[#1F1F1F] tracking-tight leading-[1.18] mb-2 font-sans line-clamp-2">
+                    <h2 className="mb-2 line-clamp-2 font-sans text-xl font-bold leading-[1.18] tracking-tight text-[#641B38] sm:text-[22px] lg:text-[23px]">
                       Certificate and logo after approval
                     </h2>
-                    <p className="text-xs sm:text-[13px] text-[#565656] leading-[1.4] mb-5 font-normal font-sans line-clamp-2">
+                    <p className="mb-5 line-clamp-2 font-sans text-xs font-normal leading-[1.4] text-[#30262B] sm:text-[13px]">
                       Once an accreditation application is approved, the certificate and logo are ready to download from the account. The sample shown on the source site is an example only.
                     </p>
                   </div>
-
                   <Link
                     href="/accreditation"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#B14B6C] hover:bg-[#8E3854] text-white text-[13px] font-semibold tracking-normal shadow-xs transition-all hover:gap-3 group w-fit"
+                    className="group inline-flex w-fit items-center gap-2 rounded-full bg-[#B83268] px-5 py-2.5 text-[13px] font-semibold text-white shadow-xs transition-all hover:gap-3 hover:bg-[#641B38]"
                   >
                     <span>Start an application</span>
-                    <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform" />
+                    <ArrowRight className="h-4 w-4 text-white transition-transform group-hover:translate-x-0.5" />
                   </Link>
                 </div>
-
-                <div className="flex w-full sm:w-[42%] relative items-center justify-center shrink-0 mt-4 sm:mt-0">
-                  <div className="relative w-full sm:w-36 sm:h-36 lg:w-40 lg:h-40 min-h-[7.5rem] rounded-2xl overflow-hidden border border-[#F0E2E7] shadow-md bg-slate-50 flex flex-col items-center justify-center p-3 text-center">
-                    <div className="w-10 h-10 rounded-full bg-[#FBEAF0] border border-[#B14B6C]/20 flex items-center justify-center mb-2">
-                      <FileCheck className="w-5 h-5 text-[#B14B6C]" />
+                <div className="relative mt-4 flex w-full shrink-0 items-center justify-center sm:mt-0 sm:w-[42%]">
+                  <div className="relative flex min-h-[7.5rem] w-full flex-col items-center justify-center rounded-2xl border border-[#EAD9E0] bg-[#F8EDF1] p-3 text-center shadow-md sm:h-36 sm:w-36 lg:h-40 lg:w-40">
+                    <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-full border border-[#B83268]/20 bg-white">
+                      <FileCheck className="h-5 w-5 text-[#B83268]" />
                     </div>
-                    <span className="text-xs font-bold text-[#1F1F1F]">Example only</span>
-                    <span className="text-[10px] text-slate-500 mt-0.5">Not an issued certificate</span>
-                    <div className="mt-2 flex items-center gap-1 text-[10px] font-semibold text-[#B14B6C]">
+                    <span className="text-xs font-bold text-[#641B38]">Example only</span>
+                    <span className="mt-0.5 text-[10px] text-[#30262B]">Not an issued certificate</span>
+                    <div className="mt-2 flex items-center gap-1 text-[10px] font-semibold text-[#B83268]">
                       <span>Check Registry</span>
-                      <ExternalLink className="w-2.5 h-2.5" />
+                      <ExternalLink className="h-2.5 w-2.5" />
                     </div>
                   </div>
                 </div>
@@ -277,10 +230,10 @@ export function EditorialHero() {
               type="button"
               onClick={nextSlide}
               aria-label="Next slide"
-              className="hidden sm:flex absolute top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white hover:bg-slate-50 text-[#B14B6C] border border-[#F0E2E7] shadow-md items-center justify-center transition-all z-20 hover:scale-105 active:scale-95 cursor-pointer"
+              className="absolute top-1/2 z-20 hidden h-11 w-11 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-[#EAD9E0] bg-white text-[#B83268] shadow-md transition-all hover:scale-105 hover:bg-[#F8EDF1] active:scale-95 sm:flex"
               style={{ right: 12, left: 'auto' }}
             >
-              <ChevronRight className="w-5 h-5 text-[#B14B6C]" />
+              <ChevronRight className="h-5 w-5 text-[#B83268]" />
             </button>
           )}
 
@@ -289,10 +242,10 @@ export function EditorialHero() {
               type="button"
               onClick={prevSlide}
               aria-label="Previous slide"
-              className="hidden sm:flex absolute top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white hover:bg-slate-50 text-[#B14B6C] border border-[#F0E2E7] shadow-md items-center justify-center transition-all z-20 hover:scale-105 active:scale-95 cursor-pointer"
+              className="absolute top-1/2 z-20 hidden h-11 w-11 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-[#EAD9E0] bg-white text-[#B83268] shadow-md transition-all hover:scale-105 hover:bg-[#F8EDF1] active:scale-95 sm:flex"
               style={{ left: 12, right: 'auto' }}
             >
-              <ChevronLeft className="w-5 h-5 text-[#B14B6C]" />
+              <ChevronLeft className="h-5 w-5 text-[#B83268]" />
             </button>
           )}
         </div>
@@ -303,7 +256,7 @@ export function EditorialHero() {
             onClick={prevSlide}
             aria-label="Previous slide"
             disabled={currentSlide === 0}
-            className="sm:hidden inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#F0E2E7] bg-white text-[#B14B6C] shadow-sm disabled:opacity-40"
+            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#EAD9E0] bg-white text-[#B83268] shadow-sm disabled:opacity-40 sm:hidden"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
@@ -318,7 +271,7 @@ export function EditorialHero() {
             >
               <span
                 className={`block rounded-full ${
-                  currentSlide === idx ? 'h-2 w-7 bg-[#B14B6C]' : 'h-2.5 w-2.5 bg-slate-300'
+                  currentSlide === idx ? 'h-2 w-7 bg-[#B83268]' : 'h-2.5 w-2.5 bg-[#E8A6BC]'
                 }`}
               />
             </button>
@@ -328,7 +281,7 @@ export function EditorialHero() {
             onClick={nextSlide}
             aria-label="Next slide"
             disabled={currentSlide === totalSlides - 1}
-            className="sm:hidden inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#F0E2E7] bg-white text-[#B14B6C] shadow-sm disabled:opacity-40"
+            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#EAD9E0] bg-white text-[#B83268] shadow-sm disabled:opacity-40 sm:hidden"
           >
             <ChevronRight className="h-5 w-5" />
           </button>

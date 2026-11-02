@@ -52,7 +52,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${sourceSans.variable} js-reveal scroll-smooth`}>
-      <body className={`${sourceSans.className} antialiased bg-white text-[#010101]`}>
+      <body className={`${sourceSans.className} antialiased bg-white text-[#30262B]`}>
         <noscript>
           <style>{`main.public-site section, main.public-site .reveal-stagger > * { opacity: 1 !important; transform: none !important; }`}</style>
         </noscript>

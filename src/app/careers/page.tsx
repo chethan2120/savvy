@@ -20,10 +20,10 @@ export default function CareersPage() {
       <section className="site-container py-14 grid grid-cols-1 lg:grid-cols-2 gap-10">
         <ol className="flex flex-col gap-4">
           {careerSteps.map((step, index) => (
-            <li key={step.title} className="rounded-2xl border border-[#F0E2E7] p-5">
-              <p className="text-xs font-bold uppercase tracking-wider text-[#B14B6C]">Step {index + 1}</p>
-              <h2 className="mt-1 text-lg font-semibold text-[#1F1F1F]">{step.title}</h2>
-              <p className="mt-1 text-sm text-[#565656]">{step.body}</p>
+            <li key={step.title} className="rounded-2xl border border-[#EAD9E0] p-5">
+              <p className="text-xs font-bold uppercase tracking-wider text-[#B83268]">Step {index + 1}</p>
+              <h2 className="mt-1 text-lg font-semibold text-[#641B38]">{step.title}</h2>
+              <p className="mt-1 text-sm text-[#30262B]">{step.body}</p>
             </li>
           ))}
         </ol>

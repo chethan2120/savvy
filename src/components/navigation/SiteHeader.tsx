@@ -165,20 +165,20 @@ export function SiteHeader() {
   return (
     <>
       {/* Coursera-Style Top Utility Bar */}
-      <div className="bg-[#5C2038] text-white text-[11px] font-semibold hidden md:block border-b border-white/10">
+      <div className="hidden border-b border-[#EAD9E0] bg-[#FCF8F7] text-[11px] font-semibold text-[#641B38] md:block">
         <div className="site-container flex items-center justify-between h-9">
           <div className="flex items-center gap-6">
-            <Link href="/" className="text-white border-b-2 border-white pb-0.5 font-bold">
+            <Link href="/" className="border-b-2 border-[#641B38] pb-0.5 font-bold text-[#641B38]">
               For Individuals
             </Link>
-            <Link href="/accreditation" className="text-white/70 hover:text-white transition-colors pb-0.5">
+            <Link href="/accreditation" className="pb-0.5 text-[#30262B] transition-colors hover:text-[#B83268]">
               Accreditation
             </Link>
-            <Link href="/teaching" className="text-white/70 hover:text-white transition-colors pb-0.5">
+            <Link href="/teaching" className="pb-0.5 text-[#30262B] transition-colors hover:text-[#B83268]">
               Teaching
             </Link>
           </div>
-          <div className="hidden lg:flex items-center gap-4 text-white/75 text-[11px] shrink-0">
+          <div className="hidden lg:flex items-center gap-4 text-[11px] text-[#30262B] shrink-0">
             <span>Accreditation, teaching qualifications and professional courses</span>
           </div>
         </div>
@@ -188,22 +188,22 @@ export function SiteHeader() {
         ref={headerRef}
         className={`sticky top-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-[#F0E2E7]'
-            : 'bg-white border-b border-[#F0E2E7]'
+            ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-[#EAD9E0]'
+            : 'bg-white border-b border-[#EAD9E0]'
         }`}
       >
         <div className="site-container h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
           {/* Left: Institute Logo & Name + Coursera-style Explore Button + Certifications */}
           <div className="flex items-center gap-4 xl:gap-5 shrink-0">
             <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group focus-visible:outline-none min-w-0">
-              <div className="h-10 w-10 sm:h-11 sm:w-11 rounded-full overflow-hidden bg-white shadow-xs border border-[#F0E2E7] p-0.5 flex items-center justify-center transition-transform group-hover:scale-105 shrink-0">
+              <div className="h-10 w-10 sm:h-11 sm:w-11 rounded-full overflow-hidden bg-white shadow-xs border border-[#EAD9E0] p-0.5 flex items-center justify-center transition-transform group-hover:scale-105 shrink-0">
                 <SavvyLogo markClassName="h-full w-full object-contain" />
               </div>
               <div className="flex flex-col min-w-0">
-                <span className="font-semibold text-[15px] sm:text-[17px] lg:text-[19px] tracking-tight text-[#1F1F1F] leading-none truncate">
+                <span className="font-semibold text-[15px] sm:text-[17px] lg:text-[19px] tracking-tight text-[#641B38] leading-none truncate">
                   Savvy Training Institute
                 </span>
-                <span className="hidden xs:block text-[10px] lg:text-[11px] font-semibold text-[#B14B6C] tracking-wider uppercase mt-1">
+                <span className="hidden xs:block text-[10px] lg:text-[11px] font-semibold text-[#B83268] tracking-wider uppercase mt-1">
                   Professional Certification
                 </span>
               </div>
@@ -227,7 +227,7 @@ export function SiteHeader() {
                     setIsMegaOpen(true);
                   }
                 }}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#B14B6C] hover:bg-[#8E3854] text-white text-xs font-bold transition-all shadow-2xs"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#B83268] hover:bg-[#641B38] text-white text-xs font-bold transition-all shadow-2xs"
               >
                 <span>Explore Courses</span>
                 <ChevronDown
@@ -246,18 +246,18 @@ export function SiteHeader() {
             onSubmit={handleSearchSubmit}
             className="hidden lg:flex items-center flex-1 max-w-sm xl:max-w-md mx-2 group"
           >
-            <div className="relative flex items-center w-full bg-white rounded-full border border-[#F0E2E7] hover:border-[#B14B6C]/60 focus-within:border-[#B14B6C] focus-within:ring-2 focus-within:ring-[#B14B6C]/15 transition-all p-1 pl-4 shadow-2xs">
+            <div className="relative flex items-center w-full bg-white rounded-full border border-[#EAD9E0] hover:border-[#B83268]/60 focus-within:border-[#B83268] focus-within:ring-2 focus-within:ring-[#B83268]/15 transition-all p-1 pl-4 shadow-2xs">
               <input
                 type="text"
                 value={courseSearch}
                 onChange={(e) => setCourseSearch(e.target.value)}
                 placeholder="What do you want to learn?"
-                className="w-full bg-transparent text-xs text-[#1F1F1F] placeholder-[#A08B94] focus:outline-none pr-2"
+                className="w-full bg-transparent text-xs text-[#641B38] placeholder-[#A08B94] focus:outline-none pr-2"
               />
               <button
                 type="submit"
                 aria-label="Search programmes"
-                className="shrink-0 w-8 h-8 rounded-full bg-[#B14B6C] hover:bg-[#8E3854] text-white flex items-center justify-center transition-all shadow-xs"
+                className="shrink-0 w-8 h-8 rounded-full bg-[#B83268] hover:bg-[#641B38] text-white flex items-center justify-center transition-all shadow-xs"
               >
                 <Search className="w-3.5 h-3.5" />
               </button>
@@ -290,7 +290,7 @@ export function SiteHeader() {
                         }
                       }}
                       className={`inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${
-                        contactActive ? 'text-[#B14B6C] bg-[#FBEAF0]' : 'text-[#565656] hover:text-[#B14B6C] hover:bg-[#FBEAF0]'
+                        contactActive ? 'text-[#B83268] bg-[#F8EDF1]' : 'text-[#30262B] hover:text-[#B83268] hover:bg-[#F8EDF1]'
                       }`}
                     >
                       Contact Us
@@ -298,7 +298,7 @@ export function SiteHeader() {
                     </button>
                     {contactOpen && (
                       <div role="menu" className="absolute right-0 top-full z-50 w-[22rem] pt-2">
-                      <div className="rounded-2xl border border-[#F0E2E7] bg-white p-3 shadow-xl">
+                      <div className="rounded-2xl border border-[#EAD9E0] bg-white p-3 shadow-xl">
                         {[
                           { label: 'Career', href: '/careers', text: 'Send your specialism, location and CV.', icon: Briefcase },
                           { label: 'Mentorship', href: '/mentorship', text: 'Ask about starting, running or registering a business.', icon: Compass },
@@ -309,12 +309,12 @@ export function SiteHeader() {
                             role="menuitem"
                             href={item.href}
                             onClick={() => setContactOpen(false)}
-                            className="flex items-start gap-3 rounded-xl px-3 py-3 hover:bg-[#FBEAF0]"
+                            className="flex items-start gap-3 rounded-xl px-3 py-3 hover:bg-[#F8EDF1]"
                           >
-                            <item.icon className="mt-0.5 h-5 w-5 text-[#B14B6C]" />
+                            <item.icon className="mt-0.5 h-5 w-5 text-[#B83268]" />
                             <span>
-                              <span className="block text-sm font-semibold text-[#1F1F1F]">{item.label}</span>
-                              <span className="mt-0.5 block text-sm text-[#565656]">{item.text}</span>
+                              <span className="block text-sm font-semibold text-[#641B38]">{item.label}</span>
+                              <span className="mt-0.5 block text-sm text-[#30262B]">{item.text}</span>
                             </span>
                           </Link>
                         ))}
@@ -330,8 +330,8 @@ export function SiteHeader() {
                   href={link.href}
                   className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${
                     isActive
-                      ? 'text-[#B14B6C] bg-[#FBEAF0]'
-                      : 'text-[#565656] hover:text-[#B14B6C] hover:bg-[#FBEAF0]'
+                      ? 'text-[#B83268] bg-[#F8EDF1]'
+                      : 'text-[#30262B] hover:text-[#B83268] hover:bg-[#F8EDF1]'
                   }`}
                 >
                   {link.label}
@@ -346,7 +346,7 @@ export function SiteHeader() {
               <div className="flex items-center gap-2">
                 <Link
                   href={`/${userSession.role}`}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#B14B6C] text-white text-xs font-bold hover:bg-[#8E3854] transition-all shadow-xs"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#B83268] text-white text-xs font-bold hover:bg-[#641B38] transition-all shadow-xs"
                 >
                   <ShieldCheck className="w-3.5 h-3.5 text-white" />
                   <span>Dashboard ({userSession.role})</span>
@@ -358,7 +358,7 @@ export function SiteHeader() {
                     setUserSession(null);
                     window.location.href = '/';
                   }}
-                  className="px-3 py-1.5 rounded-lg border border-[#F0E2E7] text-xs font-semibold text-[#565656] hover:text-[#B14B6C] hover:border-[#B14B6C] transition-colors"
+                  className="px-3 py-1.5 rounded-lg border border-[#EAD9E0] text-xs font-semibold text-[#30262B] hover:text-[#B83268] hover:border-[#B83268] transition-colors"
                 >
                   Sign Out
                 </button>
@@ -367,13 +367,13 @@ export function SiteHeader() {
               <div className="flex items-center gap-2">
                 <Link
                   href="/login"
-                  className="inline-flex items-center justify-center rounded-lg bg-[#B14B6C] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#8E3854]"
+                  className="inline-flex items-center justify-center rounded-lg border border-[#641B38] bg-white px-5 py-2.5 text-sm font-semibold text-[#641B38] hover:bg-[#F8EDF1]"
                 >
                   Login
                 </Link>
                 <Link
                   href="/contact-us"
-                  className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 rounded-lg bg-[#B14B6C] hover:bg-[#8E3854] text-white text-xs font-bold shadow-xs hover:shadow-sm transition-all active:scale-95 duration-200"
+                  className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 rounded-lg bg-[#B83268] hover:bg-[#641B38] text-white text-xs font-bold shadow-xs hover:shadow-sm transition-all active:scale-95 duration-200"
                 >
                   <span>Join for Free</span>
                 </Link>
@@ -386,7 +386,7 @@ export function SiteHeader() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2.5 rounded-xl text-[#1F1F1F] hover:bg-[#FBEAF0] focus:outline-none focus:ring-2 focus:ring-[#B14B6C] transition-colors"
+              className="p-2.5 rounded-xl text-[#641B38] hover:bg-[#F8EDF1] focus:outline-none focus:ring-2 focus:ring-[#B83268] transition-colors"
               aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -400,15 +400,15 @@ export function SiteHeader() {
             ref={megaMenuRef}
             onMouseEnter={handleMouseEnterMega}
             onMouseLeave={handleMouseLeaveMega}
-            className="hidden lg:block absolute top-full left-0 w-full bg-white border-b border-[#F0E2E7] shadow-xl anim-pop-in"
+            className="hidden lg:block absolute top-full left-0 w-full bg-white border-b border-[#EAD9E0] shadow-xl anim-pop-in"
           >
             <div className="site-container py-6">
               <div className="flex items-end justify-between gap-4">
                 <div>
-                  <p className="text-sm font-semibold text-[#B14B6C]">Courses taught by Lisa Zaman</p>
-                  <p className="mt-1 text-sm text-[#565656]">Six online courses, with manuals and video demonstrations.</p>
+                  <p className="text-sm font-semibold text-[#B83268]">Courses taught by Lisa Zaman</p>
+                  <p className="mt-1 text-sm text-[#30262B]">Six online courses, with manuals and video demonstrations.</p>
                 </div>
-                <Link href="/courses" onClick={() => setIsMegaOpen(false)} className="inline-flex items-center gap-1 text-sm font-semibold text-[#B14B6C]">
+                <Link href="/courses" onClick={() => setIsMegaOpen(false)} className="inline-flex items-center gap-1 text-sm font-semibold text-[#B83268]">
                   View all <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
@@ -416,25 +416,25 @@ export function SiteHeader() {
                 {catalogueCourses.map((course) => {
                   const price = showPrices ? gbpLabel(course) : null;
                   return (
-                    <Link key={course.id} href={`/courses/${course.slug}`} onClick={() => setIsMegaOpen(false)} className="rounded-xl border border-[#F0E2E7] p-3 hover:border-[#B14B6C]">
-                      <span className="block text-sm font-semibold text-[#1F1F1F]">{course.title}</span>
-                      <span className="mt-1 block text-sm text-[#565656]">{course.summary}</span>
-                      {price && <span className="mt-2 block text-sm font-semibold text-[#B14B6C]">{price}</span>}
+                    <Link key={course.id} href={`/courses/${course.slug}`} onClick={() => setIsMegaOpen(false)} className="rounded-xl border border-[#EAD9E0] p-3 hover:border-[#B83268]">
+                      <span className="block text-sm font-semibold text-[#641B38]">{course.title}</span>
+                      <span className="mt-1 block text-sm text-[#30262B]">{course.summary}</span>
+                      {price && <span className="mt-2 block text-sm font-semibold text-[#B83268]">{price}</span>}
                     </Link>
                   );
                 })}
               </div>
-              <div className="mt-5 grid gap-3 border-t border-[#F0E2E7] pt-5 md:grid-cols-3">
+              <div className="mt-5 grid gap-3 border-t border-[#EAD9E0] pt-5 md:grid-cols-3">
                 {[
                   { href: '/accreditation', title: 'Accreditation Certification', text: 'Apply for your training to be accredited.', icon: Award },
                   { href: '/shop', title: 'Shop', text: 'Manuals, forms and trainer resources.', icon: ShoppingBag },
                   { href: '/community', title: 'Student Community', text: 'Feedback and discussions, reviewed before publication.', icon: MessagesSquare },
                 ].map((item) => (
-                  <Link key={item.href} href={item.href} onClick={() => setIsMegaOpen(false)} className="flex gap-3 rounded-xl p-3 hover:bg-[#FBEAF0]">
-                    <item.icon className="h-5 w-5 shrink-0 text-[#B14B6C]" />
+                  <Link key={item.href} href={item.href} onClick={() => setIsMegaOpen(false)} className="flex gap-3 rounded-xl p-3 hover:bg-[#F8EDF1]">
+                    <item.icon className="h-5 w-5 shrink-0 text-[#B83268]" />
                     <span>
-                      <span className="block text-sm font-semibold text-[#1F1F1F]">{item.title}</span>
-                      <span className="mt-1 block text-sm text-[#565656]">{item.text}</span>
+                      <span className="block text-sm font-semibold text-[#641B38]">{item.title}</span>
+                      <span className="mt-1 block text-sm text-[#30262B]">{item.text}</span>
                     </span>
                   </Link>
                 ))}
@@ -462,7 +462,7 @@ export function SiteHeader() {
                   value={courseSearch}
                   onChange={(e) => setCourseSearch(e.target.value)}
                   placeholder="Search courses..."
-                  className="w-full pl-10 pr-4 py-2.5 rounded-full border border-[#e3e3e3] bg-[#FBEAF0] text-sm text-[#1F1F1F]"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-full border border-[#e3e3e3] bg-[#F8EDF1] text-sm text-[#641B38]"
                 />
               </form>
 
@@ -471,7 +471,7 @@ export function SiteHeader() {
                 <Link
                   href="/"
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`px-3 py-2.5 rounded-lg text-[16px] ${pathname === '/' ? 'text-[#B14B6C] font-bold bg-[#FBEAF0]' : 'text-[#1F1F1F]'}`}
+                  className={`px-3 py-2.5 rounded-lg text-[16px] ${pathname === '/' ? 'text-[#B83268] font-bold bg-[#F8EDF1]' : 'text-[#641B38]'}`}
                 >
                   Home
                 </Link>
@@ -481,28 +481,28 @@ export function SiteHeader() {
                   <button
                     type="button"
                     onClick={() => setMobileCategoryOpen(mobileCategoryOpen === 'explore' ? null : 'explore')}
-                    className="w-full flex items-center justify-between px-3 py-2.5 text-[#1F1F1F] font-medium text-[16px]"
+                    className="w-full flex items-center justify-between px-3 py-2.5 text-[#641B38] font-medium text-[16px]"
                   >
                     <span>Explore Courses</span>
                     <ChevronDown className={`w-4 h-4 transition-transform ${mobileCategoryOpen === 'explore' ? 'rotate-180' : ''}`} />
                   </button>
 
                   {mobileCategoryOpen === 'explore' && (
-                    <div className="pl-4 pr-2 py-2 flex flex-col gap-3 bg-[#FBEAF0] rounded-xl my-1 max-h-72 overflow-y-auto">
-                      <Link href="/courses" onClick={() => setMobileMenuOpen(false)} className="text-sm font-bold text-[#1F1F1F]">Courses</Link>
+                    <div className="pl-4 pr-2 py-2 flex flex-col gap-3 bg-[#F8EDF1] rounded-xl my-1 max-h-72 overflow-y-auto">
+                      <Link href="/courses" onClick={() => setMobileMenuOpen(false)} className="text-sm font-bold text-[#641B38]">Courses</Link>
                       {catalogueCourses.map((course) => (
                         <Link
                           key={course.id}
                           href={`/courses/${course.slug || course.id}`}
                           onClick={() => setMobileMenuOpen(false)}
-                          className="text-[13px] text-[#565656] hover:text-[#B14B6C] pl-2"
+                          className="text-[13px] text-[#30262B] hover:text-[#B83268] pl-2"
                         >
                           {course.title}
                         </Link>
                       ))}
-                      <Link href="/accreditation" onClick={() => setMobileMenuOpen(false)} className="text-sm font-bold text-[#1F1F1F]">Accreditation Certification</Link>
-                      <Link href="/shop" onClick={() => setMobileMenuOpen(false)} className="text-sm font-bold text-[#1F1F1F]">Shop</Link>
-                      <Link href="/community" onClick={() => setMobileMenuOpen(false)} className="text-sm font-bold text-[#1F1F1F]">Student Community</Link>
+                      <Link href="/accreditation" onClick={() => setMobileMenuOpen(false)} className="text-sm font-bold text-[#641B38]">Accreditation Certification</Link>
+                      <Link href="/shop" onClick={() => setMobileMenuOpen(false)} className="text-sm font-bold text-[#641B38]">Shop</Link>
+                      <Link href="/community" onClick={() => setMobileMenuOpen(false)} className="text-sm font-bold text-[#641B38]">Student Community</Link>
                     </div>
                   )}
                 </div>
@@ -510,21 +510,21 @@ export function SiteHeader() {
                 <Link
                   href="/teaching"
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`px-3 py-2.5 rounded-lg text-[16px] ${pathname === '/teaching' ? 'text-[#B14B6C] font-bold bg-[#FBEAF0]' : 'text-[#1F1F1F]'}`}
+                  className={`px-3 py-2.5 rounded-lg text-[16px] ${pathname === '/teaching' ? 'text-[#B83268] font-bold bg-[#F8EDF1]' : 'text-[#641B38]'}`}
                 >
                   Teaching
                 </Link>
                 <Link
                   href="/about-us"
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`px-3 py-2.5 rounded-lg text-[16px] ${pathname === '/about-us' ? 'text-[#B14B6C] font-bold bg-[#FBEAF0]' : 'text-[#1F1F1F]'}`}
+                  className={`px-3 py-2.5 rounded-lg text-[16px] ${pathname === '/about-us' ? 'text-[#B83268] font-bold bg-[#F8EDF1]' : 'text-[#641B38]'}`}
                 >
                   About Us
                 </Link>
                 <Link
                   href="/blogs"
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`px-3 py-2.5 rounded-lg text-[16px] ${pathname === '/blogs' ? 'text-[#B14B6C] font-bold bg-[#FBEAF0]' : 'text-[#1F1F1F]'}`}
+                  className={`px-3 py-2.5 rounded-lg text-[16px] ${pathname === '/blogs' ? 'text-[#B83268] font-bold bg-[#F8EDF1]' : 'text-[#641B38]'}`}
                 >
                   Blogs
                 </Link>
@@ -532,16 +532,16 @@ export function SiteHeader() {
                   <button
                     type="button"
                     onClick={() => setMobileCategoryOpen(mobileCategoryOpen === 'contact' ? null : 'contact')}
-                    className="w-full flex items-center justify-between px-3 py-2.5 text-[#1F1F1F] font-medium text-[16px]"
+                    className="w-full flex items-center justify-between px-3 py-2.5 text-[#641B38] font-medium text-[16px]"
                   >
                     <span>Contact Us</span>
                     <ChevronDown className={`w-4 h-4 transition-transform ${mobileCategoryOpen === 'contact' ? 'rotate-180' : ''}`} />
                   </button>
                   {mobileCategoryOpen === 'contact' && (
-                    <div className="flex flex-col gap-1 rounded-xl bg-[#FBEAF0] px-4 py-2">
-                      <Link href="/careers" onClick={() => setMobileMenuOpen(false)} className="py-2 text-sm text-[#1F1F1F]"><strong className="font-semibold">Career</strong><span className="block text-[#565656]">Send your specialism, location and CV.</span></Link>
-                      <Link href="/mentorship" onClick={() => setMobileMenuOpen(false)} className="py-2 text-sm text-[#1F1F1F]"><strong className="font-semibold">Mentorship</strong><span className="block text-[#565656]">Ask about starting or registering a business.</span></Link>
-                      <Link href="/contact-us" onClick={() => setMobileMenuOpen(false)} className="py-2 text-sm text-[#1F1F1F]"><strong className="font-semibold">Contact Us</strong><span className="block text-[#565656]">Send a course or shop enquiry.</span></Link>
+                    <div className="flex flex-col gap-1 rounded-xl bg-[#F8EDF1] px-4 py-2">
+                      <Link href="/careers" onClick={() => setMobileMenuOpen(false)} className="py-2 text-sm text-[#641B38]"><strong className="font-semibold">Career</strong><span className="block text-[#30262B]">Send your specialism, location and CV.</span></Link>
+                      <Link href="/mentorship" onClick={() => setMobileMenuOpen(false)} className="py-2 text-sm text-[#641B38]"><strong className="font-semibold">Mentorship</strong><span className="block text-[#30262B]">Ask about starting or registering a business.</span></Link>
+                      <Link href="/contact-us" onClick={() => setMobileMenuOpen(false)} className="py-2 text-sm text-[#641B38]"><strong className="font-semibold">Contact Us</strong><span className="block text-[#30262B]">Send a course or shop enquiry.</span></Link>
                     </div>
                   )}
                 </div>
@@ -555,7 +555,7 @@ export function SiteHeader() {
                   <Link
                     href={`/${userSession.role}`}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="w-full text-center py-2.5 rounded-full bg-[#B14B6C] text-white text-sm font-semibold"
+                    className="w-full text-center py-2.5 rounded-full bg-[#B83268] text-white text-sm font-semibold"
                   >
                     Go to {userSession.role.toUpperCase()} Dashboard
                   </Link>
@@ -567,7 +567,7 @@ export function SiteHeader() {
                       setMobileMenuOpen(false);
                       window.location.href = '/';
                     }}
-                    className="w-full text-center py-2 rounded-full border border-[#e3e3e3] text-xs font-medium text-[#565656]"
+                    className="w-full text-center py-2 rounded-full border border-[#e3e3e3] text-xs font-medium text-[#30262B]"
                   >
                     Sign Out
                   </button>
@@ -576,7 +576,7 @@ export function SiteHeader() {
                 <Link
                   href="/login"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="inline-flex w-full items-center justify-center rounded-full bg-[#B14B6C] px-6 py-3.5 text-base font-semibold text-white hover:bg-[#8E3854]"
+                  className="inline-flex w-full items-center justify-center rounded-full bg-[#B83268] px-6 py-3.5 text-base font-semibold text-white hover:bg-[#641B38]"
                 >
                   Login
                 </Link>

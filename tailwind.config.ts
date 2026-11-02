@@ -67,10 +67,10 @@ const config: Config = {
         "industrial-blue": "rgb(var(--industrial-blue-rgb) / <alpha-value>)",
         "safety-orange": "rgb(var(--safety-orange-rgb) / <alpha-value>)",
         coursera: {
-          blue: "#B14B6C",
-          hover: "#8E3854",
-          light: "#FBEAF0",
-          dark: "#5C2038",
+          blue: "#B83268",
+          hover: "#641B38",
+          light: "#F8EDF1",
+          dark: "#641B38",
         },
       },
       fontSize: {

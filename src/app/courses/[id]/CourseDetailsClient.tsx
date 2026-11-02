@@ -64,7 +64,7 @@ export function CourseDetailsClient({
       {/* ========================================================= */}
       {/* EXCITING EDITORIAL HERO SECTION                            */}
       {/* ========================================================= */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-[#7A2E49] via-[#B14B6C] to-[#E7A0B6] text-white pt-8 pb-16 lg:pt-10 lg:pb-20 border-b border-[#B14B6C]/30">
+      <div className="relative overflow-hidden bg-[#641B38] text-white pt-8 pb-16 lg:pt-10 lg:pb-20 border-b border-[#B83268]/30">
         {/* Theme Architectural Plus Grid */}
         <div
           aria-hidden="true"
@@ -77,7 +77,7 @@ export function CourseDetailsClient({
 
         {/* Dynamic Glow Accents */}
         <div aria-hidden="true" className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-          <div className="absolute -top-[20%] right-[10%] w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(177,75,108,0.35)_0%,transparent_70%)] blur-3xl" />
+          <div className="absolute -top-[20%] right-[10%] w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(184,50,104,0.35)_0%,transparent_70%)] blur-3xl" />
           <div className="absolute bottom-[0%] left-[5%] w-[450px] h-[450px] rounded-full bg-[radial-gradient(circle,rgba(19,201,170,0.18)_0%,transparent_70%)] blur-3xl" />
         </div>
 
@@ -105,7 +105,7 @@ export function CourseDetailsClient({
                     {course.category}
                   </span>
                 )}
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#B14B6C]/80 border border-white/20 text-xs font-semibold text-white">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#B83268]/80 border border-white/20 text-xs font-semibold text-white">
                   <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                   <span>Code Compliant Curriculum</span>
                 </span>
@@ -153,10 +153,10 @@ export function CourseDetailsClient({
               <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto mb-5">
                 <Link
                   href={`/contact-us?course=${encodeURIComponent(course.slug || course.id)}&courseName=${encodeURIComponent(course.title)}`}
-                  className="inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-full bg-white hover:bg-[#f3f5fb] text-[#B14B6C] text-sm font-bold shadow-[0_4px_20px_rgba(0,0,0,0.25)] hover:shadow-lg transition-all active:scale-98"
+                  className="inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-full bg-white hover:bg-[#f3f5fb] text-[#B83268] text-sm font-bold shadow-[0_4px_20px_rgba(0,0,0,0.25)] hover:shadow-lg transition-all active:scale-98"
                 >
                   <span>Enquire for Upcoming Batch</span>
-                  <ArrowRight className="w-4 h-4 text-[#B14B6C]" />
+                  <ArrowRight className="w-4 h-4 text-[#B83268]" />
                 </Link>
 
                 <Link
@@ -185,7 +185,7 @@ export function CourseDetailsClient({
 
             {/* Right: Featured Course Image */}
             <div className="lg:col-span-5 w-full">
-              <div className="relative aspect-[4/3] w-full rounded-3xl overflow-hidden border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.35)] bg-[#7A2E49]/50 group">
+              <div className="relative aspect-[4/3] w-full rounded-3xl overflow-hidden border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.35)] bg-[#641B38]/50 group">
                 {course.featured_image ? (
                 <Image
                   src={course.featured_image}
@@ -200,7 +200,7 @@ export function CourseDetailsClient({
 
                 {/* Overlay Badges */}
                 <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[11px] font-bold text-[#B14B6C] shadow-sm">
+                  <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[11px] font-bold text-[#B83268] shadow-sm">
                     {course.category || 'Savvy Training Academy'}
                   </span>
                 </div>
@@ -226,11 +226,11 @@ export function CourseDetailsClient({
       <div className="site-container mt-12 grid grid-cols-1 lg:grid-cols-12 gap-10">
         <div className="lg:col-span-8 flex flex-col gap-10">
           {/* 1. Course Overview & Description */}
-          <section className="bg-white rounded-3xl p-8 border border-[#F0E2E7] shadow-xs">
-            <h2 className="text-xl sm:text-2xl font-bold text-[#1F1F1F] mb-4">
+          <section className="bg-white rounded-3xl p-8 border border-[#EAD9E0] shadow-xs">
+            <h2 className="text-xl sm:text-2xl font-bold text-[#641B38] mb-4">
               Programme Overview
             </h2>
-            <div className="prose prose-sm sm:prose text-[#565656] leading-relaxed max-w-none whitespace-pre-line">
+            <div className="prose prose-sm sm:prose text-[#30262B] leading-relaxed max-w-none whitespace-pre-line">
               {course.description || course.short_description}
             </div>
           </section>
@@ -238,35 +238,35 @@ export function CourseDetailsClient({
           {/* 2. Prerequisites & Learning Outcomes */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Prerequisites */}
-            <section className="bg-white rounded-3xl p-6 sm:p-8 border border-[#F0E2E7] shadow-xs">
-              <h3 className="text-base sm:text-lg font-bold text-[#1F1F1F] mb-4 flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-[#B14B6C]" />
+            <section className="bg-white rounded-3xl p-6 sm:p-8 border border-[#EAD9E0] shadow-xs">
+              <h3 className="text-base sm:text-lg font-bold text-[#641B38] mb-4 flex items-center gap-2">
+                <ShieldCheck className="w-5 h-5 text-[#B83268]" />
                 <span>Prerequisites</span>
               </h3>
               {course.prerequisites && course.prerequisites.length > 0 ? (
-                <ul className="flex flex-col gap-3 text-sm text-[#565656]">
+                <ul className="flex flex-col gap-3 text-sm text-[#30262B]">
                   {course.prerequisites.map((req, i) => (
                     <li key={i} className="flex items-start gap-2.5">
-                      <span className="h-2 w-2 rounded-full bg-[#B14B6C] mt-2 shrink-0" />
+                      <span className="h-2 w-2 rounded-full bg-[#B83268] mt-2 shrink-0" />
                       <span>{req}</span>
                     </li>
                   ))}
                 </ul>
               ) : (
-                <p className="text-sm text-[#565656] leading-relaxed">
+                <p className="text-sm text-[#30262B] leading-relaxed">
                   {course.eligibility || 'Diploma / Engineering Degree or equivalent technical background.'}
                 </p>
               )}
             </section>
 
             {/* Learning Outcomes */}
-            <section className="bg-white rounded-3xl p-6 sm:p-8 border border-[#F0E2E7] shadow-xs">
-              <h3 className="text-base sm:text-lg font-bold text-[#1F1F1F] mb-4 flex items-center gap-2">
-                <Award className="w-5 h-5 text-[#B14B6C]" />
+            <section className="bg-white rounded-3xl p-6 sm:p-8 border border-[#EAD9E0] shadow-xs">
+              <h3 className="text-base sm:text-lg font-bold text-[#641B38] mb-4 flex items-center gap-2">
+                <Award className="w-5 h-5 text-[#B83268]" />
                 <span>Learning Outcomes</span>
               </h3>
               {course.learning_outcomes && course.learning_outcomes.length > 0 ? (
-                <ul className="flex flex-col gap-3 text-sm text-[#565656]">
+                <ul className="flex flex-col gap-3 text-sm text-[#30262B]">
                   {course.learning_outcomes.map((out, i) => (
                     <li key={i} className="flex items-start gap-2.5">
                       <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
@@ -275,7 +275,7 @@ export function CourseDetailsClient({
                   ))}
                 </ul>
               ) : (
-                <p className="text-sm text-[#565656] leading-relaxed">
+                <p className="text-sm text-[#30262B] leading-relaxed">
                   Attain proficiency in standard testing codes, calibration procedures, and certified inspection reports.
                 </p>
               )}
@@ -283,41 +283,41 @@ export function CourseDetailsClient({
           </div>
 
           {/* 3. Detailed Syllabus Chapters Breakdown */}
-          <section className="bg-white rounded-3xl p-8 border border-[#F0E2E7] shadow-xs">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-[#F0E2E7]">
+          <section className="bg-white rounded-3xl p-8 border border-[#EAD9E0] shadow-xs">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-[#EAD9E0]">
               <div>
-                <h3 className="text-xl sm:text-2xl font-bold text-[#1F1F1F]">
+                <h3 className="text-xl sm:text-2xl font-bold text-[#641B38]">
                   Curriculum &amp; Chapters
                 </h3>
-                <p className="text-xs text-[#565656] mt-1">
+                <p className="text-xs text-[#30262B] mt-1">
                   Structured syllabus following international engineering codes and hands-on lab modules.
                 </p>
               </div>
-              <span className="text-xs font-bold px-3 py-1.5 rounded-full bg-[#FBEAF0] text-[#B14B6C] border border-[#B14B6C]/20 self-start sm:self-auto shadow-2xs">
+              <span className="text-xs font-bold px-3 py-1.5 rounded-full bg-[#F8EDF1] text-[#B83268] border border-[#B83268]/20 self-start sm:self-auto shadow-2xs">
                 {modules.length} Modules Total
               </span>
             </div>
 
             {modules.length > 0 ? (
-              <div className="divide-y divide-[#F0E2E7]">
+              <div className="divide-y divide-[#EAD9E0]">
                 {modules.map((mod, index) => (
                   <div key={mod.id || index} className="py-5 first:pt-0 last:pb-0">
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex items-start gap-3.5">
-                        <span className="flex items-center justify-center h-7 w-7 rounded-full bg-[#FBEAF0] text-xs font-bold text-[#B14B6C] shrink-0 mt-0.5">
+                        <span className="flex items-center justify-center h-7 w-7 rounded-full bg-[#F8EDF1] text-xs font-bold text-[#B83268] shrink-0 mt-0.5">
                           {index + 1}
                         </span>
                         <div>
-                          <h4 className="text-base font-bold text-[#1F1F1F]">
+                          <h4 className="text-base font-bold text-[#641B38]">
                             {mod.title}
                           </h4>
                           {mod.description && (
-                            <p className="text-sm text-[#565656] mt-1.5 leading-relaxed">
+                            <p className="text-sm text-[#30262B] mt-1.5 leading-relaxed">
                               {mod.description}
                             </p>
                           )}
                           {(mod as any).content && (
-                            <div className="mt-3 text-sm bg-slate-50 p-3.5 rounded-xl border border-[#F0E2E7] text-[#1F1F1F]">
+                            <div className="mt-3 text-sm bg-slate-50 p-3.5 rounded-xl border border-[#EAD9E0] text-[#641B38]">
                               {(mod as any).content}
                             </div>
                           )}
@@ -325,7 +325,7 @@ export function CourseDetailsClient({
                       </div>
 
                       {mod.study_hours && (
-                        <div className="text-xs font-semibold text-[#565656] shrink-0 whitespace-nowrap bg-white px-2.5 py-1 rounded-md border border-[#F0E2E7]">
+                        <div className="text-xs font-semibold text-[#30262B] shrink-0 whitespace-nowrap bg-white px-2.5 py-1 rounded-md border border-[#EAD9E0]">
                           {mod.study_hours} hrs
                         </div>
                       )}
@@ -334,7 +334,7 @@ export function CourseDetailsClient({
                 ))}
               </div>
             ) : (
-              <p className="text-sm text-[#565656] italic">
+              <p className="text-sm text-[#30262B] italic">
                 Detailed chapter breakdown is currently being published by the academic committee.
               </p>
             )}
@@ -342,17 +342,17 @@ export function CourseDetailsClient({
 
           {/* 4. Frequently Asked Questions */}
           {course.faqs && course.faqs.length > 0 && (
-            <section className="bg-white rounded-3xl p-8 border border-[#F0E2E7] shadow-xs">
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1F1F1F] mb-6">
+            <section className="bg-white rounded-3xl p-8 border border-[#EAD9E0] shadow-xs">
+              <h2 className="text-xl sm:text-2xl font-bold text-[#641B38] mb-6">
                 Frequently Asked Questions
               </h2>
               <div className="flex flex-col gap-4">
                 {course.faqs.map((faq) => (
-                  <div key={faq.id} className="p-4 rounded-2xl bg-white border border-[#F0E2E7]">
-                    <h4 className="text-sm font-bold text-[#1F1F1F]">
+                  <div key={faq.id} className="p-4 rounded-2xl bg-white border border-[#EAD9E0]">
+                    <h4 className="text-sm font-bold text-[#641B38]">
                       {faq.question}
                     </h4>
-                    <p className="text-xs text-[#565656] mt-1.5 leading-relaxed">
+                    <p className="text-xs text-[#30262B] mt-1.5 leading-relaxed">
                       {faq.answer}
                     </p>
                   </div>
@@ -367,25 +367,25 @@ export function CourseDetailsClient({
         {/* ========================================================= */}
         <div className="lg:col-span-4 flex flex-col gap-6">
           {/* Institute Accreditation Notice */}
-          <div className="bg-white rounded-3xl p-6 border border-[#F0E2E7] shadow-xs">
+          <div className="bg-white rounded-3xl p-6 border border-[#EAD9E0] shadow-xs">
             <div className="flex items-center gap-3 mb-3">
-              <div className="h-10 w-10 rounded-full bg-[#FBEAF0] flex items-center justify-center shrink-0">
-                <ShieldCheck className="w-5 h-5 text-[#B14B6C]" />
+              <div className="h-10 w-10 rounded-full bg-[#F8EDF1] flex items-center justify-center shrink-0">
+                <ShieldCheck className="w-5 h-5 text-[#B83268]" />
               </div>
               <div>
-                <h4 className="text-sm font-bold text-[#1F1F1F]">Savvy Institute Assurance</h4>
-                <span className="text-[11px] text-[#B14B6C] font-semibold">Quality &amp; Code Integrity</span>
+                <h4 className="text-sm font-bold text-[#641B38]">Savvy Institute Assurance</h4>
+                <span className="text-[11px] text-[#B83268] font-semibold">Quality &amp; Code Integrity</span>
               </div>
             </div>
-            <p className="text-xs text-[#565656] leading-relaxed">
+            <p className="text-xs text-[#30262B] leading-relaxed">
               All courses are conducted in adherence to verified technical codes (ASNT, ASME, ISO). No unsupported guarantees or non-standard claims are made.
             </p>
           </div>
 
           {/* Related Programmes */}
           {relatedCourses.length > 0 && (
-            <div className="bg-white rounded-3xl p-6 border border-[#F0E2E7] shadow-xs">
-              <h3 className="text-base font-bold text-[#1F1F1F] mb-4">
+            <div className="bg-white rounded-3xl p-6 border border-[#EAD9E0] shadow-xs">
+              <h3 className="text-base font-bold text-[#641B38] mb-4">
                 Related Programmes
               </h3>
               <div className="flex flex-col gap-3">
@@ -395,17 +395,17 @@ export function CourseDetailsClient({
                     <Link
                       key={rel.id}
                       href={`/courses/${rel.slug || rel.id}`}
-                      className="group p-3.5 rounded-2xl bg-white border border-[#F0E2E7] hover:border-[#B14B6C]/50 hover:shadow-xs transition-all"
+                      className="group p-3.5 rounded-2xl bg-white border border-[#EAD9E0] hover:border-[#B83268]/50 hover:shadow-xs transition-all"
                     >
-                      <h4 className="text-xs font-bold text-[#1F1F1F] group-hover:text-[#B14B6C] line-clamp-1">
+                      <h4 className="text-xs font-bold text-[#641B38] group-hover:text-[#B83268] line-clamp-1">
                         {rel.title}
                       </h4>
-                      <p className="text-[11px] text-[#565656] line-clamp-1 mt-1">
+                      <p className="text-[11px] text-[#30262B] line-clamp-1 mt-1">
                         {rel.duration} · {rel.certification || 'Certification'}
                       </p>
-                      <div className="mt-2 pt-2 border-t border-[#F0E2E7] flex items-center justify-between text-xs">
-                        {relPrice && <span className="font-bold text-[#B14B6C]">{relPrice}</span>}
-                        <span className="text-[#B14B6C] group-hover:translate-x-1 transition-transform flex items-center gap-1 font-semibold text-[11px]">
+                      <div className="mt-2 pt-2 border-t border-[#EAD9E0] flex items-center justify-between text-xs">
+                        {relPrice && <span className="font-bold text-[#B83268]">{relPrice}</span>}
+                        <span className="text-[#B83268] group-hover:translate-x-1 transition-transform flex items-center gap-1 font-semibold text-[11px]">
                           <span>View</span>
                           <ArrowRight className="w-3 h-3" />
                         </span>
@@ -421,7 +421,7 @@ export function CourseDetailsClient({
           {/* USER REQUESTED: "Interested in this Course?" SECTION        */}
           {/* Placed below Related Programmes                           */}
           {/* ========================================================= */}
-          <div className="bg-gradient-to-br from-[#7A2E49] via-[#B14B6C] to-[#E7A0B6] rounded-3xl p-6 sm:p-7 text-white shadow-[0_12px_36px_rgba(177,75,108,0.25)] border border-[#B14B6C]/40 relative overflow-hidden">
+          <div className="bg-[#641B38] rounded-3xl p-6 sm:p-7 text-white shadow-[0_12px_36px_rgba(184,50,104,0.25)] border border-[#B83268]/40 relative overflow-hidden">
             {/* Ambient shimmer */}
             <div
               aria-hidden="true"
@@ -455,10 +455,10 @@ export function CourseDetailsClient({
               {/* Instant Redirect to Contact Us with Course Marked */}
               <Link
                 href={`/contact-us?course=${encodeURIComponent(course.slug || course.id)}&courseName=${encodeURIComponent(course.title)}`}
-                className="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-white hover:bg-[#f3f5fb] text-[#B14B6C] text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all active:scale-98 group mt-1"
+                className="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-white hover:bg-[#f3f5fb] text-[#B83268] text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all active:scale-98 group mt-1"
               >
                 <span>Express Interest &amp; Enquire Now</span>
-                <ArrowRight className="w-4 h-4 text-[#B14B6C] group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 text-[#B83268] group-hover:translate-x-1 transition-transform" />
               </Link>
 
               <div className="flex items-center justify-center gap-1.5 text-[11px] text-white/75 mt-1">

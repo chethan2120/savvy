@@ -32,20 +32,20 @@ export function PageHeroBanner({
   if (variant !== 'default') {
     const light = variant !== 'blogs';
     return (
-      <section data-no-reveal className={`${light ? 'bg-[#FBF6F8]' : 'bg-[#F8EEF2]'} border-b border-[#F0E2E7] py-12 sm:py-16`}>
+      <section data-no-reveal className={`${light ? 'bg-[#F8EDF1]' : 'bg-[#F8EDF1]'} border-b border-[#EAD9E0] py-12 sm:py-16`}>
         <div className={`site-container grid items-center gap-8 ${variant === 'blogs' ? 'lg:grid-cols-[1.2fr_0.8fr]' : 'lg:grid-cols-2'}`}>
           <div>
-            <p className="text-sm font-semibold text-[#B14B6C]">{badgeText}</p>
-            <h1 className="mt-3 max-w-3xl text-[#1F1F1F]">{title}</h1>
-            <p className="mt-4 max-w-2xl text-[#565656]">{description}</p>
+            <p className="text-sm font-semibold text-[#B83268]">{badgeText}</p>
+            <h1 className="mt-3 max-w-3xl text-[#641B38]">{title}</h1>
+            <p className="mt-4 max-w-2xl text-[#30262B]">{description}</p>
             {actionHref && actionLabel && (
-              <a href={actionHref} className="mt-6 inline-flex rounded-full bg-[#B14B6C] px-5 py-3 text-base font-semibold text-white">{actionLabel}</a>
+              <a href={actionHref} className="mt-6 inline-flex rounded-full bg-[#B83268] px-5 py-3 text-base font-semibold text-white">{actionLabel}</a>
             )}
           </div>
           {visual ? (
             <div className="w-full">{visual}</div>
           ) : (
-            <div className={`relative overflow-hidden rounded-3xl border border-[#F0E2E7] bg-white ${variant === 'blogs' ? 'aspect-[5/4]' : 'aspect-[4/3]'}`}>
+            <div className={`relative overflow-hidden rounded-3xl border border-[#EAD9E0] bg-white ${variant === 'blogs' ? 'aspect-[5/4]' : 'aspect-[4/3]'}`}>
               {imageSrc && (
                 <Image src={imageSrc} alt={imageAlt || ''} fill priority={priority} sizes="(max-width: 1024px) 100vw, 640px" className="object-cover" />
               )}
@@ -56,7 +56,7 @@ export function PageHeroBanner({
     );
   }
   return (
-    <section data-no-reveal className="bg-gradient-to-br from-[#7A2E49] via-[#B14B6C] to-[#E7A0B6] text-white py-12 sm:py-16 lg:py-20 border-b border-[#B14B6C]/30 relative overflow-hidden">
+    <section data-no-reveal className="bg-[#641B38] text-white py-12 sm:py-16 lg:py-20 border-b border-[#B83268]/30 relative overflow-hidden">
       {/* Subtle ambient background glow */}
       <div
         aria-hidden="true"
@@ -94,7 +94,7 @@ export function PageHeroBanner({
 
           {/* Right Column (5 cols on desktop): Hero Image */}
           <div className="lg:col-span-5 w-full">
-            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-white/20 shadow-2xl bg-[#7A2E49] aspect-[4/3] group">
+            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-white/20 shadow-2xl bg-[#641B38] aspect-[4/3] group">
               {imageSrc && (
               <Image
                 src={imageSrc}

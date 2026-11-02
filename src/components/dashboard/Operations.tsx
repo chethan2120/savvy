@@ -137,7 +137,7 @@ export function PeopleDirectory({ role }: { role: 'student' | 'staff' }) {
             <tbody>
               {rows.map((person) => (
                 <tr key={person.id} className="border-t border-border">
-                  <td className="py-3 pr-3 font-medium text-[#1F1F1F]">{person.fullName}</td>
+                  <td className="py-3 pr-3 font-medium text-[#641B38]">{person.fullName}</td>
                   <td className="py-3 pr-3">{person.email}</td>
                   <td className="py-3 pr-3">{person.phone}</td>
                   <td className="py-3 pr-3">{person.createdAt.slice(0, 10)}</td>
@@ -174,7 +174,7 @@ export function PeopleDirectory({ role }: { role: 'student' | 'staff' }) {
         <div className="mt-4 rounded-xl border border-border bg-[#f7faf9] p-4 text-sm">
           <div className="flex justify-between gap-3 border-b border-border pb-2">
             <div>
-              <h3 className="font-semibold text-base text-[#1F1F1F]">{selected.fullName}</h3>
+              <h3 className="font-semibold text-base text-[#641B38]">{selected.fullName}</h3>
               <p className="text-xs text-muted-foreground">{selected.email} · {selected.phone} · Role: <span className="capitalize font-medium">{selected.role}</span></p>
             </div>
             <button type="button" className="text-forest font-semibold" onClick={() => setSelected(null)}>Close</button>
@@ -336,7 +336,7 @@ function CreateAccountModal({
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs">
       <div className="w-full max-w-md rounded-2xl border border-border bg-white p-6 shadow-xl animate-in fade-in zoom-in-95">
         <div className="flex items-center justify-between border-b border-border pb-3">
-          <h3 className="text-base font-bold text-[#1F1F1F]">
+          <h3 className="text-base font-bold text-[#641B38]">
             Create New {role === 'student' ? 'Student' : 'Staff'} Account
           </h3>
           <button

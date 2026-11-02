@@ -79,7 +79,7 @@ export default function BlogsPage() {
 
       <div id="articles" className="site-container mt-10">
         {/* Search & Categories Filter */}
-        <div className="bg-white rounded-2xl p-5 border border-[#F0E2E7] shadow-xs mb-12 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="bg-white rounded-2xl p-5 border border-[#EAD9E0] shadow-xs mb-12 flex flex-col sm:flex-row items-center justify-between gap-4">
           {/* Category Tabs */}
           <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto">
             {categories.map((cat) => (
@@ -89,8 +89,8 @@ export default function BlogsPage() {
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
                   selectedCategory === cat
-                    ? 'bg-[#B14B6C] text-white shadow-xs'
-                    : 'bg-white text-[#565656] border border-[#F0E2E7] hover:border-[#B14B6C]/40'
+                    ? 'bg-[#B83268] text-white shadow-xs'
+                    : 'bg-white text-[#30262B] border border-[#EAD9E0] hover:border-[#B83268]/40'
                 }`}
               >
                 {cat}
@@ -106,15 +106,15 @@ export default function BlogsPage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search articles..."
-              className="w-full pl-10 pr-4 py-2 rounded-xl border border-[#F0E2E7] bg-white text-xs text-[#1F1F1F] placeholder-[#A08B94] focus:outline-none focus:border-[#B14B6C] focus:ring-1 focus:ring-[#B14B6C]"
+              className="w-full pl-10 pr-4 py-2 rounded-xl border border-[#EAD9E0] bg-white text-xs text-[#641B38] placeholder-[#A08B94] focus:outline-none focus:border-[#B83268] focus:ring-1 focus:ring-[#B83268]"
             />
           </div>
         </div>
 
         {/* Featured Article Card */}
         {featured && (
-          <div className="bg-white rounded-3xl border border-[#F0E2E7] overflow-hidden shadow-xs mb-12 grid grid-cols-1 lg:grid-cols-2">
-            <div className="bg-gradient-to-br from-[#7A2E49] via-[#B14B6C] to-[#E7A0B6] p-8 sm:p-12 text-white flex flex-col justify-between">
+          <div className="bg-white rounded-3xl border border-[#EAD9E0] overflow-hidden shadow-xs mb-12 grid grid-cols-1 lg:grid-cols-2">
+            <div className="bg-[#641B38] p-8 sm:p-12 text-white flex flex-col justify-between">
               <div>
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 text-white text-[11px] font-bold uppercase tracking-wider mb-4 border border-white/20 backdrop-blur-xs">
                   <Tag className="w-3 h-3 text-amber-300" />
@@ -155,8 +155,8 @@ export default function BlogsPage() {
             </div>
 
             {/* Visual Block for Featured Article */}
-            <div className="relative bg-[#7A2E49] aspect-[16/10] lg:aspect-auto flex items-center justify-center p-8 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#7A2E49] to-[#B14B6C] opacity-90" />
+            <div className="relative bg-[#641B38] aspect-[16/10] lg:aspect-auto flex items-center justify-center p-8 overflow-hidden">
+              <div className="absolute inset-0 bg-[#641B38] opacity-90" />
               <div className="relative z-10 text-center max-w-sm">
                 <BookOpen className="w-16 h-16 text-white/30 mx-auto mb-4" />
                 <span className="text-xs font-bold uppercase tracking-widest text-amber-300">
@@ -176,36 +176,36 @@ export default function BlogsPage() {
             {displayPosts.map((post) => (
               <div
                 key={post.id}
-                className="group flex flex-col bg-white rounded-2xl border border-[#F0E2E7] overflow-hidden shadow-xs hover:shadow-lg hover:border-[#B14B6C]/40 transition-all duration-300"
+                className="group flex flex-col bg-white rounded-2xl border border-[#EAD9E0] overflow-hidden shadow-xs hover:shadow-lg hover:border-[#B83268]/40 transition-all duration-300"
               >
                 <div className="p-6 flex flex-col flex-1 justify-between">
                   <div>
                     {post.category_name && (
-                      <span className="inline-block px-2.5 py-1 rounded-full bg-[#FBEAF0] border border-[#B14B6C]/20 text-[10px] font-bold text-[#B14B6C] mb-3">
+                      <span className="inline-block px-2.5 py-1 rounded-full bg-[#F8EDF1] border border-[#B83268]/20 text-[10px] font-bold text-[#B83268] mb-3">
                         {post.category_name}
                       </span>
                     )}
 
-                    <h3 className="text-base font-bold text-[#1F1F1F] group-hover:text-[#B14B6C] transition-colors leading-snug">
+                    <h3 className="text-base font-bold text-[#641B38] group-hover:text-[#B83268] transition-colors leading-snug">
                       <Link href={`/blogs/${post.slug}`}>
                         {post.title}
                       </Link>
                     </h3>
 
-                    <p className="text-xs text-[#565656] mt-2.5 line-clamp-3 leading-relaxed font-normal">
+                    <p className="text-xs text-[#30262B] mt-2.5 line-clamp-3 leading-relaxed font-normal">
                       {post.excerpt}
                     </p>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-[#F0E2E7] flex items-center justify-between text-[11px] text-[#565656]">
+                  <div className="mt-6 pt-4 border-t border-[#EAD9E0] flex items-center justify-between text-[11px] text-[#30262B]">
                     <div className="flex items-center gap-1.5">
-                      <User className="w-3.5 h-3.5 text-[#B14B6C]" />
+                      <User className="w-3.5 h-3.5 text-[#B83268]" />
                       <span>{post.author_name}</span>
                     </div>
 
                     <Link
                       href={`/blogs/${post.slug}`}
-                      className="font-bold text-[#B14B6C] group-hover:text-[#8E3854] transition-colors flex items-center gap-1"
+                      className="font-bold text-[#B83268] group-hover:text-[#641B38] transition-colors flex items-center gap-1"
                     >
                       <span>Read</span>
                       <ArrowRight className="w-3 h-3" />
@@ -216,14 +216,14 @@ export default function BlogsPage() {
             ))}
           </div>
         ) : (
-          <div className="rounded-2xl border border-[#F0E2E7] bg-white p-12 text-center max-w-md mx-auto">
+          <div className="rounded-2xl border border-[#EAD9E0] bg-white p-12 text-center max-w-md mx-auto">
             <BookOpen className="w-10 h-10 text-[#A08B94] mx-auto mb-3" />
-            <h3 className="text-base font-bold text-[#1F1F1F]">No Articles Found</h3>
-            <p className="text-xs text-[#565656] mt-1 font-normal">Try searching for other technical terms or reset the category filter.</p>
+            <h3 className="text-base font-bold text-[#641B38]">No Articles Found</h3>
+            <p className="text-xs text-[#30262B] mt-1 font-normal">Try searching for other technical terms or reset the category filter.</p>
             <button
               type="button"
               onClick={() => { setSelectedCategory('All'); setSearchQuery(''); }}
-              className="mt-4 px-4 py-2 rounded-full bg-[#B14B6C] text-white text-xs font-bold hover:bg-[#8E3854] transition-colors cursor-pointer"
+              className="mt-4 px-4 py-2 rounded-full bg-[#B83268] text-white text-xs font-bold hover:bg-[#641B38] transition-colors cursor-pointer"
             >
               Reset Filters
             </button>

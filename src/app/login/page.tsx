@@ -119,12 +119,12 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="account-theme auth-layout min-h-screen overflow-x-hidden bg-[#F6F4EE] text-[#102B46]">
+    <div className="account-theme auth-layout min-h-screen overflow-x-hidden bg-[#FCF8F7] text-[#30262B]">
       <div className="grid min-h-screen w-full grid-cols-1 lg:grid-cols-2">
         <section className="auth-panel relative flex min-h-[20rem] items-center overflow-hidden px-6 py-14 text-white sm:px-10 lg:min-h-screen lg:px-12">
-          <div className="absolute inset-0 bg-[#102B46]" />
+          <div className="absolute inset-0 bg-[#641B38]" />
           <img src="/images/hero-factory.jpg" alt="" className="absolute inset-0 h-full w-full object-cover object-[center_20%] opacity-40" />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#102B46]/92 via-[#102B46]/78 to-[#102B46]/88" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#641B38]/92 via-[#641B38]/78 to-[#641B38]/88" />
           <Link href="/" className="absolute left-6 top-5 z-10 inline-flex items-center gap-1.5 text-sm text-white hover:text-[#D9AD55] sm:left-10">
             <ArrowLeft className="h-4 w-4" /> Back to website
           </Link>
@@ -153,8 +153,8 @@ export default function LoginPage() {
           </div>
         </section>
 
-        <section className="flex min-w-0 items-center justify-center bg-[#F6F4EE] px-4 py-8 sm:px-8">
-          <div className="w-full max-w-md rounded-2xl border border-[#E2E6EA] bg-white p-5 shadow-[0_18px_50px_rgba(16,43,70,0.08)] sm:p-8">
+        <section className="flex min-w-0 items-center justify-center bg-[#FCF8F7] px-4 py-8 sm:px-8">
+          <div className="w-full max-w-md rounded-2xl border border-[#EAD9E0] bg-white p-5 shadow-[0_18px_50px_rgba(16,43,70,0.08)] sm:p-8">
             <div className="grid grid-cols-3 gap-2" role="group" aria-label="Account role">
               {roles.map((item) => (
                 <button
@@ -166,10 +166,10 @@ export default function LoginPage() {
                     setMode('signin');
                     resetNotice();
                   }}
-                  className={`flex min-w-0 flex-col items-center gap-1.5 rounded-xl border px-1 py-3 text-center transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#087F73] ${
+                  className={`flex min-w-0 flex-col items-center gap-1.5 rounded-xl border px-1 py-3 text-center transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B83268] ${
                     role === item.id
-                      ? 'border-[#087F73] bg-[#087F73] text-white shadow-sm'
-                      : 'border-[#E2E6EA] bg-white text-[#102B46] hover:border-[#087F73]'
+                      ? 'border-[#B83268] bg-[#B83268] text-white shadow-sm'
+                      : 'border-[#EAD9E0] bg-white text-[#30262B] hover:border-[#B83268]'
                   }`}
                 >
                   {item.icon}
@@ -182,14 +182,14 @@ export default function LoginPage() {
               <form onSubmit={signIn} className="mt-5 flex flex-col gap-3">
                 <Field label="Email address or phone number" type="text" value={email} onChange={setEmail} autoComplete="username" placeholder="Enter your email or phone number" icon={<Mail className="h-4 w-4" />} />
                 <PasswordField label="Password" value={password} onChange={setPassword} shown={showPassword} onToggle={() => setShowPassword((v) => !v)} placeholder="Enter your password" />
-                <button type="submit" disabled={busy} className="mt-1 flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#087F73] py-3 text-sm font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#087F73] disabled:opacity-60">
+                <button type="submit" disabled={busy} className="mt-1 flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#B83268] py-3 text-sm font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B83268] disabled:opacity-60">
                   {busy ? <Spinner label="Signing in" /> : <>Sign In <ArrowRight className="h-4 w-4" /></>}
                 </button>
                 <div className="flex items-center justify-between gap-3 text-xs">
-                  <button type="button" className="text-[#087F73]" onClick={() => { setMode('forgot'); resetNotice(); }}>
+                  <button type="button" className="text-[#B83268]" onClick={() => { setMode('forgot'); resetNotice(); }}>
                     Forgot password?
                   </button>
-                  <button type="button" className="text-[#087F73]" onClick={() => { setRole('student'); setMode('signup'); resetNotice(); }}>
+                  <button type="button" className="text-[#B83268]" onClick={() => { setRole('student'); setMode('signup'); resetNotice(); }}>
                     Create new account
                   </button>
                 </div>
@@ -258,16 +258,16 @@ function Field({
 }) {
   return (
     <label className="flex flex-col gap-1.5 text-xs">
-      <span className="font-semibold text-[#102B46]">{label}</span>
+      <span className="font-semibold text-[#30262B]">{label}</span>
       <span className="relative">
-        {icon && <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[#64748B]">{icon}</span>}
+        {icon && <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[#6B5A60]">{icon}</span>}
         <input
           type={type}
           value={value}
           autoComplete={autoComplete}
           placeholder={placeholder}
           onChange={(event) => onChange(event.target.value)}
-          className={`w-full rounded-xl border border-[#E2E6EA] bg-white py-2.5 text-sm text-[#102B46] focus:border-[#087F73] focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#087F73] ${icon ? 'pl-10 pr-3' : 'px-3'}`}
+          className={`w-full rounded-xl border border-[#EAD9E0] bg-white py-2.5 text-sm text-[#30262B] focus:border-[#B83268] focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#B83268] ${icon ? 'pl-10 pr-3' : 'px-3'}`}
         />
       </span>
     </label>
@@ -286,18 +286,18 @@ function PasswordField({
 }) {
   return (
     <label className="flex flex-col gap-1 text-xs">
-      <span className="font-semibold text-[#102B46]">{label}</span>
+      <span className="font-semibold text-[#30262B]">{label}</span>
       <span className="relative">
-        <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#64748B]" />
+        <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#6B5A60]" />
         <input
           type={shown ? 'text' : 'password'}
           value={value}
           autoComplete="current-password"
           placeholder={placeholder}
           onChange={(event) => onChange(event.target.value)}
-          className="w-full rounded-xl border border-[#E2E6EA] bg-white py-2.5 pl-10 pr-10 text-sm text-[#102B46] focus:border-[#087F73] focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#087F73]"
+          className="w-full rounded-xl border border-[#EAD9E0] bg-white py-2.5 pl-10 pr-10 text-sm text-[#30262B] focus:border-[#B83268] focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#B83268]"
         />
-        <button type="button" onClick={onToggle} aria-label={shown ? 'Hide password' : 'Show password'} className="absolute right-2 top-1/2 -translate-y-1/2 rounded text-[#64748B] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#087F73]">
+        <button type="button" onClick={onToggle} aria-label={shown ? 'Hide password' : 'Show password'} className="absolute right-2 top-1/2 -translate-y-1/2 rounded text-[#6B5A60] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#B83268]">
           {shown ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
         </button>
       </span>

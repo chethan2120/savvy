@@ -28,7 +28,7 @@ interface ContactEnquiry {
 }
 
 const STATUS_COLORS: Record<string, string> = {
-  new: 'bg-[#FBEAF0] text-[#8E3854] border-[#F3D5E0]',
+  new: 'bg-[#F8EDF1] text-[#641B38] border-[#EAD9E0]',
   contacted: 'bg-purple-50 text-purple-700 border-purple-200',
   in_progress: 'bg-amber-50 text-amber-700 border-amber-200',
   enrolled: 'bg-emerald-50 text-emerald-700 border-emerald-200',
@@ -184,7 +184,7 @@ export function ContactInfoPanel() {
                     setPage(1);
                   }}
                   className={`rounded-full px-3 py-1 text-xs font-semibold border ${
-                    category === value ? 'bg-[#B14B6C] text-white border-[#B14B6C]' : 'bg-white text-foreground border-border'
+                    category === value ? 'bg-[#B83268] text-white border-[#B83268]' : 'bg-white text-foreground border-border'
                   }`}
                 >
                   {label}
@@ -529,12 +529,12 @@ export function ContactInfoPanel() {
               </div>
             )}
             {activeEnquiry.cvFile && (
-              <a className="text-sm font-semibold text-[#B14B6C]" href={`/api/contacts/file?id=${activeEnquiry.id}`}>
+              <a className="text-sm font-semibold text-[#B83268]" href={`/api/contacts/file?id=${activeEnquiry.id}`}>
                 Download CV
               </a>
             )}
             {(activeEnquiry.attachments ?? []).map((file) => (
-              <a key={file} className="text-sm font-semibold text-[#B14B6C]" href={`/api/contacts/file?id=${activeEnquiry.id}&name=${encodeURIComponent(file)}`}>
+              <a key={file} className="text-sm font-semibold text-[#B83268]" href={`/api/contacts/file?id=${activeEnquiry.id}&name=${encodeURIComponent(file)}`}>
                 Download {file}
               </a>
             ))}
