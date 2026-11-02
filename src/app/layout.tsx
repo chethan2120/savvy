@@ -51,8 +51,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${sourceSans.variable} scroll-smooth`}>
+    <html lang="en" className={`${sourceSans.variable} js-reveal scroll-smooth`}>
       <body className={`${sourceSans.className} antialiased bg-white text-[#010101]`}>
+        <noscript>
+          <style>{`main.public-site section, main.public-site .reveal-stagger > * { opacity: 1 !important; transform: none !important; }`}</style>
+        </noscript>
         <AppShell>{children}</AppShell>
       </body>
     </html>

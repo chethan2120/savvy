@@ -1,38 +1,15 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle2, AlertCircle, Mail, MapPin, Phone, Globe, User } from 'lucide-react';
+import { ArrowRight, CheckCircle2, AlertCircle, User } from 'lucide-react';
 import { SavvyLogo } from '@/components/brand/SavvyLogo';
-import { getCachedCategories } from '@/lib/api-cache';
-import { useCurrency, SUPPORTED_CURRENCIES, CURRENCY_CONFIGS, CurrencyCode } from '@/lib/currency';
-
-interface CategoryItem {
-  id: string;
-  name: string;
-  courseCount: number;
-}
+import { onlineCourses } from '@/lib/academy-content';
 
 export function SiteFooter() {
-  const { currency, setCurrency } = useCurrency();
-  const [categories, setCategories] = useState<CategoryItem[]>([]);
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    let mounted = true;
-    getCachedCategories()
-      .then((data) => {
-        if (mounted && data?.categories) {
-          setCategories(data.categories);
-        }
-      })
-      .catch(() => {});
-    return () => {
-      mounted = false;
-    };
-  }, []);
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -88,23 +65,11 @@ export function SiteFooter() {
             </div>
 
             <p className="text-sm text-[#565656] leading-relaxed mt-1 font-normal">
-              Providing rigorous, industry-accredited technical training in Non-Destructive Testing (NDT), QA/QC Inspection, Health &amp; Safety, and Advanced MEP Engineering.
+              Accreditation, teaching qualifications and professional courses by Lisa Zaman.
             </p>
-
-            <div className="flex flex-col gap-2.5 pt-2 text-sm text-[#565656]">
-              <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-[#0056D2] shrink-0 mt-0.5" />
-                <span>Training Centre, Bengaluru, Karnataka, India</span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-[#0056D2] shrink-0" />
-                <span>+91 90000 12345</span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-[#0056D2] shrink-0" />
-                <span>admissions@savvytraining.example</span>
-              </div>
-            </div>
+            <p className="text-xs text-[#687587]">
+              A postal address, phone number and email address are not published on the source website. Use the contact form to get in touch.
+            </p>
           </div>
 
           {/* Column 2: Quick Links */}
@@ -130,17 +95,12 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link href="/blogs" className="hover:text-[#0056D2] transition-colors">
-                  Technical Insights &amp; Blogs
+                  Blogs
                 </Link>
               </li>
               <li>
                 <Link href="/contact-us" className="hover:text-[#0056D2] transition-colors">
-                  Contact Us &amp; Enquiries
-                </Link>
-              </li>
-              <li>
-                <Link href="/login" className="hover:text-[#0056D2] transition-colors">
-                  Student &amp; Staff Portal
+                  Contact Us
                 </Link>
               </li>
             </ul>
@@ -152,20 +112,13 @@ export function SiteFooter() {
               Course Categories
             </h3>
             <ul className="flex flex-col gap-2.5 text-sm text-[#565656] mt-1 font-normal">
-              {categories.slice(0, 6).map((cat) => (
-                <li key={cat.id}>
-                  <Link
-                    href={`/courses?category=${cat.id}`}
-                    className="hover:text-[#0056D2] transition-colors flex items-center justify-between"
-                  >
-                    <span>{cat.name}</span>
-                    <span className="text-xs text-[#0056D2] font-bold">({cat.courseCount})</span>
+              {onlineCourses.map((course) => (
+                <li key={course.slug}>
+                  <Link href={`/courses/${course.slug}`} className="hover:text-[#0056D2] transition-colors">
+                    {course.title}
                   </Link>
                 </li>
               ))}
-              {categories.length === 0 && (
-                <li className="text-sm text-[#565656]/60">Loading categories...</li>
-              )}
             </ul>
           </div>
 
@@ -175,7 +128,7 @@ export function SiteFooter() {
               Stay Informed
             </h3>
             <p className="text-sm text-[#565656] leading-relaxed mt-1 font-normal">
-              Subscribe for upcoming batch schedules, industry code updates, and professional certification notices.
+              Subscribe for updates from Savvy Training Institute.
             </p>
 
             <form onSubmit={handleSubscribe} className="flex flex-col gap-2.5 mt-2">
@@ -236,29 +189,12 @@ export function SiteFooter() {
 
           {/* Right: Currency Selector (Phone & Laptop) + Portal Login (Last Place) */}
           <div className="flex items-center gap-3 order-3">
-            {/* Currency Selector (Works for phone & laptop) */}
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#e2e8f0] bg-white text-xs font-semibold text-[#1F1F1F] shadow-2xs">
-              <Globe className="w-3.5 h-3.5 text-[#0056D2]" />
-              <select
-                value={currency}
-                onChange={(e) => setCurrency(e.target.value as CurrencyCode)}
-                aria-label="Currency preference"
-                className="bg-transparent text-xs font-semibold text-[#1F1F1F] border-none focus:outline-none cursor-pointer pr-1"
-              >
-                {SUPPORTED_CURRENCIES.map((code) => (
-                  <option key={code} value={code}>
-                    {CURRENCY_CONFIGS[code].label}
-                  </option>
-                ))}
-              </select>
-            </div>
-
             {/* Login Option */}
             <Link
               href="/login"
-              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#0056D2] hover:bg-[#00419e] text-white text-xs font-bold transition-all shadow-xs"
+              className="inline-flex items-center gap-2 rounded-full bg-[#0056D2] px-5 py-3 text-base font-semibold text-white hover:bg-[#00419e]"
             >
-              <User className="w-3.5 h-3.5" />
+              <User className="h-4 w-4" />
               <span>Login</span>
             </Link>
           </div>

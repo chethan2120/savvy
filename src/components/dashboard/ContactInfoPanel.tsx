@@ -19,6 +19,12 @@ interface ContactEnquiry {
   otherCourse?: string;
   message?: string;
   status: 'new' | 'contacted' | 'in_progress' | 'enrolled' | 'closed';
+  category?: 'career' | 'mentorship' | 'contact' | 'strategy';
+  specialism?: string;
+  availability?: string;
+  supportType?: string;
+  cvFile?: string | null;
+  attachments?: string[];
 }
 
 const STATUS_COLORS: Record<string, string> = {
@@ -36,6 +42,7 @@ export function ContactInfoPanel() {
   const [error, setError] = useState('');
 
   // Filters
+  const [category, setCategory] = useState('all');
   const [query, setQuery] = useState('');
   const [selectedCourse, setSelectedCourse] = useState('all');
   const [selectedStatus, setSelectedStatus] = useState('all');
@@ -67,6 +74,7 @@ export function ContactInfoPanel() {
     setError('');
     try {
       const params = new URLSearchParams();
+      if (category !== 'all') params.set('category', category);
       if (query.trim()) params.set('query', query.trim());
       if (selectedCourse !== 'all') params.set('course', selectedCourse);
       if (selectedStatus !== 'all') params.set('status', selectedStatus);
@@ -88,7 +96,7 @@ export function ContactInfoPanel() {
     } finally {
       setLoading(false);
     }
-  }, [query, selectedCourse, selectedStatus, startDate, endDate, page]);
+  }, [category, query, selectedCourse, selectedStatus, startDate, endDate, page]);
 
   useEffect(() => {
     loadEnquiries();
@@ -123,6 +131,7 @@ export function ContactInfoPanel() {
     setExporting(true);
     try {
       const params = new URLSearchParams();
+      if (category !== 'all') params.set('category', category);
       if (query.trim()) params.set('query', query.trim());
       if (selectedCourse !== 'all') params.set('course', selectedCourse);
       if (selectedStatus !== 'all') params.set('status', selectedStatus);
@@ -140,6 +149,7 @@ export function ContactInfoPanel() {
   };
 
   const resetFilters = () => {
+    setCategory('all');
     setQuery('');
     setSelectedCourse('all');
     setSelectedStatus('all');
@@ -156,8 +166,31 @@ export function ContactInfoPanel() {
           <div>
             <h2 className="text-xl font-bold text-foreground">Contact Enquiries Desk</h2>
             <p className="text-xs text-muted-foreground mt-0.5">
-              Review and manage prospective learner enquiries submitted through the public Contact Us form.
+              Career, mentorship, strategy call and contact submissions are stored in this one list.
             </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {[
+                ['all', 'All'],
+                ['career', 'Career'],
+                ['mentorship', 'Mentorship'],
+                ['contact', 'Contact Us'],
+                ['strategy', 'Strategy Call'],
+              ].map(([value, label]) => (
+                <button
+                  key={value}
+                  type="button"
+                  onClick={() => {
+                    setCategory(value);
+                    setPage(1);
+                  }}
+                  className={`rounded-full px-3 py-1 text-xs font-semibold border ${
+                    category === value ? 'bg-[#0056D2] text-white border-[#0056D2]' : 'bg-white text-foreground border-border'
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="flex items-center gap-3 shrink-0">
@@ -418,7 +451,7 @@ export function ContactInfoPanel() {
             <div className="flex items-start justify-between gap-4 pb-4 border-b border-border">
               <div>
                 <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
-                  Enquiry ID: {activeEnquiry.id}
+                  {(activeEnquiry.category || 'contact').replace('_', ' ')} · {activeEnquiry.id}
                 </span>
                 <h3 className="text-xl font-bold text-foreground mt-0.5">
                   {activeEnquiry.fullName}
@@ -487,6 +520,24 @@ export function ContactInfoPanel() {
                 <p className="mt-1">{activeEnquiry.otherCourse}</p>
               </div>
             )}
+
+            {(activeEnquiry.specialism || activeEnquiry.availability || activeEnquiry.supportType) && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                {activeEnquiry.specialism && <p><strong>Specialism:</strong> {activeEnquiry.specialism}</p>}
+                {activeEnquiry.availability && <p><strong>Availability:</strong> {activeEnquiry.availability}</p>}
+                {activeEnquiry.supportType && <p><strong>Support:</strong> {activeEnquiry.supportType}</p>}
+              </div>
+            )}
+            {activeEnquiry.cvFile && (
+              <a className="text-sm font-semibold text-[#0056D2]" href={`/api/contacts/file?id=${activeEnquiry.id}`}>
+                Download CV
+              </a>
+            )}
+            {(activeEnquiry.attachments ?? []).map((file) => (
+              <a key={file} className="text-sm font-semibold text-[#0056D2]" href={`/api/contacts/file?id=${activeEnquiry.id}&name=${encodeURIComponent(file)}`}>
+                Download {file}
+              </a>
+            ))}
 
             {/* Message Body */}
             <div>

@@ -6,10 +6,11 @@ import Link from 'next/link';
 import {
   Clock, Award, BookOpen, CheckCircle2, ChevronRight,
   ShieldCheck, ArrowRight, Lock, UserCheck, Layers, FileText,
-  Globe, GraduationCap, MessageSquare, Star, Check
+  GraduationCap, MessageSquare, Star, Check
 } from 'lucide-react';
 import type { Course } from '@/lib/types';
-import { useCurrency, SUPPORTED_CURRENCIES, CURRENCY_CONFIGS, CurrencyCode } from '@/lib/currency';
+import { gbpLabel, useShowCoursePrices } from '@/lib/public-price';
+import { courseVisualBySrc } from '@/lib/course-visuals';
 
 interface CourseDetailsClientProps {
   course: Course;
@@ -25,8 +26,8 @@ export function CourseDetailsClient({
   viewerRole,
   viewerName,
 }: CourseDetailsClientProps) {
-  const { currency, setCurrency, getCoursePriceDisplay } = useCurrency();
-  const priceInfo = getCoursePriceDisplay(course, currency);
+  const showPrices = useShowCoursePrices();
+  const price = showPrices ? gbpLabel(course) : null;
 
   // Authenticated state: optionally load authorized workspace chapters if logged in
   const [authorizedChapters, setAuthorizedChapters] = useState<any[] | null>(null);
@@ -140,26 +141,12 @@ export function CourseDetailsClient({
                   </div>
                 )}
 
-                {/* Tuition Fee Pill with Currency Dropdown */}
+                {price && (
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/15 backdrop-blur-xs border border-white/20 text-xs sm:text-sm text-white font-medium">
                   <span className="text-white/70 text-[11px] uppercase tracking-wider font-bold">Fee:</span>
-                  <strong className="text-white font-bold text-sm sm:text-base">{priceInfo.formatted}</strong>
-                  <div className="flex items-center gap-1 ml-1 pl-2 border-l border-white/20">
-                    <Globe className="w-3 h-3 text-white/70" />
-                    <select
-                      value={currency}
-                      onChange={(e) => setCurrency(e.target.value as CurrencyCode)}
-                      aria-label="Select Currency"
-                      className="bg-[#003e9a] border border-white/20 rounded px-1.5 py-0.5 text-[11px] font-bold text-white focus:outline-none cursor-pointer"
-                    >
-                      {SUPPORTED_CURRENCIES.map((code) => (
-                        <option key={code} value={code} className="bg-[#003e9a] text-white">
-                          {code} ({CURRENCY_CONFIGS[code].symbol})
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                  <strong className="text-white font-bold text-sm sm:text-base">{price}</strong>
                 </div>
+                )}
               </div>
 
               {/* Action Buttons: Enquire for Upcoming Batch & Enquire via WhatsApp */}
@@ -187,11 +174,11 @@ export function CourseDetailsClient({
               <div className="flex flex-col sm:flex-row sm:items-center gap-3 text-xs text-white/80 pt-2 border-t border-white/15 w-full max-w-xl">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>ASNT, ASME &amp; ISO Code-compliant curriculum</span>
+                  <span>{course.training_mode || 'Study method listed with the course'}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Hands-on flaw detector lab training &amp; digital credentials</span>
+                  <span>{course.duration || 'Duration listed with the course'}</span>
                 </div>
               </div>
             </div>
@@ -199,20 +186,22 @@ export function CourseDetailsClient({
             {/* Right: Featured Course Image */}
             <div className="lg:col-span-5 w-full">
               <div className="relative aspect-[4/3] w-full rounded-3xl overflow-hidden border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.35)] bg-[#003e9a]/50 group">
+                {course.featured_image ? (
                 <Image
-                  src={course.featured_image || '/images/hero-factory.jpg'}
-                  alt={course.title}
+                  src={course.featured_image}
+                  alt={courseVisualBySrc(course.featured_image)?.alt || course.title}
                   fill
                   sizes="(max-width: 1024px) 100vw, 500px"
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                   priority
                 />
+                ) : null}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
 
                 {/* Overlay Badges */}
                 <div className="absolute top-4 left-4">
                   <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[11px] font-bold text-[#0056D2] shadow-sm">
-                    Savvy Practical Lab Training
+                    {course.category || 'Savvy Training Academy'}
                   </span>
                 </div>
 
@@ -220,7 +209,7 @@ export function CourseDetailsClient({
                   <div className="absolute bottom-4 left-4 right-4 p-3 rounded-2xl bg-black/60 backdrop-blur-md border border-white/15 text-white flex items-center gap-3">
                     <Award className="w-5 h-5 text-amber-300 shrink-0" />
                     <div className="truncate">
-                      <span className="text-[10px] uppercase font-bold text-white/70 block">Authorized Credential</span>
+                      <span className="text-[10px] uppercase font-bold text-white/70 block">Certificate</span>
                       <strong className="text-xs font-semibold text-white truncate block">{course.certification}</strong>
                     </div>
                   </div>
@@ -401,7 +390,7 @@ export function CourseDetailsClient({
               </h3>
               <div className="flex flex-col gap-3">
                 {relatedCourses.map((rel) => {
-                  const relPrice = getCoursePriceDisplay(rel, currency);
+                  const relPrice = showPrices ? gbpLabel(rel) : null;
                   return (
                     <Link
                       key={rel.id}
@@ -415,7 +404,7 @@ export function CourseDetailsClient({
                         {rel.duration} · {rel.certification || 'Certification'}
                       </p>
                       <div className="mt-2 pt-2 border-t border-[#e2e8f0] flex items-center justify-between text-xs">
-                        <span className="font-bold text-[#0056D2]">{relPrice.formatted}</span>
+                        {relPrice && <span className="font-bold text-[#0056D2]">{relPrice}</span>}
                         <span className="text-[#0056D2] group-hover:translate-x-1 transition-transform flex items-center gap-1 font-semibold text-[11px]">
                           <span>View</span>
                           <ArrowRight className="w-3 h-3" />
@@ -450,7 +439,7 @@ export function CourseDetailsClient({
               </h3>
 
               <p className="text-xs sm:text-[13px] text-white/85 leading-relaxed">
-                Speak directly with our training coordinators to receive the detailed chapter syllabus, discuss upcoming batch schedules, or inquire about multi-currency fee concessions.
+                Ask about the syllabus, the next Zoom sessions, or how to enrol.
               </p>
 
               {/* Selected Course Visual Badge */}

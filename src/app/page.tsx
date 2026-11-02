@@ -1,75 +1,67 @@
 import React from 'react';
-import dynamic from 'next/dynamic';
-import { websiteCourses, listCategories } from '@/lib/server/institute-db';
-import { testimonialsData } from '@/lib/data';
+import { listHomepageFaqs, listPublicFeedback, listPublicReviews, websiteCourses, listCategories } from '@/lib/server/institute-db';
+import { categoryVisual } from '@/lib/course-visuals';
+import { SectorTicker } from '@/components/common/SectorTicker';
+import { CareerStrategyCall } from '@/components/home/CareerStrategyCall';
 import { EditorialHero } from '@/components/home/EditorialHero';
 import { PopularCoursesSection } from '@/components/home/PopularCoursesSection';
 import { CategoryShowcase } from '@/components/home/CategoryShowcase';
 import { WhySavvySection } from '@/components/home/WhySavvySection';
 import { CertificateCtaSection } from '@/components/home/CertificateCtaSection';
-import { Shield, BookOpen, Users, Compass, Award, CheckCircle2 } from 'lucide-react';
+import { FaqSection } from '@/components/home/FaqSection';
+import Testimonial3 from '@/components/ui/testimonial-section-3';
+import { Shield, BookOpen, Compass, Award, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
 
 // Dynamically split below-the-fold interactive components to minimize initial JavaScript bundle size
-const StrategyCallSection = dynamic(
-  () => import('@/components/home/StrategyCallSection').then((m) => m.StrategyCallSection),
-  { ssr: true }
-);
-
-const TestimonialsCarousel = dynamic(
-  () => import('@/components/home/TestimonialsCarousel').then((m) => m.TestimonialsCarousel),
-  { ssr: true }
-);
-
-const FaqSection = dynamic(
-  () => import('@/components/home/FaqSection').then((m) => m.FaqSection),
-  { ssr: true }
-);
-
-const AdmissionsHubSection = dynamic(
-  () => import('@/components/home/AdmissionsHubSection').then((m) => m.AdmissionsHubSection),
-  { ssr: true }
-);
-
-// High-performance Incremental Static Regeneration (revalidates every 60s)
-export const revalidate = 60;
+export const revalidate = 0;
 
 export default async function HomePage() {
   const courses = websiteCourses();
   const rawCategories = listCategories().filter((cat) => cat.active);
 
-  const categories = rawCategories.map((cat) => ({
-    id: cat.id,
-    name: cat.name,
-    description: cat.description,
-    courseCount: courses.filter((c) => c.category === cat.name || (c as any).categoryId === cat.id).length,
-  }));
+  const categories = rawCategories.map((cat) => {
+    const visual = categoryVisual(cat.id, cat.name);
+    const sample = courses.find((course) => course.category === cat.name);
+    const image = sample?.featured_image || visual?.src || '';
+    return {
+      id: cat.id,
+      name: cat.name,
+      description: cat.description,
+      courseCount: courses.filter((c) => c.category === cat.name || (c as { categoryId?: string }).categoryId === cat.id).length,
+      image,
+      imageAlt: image && image === visual?.src ? visual.alt : (sample?.title || cat.name),
+    };
+  }).filter((cat) => cat.courseCount > 0);
+
+  const testimonials = [
+    ...listPublicReviews().map((review) => ({
+      id: review.id,
+      name: review.authorName,
+      course: review.courseTitle,
+      quote: review.body,
+      rating: review.rating,
+    })),
+    ...listPublicFeedback().map((item) => ({
+      id: item.id,
+      name: item.name,
+      course: item.courseTitle,
+      quote: item.body,
+      rating: item.rating,
+    })),
+  ];
 
   return (
     <div className="flex flex-col">
       {/* 1. Modern UK Editorial Hero Section */}
       <EditorialHero />
 
-      <section className="bg-white border-b border-[#e2e8f0] py-7 sm:py-8">
-        <div className="site-container">
-          <h2 className="text-lg sm:text-2xl font-bold text-[#1F1F1F] tracking-tight">
-            Calibrated to the codes industry hires for
-          </h2>
-          <div className="mt-4 flex items-center gap-2.5 overflow-x-auto pb-2 snap-x snap-mandatory">
-            {['ASME', 'ASNT SNT-TC-1A', 'ISO 9712', 'TWI CSWIP', 'ASHRAE', 'IOSH', 'API'].map((code) => (
-              <span
-                key={code}
-                className="shrink-0 snap-start inline-flex items-center px-4 py-2 rounded-full border border-[#e2e8f0] bg-white text-sm font-semibold text-[#1F1F1F] shadow-2xs"
-              >
-                {code}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
+      <SectorTicker />
 
       {/* 2. Popular / Best-Selling Courses (3 cards with Contact Us CTA pre-fill) */}
-      <PopularCoursesSection courses={courses} />
+      <PopularCoursesSection courses={courses}>
+        <CareerStrategyCall />
+      </PopularCoursesSection>
 
       {/* 3. Category Showcase Grid */}
       <CategoryShowcase categories={categories} />
@@ -89,10 +81,10 @@ export default async function HomePage() {
                 </span>
               </div>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#1F1F1F] tracking-tight mt-1 leading-snug">
-                Designed for International Professional &amp; Enterprise Excellence
+                Learn it. Teach it. Certify it.
               </h2>
               <p className="text-sm sm:text-base text-[#565656] mt-3 leading-relaxed font-normal">
-                Savvy Training Institute delivers structured, laboratory-intensive technical instruction calibrated to the requirements of heavy manufacturing, infrastructure, oil &amp; gas, and energy engineering sectors.
+                Savvy Training Academy helps professionals and businesses get their skills recognised. Earn a teaching qualification, take an online course, or get accredited to certify learners in your own right.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-8">
@@ -100,9 +92,9 @@ export default async function HomePage() {
                   <div className="h-10 w-10 rounded-xl bg-[#EBF3FF] flex items-center justify-center mb-3">
                     <Shield className="w-5 h-5 text-[#0056D2]" />
                   </div>
-                  <h3 className="text-sm font-bold text-[#1F1F1F]">Code Compliant</h3>
+                  <h3 className="text-sm font-bold text-[#1F1F1F]">Apply online</h3>
                   <p className="text-xs text-[#565656] mt-1.5 leading-relaxed font-normal">
-                    Curriculum structured around ASNT SNT-TC-1A, ASME Boiler &amp; Pressure Vessel codes, and ISO quality frameworks.
+                    Tell Savvy about your business, the course you deliver and who it is for.
                   </p>
                 </div>
 
@@ -110,9 +102,9 @@ export default async function HomePage() {
                   <div className="h-10 w-10 rounded-xl bg-[#EBF3FF] flex items-center justify-center mb-3">
                     <Compass className="w-5 h-5 text-[#0056D2]" />
                   </div>
-                  <h3 className="text-sm font-bold text-[#1F1F1F]">Real Instrumentation</h3>
+                  <h3 className="text-sm font-bold text-[#1F1F1F]">Document review</h3>
                   <p className="text-xs text-[#565656] mt-1.5 leading-relaxed font-normal">
-                    Direct access to ultrasonic flaw detectors, radiographic film readers, magnetic yokes, and Autodesk Revit MEP tools.
+                    Course manuals, lesson plans, assessment materials, insurance and your own qualifications are reviewed by Lisa.
                   </p>
                 </div>
 
@@ -120,9 +112,9 @@ export default async function HomePage() {
                   <div className="h-10 w-10 rounded-xl bg-[#EBF3FF] flex items-center justify-center mb-3">
                     <BookOpen className="w-5 h-5 text-[#0056D2]" />
                   </div>
-                  <h3 className="text-sm font-bold text-[#1F1F1F]">Transparent Curricula</h3>
+                  <h3 className="text-sm font-bold text-[#1F1F1F]">Written feedback</h3>
                   <p className="text-xs text-[#565656] mt-1.5 leading-relaxed font-normal">
-                    Clear chapter breakdowns, estimated study hours, and defined prerequisites for every technical level.
+                    You receive written feedback on content, assessment and learner-safety before anything is approved.
                   </p>
                 </div>
 
@@ -130,9 +122,9 @@ export default async function HomePage() {
                   <div className="h-10 w-10 rounded-xl bg-[#EBF3FF] flex items-center justify-center mb-3">
                     <Award className="w-5 h-5 text-[#0056D2]" />
                   </div>
-                  <h3 className="text-sm font-bold text-[#1F1F1F]">Verifiable Credentials</h3>
+                  <h3 className="text-sm font-bold text-[#1F1F1F]">Certificate and logo</h3>
                   <p className="text-xs text-[#565656] mt-1.5 leading-relaxed font-normal">
-                    Digital certificates with secure issue numbers verifiable through authorized portal lookups.
+                    Once approved, the accreditation certificate and logo are ready to download from the account.
                   </p>
                 </div>
               </div>
@@ -145,33 +137,33 @@ export default async function HomePage() {
                     Savvy for Enterprise &amp; Teams
                   </span>
                   <h3 className="text-xl sm:text-2xl font-extrabold text-white mt-4 tracking-tight">
-                    Upskill Your Engineering Workforce
+                    Build your training business
                   </h3>
                   <p className="text-xs sm:text-sm text-white/90 mt-3 leading-relaxed">
-                    Custom corporate training batches, on-site ASME/ISO qualification, and third-party inspection readiness for EPC contractors and manufacturing plants.
+                    Lisa offers one-to-one guidance from a first idea through to a registered centre, including venue setup and awarding body registration.
                   </p>
 
                   <div className="flex flex-col gap-3 mt-6 text-xs text-white">
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-emerald-300" />
-                      <span>Dedicated enterprise laboratory batches &amp; custom schedules</span>
+                      <span>Business start-ups, pricing, insurance and launch planning</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-emerald-300" />
-                      <span>On-premise NDT Level II &amp; QA/QC qualification workshops</span>
+                      <span>Regular mentorship sessions</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-emerald-300" />
-                      <span>Multi-currency corporate billing (GBP £, USD $, INR ₹, AED)</span>
+                      <span>Course prices are shown in pounds sterling when a price has been set</span>
                     </div>
                   </div>
 
                   <div className="mt-8 pt-6 border-t border-white/20 flex flex-wrap items-center gap-4">
                     <Link
-                      href="/contact-us"
+                      href="/mentorship"
                       className="px-6 py-3 rounded-full bg-white hover:bg-slate-100 text-[#0056D2] text-xs font-bold transition-all shadow-sm"
                     >
-                      Request Corporate Proposal
+                      Request mentorship
                     </Link>
                     <Link
                       href="/about-us"
@@ -187,20 +179,9 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Part 6. 40-Minute FREE Strategy Call Section (Inspired by Reference Layout) */}
-      <StrategyCallSection />
-
-      {/* Part 7. Authentic Testimonials Carousel */}
-      <TestimonialsCarousel testimonials={testimonialsData} />
-
-      {/* Part 8. Certificate Call-to-Action Section */}
+      <Testimonial3 testimonials={testimonials} />
+      <FaqSection faqs={listHomepageFaqs()} />
       <CertificateCtaSection />
-
-      {/* Part 9. Frequently Asked Questions */}
-      <FaqSection />
-
-      {/* Part 10. Admissions Hub & Upcoming Batches */}
-      <AdmissionsHubSection />
     </div>
   );
 }

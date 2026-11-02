@@ -1,9 +1,11 @@
 import { NextResponse } from 'next/server';
 import { listCategories, allCourses } from '@/lib/server/institute-db';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   const categories = listCategories().filter((cat) => cat.active);
-  const courses = allCourses().filter((c) => c.visible && c.active);
+  const courses = allCourses().filter((c) => c.visible && c.active && c.id.startsWith('ref-'));
 
   const categoriesWithCourses = categories.map((cat) => ({
     id: cat.id,
@@ -12,7 +14,6 @@ export async function GET() {
     courseCount: courses.filter((c) => c.categoryId === cat.id).length,
     courses: courses
       .filter((c) => c.categoryId === cat.id)
-      .slice(0, 5)
       .map((c) => ({
         id: c.id,
         slug: c.slug,
@@ -30,7 +31,7 @@ export async function GET() {
     totalCourses: courses.length,
   }, {
     headers: {
-      'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300',
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
     },
   });
 }

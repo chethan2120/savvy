@@ -2,6 +2,8 @@ import { createHmac, randomBytes, scryptSync, timingSafeEqual } from 'crypto';
 import { mkdirSync, readFileSync, writeFileSync, existsSync, statSync } from 'fs';
 import path from 'path';
 import { coursesData, blogPostsData } from '@/lib/data';
+import { homepageFaqSeed, onlineCourses, shopProducts as referenceShopProducts, teachingQualifications } from '@/lib/academy-content';
+import { courseVisuals } from '@/lib/course-visuals';
 import type { Course, CourseModule } from '@/lib/types';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 import { supabaseTablesReady } from '@/lib/supabase-schema';
@@ -124,6 +126,7 @@ export type CustomCourse = {
   prerequisites?: string[];
   outcomes?: string[];
   visible?: boolean;
+  trainingMode?: string;
 };
 
 export type CourseOverride = {
@@ -241,8 +244,11 @@ export type WebsiteSettingsRecord = {
   showRecognitions: boolean;
   instituteName: string;
   defaultCurrency?: 'INR' | 'EUR' | 'GBP' | 'USD' | 'AED';
+  showCoursePrices?: boolean;
   updatedAt: string | null;
 };
+
+export type EnquiryCategory = 'career' | 'mentorship' | 'contact' | 'strategy';
 
 export type ContactEnquiryRecord = {
   id: string;
@@ -256,6 +262,91 @@ export type ContactEnquiryRecord = {
   otherCourse?: string;
   message?: string;
   status: 'new' | 'contacted' | 'in_progress' | 'enrolled' | 'closed';
+  category?: EnquiryCategory;
+  specialism?: string;
+  availability?: string;
+  supportType?: string;
+  cvFile?: string | null;
+  attachments?: string[];
+};
+
+export type ShopProductRecord = {
+  id: string;
+  slug: string;
+  title: string;
+  format: string;
+  includes: string[];
+  priceGbp: number | null;
+  published: boolean;
+  fileName?: string | null;
+  createdAt: string;
+};
+
+export type StudentReviewRecord = {
+  id: string;
+  courseId: string;
+  courseTitle: string;
+  authorId: string;
+  authorName: string;
+  rating: number;
+  body: string;
+  status: 'pending' | 'approved' | 'rejected';
+  createdAt: string;
+};
+
+export type ForumReplyRecord = {
+  id: string;
+  authorId: string;
+  authorName: string;
+  body: string;
+  createdAt: string;
+  hidden: boolean;
+  approved?: boolean;
+};
+
+export type ForumThreadRecord = {
+  id: string;
+  title: string;
+  body: string;
+  category?: string;
+  initials?: string;
+  exampleReplyCount?: number;
+  example?: boolean;
+  pending?: boolean;
+  authorId: string;
+  authorName: string;
+  createdAt: string;
+  hidden: boolean;
+  reported: boolean;
+  replies: ForumReplyRecord[];
+};
+
+export type GuestFeedbackRecord = {
+  id: string;
+  name: string;
+  phone: string;
+  body: string;
+  courseTitle?: string;
+  rating?: number;
+  status: 'pending' | 'approved' | 'hidden';
+  createdAt: string;
+};
+
+export type HomepageFaq = {
+  id: string;
+  question: string;
+  answer: string;
+};
+
+export type PortalItemRecord = {
+  id: string;
+  kind: 'info' | 'zoom' | 'schedule' | 'update';
+  title: string;
+  detail: string;
+  zoomUrl?: string;
+  startsAt?: string;
+  published: boolean;
+  createdAt: string;
 };
 
 export type NewsletterRecord = {
@@ -344,6 +435,15 @@ type Database = {
   enquiries: ContactEnquiryRecord[];
   newsletter: NewsletterRecord[];
   articles: ArticleRecord[];
+  shopProducts?: ShopProductRecord[];
+  reviews?: StudentReviewRecord[];
+  threads?: ForumThreadRecord[];
+  guestFeedback?: GuestFeedbackRecord[];
+  portalItems?: PortalItemRecord[];
+  referenceCatalogSeeded?: boolean;
+  communityExamplesSeeded?: boolean;
+  homepageFaqs?: HomepageFaq[];
+  homepageFaqsSeeded?: boolean;
 };
 
 const DATA_DIR = path.join(process.cwd(), 'data');
@@ -351,6 +451,7 @@ const DB_PATH = path.join(DATA_DIR, 'institute-db.json');
 const SECRET_PATH = path.join(DATA_DIR, 'session-secret');
 let memoryDb: Database | null = null;
 let lastDbMtime: number = 0;
+let normaliseShouldPersist = false;
 let memorySecret: string | null = null;
 export const SESSION_COOKIE = 'savvy_session';
 export const INSTITUTE_TZ = 'Asia/Kolkata';
@@ -449,7 +550,175 @@ function emptyDatabase(): Database {
     enquiries: [],
     newsletter: [],
     articles: [],
+    shopProducts: [],
+    reviews: [],
+    threads: [],
+    guestFeedback: [],
+    portalItems: [],
+    referenceCatalogSeeded: false,
+    communityExamplesSeeded: false,
+    homepageFaqs: [],
+    homepageFaqsSeeded: false,
   };
+}
+
+function ensureReferenceCatalog(parsed: Database) {
+  let changed = false;
+  parsed.shopProducts ??= [];
+  parsed.reviews ??= [];
+  parsed.threads ??= [];
+  parsed.enquiries ??= [];
+  parsed.guestFeedback ??= [];
+  parsed.portalItems ??= [];
+
+  for (const id of PROGRAM_IDS) {
+    const current = parsed.courseOverrides[id] || {};
+    if (current.visible !== false) {
+      parsed.courseOverrides[id] = { ...current, visible: false };
+      changed = true;
+    }
+  }
+  for (const course of parsed.customCourses) {
+    if (!course.id.startsWith('ref-') && course.visible !== false) {
+      course.visible = false;
+      changed = true;
+    }
+  }
+
+  if (!parsed.referenceCatalogSeeded && !parsed.categories.some((item) => item.id === 'cat-teaching')) {
+    parsed.categories.push({
+      id: 'cat-teaching',
+      name: 'Teaching qualifications',
+      description: 'Regulated teaching qualifications, completed fully online with live Zoom sessions.',
+      active: true,
+      createdAt: '2026-10-05T00:00:00.000Z',
+    });
+    changed = true;
+  }
+  if (!parsed.referenceCatalogSeeded && !parsed.categories.some((item) => item.id === 'cat-online')) {
+    parsed.categories.push({
+      id: 'cat-online',
+      name: 'Online courses',
+      description: 'Practical courses taught by Lisa Zaman, with manuals, video demonstrations and a certificate on completion.',
+      active: true,
+      createdAt: '2026-10-05T00:00:00.000Z',
+    });
+    changed = true;
+  }
+
+  const addCourse = (course: CustomCourse) => {
+    if (parsed.customCourses.some((item) => item.slug === course.slug || item.id === course.id)) return;
+    parsed.customCourses.push(course);
+    parsed.courseCategories[course.id] = course.categoryId;
+    changed = true;
+  };
+
+  if (!parsed.referenceCatalogSeeded) for (const item of teachingQualifications) {
+    addCourse({
+      id: `ref-${item.slug}`,
+      slug: item.slug,
+      title: item.title,
+      duration: item.level,
+      description: `${item.summary}. Intended for ${item.audience}. Study method: ${item.study}.`,
+      shortDescription: item.summary,
+      categoryId: 'cat-teaching',
+      active: true,
+      createdAt: '2026-10-05T00:00:00.000Z',
+      prices: { GBP: null },
+      certificate: 'Regulated teaching qualification',
+      outcomes: [item.audience],
+      visible: true,
+      trainingMode: item.study,
+      image: courseVisuals[item.slug]?.src || '',
+    });
+  }
+
+  if (!parsed.referenceCatalogSeeded) for (const item of onlineCourses) {
+    const modules = Number.parseInt(item.modules, 10) || null;
+    addCourse({
+      id: `ref-${item.slug}`,
+      slug: item.slug,
+      title: item.title,
+      duration: item.modules,
+      description: `${item.summary} Online and self-paced, with a certificate on completion. The source site describes manuals and video demonstrations, but it does not publish the video files.`,
+      shortDescription: item.summary,
+      categoryId: 'cat-online',
+      active: true,
+      createdAt: '2026-10-05T00:00:00.000Z',
+      prices: { GBP: null },
+      manualChapterCount: modules,
+      certificate: 'Certificate',
+      visible: true,
+      trainingMode: 'Online, self-paced',
+      image: courseVisuals[item.slug]?.src || '',
+    });
+  }
+
+  for (const course of parsed.customCourses) {
+    if (!course.id.startsWith('ref-') || course.image) continue;
+    const visual = courseVisuals[course.slug];
+    if (!visual) continue;
+    course.image = visual.src;
+    changed = true;
+  }
+
+  parsed.homepageFaqs ??= [];
+  if (!parsed.homepageFaqsSeeded && parsed.homepageFaqs.length === 0) {
+    parsed.homepageFaqs = homepageFaqSeed.map((item) => ({ ...item }));
+    parsed.homepageFaqsSeeded = true;
+    changed = true;
+  }
+
+  if (!parsed.referenceCatalogSeeded) {
+    if (parsed.shopProducts.length === 0) {
+      parsed.shopProducts = referenceShopProducts.map((item) => ({
+        id: `shop-${item.slug}`,
+        slug: item.slug,
+        title: item.title,
+        format: item.format,
+        includes: [...item.includes],
+        priceGbp: null,
+        published: true,
+        fileName: null,
+        createdAt: '2026-10-05T00:00:00.000Z',
+      }));
+    }
+    parsed.referenceCatalogSeeded = true;
+    changed = true;
+  }
+
+  for (const enquiry of parsed.enquiries) {
+    if (!enquiry.category) {
+      enquiry.category = 'contact';
+      changed = true;
+    }
+  }
+
+  if (!parsed.communityExamplesSeeded) {
+    const examples: ForumThreadRecord[] = [
+      { id: 'example-unit-3', title: 'Tips for writing Unit 3 assessment plans?', category: 'Teaching Qualifications', initials: 'AM', exampleReplyCount: 12 },
+      { id: 'example-sensitive-wax', title: 'Best wax for sensitive skin clients', category: 'Beauty', initials: 'RK', exampleReplyCount: 8 },
+      { id: 'example-home-room', title: 'Setting up a training room at home: insurance?', category: 'Business', initials: 'SL', exampleReplyCount: 15 },
+      { id: 'example-massage-partner', title: 'Looking for a massage practice partner nearby', category: 'Massage', initials: 'AM', exampleReplyCount: 4 },
+    ].map((item) => ({
+      ...item,
+      body: '',
+      example: true,
+      pending: false,
+      authorId: 'example',
+      authorName: item.initials,
+      createdAt: '2026-10-05T00:00:00.000Z',
+      hidden: false,
+      reported: false,
+      replies: [],
+    }));
+    for (const example of examples) {
+      if (!parsed.threads.some((item) => item.id === example.id)) parsed.threads.push(example);
+    }
+    parsed.communityExamplesSeeded = true;
+    changed = true;
+  }
+  return changed;
 }
 
 function normaliseDb(parsed: Database) {
@@ -525,6 +794,8 @@ function normaliseDb(parsed: Database) {
       updatedAt: post.published_at || new Date().toISOString(),
     }));
   }
+  normaliseShouldPersist = ensureReferenceCatalog(parsed);
+  if (normaliseShouldPersist) parsed.referenceCatalogSeeded = parsed.referenceCatalogSeeded ?? true;
   return parsed;
 }
 
@@ -533,6 +804,7 @@ function readDb(): Database {
     mkdirSync(DATA_DIR, { recursive: true });
     if (!existsSync(DB_PATH)) {
       const seeded = emptyDatabase();
+      ensureReferenceCatalog(seeded);
       writeFileSync(DB_PATH, JSON.stringify(seeded, null, 2));
       memoryDb = seeded;
       lastDbMtime = statSync(DB_PATH).mtimeMs;
@@ -545,11 +817,21 @@ function readDb(): Database {
     const raw = JSON.parse(readFileSync(DB_PATH, 'utf8')) as Database;
     const chaptersBefore = raw.chapters?.length ?? 0;
     const articlesBefore = raw.articles?.length ?? 0;
+    const catalogBefore = raw.referenceCatalogSeeded === true;
     memoryDb = normaliseDb(raw);
     lastDbMtime = stat.mtimeMs;
-    if ((chaptersBefore === 0 && memoryDb.chapters.length > 0) || (articlesBefore === 0 && memoryDb.articles.length > 0)) {
-      writeFileSync(DB_PATH, JSON.stringify(memoryDb, null, 2));
-      lastDbMtime = statSync(DB_PATH).mtimeMs;
+    if (
+      normaliseShouldPersist ||
+      (chaptersBefore === 0 && memoryDb.chapters.length > 0) ||
+      (articlesBefore === 0 && memoryDb.articles.length > 0) ||
+      (!catalogBefore && memoryDb.referenceCatalogSeeded)
+    ) {
+      try {
+        writeFileSync(DB_PATH, JSON.stringify(memoryDb, null, 2));
+        lastDbMtime = statSync(DB_PATH).mtimeMs;
+      } catch (error) {
+        console.error('Institute database changes could not be saved.', error instanceof Error ? error.message : 'write failed');
+      }
     }
     return memoryDb;
   } catch (error) {
@@ -566,7 +848,7 @@ function publicWebsiteSettings(record?: WebsiteSettingsRecord) {
   return {
     show_recognitions: record?.showRecognitions === true,
     institute_name: name || DEFAULT_INSTITUTE_NAME,
-    default_currency: record?.defaultCurrency || 'EUR',
+    show_course_prices: record?.showCoursePrices === true,
   };
 }
 
@@ -948,13 +1230,9 @@ export function deleteAccount(id: string, options?: { force?: boolean }): { ok: 
 
 const COURSE_IMAGE = '/images/course/ndt-level-2-course.png';
 
-export function formatCourseFee(prices?: Record<string, number | null>, priceInr?: number | null, fallbackFee?: string): string {
+export function formatCourseFee(prices?: Record<string, number | null>, _priceInr?: number | null, fallbackFee?: string): string {
   if (prices?.GBP != null && !isNaN(prices.GBP) && prices.GBP > 0) {
     return `£${new Intl.NumberFormat('en-GB', { maximumFractionDigits: 0 }).format(prices.GBP)}`;
-  }
-  if (priceInr != null && !isNaN(priceInr) && priceInr > 0) {
-    const convertedGbp = Math.round((priceInr * 0.0095) / 5) * 5;
-    return `£${new Intl.NumberFormat('en-GB', { maximumFractionDigits: 0 }).format(convertedGbp)}`;
   }
   if (fallbackFee && fallbackFee.includes('£')) {
     return fallbackFee;
@@ -1021,7 +1299,7 @@ export function allCourses() {
       shortDescription: course.shortDescription || '',
       description: course.description,
       duration: course.duration,
-      image: course.image || COURSE_IMAGE,
+      image: course.image || courseVisuals[course.slug]?.src || '',
       fee: formatCourseFee(prices, course.priceInr),
       priceInr: course.priceInr ?? prices.INR ?? null,
       prices,
@@ -1039,6 +1317,7 @@ export function allCourses() {
       visible: course.visible !== false,
       custom: true,
       categoryId: course.categoryId,
+      trainingMode: course.trainingMode || '',
     };
   });
   return [...published, ...custom].map((course) => {
@@ -1053,7 +1332,7 @@ export function allCourses() {
 /** Public catalogue: the same active courses the admin list edits, including later additions. */
 export function websiteCourses(): Course[] {
   const db = readDb();
-  return allCourses().filter((course) => course.visible && course.active).map((course) => {
+  return allCourses().filter((course) => course.visible && course.active && course.id.startsWith('ref-')).map((course) => {
     const seed = coursesData.find((item) => item.id === course.id);
     const chapters = db.chapters
       .filter((chapter) => chapter.courseId === course.id && chapter.status === 'published')
@@ -1076,7 +1355,7 @@ export function websiteCourses(): Course[] {
       description: course.description || seed?.description || course.shortDescription,
       duration: course.duration,
       fee: course.fee || 'Fee on request',
-      training_mode: seed?.training_mode || 'Classroom & Online',
+      training_mode: (course as { trainingMode?: string }).trainingMode || seed?.training_mode || 'Classroom & Online',
       certification: course.certification,
       eligibility: course.eligibility,
       placement_support: seed?.placement_support ?? false,
@@ -1480,17 +1759,17 @@ export function createCustomCourse(input: CourseDraft) {
         ? Number(input.prices.GBP)
         : null;
 
-  const effectivePriceInr = input.priceInr != null && input.priceInr !== ''
+  const explicitInr = input.priceInr != null && input.priceInr !== ''
     ? Number(input.priceInr)
     : input.prices?.INR != null
       ? Number(input.prices.INR)
-      : (gbpVal != null ? Math.round(gbpVal * 105) : null);
+      : null;
 
   const coursePrices = {
     GBP: gbpVal,
-    INR: effectivePriceInr,
-    USD: input.prices?.USD != null ? Number(input.prices.USD) : (gbpVal != null ? Math.round(gbpVal * 1.28) : null),
-    AED: input.prices?.AED != null ? Number(input.prices.AED) : (gbpVal != null ? Math.round(gbpVal * 4.7) : null),
+    INR: explicitInr,
+    USD: input.prices?.USD != null ? Number(input.prices.USD) : null,
+    AED: input.prices?.AED != null ? Number(input.prices.AED) : null,
   };
 
   const course: CustomCourse = {
@@ -1503,7 +1782,7 @@ export function createCustomCourse(input: CourseDraft) {
     categoryId: category.id,
     active: true,
     createdAt: new Date().toISOString(),
-    priceInr: effectivePriceInr,
+    priceInr: explicitInr,
     prices: coursePrices,
     studyHours: input.studyHours ?? null,
     manualChapterCount: input.manualChapterCount ?? null,
@@ -2076,7 +2355,7 @@ export function websiteSettings() {
   return publicWebsiteSettings(readDb().websiteSettings);
 }
 
-export function saveWebsiteSettings(input: { show_recognitions?: boolean; institute_name?: string; default_currency?: 'INR' | 'EUR' | 'GBP' | 'USD' | 'AED' }) {
+export function saveWebsiteSettings(input: { show_recognitions?: boolean; institute_name?: string; default_currency?: 'INR' | 'EUR' | 'GBP' | 'USD' | 'AED'; show_course_prices?: boolean }) {
   const db = readDb();
   const current = db.websiteSettings;
   const instituteName = input.institute_name !== undefined ? input.institute_name.trim() : (current?.instituteName || DEFAULT_INSTITUTE_NAME);
@@ -2086,7 +2365,8 @@ export function saveWebsiteSettings(input: { show_recognitions?: boolean; instit
   db.websiteSettings = {
     showRecognitions: input.show_recognitions !== undefined ? input.show_recognitions === true : (current?.showRecognitions ?? false),
     instituteName,
-    defaultCurrency: input.default_currency || current?.defaultCurrency || 'EUR',
+    defaultCurrency: input.default_currency || current?.defaultCurrency || 'GBP',
+    showCoursePrices: input.show_course_prices !== undefined ? input.show_course_prices === true : (current?.showCoursePrices === true),
     updatedAt: new Date().toISOString(),
   };
   writeDb(db);
@@ -2102,18 +2382,40 @@ export function submitContactEnquiry(input: {
   courseName?: string;
   otherCourse?: string;
   message?: string;
+  category?: string;
+  specialism?: string;
+  availability?: string;
+  supportType?: string;
+  cvFile?: string | null;
+  attachments?: string[];
 }) {
   const fullName = input.fullName.trim();
   const phone = input.phone.trim();
   const email = input.email.trim().toLowerCase();
-  const location = (input.location || 'Online Session / Web Enquiry').trim();
-  const courseName = (input.courseName || input.otherCourse || 'General Enquiry').trim();
+  const category: EnquiryCategory = input.category === 'career' || input.category === 'mentorship' || input.category === 'strategy' ? input.category : 'contact';
+  const location = (input.location || (category === 'contact' || category === 'strategy' ? 'Online Session / Web Enquiry' : '')).trim();
+  const courseName = (input.courseName || input.otherCourse || (category === 'career' ? 'Career enquiry' : category === 'mentorship' ? 'Mentorship enquiry' : category === 'strategy' ? 'Free Technical Career Strategy Call' : 'General Enquiry')).trim();
   const otherCourse = input.otherCourse?.trim();
   const message = input.message?.trim();
+  const specialism = input.specialism?.trim();
+  const availability = input.availability?.trim();
+  const supportType = input.supportType?.trim();
 
   if (!fullName) return { ok: false as const, message: 'Please enter your full name.' };
   if (!email || !email.includes('@')) return { ok: false as const, message: 'Please enter a valid email address.' };
-  if (!phone || digits(phone).length < 7) return { ok: false as const, message: 'Please enter a valid contact phone number.' };
+  if (category === 'career') {
+    if (phone && digits(phone).length < 7) return { ok: false as const, message: 'Please enter a valid contact phone number.' };
+    if (!location) return { ok: false as const, message: 'Please enter your location.' };
+    if (!specialism) return { ok: false as const, message: 'Please choose a specialism.' };
+    if (!availability) return { ok: false as const, message: 'Please choose your availability.' };
+    if (!input.cvFile) return { ok: false as const, message: 'Please upload a CV as a PDF or Word file.' };
+  } else if (!phone || digits(phone).length < 7) {
+    return { ok: false as const, message: 'Please enter a valid contact phone number.' };
+  }
+  if (category === 'mentorship') {
+    if (!supportType) return { ok: false as const, message: 'Please choose the type of support you need.' };
+    if (!message) return { ok: false as const, message: 'Please describe your business plans or requirements.' };
+  }
 
   const db = readDb();
   const enquiry: ContactEnquiryRecord = {
@@ -2128,6 +2430,12 @@ export function submitContactEnquiry(input: {
     otherCourse: otherCourse || undefined,
     message: message || undefined,
     status: 'new',
+    category,
+    specialism: specialism || undefined,
+    availability: availability || undefined,
+    supportType: supportType || undefined,
+    cvFile: input.cvFile || null,
+    attachments: input.attachments?.length ? input.attachments : undefined,
   };
 
   db.enquiries.unshift(enquiry);
@@ -2147,6 +2455,7 @@ export function listContactEnquiries(filters?: {
   status?: string;
   startDate?: string;
   endDate?: string;
+  category?: string;
 }) {
   const db = readDb();
   let list = db.enquiries ?? [];
@@ -2174,6 +2483,11 @@ export function listContactEnquiries(filters?: {
 
   if (filters?.status && filters.status !== 'all') {
     list = list.filter((item) => item.status === filters.status);
+  }
+
+  if (filters?.category && filters.category !== 'all') {
+    const category = filters.category === 'career' || filters.category === 'mentorship' || filters.category === 'strategy' ? filters.category : 'contact';
+    list = list.filter((item) => (item.category || 'contact') === category);
   }
 
   if (filters?.startDate) {
@@ -2314,6 +2628,398 @@ export function saveArticle(input: ArticleDraft): { ok: boolean; article?: Artic
   db.articles.push(newArticle);
   writeDb(db);
   return { ok: true, article: newArticle };
+}
+
+const PRIVATE_ROOT = path.join(DATA_DIR, 'private');
+
+function fileMagicMatches(extension: string, bytes: Buffer) {
+  if (bytes.length < 12) return false;
+  if (extension === '.pdf') return bytes.subarray(0, 5).toString('latin1') === '%PDF-';
+  if (extension === '.docx') return bytes[0] === 0x50 && bytes[1] === 0x4b;
+  if (extension === '.doc') return bytes[0] === 0xd0 && bytes[1] === 0xcf;
+  if (extension === '.png') return bytes[0] === 0x89 && bytes[1] === 0x50;
+  if (extension === '.jpg' || extension === '.jpeg') return bytes[0] === 0xff && bytes[1] === 0xd8;
+  if (extension === '.webp') return bytes.subarray(0, 4).toString('latin1') === 'RIFF' && bytes.subarray(8, 12).toString('latin1') === 'WEBP';
+  return false;
+}
+
+export function savePrivateUpload(folder: 'cvs' | 'accreditation' | 'shop', id: string, originalName: string, bytes: Buffer) {
+  const extension = path.extname(originalName).toLowerCase();
+  const allowed = folder === 'cvs'
+    ? ['.pdf', '.doc', '.docx']
+    : ['.pdf', '.doc', '.docx', '.png', '.jpg', '.jpeg', '.webp'];
+  if (!allowed.includes(extension)) {
+    return { ok: false as const, message: folder === 'cvs' ? 'Upload a PDF or Word CV.' : 'Upload a PDF, Word or image file.' };
+  }
+  if (bytes.length > 5 * 1024 * 1024) {
+    return { ok: false as const, message: 'Each file must be 5 MB or smaller.' };
+  }
+  if (!fileMagicMatches(extension, bytes)) {
+    return { ok: false as const, message: 'The file contents do not match its type.' };
+  }
+  const fileName = `${id}${extension}`;
+  const directory = path.join(PRIVATE_ROOT, folder);
+  mkdirSync(directory, { recursive: true });
+  writeFileSync(path.join(directory, fileName), bytes);
+  return { ok: true as const, fileName };
+}
+
+export function privateUploadPath(folder: 'cvs' | 'accreditation' | 'shop', fileName: string) {
+  const base = path.basename(fileName);
+  if (!base || base !== fileName) return null;
+  const full = path.join(PRIVATE_ROOT, folder, base);
+  return existsSync(full) ? full : null;
+}
+
+export function listShopProducts(includeUnpublished = false) {
+  const db = readDb();
+  return (db.shopProducts ?? []).filter((item) => includeUnpublished || item.published);
+}
+
+export function saveShopProduct(input: {
+  id?: string;
+  title: string;
+  format?: string;
+  includes?: string[];
+  priceGbp?: number | null;
+  published?: boolean;
+  fileName?: string | null;
+}) {
+  const db = readDb();
+  db.shopProducts ??= [];
+  const title = input.title.trim();
+  if (!title) return { ok: false as const, message: 'Enter a product title.' };
+  const price = input.priceGbp == null || Number.isNaN(Number(input.priceGbp)) ? null : Number(input.priceGbp);
+  if (price != null && price < 0) return { ok: false as const, message: 'Enter a price in pounds, or leave it blank.' };
+  if (input.id) {
+    const existing = db.shopProducts.find((item) => item.id === input.id);
+    if (!existing) return { ok: false as const, message: 'That product was not found.' };
+    existing.title = title;
+    if (input.format !== undefined) existing.format = input.format.trim();
+    if (input.includes) existing.includes = input.includes.map((item) => item.trim()).filter(Boolean);
+    if (input.priceGbp !== undefined) existing.priceGbp = price;
+    if (input.published !== undefined) existing.published = input.published;
+    if (input.fileName !== undefined) existing.fileName = input.fileName;
+    writeDb(db);
+    return { ok: true as const, product: existing };
+  }
+  const base = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || `product-${randomBytes(2).toString('hex')}`;
+  let slug = base;
+  let suffix = 2;
+  while (db.shopProducts.some((item) => item.slug === slug)) slug = `${base}-${suffix++}`;
+  const product: ShopProductRecord = {
+    id: `shop-${randomBytes(4).toString('hex')}`,
+    slug,
+    title,
+    format: input.format?.trim() || 'Download',
+    includes: (input.includes ?? []).map((item) => item.trim()).filter(Boolean),
+    priceGbp: price,
+    published: input.published !== false,
+    fileName: input.fileName ?? null,
+    createdAt: new Date().toISOString(),
+  };
+  db.shopProducts.push(product);
+  writeDb(db);
+  return { ok: true as const, product };
+}
+
+export function deleteShopProduct(id: string) {
+  const db = readDb();
+  const before = db.shopProducts?.length ?? 0;
+  db.shopProducts = (db.shopProducts ?? []).filter((item) => item.id !== id);
+  if (db.shopProducts.length === before) return { ok: false as const, message: 'That product was not found.' };
+  writeDb(db);
+  return { ok: true as const };
+}
+
+export function listPublicReviews() {
+  return (readDb().reviews ?? []).filter((item) => item.status === 'approved');
+}
+
+export function listReviewsForAdmin() {
+  return [...(readDb().reviews ?? [])].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+}
+
+export function submitStudentReview(input: {
+  courseId: string;
+  courseTitle: string;
+  authorId: string;
+  authorName: string;
+  rating: number;
+  body: string;
+}) {
+  const body = input.body.trim();
+  const rating = Math.round(input.rating);
+  if (!input.courseId) return { ok: false as const, message: 'Choose a course.' };
+  if (rating < 1 || rating > 5) return { ok: false as const, message: 'Choose a rating from 1 to 5.' };
+  if (body.length < 12) return { ok: false as const, message: 'Write a short review of at least 12 characters.' };
+  const db = readDb();
+  db.reviews ??= [];
+  const review: StudentReviewRecord = {
+    id: `rev-${randomBytes(4).toString('hex')}`,
+    courseId: input.courseId,
+    courseTitle: input.courseTitle.trim() || 'Course',
+    authorId: input.authorId,
+    authorName: input.authorName,
+    rating,
+    body,
+    status: 'pending',
+    createdAt: new Date().toISOString(),
+  };
+  db.reviews.unshift(review);
+  writeDb(db);
+  return { ok: true as const, review };
+}
+
+export function setReviewStatus(id: string, status: StudentReviewRecord['status']) {
+  const db = readDb();
+  const review = (db.reviews ?? []).find((item) => item.id === id);
+  if (!review) return { ok: false as const, message: 'Review not found.' };
+  review.status = status;
+  writeDb(db);
+  return { ok: true as const, review };
+}
+
+export function deleteReview(id: string) {
+  const db = readDb();
+  const before = db.reviews?.length ?? 0;
+  db.reviews = (db.reviews ?? []).filter((item) => item.id !== id);
+  if (db.reviews.length === before) return { ok: false as const, message: 'Review not found.' };
+  writeDb(db);
+  return { ok: true as const };
+}
+
+export function listHomepageFaqs() {
+  return [...(readDb().homepageFaqs ?? [])];
+}
+
+export function saveHomepageFaqs(items: HomepageFaq[]) {
+  const next: HomepageFaq[] = [];
+  for (const item of items) {
+    const question = item.question.trim();
+    const answer = item.answer.trim();
+    if (!question && !answer) continue;
+    if (question.length < 8) return { ok: false as const, message: 'Each question needs at least a short sentence.' };
+    if (answer.length < 20) return { ok: false as const, message: 'Each answer needs to explain the point in plain language.' };
+    next.push({
+      id: item.id?.trim() || `faq-${randomBytes(4).toString('hex')}`,
+      question,
+      answer,
+    });
+  }
+  if (next.length > 20) return { ok: false as const, message: 'Keep the public FAQ list to 20 questions.' };
+  const db = readDb();
+  db.homepageFaqs = next;
+  db.homepageFaqsSeeded = true;
+  writeDb(db);
+  return { ok: true as const, faqs: next };
+}
+
+export function listForumThreads(includeHidden = false) {
+  return (readDb().threads ?? [])
+    .filter((item) => includeHidden || (!item.hidden && item.pending !== true))
+    .map((item) => ({
+      ...item,
+      replies: includeHidden ? item.replies : item.replies.filter((reply) => !reply.hidden && reply.approved !== false),
+    }));
+}
+
+export function createForumThread(input: { title: string; body: string; authorId: string; authorName: string; category?: string }) {
+  const title = input.title.trim();
+  const body = input.body.trim();
+  const authorName = input.authorName.trim();
+  if (authorName.length < 2) return { ok: false as const, message: 'Enter your name.' };
+  if (title.length < 4) return { ok: false as const, message: 'Enter a discussion title.' };
+  if (body.length < 12) return { ok: false as const, message: 'Write a little more so other learners can reply.' };
+  const db = readDb();
+  db.threads ??= [];
+  const initials = authorName.split(/\s+/).map((part) => part[0]).join('').slice(0, 2).toUpperCase();
+  const thread: ForumThreadRecord = {
+    id: `thread-${randomBytes(4).toString('hex')}`,
+    title,
+    body,
+    category: input.category?.trim() || 'Community',
+    initials,
+    authorId: input.authorId,
+    authorName,
+    createdAt: new Date().toISOString(),
+    hidden: false,
+    pending: true,
+    reported: false,
+    replies: [],
+  };
+  db.threads.unshift(thread);
+  writeDb(db);
+  return { ok: true as const, thread };
+}
+
+export function replyToThread(input: { threadId: string; body: string; authorId: string; authorName: string }) {
+  const body = input.body.trim();
+  const authorName = input.authorName.trim();
+  if (authorName.length < 2) return { ok: false as const, message: 'Enter your name.' };
+  if (body.length < 2) return { ok: false as const, message: 'Write a reply.' };
+  const db = readDb();
+  const thread = (db.threads ?? []).find((item) => item.id === input.threadId && !item.hidden);
+  if (!thread) return { ok: false as const, message: 'That discussion is not available.' };
+  thread.replies.push({
+    id: `reply-${randomBytes(4).toString('hex')}`,
+    authorId: input.authorId,
+    authorName,
+    body,
+    createdAt: new Date().toISOString(),
+    hidden: false,
+    approved: false,
+  });
+  writeDb(db);
+  return { ok: true as const, thread };
+}
+
+export function deleteForumThread(id: string) {
+  const db = readDb();
+  const before = db.threads?.length ?? 0;
+  db.threads = (db.threads ?? []).filter((item) => item.id !== id);
+  if (db.threads.length === before) return { ok: false as const, message: 'Discussion not found.' };
+  writeDb(db);
+  return { ok: true as const };
+}
+
+export function setReplyApproval(threadId: string, replyId: string, approved: boolean) {
+  const db = readDb();
+  const reply = (db.threads ?? []).find((item) => item.id === threadId)?.replies.find((item) => item.id === replyId);
+  if (!reply) return { ok: false as const, message: 'Reply not found.' };
+  reply.approved = approved;
+  reply.hidden = !approved;
+  writeDb(db);
+  return { ok: true as const };
+}
+
+function validPhone(value: string) {
+  const digits = value.replace(/\D/g, '');
+  return digits.length >= 8 && digits.length <= 15 && /^[+0-9()\-\s]+$/.test(value);
+}
+
+export function submitGuestFeedback(input: { name: string; phone: string; body: string; courseTitle?: string; rating?: number }) {
+  const name = input.name.trim();
+  const phone = input.phone.trim();
+  const body = input.body.trim();
+  const courseTitle = input.courseTitle?.trim() || '';
+  const rating = Number(input.rating);
+  if (name.length < 2) return { ok: false as const, message: 'Enter your name.' };
+  if (!validPhone(phone)) return { ok: false as const, message: 'Enter a valid phone number.' };
+  if (body.length < 12) return { ok: false as const, message: 'Write at least a short note of feedback.' };
+  if (courseTitle && !websiteCourses().some((course) => course.title === courseTitle)) {
+    return { ok: false as const, message: 'Choose a published course.' };
+  }
+  const hasRating = input.rating !== undefined && input.rating !== null && !Number.isNaN(rating);
+  if (hasRating && (!Number.isInteger(rating) || rating < 1 || rating > 5)) {
+    return { ok: false as const, message: 'Choose a rating from 1 to 5.' };
+  }
+  const db = readDb();
+  db.guestFeedback ??= [];
+  const feedback: GuestFeedbackRecord = {
+    id: `fb-${randomBytes(4).toString('hex')}`,
+    name,
+    phone,
+    body,
+    ...(courseTitle ? { courseTitle } : {}),
+    ...(Number.isInteger(rating) && rating >= 1 && rating <= 5 ? { rating } : {}),
+    status: 'pending',
+    createdAt: new Date().toISOString(),
+  };
+  db.guestFeedback.unshift(feedback);
+  writeDb(db);
+  return { ok: true as const };
+}
+
+export function listPublicFeedback() {
+  return (readDb().guestFeedback ?? [])
+    .filter((item) => item.status === 'approved')
+    .map(({ phone: _phone, ...item }) => item);
+}
+
+export function listFeedbackForAdmin() {
+  return [...(readDb().guestFeedback ?? [])].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+}
+
+export function setFeedbackStatus(id: string, status: GuestFeedbackRecord['status']) {
+  const db = readDb();
+  const item = (db.guestFeedback ?? []).find((row) => row.id === id);
+  if (!item) return { ok: false as const, message: 'Feedback not found.' };
+  item.status = status;
+  writeDb(db);
+  return { ok: true as const };
+}
+
+export function deleteGuestFeedback(id: string) {
+  const db = readDb();
+  const before = db.guestFeedback?.length ?? 0;
+  db.guestFeedback = (db.guestFeedback ?? []).filter((item) => item.id !== id);
+  if (db.guestFeedback.length === before) return { ok: false as const, message: 'Feedback not found.' };
+  writeDb(db);
+  return { ok: true as const };
+}
+
+export function listPortalItems(includeHidden = false) {
+  return (readDb().portalItems ?? [])
+    .filter((item) => includeHidden || item.published)
+    .sort((a, b) => (a.startsAt || a.createdAt).localeCompare(b.startsAt || b.createdAt));
+}
+
+export function savePortalItem(input: Partial<PortalItemRecord> & { title?: string }) {
+  const title = String(input.title || '').trim();
+  const detail = String(input.detail || '').trim();
+  if (title.length < 2) return { ok: false as const, message: 'Enter a title.' };
+  const db = readDb();
+  db.portalItems ??= [];
+  const kind = input.kind === 'zoom' || input.kind === 'schedule' || input.kind === 'update' ? input.kind : 'info';
+  if (input.id) {
+    const current = db.portalItems.find((item) => item.id === input.id);
+    if (!current) return { ok: false as const, message: 'That portal item was not found.' };
+    current.title = title;
+    current.detail = detail;
+    current.kind = kind;
+    current.zoomUrl = String(input.zoomUrl || '').trim();
+    current.startsAt = String(input.startsAt || '').trim();
+    current.published = input.published !== false;
+    writeDb(db);
+    return { ok: true as const, item: current };
+  }
+  const item: PortalItemRecord = {
+    id: `portal-${randomBytes(4).toString('hex')}`,
+    kind,
+    title,
+    detail,
+    zoomUrl: String(input.zoomUrl || '').trim(),
+    startsAt: String(input.startsAt || '').trim(),
+    published: input.published !== false,
+    createdAt: new Date().toISOString(),
+  };
+  db.portalItems.push(item);
+  writeDb(db);
+  return { ok: true as const, item };
+}
+
+export function deletePortalItem(id: string) {
+  const db = readDb();
+  const before = db.portalItems?.length ?? 0;
+  db.portalItems = (db.portalItems ?? []).filter((item) => item.id !== id);
+  if (db.portalItems.length === before) return { ok: false as const, message: 'That portal item was not found.' };
+  writeDb(db);
+  return { ok: true as const };
+}
+
+export function moderateThread(id: string, action: 'hide' | 'report' | 'restore') {
+  const db = readDb();
+  const thread = (db.threads ?? []).find((item) => item.id === id);
+  if (!thread) return { ok: false as const, message: 'Discussion not found.' };
+  if (action === 'hide') thread.hidden = true;
+  if (action === 'restore') {
+    thread.hidden = false;
+    thread.reported = false;
+  }
+  if (action === 'report') thread.reported = true;
+  writeDb(db);
+  return { ok: true as const, thread };
 }
 
 export function deleteArticle(id: string): { ok: boolean; message?: string } {

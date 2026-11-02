@@ -5,119 +5,48 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, Star, ShieldCheck, Award, Wrench, CheckCircle2 } from 'lucide-react';
 import type { Course } from '@/lib/types';
-import { useCurrency } from '@/lib/currency';
+import { gbpLabel, useShowCoursePrices } from '@/lib/public-price';
+import { courseVisualBySrc } from '@/lib/course-visuals';
 import { SavvyLogo } from '@/components/brand/SavvyLogo';
 
 interface PopularCoursesSectionProps {
   courses: Course[];
+  children?: React.ReactNode;
 }
 
-export function PopularCoursesSection({ courses }: PopularCoursesSectionProps) {
-  const { currency, getCoursePriceDisplay } = useCurrency();
+export function PopularCoursesSection({ courses, children }: PopularCoursesSectionProps) {
+  const showPrices = useShowCoursePrices();
   const [selectedFilter, setSelectedFilter] = useState('All');
 
-  const filterTabs = ['All', 'NDT Inspection', 'QA/QC Mechanical', 'MEP & BIM', 'Safety & HSE'];
+  const filterTabs = ['All', ...Array.from(new Set(courses.map((course) => course.category).filter((name): name is string => Boolean(name))))].slice(0, 6);
 
-  // Filtered courses for full catalog grid below
   const filteredCourses = useMemo(() => {
     if (selectedFilter === 'All') return courses.slice(0, 6);
-    const q = selectedFilter.toLowerCase();
-    return courses.filter((c) => {
-      const cat = (c.category || '').toLowerCase();
-      const title = c.title.toLowerCase();
-      if (q.includes('ndt')) return cat.includes('ndt') || title.includes('ndt');
-      if (q.includes('qa/qc')) return cat.includes('qa') || cat.includes('qc') || title.includes('qa') || title.includes('qc');
-      if (q.includes('mep')) return cat.includes('mep') || cat.includes('bim') || title.includes('mep') || title.includes('revit');
-      if (q.includes('safety') || q.includes('hse')) return cat.includes('safety') || cat.includes('hse') || title.includes('safety');
-      return true;
-    }).slice(0, 6);
+    return courses.filter((course) => course.category === selectedFilter).slice(0, 6);
   }, [courses, selectedFilter]);
 
-  // Coursera "New and popular" 3 columns mapping
-  const ndtCourse = courses.find((c) => c.slug === 'ndt-level-2-course' || c.id === 'c1') || courses[0];
-  const qaqcCourse = courses.find((c) => c.slug === 'qa-and-qc-course' || c.id === 'c2') || courses[1];
-  const revitCourse = courses.find((c) => c.title.toLowerCase().includes('revit') || c.id === 'c3') || courses[2];
-  const cswipCourse = courses.find((c) => c.title.toLowerCase().includes('cswip') || c.id === 'c6') || courses[3];
-  const hvacCourse = courses.find((c) => c.title.toLowerCase().includes('hvac') || c.id === 'c4') || courses[4];
-  const safetyCourse = courses.find((c) => c.title.toLowerCase().includes('safety') || c.id === 'c5') || courses[5];
+  const toCard = (course: Course) => ({
+    course,
+    partner: course.category || 'Savvy Training Academy',
+    title: course.title,
+    badge: course.category?.split(' ')[0] || 'Course',
+    type: course.training_mode || course.certification || 'Course',
+    rating: course.rating && course.rating > 0 ? String(course.rating) : '',
+    image: course.featured_image || '',
+  });
+  const teaching = courses.filter((course) => (course.category || '').toLowerCase().includes('teaching'));
+  const online = courses.filter((course) => (course.category || '').toLowerCase().includes('online'));
+  const other = courses.filter((course) => !teaching.includes(course) && !online.includes(course));
 
   const popularColumns = [
-    {
-      title: 'Most popular',
-      href: '/courses?sort=featured',
-      items: [
-        {
-          course: ndtCourse,
-          partner: 'ASNT SNT-TC-1A',
-          title: ndtCourse?.title || 'NDT Level II Course (UT, RT, MPT, LPT, VT)',
-          badge: 'NDT',
-          type: 'Professional Certificate',
-          rating: '4.9',
-          image: ndtCourse?.featured_image || '/images/course/ndt-level-2-course.png',
-        },
-        {
-          course: qaqcCourse,
-          partner: 'ASME Section V & IX',
-          title: qaqcCourse?.title || 'QA & QC Mechanical & Piping Inspection',
-          badge: 'QA/QC',
-          type: 'Professional Certificate',
-          rating: '4.8',
-          image: qaqcCourse?.featured_image || '/images/course/qa-and-qc-course.png',
-        },
-      ],
-    },
-    {
-      title: 'Hot new releases',
-      href: '/courses?category=cat2',
-      items: [
-        {
-          course: revitCourse,
-          partner: 'Autodesk Revit BIM',
-          title: revitCourse?.title || 'Revit MEP & BIM 3D Engineering Design',
-          badge: 'BIM',
-          type: 'Professional Certificate',
-          rating: '4.8',
-          image: revitCourse?.featured_image || '/images/course/revit-mep-training-course-fees.png',
-        },
-        {
-          course: cswipCourse,
-          partner: 'TWI / CSWIP UK',
-          title: cswipCourse?.title || 'CSWIP 3.1 Welding Inspector Preparation',
-          badge: 'CSWIP',
-          type: 'Professional Certificate',
-          rating: '4.9',
-          image: cswipCourse?.featured_image || '/images/course/cswip-3-1-course.png',
-        },
-      ],
-    },
-    {
-      title: 'Trending technical courses',
-      href: '/courses',
-      items: [
-        {
-          course: hvacCourse,
-          partner: 'ASHRAE / HVAC Labs',
-          title: hvacCourse?.title || 'HVAC Design & Cleanroom Engineering',
-          badge: 'HVAC',
-          type: 'Professional Certificate',
-          rating: '4.7',
-          image: hvacCourse?.featured_image || '/images/course/hvac-course.png',
-        },
-        {
-          course: safetyCourse,
-          partner: 'IOSH / NEBOSH Framework',
-          title: safetyCourse?.title || 'Industrial Fire & Safety (HSE) Engineering',
-          badge: 'HSE',
-          type: 'Specialization',
-          rating: '4.8',
-          image: safetyCourse?.featured_image || '/images/course/fire-safety-course.png',
-        },
-      ],
-    },
-  ];
+    { title: 'Teaching qualifications', href: '/teaching', items: teaching.slice(0, 2).map(toCard) },
+    { title: 'Online courses', href: '/courses', items: online.slice(0, 2).map(toCard) },
+    { title: 'More programmes', href: '/courses', items: (other.length ? other : courses).slice(0, 2).map(toCard) },
+  ].filter((column) => column.items.length > 0);
 
   return (
-    <section className="py-12 sm:py-16 bg-white border-b border-[#e2e8f0]">
+    <>
+    <section className="bg-white py-12 sm:py-16">
       <div className="site-container">
         {/* ========================================================= */}
         {/* 1. COURSERA EXACT: "New and popular" 3-Column Showcase    */}
@@ -127,7 +56,7 @@ export function PopularCoursesSection({ courses }: PopularCoursesSectionProps) {
             New and popular
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="reveal-stagger grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {popularColumns.map((col, colIdx) => {
               const panel =
                 colIdx === 0
@@ -165,13 +94,19 @@ export function PopularCoursesSection({ courses }: PopularCoursesSectionProps) {
                         >
                           {/* Square Thumbnail with Badge Overlay */}
                           <div className="relative w-[72px] h-[72px] rounded-xl overflow-hidden shrink-0 bg-[#f4f7fb]">
-                            <Image
-                              src={item.image}
-                              alt={item.title}
-                              fill
-                              sizes="80px"
-                              className="object-cover group-hover:scale-105 transition-transform duration-300"
-                            />
+                            {item.image ? (
+                              <Image
+                                src={item.image}
+                                alt={courseVisualBySrc(item.image)?.alt || item.title}
+                                fill
+                                sizes="80px"
+                                className="object-cover group-hover:scale-105 transition-transform duration-300"
+                              />
+                            ) : (
+                              <div className="flex h-full w-full items-center justify-center bg-[#EBF3FF] text-xs font-bold text-[#0056D2]">
+                                {item.badge.slice(0, 2)}
+                              </div>
+                            )}
                             <div className="absolute bottom-0 left-0 right-0 bg-[#0056D2] text-[8px] font-extrabold text-white text-center py-0.5 uppercase tracking-wider">
                               {item.badge}
                             </div>
@@ -193,11 +128,15 @@ export function PopularCoursesSection({ courses }: PopularCoursesSectionProps) {
                             {/* Format & Rating */}
                             <div className="flex items-center gap-1.5 text-[11px] text-[#565656] mt-1">
                               <span>{item.type}</span>
-                              <span>·</span>
-                              <div className="flex items-center gap-0.5 text-[#1F1F1F] font-bold">
-                                <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-                                <span>{item.rating}</span>
-                              </div>
+                              {item.rating && (
+                                <>
+                                  <span>·</span>
+                                  <div className="flex items-center gap-0.5 text-[#1F1F1F] font-bold">
+                                    <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+                                    <span>{item.rating}</span>
+                                  </div>
+                                </>
+                              )}
                             </div>
                           </div>
                         </Link>
@@ -210,11 +149,15 @@ export function PopularCoursesSection({ courses }: PopularCoursesSectionProps) {
             })}
           </div>
         </div>
-
+      </div>
+    </section>
+    {children}
+    <section className="border-b border-[#e2e8f0] bg-white py-12 sm:py-16">
+      <div className="site-container">
         {/* ========================================================= */}
         {/* 2. Full Course Catalogue Grid with Category Filter Tabs    */}
         {/* ========================================================= */}
-        <div className="pt-8 border-t border-[#e2e8f0]">
+        <div>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-[#0056D2]">
@@ -253,9 +196,9 @@ export function PopularCoursesSection({ courses }: PopularCoursesSectionProps) {
           </div>
 
           {/* Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div className="reveal-stagger grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {filteredCourses.map((course) => {
-              const priceInfo = getCoursePriceDisplay(course, currency);
+              const price = showPrices ? gbpLabel(course) : null;
 
               return (
                 <div
@@ -267,7 +210,7 @@ export function PopularCoursesSection({ courses }: PopularCoursesSectionProps) {
                     {course.featured_image ? (
                       <Image
                         src={course.featured_image}
-                        alt={course.title}
+                        alt={courseVisualBySrc(course.featured_image)?.alt || course.title}
                         fill
                         sizes="(max-width: 768px) 100vw, 33vw"
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -316,14 +259,16 @@ export function PopularCoursesSection({ courses }: PopularCoursesSectionProps) {
 
                     {/* Price & Action Button */}
                     <div className="mt-5 pt-4 border-t border-[#e2e8f0] flex items-center justify-between gap-3">
+                      {price && (
                       <div className="flex flex-col">
                         <span className="text-[10px] text-[#565656] uppercase font-semibold">
                           Tuition Fee
                         </span>
                         <span className="text-base font-extrabold text-[#0056D2]">
-                          {priceInfo.formatted}
+                          {price}
                         </span>
                       </div>
+                      )}
 
                       <div className="flex items-center gap-2">
                         <Link
@@ -349,5 +294,6 @@ export function PopularCoursesSection({ courses }: PopularCoursesSectionProps) {
         </div>
       </div>
     </section>
+    </>
   );
 }

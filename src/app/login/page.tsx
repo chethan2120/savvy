@@ -134,14 +134,14 @@ export default function LoginPage() {
             <div className="flex flex-col gap-3">
               <h1 className="text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl">SAVVY TRAINING INSTITUTE</h1>
               <p className="text-sm leading-relaxed text-white/85 sm:text-base">
-                Empowering the next generation of NDT professionals through industry-focused training, practical expertise, and internationally recognized certification preparation.
+                Savvy Training Academy helps professionals and businesses get their skills recognised through teaching qualifications, online courses and accreditation.
               </p>
             </div>
             <ul className="flex flex-col gap-3 text-sm text-white">
               {[
-                'Industry-focused NDT training.',
-                'Expert guidance and practical learning.',
-                'Career development and certification preparation.',
+                'Regulated teaching qualifications, fully online.',
+                'Beauty, massage and hairdressing courses.',
+                'Accreditation reviewed by Lisa Zaman.',
               ].map((item) => (
                 <li key={item} className="flex items-start gap-2.5">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#D9AD55]" />
@@ -149,7 +149,7 @@ export default function LoginPage() {
                 </li>
               ))}
             </ul>
-            <p className="text-xs font-semibold tracking-[0.22em] text-[#D9AD55]">SKILLS TODAY | SAFER TOMORROW</p>
+            <p className="text-xs font-semibold tracking-[0.22em] text-[#D9AD55]">LEARN IT. TEACH IT. CERTIFY IT.</p>
           </div>
         </section>
 

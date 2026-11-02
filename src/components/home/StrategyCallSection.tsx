@@ -75,6 +75,7 @@ export function StrategyCallSection() {
           courseName: `Strategy Call: ${discipline}`,
           location: `Online Zoom Call (${selectedDate} at ${selectedSlot})`,
           message: `Booked 40-Minute FREE Technical Strategy Call for ${discipline}. Scheduled: ${selectedDate} at ${selectedSlot}.`,
+          category: 'contact',
         }),
       });
       if (res.ok) {

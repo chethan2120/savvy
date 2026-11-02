@@ -10,7 +10,7 @@ import { websiteCourses } from '@/lib/server/institute-db';
 import { currentAccount } from '@/lib/server/session';
 import { CourseDetailsClient } from './CourseDetailsClient';
 
-export const revalidate = 60; // 60s cache with background revalidation
+export const revalidate = 0;
 
 interface CourseDetailsPageProps {
   params: { id: string };

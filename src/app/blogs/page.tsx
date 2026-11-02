@@ -66,15 +66,18 @@ export default function BlogsPage() {
     <div className="bg-white pb-24">
       {/* Header with Consistent 16:9 Hero Image */}
       <PageHeroBanner
-        badgeText="Technical Knowledge Base"
-        title="Industry Articles &amp; Technical Guides"
-        description="Expert insights into non-destructive testing methodology, radiographic interpretation, ASME/ISO quality control codes, and engineering career standards."
+        variant="blogs"
+        badgeText="Blogs"
+        title="Insights on teaching, training and professional development"
+        description="Read articles from Savvy Training Academy on qualifications, online teaching and the practical side of running training."
         imageSrc="/images/heroes/blogs-hero.jpg"
-        imageAlt="Engineering blueprints, ASME Section V and ISO code manuals, ultrasonic flaw detectors and precision calipers"
+        imageAlt="A study desk with a notebook, books and a pen"
+        actionHref="#articles"
+        actionLabel="Read the articles"
         priority={true}
       />
 
-      <div className="site-container mt-10">
+      <div id="articles" className="site-container mt-10">
         {/* Search & Categories Filter */}
         <div className="bg-white rounded-2xl p-5 border border-[#e2e8f0] shadow-xs mb-12 flex flex-col sm:flex-row items-center justify-between gap-4">
           {/* Category Tabs */}

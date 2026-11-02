@@ -28,9 +28,9 @@ export async function GET(request: Request) {
   const status = url.searchParams.get('status') || undefined;
   const startDate = url.searchParams.get('startDate') || undefined;
   const endDate = url.searchParams.get('endDate') || undefined;
+  const category = url.searchParams.get('category') || undefined;
 
-  // Retrieve ALL matching enquiries respecting filters
-  const enquiries = listContactEnquiries({ query, course, status, startDate, endDate });
+  const enquiries = listContactEnquiries({ query, course, status, startDate, endDate, category });
 
   const rows = enquiries.map((enq, index) => ({
     '#': index + 1,
@@ -38,6 +38,7 @@ export async function GET(request: Request) {
       dateStyle: 'medium',
       timeStyle: 'short',
     }) : '',
+    'Category': sanitizeFormulaInjection(enq.category || 'contact'),
     'Full Name': sanitizeFormulaInjection(enq.fullName),
     'Contact Number': sanitizeFormulaInjection(enq.phone),
     'Email Address': sanitizeFormulaInjection(enq.email),
@@ -45,6 +46,10 @@ export async function GET(request: Request) {
     'Course of Interest': sanitizeFormulaInjection(enq.courseName),
     'Other Course Request': sanitizeFormulaInjection(enq.otherCourse || '—'),
     'Status': enq.status.toUpperCase(),
+    'Specialism': sanitizeFormulaInjection(enq.specialism || '—'),
+    'Availability': sanitizeFormulaInjection(enq.availability || '—'),
+    'Support type': sanitizeFormulaInjection(enq.supportType || '—'),
+    'CV on file': enq.cvFile ? 'Yes' : 'No',
     'Message': sanitizeFormulaInjection(enq.message || '—'),
   }));
 

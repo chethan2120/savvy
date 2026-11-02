@@ -100,25 +100,9 @@ export function getCoursePriceDisplay(course: Partial<Course>, targetCurrency: C
     }
   }
 
-  // Safe backwards compatibility if course was stored with legacy price
-  if (amount == null) {
-    if (course.fee && typeof course.fee === 'string' && course.fee.includes('£')) {
-      const parsed = Number(course.fee.replace(/[^0-9]/g, ''));
-      if (!isNaN(parsed) && parsed > 0) amount = parsed;
-    } else {
-      let inrBase: number | null = null;
-      if ((course as any).priceInr != null && !isNaN(Number((course as any).priceInr))) {
-        inrBase = Number((course as any).priceInr);
-      } else if (pricesMap?.INR != null && !isNaN(Number(pricesMap.INR))) {
-        inrBase = Number(pricesMap.INR);
-      } else if (course.fee) {
-        const parsed = Number(String(course.fee).replace(/[₹,€,$,£,\s]/g, ''));
-        if (!isNaN(parsed) && parsed > 0) inrBase = parsed;
-      }
-      if (inrBase != null && inrBase > 0) {
-        amount = Math.round((inrBase * 0.0095) / 5) * 5;
-      }
-    }
+  if (amount == null && course.fee && typeof course.fee === 'string' && course.fee.includes('£')) {
+    const parsed = Number(course.fee.replace(/[^0-9.]/g, ''));
+    if (!isNaN(parsed) && parsed > 0) amount = parsed;
   }
 
   if (amount != null && amount > 0) {

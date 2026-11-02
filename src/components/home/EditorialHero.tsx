@@ -58,6 +58,7 @@ export function EditorialHero() {
 
   return (
     <section
+      data-no-reveal
       className="bg-white pt-4 pb-6 sm:pb-10 border-b border-[#e2e8f0] relative overflow-x-clip font-sans"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
@@ -90,10 +91,10 @@ export function EditorialHero() {
                 <div className="relative z-30 w-full sm:w-[54%] flex flex-col justify-center text-left p-6 sm:p-7 lg:p-8">
                   <div>
                     <h2 className="text-xl sm:text-2xl lg:text-[25px] font-bold text-[#14532d] tracking-tight leading-[1.18] mb-2 font-sans">
-                      Master Industrial Standards from Industry Leaders
+                      Learn it. Teach it. Certify it.
                     </h2>
-                    <p className="text-xs sm:text-[13px] text-[#166534] leading-[1.4] mb-5 font-normal font-sans line-clamp-2">
-                      Courses and certificates calibrated to ASME, ASNT SNT-TC-1A, TWI CSWIP, and ISO — for every technical level and role.
+                    <p className="text-xs sm:text-[13px] text-[#166534] leading-[1.4] mb-5 font-normal font-sans line-clamp-3">
+                      Teaching qualifications, online beauty, massage and hairdressing courses, and accreditation to certify your own learners.
                     </p>
                   </div>
 
@@ -116,10 +117,10 @@ export function EditorialHero() {
                     priority
                   />
                   <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between gap-2 rounded-full bg-white/95 px-3 py-1.5 shadow-md">
-                    <span className="min-w-0 truncate text-[11px] font-bold text-[#14532d]">Inspection Lab</span>
+                    <span className="min-w-0 truncate text-[11px] font-bold text-[#14532d]">Lisa Zaman</span>
                     <span className="inline-flex shrink-0 items-center gap-1 text-[10px] font-bold text-[#047857]">
                       <Award className="w-3 h-3" />
-                      ASNT · ISO · ASME
+                      Founder, tutor and assessor
                     </span>
                   </div>
                 </div>
@@ -139,31 +140,31 @@ export function EditorialHero() {
                         <SavvyLogo markClassName="h-full w-full object-contain" />
                       </div>
                       <span className="text-[11px] font-bold uppercase tracking-wider text-[#0056D2] font-sans">
-                        Savvy Practical Lab Training
+                        Teaching qualifications
                       </span>
                     </div>
 
                     <h2 className="text-xl sm:text-[22px] lg:text-[23px] font-bold text-[#1F1F1F] tracking-tight leading-[1.18] mb-2 font-sans line-clamp-3">
-                      Unlock 3 Months of Practical Lab Access with Any Certificate
+                      Become a teacher, fully online
                     </h2>
                     <p className="text-xs sm:text-[13px] text-[#565656] leading-[1.4] mb-5 font-normal font-sans line-clamp-2">
-                      Use Savvy’s calibrated ultrasonic flaw detectors, magnetic yokes, and Revit MEP workstations to study faster and jumpstart your career.
+                      Level 3 to Level 5 teaching qualifications, plus assessing and internal quality assurance, with live Zoom sessions.
                     </p>
                   </div>
 
                   <Link
-                    href="/contact-us"
+                    href="/teaching"
                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0056D2] hover:bg-[#00419e] text-white text-[13px] font-semibold tracking-normal shadow-xs transition-all hover:gap-3 group w-fit"
                   >
-                    <span>Get started</span>
+                    <span>View qualifications</span>
                     <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform" />
                   </Link>
                 </div>
 
                 <div className="relative w-full h-48 min-h-48 shrink-0 overflow-hidden sm:h-auto sm:min-h-full sm:w-[46%] bg-[#f4f7fb]">
                   <Image
-                    src="/images/course/revit-mep-training-course-fees.png"
-                    alt="Practical lab workstation"
+                    src="/images/courses/award-in-education-and-training.jpg"
+                    alt="A trainer speaking with adult learners in a classroom"
                     fill
                     sizes="320px"
                     className="object-cover object-center"
@@ -192,33 +193,33 @@ export function EditorialHero() {
                       Savvy for Business
                     </span>
                     <h2 className="text-xl sm:text-2xl lg:text-[25px] font-bold text-white tracking-tight leading-[1.18] mb-2 font-sans line-clamp-2">
-                      Corporate Workforce Training &amp; ASME Certification Cohorts
+                      Certify your training in your own right
                     </h2>
                     <p className="text-xs sm:text-[13px] text-white/90 leading-[1.4] mb-5 font-normal font-sans line-clamp-2">
-                      On-site ultrasonic, radiographic, and welding qualification cohorts structured for energy EPCs, refineries, and fabricators.
+                      Private companies and individuals can apply. Every sector is welcome, from beauty and hair to education and business skills.
                     </p>
                   </div>
 
                   <Link
-                    href="/contact-us"
+                    href="/accreditation"
                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white hover:bg-slate-100 text-[#0056D2] text-[13px] font-semibold tracking-normal shadow-xs transition-all hover:gap-3 group w-fit"
                   >
-                    <span>Request proposal</span>
+                    <span>Apply for accreditation</span>
                     <ArrowRight className="w-4 h-4 text-[#0056D2] group-hover:translate-x-0.5 transition-transform" />
                   </Link>
                 </div>
 
                 <div className="relative w-full h-48 min-h-48 shrink-0 overflow-hidden sm:h-auto sm:min-h-full sm:w-[46%]">
                   <Image
-                    src="/images/course/qa-and-qc-course.png"
-                    alt="Corporate engineering inspection cohort"
+                    src="/images/courses/internal-quality-assurance.jpg"
+                    alt="An assessor reviewing training assessment folders"
                     fill
                     sizes="320px"
                     className="object-cover object-center"
                   />
                   <div className="absolute bottom-3 left-3 right-3 px-2.5 py-1.5 rounded-full bg-white/95 text-[10px] font-bold text-[#0056D2] flex items-center justify-center gap-1 shadow-md">
                     <ShieldCheck className="w-3 h-3 text-[#0056D2]" />
-                    <span>EPC Approved</span>
+                    <span>Reviewed by Lisa</span>
                   </div>
                 </div>
               </div>
@@ -238,18 +239,18 @@ export function EditorialHero() {
                       </span>
                     </div>
                     <h2 className="text-xl sm:text-[22px] lg:text-[23px] font-bold text-[#1F1F1F] tracking-tight leading-[1.18] mb-2 font-sans line-clamp-2">
-                      100% Verifiable Digital Credentials for Global Careers
+                      Certificate and logo after approval
                     </h2>
                     <p className="text-xs sm:text-[13px] text-[#565656] leading-[1.4] mb-5 font-normal font-sans line-clamp-2">
-                      Every certificate issued carries an authorized issue number verifiable through online institute records for overseas deployment.
+                      Once an accreditation application is approved, the certificate and logo are ready to download from the account. The sample shown on the source site is an example only.
                     </p>
                   </div>
 
                   <Link
-                    href="/courses"
+                    href="/accreditation"
                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0056D2] hover:bg-[#00419e] text-white text-[13px] font-semibold tracking-normal shadow-xs transition-all hover:gap-3 group w-fit"
                   >
-                    <span>View all credentials</span>
+                    <span>Start an application</span>
                     <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform" />
                   </Link>
                 </div>
@@ -259,8 +260,8 @@ export function EditorialHero() {
                     <div className="w-10 h-10 rounded-full bg-[#EBF3FF] border border-[#0056D2]/20 flex items-center justify-center mb-2">
                       <FileCheck className="w-5 h-5 text-[#0056D2]" />
                     </div>
-                    <span className="text-xs font-bold text-[#1F1F1F]">ISO 9712 / ASNT</span>
-                    <span className="text-[10px] text-slate-500 mt-0.5">Online QR Verifiable</span>
+                    <span className="text-xs font-bold text-[#1F1F1F]">Example only</span>
+                    <span className="text-[10px] text-slate-500 mt-0.5">Not an issued certificate</span>
                     <div className="mt-2 flex items-center gap-1 text-[10px] font-semibold text-[#0056D2]">
                       <span>Check Registry</span>
                       <ExternalLink className="w-2.5 h-2.5" />

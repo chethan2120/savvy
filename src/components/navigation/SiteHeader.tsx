@@ -5,10 +5,12 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   ChevronDown, Search, Menu, X, ArrowRight,
-  BookOpen, Globe, User, ExternalLink, ShieldCheck
+  ShieldCheck, Award, ShoppingBag, MessagesSquare,
+  Briefcase, Compass, Mail
 } from 'lucide-react';
 import { SavvyLogo } from '@/components/brand/SavvyLogo';
-import { useCurrency, SUPPORTED_CURRENCIES, CURRENCY_CONFIGS, CurrencyCode } from '@/lib/currency';
+import { onlineCourses } from '@/lib/academy-content';
+import { gbpLabel, useShowCoursePrices } from '@/lib/public-price';
 import { getCachedCategories, getCachedSession } from '@/lib/api-cache';
 import { signOutPortal } from '@/lib/portal-auth';
 
@@ -18,7 +20,7 @@ interface CategoryCourseItem {
   title: string;
   duration?: string;
   priceInr?: number | null;
-  currency_prices?: Partial<Record<CurrencyCode, number | null>>;
+  currency_prices?: { GBP?: number | null };
 }
 
 interface CategoryWithCourses {
@@ -32,13 +34,22 @@ interface CategoryWithCourses {
 export function SiteHeader() {
   const pathname = usePathname();
   const router = useRouter();
-  const { currency, setCurrency, getCoursePriceDisplay } = useCurrency();
+  const showPrices = useShowCoursePrices();
 
   const [categories, setCategories] = useState<CategoryWithCourses[]>([]);
   const [isMegaOpen, setIsMegaOpen] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
+  const contactCloseTimer = useRef<number | null>(null);
+  const openContactMenu = () => {
+    if (contactCloseTimer.current) window.clearTimeout(contactCloseTimer.current);
+    setContactOpen(true);
+  };
+  const closeContactMenu = () => {
+    if (contactCloseTimer.current) window.clearTimeout(contactCloseTimer.current);
+    contactCloseTimer.current = window.setTimeout(() => setContactOpen(false), 220);
+  };
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileCategoryOpen, setMobileCategoryOpen] = useState<string | null>(null);
-  const [showAllCategories, setShowAllCategories] = useState(false);
   const [courseSearch, setCourseSearch] = useState('');
   const [isScrolled, setIsScrolled] = useState(false);
   const [userSession, setUserSession] = useState<{ role: string; fullName: string } | null>(null);
@@ -137,18 +148,19 @@ export function SiteHeader() {
   const navLinks = [
     { label: 'Home', href: '/' },
     { label: 'Explore Courses', href: '/courses', isMega: true },
+    { label: 'Teaching', href: '/teaching' },
     { label: 'About Us', href: '/about-us' },
     { label: 'Blogs', href: '/blogs' },
     { label: 'Contact Us', href: '/contact-us' },
   ];
 
-  const filteredCategories = categories.filter((cat) => {
-    if (!courseSearch.trim()) return true;
-    const q = courseSearch.toLowerCase();
-    const matchCat = cat.name.toLowerCase().includes(q);
-    const matchCourse = cat.courses.some((c) => c.title.toLowerCase().includes(q));
-    return matchCat || matchCourse;
-  });
+  const onlineSlugs = new Set<string>(onlineCourses.map((course) => course.slug));
+  const catalogueCourses = categories.flatMap((cat) =>
+    cat.courses
+      .filter((course) => onlineSlugs.has(course.slug))
+      .filter((course) => !courseSearch.trim() || course.title.toLowerCase().includes(courseSearch.toLowerCase()))
+      .map((course) => ({ ...course, categoryName: cat.name, summary: onlineCourses.find((item) => item.slug === course.slug)?.summary || '' }))
+  );
 
   return (
     <>
@@ -159,18 +171,15 @@ export function SiteHeader() {
             <Link href="/" className="text-white border-b-2 border-white pb-0.5 font-bold">
               For Individuals
             </Link>
-            <Link href="/about-us" className="text-white/70 hover:text-white transition-colors pb-0.5">
-              For Businesses
+            <Link href="/accreditation" className="text-white/70 hover:text-white transition-colors pb-0.5">
+              Accreditation
             </Link>
-            <Link href="/courses" className="text-white/70 hover:text-white transition-colors pb-0.5">
-              For Universities
-            </Link>
-            <Link href="/contact-us" className="text-white/70 hover:text-white transition-colors pb-0.5">
-              For Governments
+            <Link href="/teaching" className="text-white/70 hover:text-white transition-colors pb-0.5">
+              Teaching
             </Link>
           </div>
           <div className="hidden lg:flex items-center gap-4 text-white/75 text-[11px] shrink-0">
-            <span>UK Standards · ASME &amp; ASNT Calibration</span>
+            <span>Accreditation, teaching qualifications and professional courses</span>
           </div>
         </div>
       </div>
@@ -202,17 +211,25 @@ export function SiteHeader() {
 
             {/* Coursera-style Explore Dropdown Button */}
             <div
-              className="relative hidden md:block"
+              className="relative hidden lg:block"
               onMouseEnter={handleMouseEnterMega}
               onMouseLeave={handleMouseLeaveMega}
             >
               <button
                 type="button"
-                onClick={() => setIsMegaOpen(!isMegaOpen)}
+                onClick={(event) => setIsMegaOpen(event.detail === 0 ? !isMegaOpen : true)}
                 aria-expanded={isMegaOpen}
+                aria-haspopup="true"
+                onKeyDown={(event) => {
+                  if (event.key === 'Escape') setIsMegaOpen(false);
+                  if (event.key === 'ArrowDown') {
+                    event.preventDefault();
+                    setIsMegaOpen(true);
+                  }
+                }}
                 className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#0056D2] hover:bg-[#00419e] text-white text-xs font-bold transition-all shadow-2xs"
               >
-                <span>Explore</span>
+                <span>Explore Courses</span>
                 <ChevronDown
                   className={`w-3.5 h-3.5 transition-transform duration-200 ${
                     isMegaOpen ? 'rotate-180' : ''
@@ -222,12 +239,6 @@ export function SiteHeader() {
             </div>
 
             {/* Degrees / Certifications link matching screenshot */}
-            <Link
-              href="/courses"
-              className="hidden xl:inline-block text-xs font-semibold text-[#565656] hover:text-[#0056D2] transition-colors"
-            >
-              Certifications
-            </Link>
           </div>
 
           {/* Center: Coursera-style Search Input Bar (Desktop) */}
@@ -240,7 +251,7 @@ export function SiteHeader() {
                 type="text"
                 value={courseSearch}
                 onChange={(e) => setCourseSearch(e.target.value)}
-                placeholder="What do you want to learn? (e.g. NDT, QA/QC, ASME...)"
+                placeholder="What do you want to learn?"
                 className="w-full bg-transparent text-xs text-[#1F1F1F] placeholder-[#8C9BAE] focus:outline-none pr-2"
               />
               <button
@@ -257,6 +268,62 @@ export function SiteHeader() {
           <nav className="hidden xl:flex items-center gap-1" aria-label="Main Navigation">
             {navLinks.filter((l) => !l.isMega && l.href !== '/').map((link) => {
               const isActive = pathname === link.href || pathname.startsWith(`${link.href}/`);
+              if (link.href === '/contact-us') {
+                const contactActive = ['/contact-us', '/careers', '/mentorship'].some((href) => pathname === href);
+                return (
+                  <div
+                    key={link.label}
+                    className="relative"
+                    onMouseEnter={openContactMenu}
+                    onMouseLeave={closeContactMenu}
+                  >
+                    <button
+                      type="button"
+                      aria-expanded={contactOpen}
+                      aria-haspopup="menu"
+                      onClick={(event) => setContactOpen(event.detail === 0 ? !contactOpen : true)}
+                      onKeyDown={(event) => {
+                        if (event.key === 'Escape') setContactOpen(false);
+                        if (event.key === 'ArrowDown') {
+                          event.preventDefault();
+                          setContactOpen(true);
+                        }
+                      }}
+                      className={`inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${
+                        contactActive ? 'text-[#0056D2] bg-[#F0F5FF]' : 'text-[#565656] hover:text-[#0056D2] hover:bg-[#F0F5FF]'
+                      }`}
+                    >
+                      Contact Us
+                      <ChevronDown className={`w-3.5 h-3.5 transition-transform ${contactOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {contactOpen && (
+                      <div role="menu" className="absolute right-0 top-full z-50 w-[22rem] pt-2">
+                      <div className="rounded-2xl border border-[#e2e8f0] bg-white p-3 shadow-xl">
+                        {[
+                          { label: 'Career', href: '/careers', text: 'Send your specialism, location and CV.', icon: Briefcase },
+                          { label: 'Mentorship', href: '/mentorship', text: 'Ask about starting, running or registering a business.', icon: Compass },
+                          { label: 'Contact Us', href: '/contact-us', text: 'Send a course or shop enquiry.', icon: Mail },
+                        ].map((item) => (
+                          <Link
+                            key={item.href}
+                            role="menuitem"
+                            href={item.href}
+                            onClick={() => setContactOpen(false)}
+                            className="flex items-start gap-3 rounded-xl px-3 py-3 hover:bg-[#F0F5FF]"
+                          >
+                            <item.icon className="mt-0.5 h-5 w-5 text-[#0056D2]" />
+                            <span>
+                              <span className="block text-sm font-semibold text-[#1F1F1F]">{item.label}</span>
+                              <span className="mt-0.5 block text-sm text-[#565656]">{item.text}</span>
+                            </span>
+                          </Link>
+                        ))}
+                      </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              }
               return (
                 <Link
                   key={link.label}
@@ -273,30 +340,7 @@ export function SiteHeader() {
             })}
           </nav>
 
-          {/* Right: Currency Switcher & Auth CTA (Coursera Style) */}
           <div className="hidden lg:flex items-center gap-2.5 shrink-0">
-            {/* Currency selector */}
-            <div className="relative group">
-              <label htmlFor="currency-select-header" className="sr-only">
-                Select currency
-              </label>
-              <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[#e2e8f0] bg-white text-xs font-semibold text-[#1F1F1F] hover:border-[#0056D2] transition-colors cursor-pointer shadow-2xs">
-                <Globe className="w-3.5 h-3.5 text-[#565656]" />
-                <select
-                  id="currency-select-header"
-                  value={currency}
-                  onChange={(e) => setCurrency(e.target.value as CurrencyCode)}
-                  className="bg-transparent text-xs font-semibold text-[#1F1F1F] border-none focus:outline-none cursor-pointer pr-1"
-                >
-                  {SUPPORTED_CURRENCIES.map((code) => (
-                    <option key={code} value={code}>
-                      {CURRENCY_CONFIGS[code].label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
             {/* Portal / Login button */}
             {userSession ? (
               <div className="flex items-center gap-2">
@@ -323,9 +367,9 @@ export function SiteHeader() {
               <div className="flex items-center gap-2">
                 <Link
                   href="/login"
-                  className="px-3 py-2 text-xs font-bold text-[#0056D2] hover:text-[#00419e] hover:bg-[#F0F5FF] rounded-lg transition-colors"
+                  className="inline-flex items-center justify-center rounded-lg bg-[#0056D2] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#00419e]"
                 >
-                  Log In
+                  Login
                 </Link>
                 <Link
                   href="/contact-us"
@@ -358,148 +402,42 @@ export function SiteHeader() {
             onMouseLeave={handleMouseLeaveMega}
             className="hidden lg:block absolute top-full left-0 w-full bg-white border-b border-[#e2e8f0] shadow-xl anim-pop-in"
           >
-            <div className="site-container py-4">
-              {/* Header inside mega-menu: search + quick link */}
-              <div className="flex items-center justify-between gap-4 pb-3.5 border-b border-[#e2e8f0]">
-                <form onSubmit={handleSearchSubmit} className="relative w-full max-w-md">
-                  <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8C9BAE]" />
-                  <input
-                    type="text"
-                    value={courseSearch}
-                    onChange={(e) => setCourseSearch(e.target.value)}
-                    placeholder="Search courses or skills..."
-                    className="w-full pl-10 pr-4 py-2 rounded-full border border-[#e2e8f0] bg-white text-xs sm:text-sm text-[#1F1F1F] placeholder-[#8C9BAE] focus:outline-none focus:border-[#0056D2] transition-colors"
-                  />
-                </form>
-
-                <div className="flex items-center gap-4 text-xs font-semibold">
-                  <span className="text-[#565656]">
-                    Explore verified professional development pathways
-                  </span>
-                  <Link
-                    href="/courses"
-                    onClick={() => setIsMegaOpen(false)}
-                    className="inline-flex items-center gap-1.5 text-[#0056D2] hover:text-[#00419e] transition-colors"
-                  >
-                    <span>View All Programmes</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
+            <div className="site-container py-6">
+              <div className="flex items-end justify-between gap-4">
+                <div>
+                  <p className="text-sm font-semibold text-[#0056D2]">Courses taught by Lisa Zaman</p>
+                  <p className="mt-1 text-sm text-[#565656]">Six online courses, with manuals and video demonstrations.</p>
                 </div>
+                <Link href="/courses" onClick={() => setIsMegaOpen(false)} className="inline-flex items-center gap-1 text-sm font-semibold text-[#0056D2]">
+                  View all <ArrowRight className="h-4 w-4" />
+                </Link>
               </div>
-
-              {/* 3-Column Categories & Courses Grid (Compact) */}
-              <div className="grid grid-cols-3 gap-6 pt-4 max-h-[46vh] overflow-y-auto pr-2">
-                {(showAllCategories ? filteredCategories : filteredCategories.slice(0, 5)).map((cat) => (
-                  <div key={cat.id} className="flex flex-col">
-                    <div className="flex items-baseline justify-between mb-3 pb-2 border-b border-[#e2e8f0]">
-                      <Link
-                        href={`/courses?category=${cat.id}`}
-                        onClick={() => setIsMegaOpen(false)}
-                        className="font-bold text-sm text-[#1F1F1F] hover:text-[#0056D2] transition-colors flex items-center gap-1.5"
-                      >
-                        <span>{cat.name}</span>
-                        <span className="text-[11px] font-normal text-[#8C9BAE]">
-                          ({cat.courseCount})
-                        </span>
-                      </Link>
-                      <Link
-                        href={`/courses?category=${cat.id}`}
-                        onClick={() => setIsMegaOpen(false)}
-                        className="text-xs text-[#0056D2] hover:underline font-semibold shrink-0"
-                      >
-                        See All
-                      </Link>
-                    </div>
-
-                    <ul className="flex flex-col gap-2">
-                      {cat.courses.slice(0, 5).map((course) => {
-                        const priceInfo = getCoursePriceDisplay(course, currency);
-                        return (
-                          <li key={course.id}>
-                            <Link
-                              href={`/courses/${course.slug || course.id}`}
-                              onClick={() => setIsMegaOpen(false)}
-                              className="group block p-2 rounded-lg hover:bg-slate-50 transition-colors"
-                            >
-                              <div className="text-xs font-semibold text-[#1F1F1F] group-hover:text-[#0056D2] line-clamp-1">
-                                {course.title}
-                              </div>
-                              <div className="flex items-center justify-between text-[11px] text-[#565656] mt-1">
-                                <span>{course.duration || 'Flexible study'}</span>
-                                <span className="font-semibold text-[#0056D2]">
-                                  {priceInfo.formatted}
-                                </span>
-                              </div>
-                            </Link>
-                          </li>
-                        );
-                      })}
-                      {cat.courses.length === 0 && (
-                        <li className="text-xs text-[#687587] italic p-2">
-                          Programmes coming soon
-                        </li>
-                      )}
-                    </ul>
-                  </div>
-                ))}
-
-                {/* Additional categories discovery tile if > 5 categories exist */}
-                {filteredCategories.length > 5 && !showAllCategories && (
-                  <div className="flex flex-col justify-center items-center text-center p-6 rounded-xl border border-dashed border-[#0056D2]/40 bg-white hover:bg-slate-50 transition-colors">
-                    <span className="text-xs font-bold text-[#1F1F1F]">
-                      +{filteredCategories.length - 5} More Categories Available
+              <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                {catalogueCourses.map((course) => {
+                  const price = showPrices ? gbpLabel(course) : null;
+                  return (
+                    <Link key={course.id} href={`/courses/${course.slug}`} onClick={() => setIsMegaOpen(false)} className="rounded-xl border border-[#e2e8f0] p-3 hover:border-[#0056D2]">
+                      <span className="block text-sm font-semibold text-[#1F1F1F]">{course.title}</span>
+                      <span className="mt-1 block text-sm text-[#565656]">{course.summary}</span>
+                      {price && <span className="mt-2 block text-sm font-semibold text-[#0056D2]">{price}</span>}
+                    </Link>
+                  );
+                })}
+              </div>
+              <div className="mt-5 grid gap-3 border-t border-[#e2e8f0] pt-5 md:grid-cols-3">
+                {[
+                  { href: '/accreditation', title: 'Accreditation Certification', text: 'Apply for your training to be accredited.', icon: Award },
+                  { href: '/shop', title: 'Shop', text: 'Manuals, forms and trainer resources.', icon: ShoppingBag },
+                  { href: '/community', title: 'Student Community', text: 'Feedback and discussions, reviewed before publication.', icon: MessagesSquare },
+                ].map((item) => (
+                  <Link key={item.href} href={item.href} onClick={() => setIsMegaOpen(false)} className="flex gap-3 rounded-xl p-3 hover:bg-[#F0F5FF]">
+                    <item.icon className="h-5 w-5 shrink-0 text-[#0056D2]" />
+                    <span>
+                      <span className="block text-sm font-semibold text-[#1F1F1F]">{item.title}</span>
+                      <span className="mt-1 block text-sm text-[#565656]">{item.text}</span>
                     </span>
-                    <p className="text-[11px] text-[#565656] mt-1 mb-3">
-                      Explore specialized courses across all engineering disciplines.
-                    </p>
-                    <button
-                      type="button"
-                      onClick={() => setShowAllCategories(true)}
-                      className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold bg-[#0056D2] text-white hover:bg-[#00419e] transition-colors shadow-sm"
-                    >
-                      <span>View All {filteredCategories.length} Categories</span>
-                      <ChevronDown className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                )}
-                {filteredCategories.length > 5 && showAllCategories && (
-                  <div className="flex flex-col justify-center items-center text-center p-6 rounded-xl border border-dashed border-[#e2e8f0] bg-white">
-                    <button
-                      type="button"
-                      onClick={() => setShowAllCategories(false)}
-                      className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold border border-[#0056D2] text-[#0056D2] hover:bg-[#0056D2] hover:text-white transition-colors"
-                    >
-                      <span>Show First 5 Categories</span>
-                      <ChevronDown className="w-3.5 h-3.5 rotate-180" />
-                    </button>
-                  </div>
-                )}
-              </div>
-
-              {/* Footer bar of mega-menu */}
-              <div className="mt-6 pt-4 border-t border-[#e2e8f0] flex items-center justify-between text-xs text-[#8C9BAE]">
-                <span>
-                  Showing {showAllCategories ? filteredCategories.length : Math.min(5, filteredCategories.length)} of {filteredCategories.length} categories. All certifications are issued upon completion of coursework and assessments.
-                </span>
-                <div className="flex items-center gap-4">
-                  {filteredCategories.length > 5 && (
-                    <button
-                      type="button"
-                      onClick={() => setShowAllCategories(!showAllCategories)}
-                      className="font-semibold text-[#0056D2] hover:underline"
-                    >
-                      {showAllCategories ? 'Collapse Categories' : `View All ${filteredCategories.length} Categories`}
-                    </button>
-                  )}
-                  <Link
-                    href="/courses"
-                    onClick={() => setIsMegaOpen(false)}
-                    className="font-semibold text-[#0056D2] hover:text-[#00419e] flex items-center gap-1"
-                  >
-                    Browse Complete Catalogue ({categories.reduce((acc, c) => acc + c.courseCount, 0)} courses)
-                    <ArrowRight className="w-3.5 h-3.5 ml-1" />
                   </Link>
-                </div>
+                ))}
               </div>
             </div>
           </div>
@@ -542,48 +480,40 @@ export function SiteHeader() {
                 <div>
                   <button
                     type="button"
-                    onClick={() => setMobileCategoryOpen(mobileCategoryOpen ? null : 'open')}
+                    onClick={() => setMobileCategoryOpen(mobileCategoryOpen === 'explore' ? null : 'explore')}
                     className="w-full flex items-center justify-between px-3 py-2.5 text-[#1F1F1F] font-medium text-[16px]"
                   >
                     <span>Explore Courses</span>
-                    <ChevronDown className={`w-4 h-4 transition-transform ${mobileCategoryOpen ? 'rotate-180' : ''}`} />
+                    <ChevronDown className={`w-4 h-4 transition-transform ${mobileCategoryOpen === 'explore' ? 'rotate-180' : ''}`} />
                   </button>
 
-                  {mobileCategoryOpen && (
-                    <div className="pl-4 pr-2 py-2 flex flex-col gap-3 bg-[#F0F5FF] rounded-xl my-1">
-                      <Link
-                        href="/courses"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="text-xs font-bold text-[#0056D2] flex items-center gap-1"
-                      >
-                        <span>All Courses</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </Link>
-                      {categories.map((cat) => (
-                        <div key={cat.id} className="flex flex-col gap-1">
-                          <Link
-                            href={`/courses?category=${cat.id}`}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="text-xs font-semibold text-[#1F1F1F]"
-                          >
-                            {cat.name} ({cat.courseCount})
-                          </Link>
-                          {cat.courses.slice(0, 3).map((course) => (
-                            <Link
-                              key={course.id}
-                              href={`/courses/${course.slug || course.id}`}
-                              onClick={() => setMobileMenuOpen(false)}
-                              className="text-[11px] text-[#565656] hover:text-[#0056D2] pl-2 py-0.5 line-clamp-1"
-                            >
-                              • {course.title}
-                            </Link>
-                          ))}
-                        </div>
+                  {mobileCategoryOpen === 'explore' && (
+                    <div className="pl-4 pr-2 py-2 flex flex-col gap-3 bg-[#F0F5FF] rounded-xl my-1 max-h-72 overflow-y-auto">
+                      <Link href="/courses" onClick={() => setMobileMenuOpen(false)} className="text-sm font-bold text-[#1F1F1F]">Courses</Link>
+                      {catalogueCourses.map((course) => (
+                        <Link
+                          key={course.id}
+                          href={`/courses/${course.slug || course.id}`}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="text-[13px] text-[#565656] hover:text-[#0056D2] pl-2"
+                        >
+                          {course.title}
+                        </Link>
                       ))}
+                      <Link href="/accreditation" onClick={() => setMobileMenuOpen(false)} className="text-sm font-bold text-[#1F1F1F]">Accreditation Certification</Link>
+                      <Link href="/shop" onClick={() => setMobileMenuOpen(false)} className="text-sm font-bold text-[#1F1F1F]">Shop</Link>
+                      <Link href="/community" onClick={() => setMobileMenuOpen(false)} className="text-sm font-bold text-[#1F1F1F]">Student Community</Link>
                     </div>
                   )}
                 </div>
 
+                <Link
+                  href="/teaching"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`px-3 py-2.5 rounded-lg text-[16px] ${pathname === '/teaching' ? 'text-[#0056D2] font-bold bg-[#F0F5FF]' : 'text-[#1F1F1F]'}`}
+                >
+                  Teaching
+                </Link>
                 <Link
                   href="/about-us"
                   onClick={() => setMobileMenuOpen(false)}
@@ -598,13 +528,23 @@ export function SiteHeader() {
                 >
                   Blogs
                 </Link>
-                <Link
-                  href="/contact-us"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`px-3 py-2.5 rounded-lg text-[16px] ${pathname === '/contact-us' ? 'text-[#0056D2] font-bold bg-[#F0F5FF]' : 'text-[#1F1F1F]'}`}
-                >
-                  Contact Us
-                </Link>
+                <div>
+                  <button
+                    type="button"
+                    onClick={() => setMobileCategoryOpen(mobileCategoryOpen === 'contact' ? null : 'contact')}
+                    className="w-full flex items-center justify-between px-3 py-2.5 text-[#1F1F1F] font-medium text-[16px]"
+                  >
+                    <span>Contact Us</span>
+                    <ChevronDown className={`w-4 h-4 transition-transform ${mobileCategoryOpen === 'contact' ? 'rotate-180' : ''}`} />
+                  </button>
+                  {mobileCategoryOpen === 'contact' && (
+                    <div className="flex flex-col gap-1 rounded-xl bg-[#F0F5FF] px-4 py-2">
+                      <Link href="/careers" onClick={() => setMobileMenuOpen(false)} className="py-2 text-sm text-[#1F1F1F]"><strong className="font-semibold">Career</strong><span className="block text-[#565656]">Send your specialism, location and CV.</span></Link>
+                      <Link href="/mentorship" onClick={() => setMobileMenuOpen(false)} className="py-2 text-sm text-[#1F1F1F]"><strong className="font-semibold">Mentorship</strong><span className="block text-[#565656]">Ask about starting or registering a business.</span></Link>
+                      <Link href="/contact-us" onClick={() => setMobileMenuOpen(false)} className="py-2 text-sm text-[#1F1F1F]"><strong className="font-semibold">Contact Us</strong><span className="block text-[#565656]">Send a course or shop enquiry.</span></Link>
+                    </div>
+                  )}
+                </div>
               </nav>
             </div>
 
@@ -636,9 +576,9 @@ export function SiteHeader() {
                 <Link
                   href="/login"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full text-center py-2.5 rounded-full border-2 border-[#0056D2] text-[#0056D2] text-sm font-bold hover:bg-[#0056D2] hover:text-white transition-colors"
+                  className="inline-flex w-full items-center justify-center rounded-full bg-[#0056D2] px-6 py-3.5 text-base font-semibold text-white hover:bg-[#00419e]"
                 >
-                  Student &amp; Staff Login
+                  Login
                 </Link>
               )}
             </div>

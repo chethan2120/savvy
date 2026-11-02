@@ -8,9 +8,13 @@ interface PageHeroBannerProps {
   badgeText: string;
   title: string;
   description: string;
-  imageSrc: string;
-  imageAlt: string;
+  imageSrc?: string;
+  imageAlt?: string;
   priority?: boolean;
+  variant?: 'default' | 'about' | 'blogs' | 'contact';
+  actionHref?: string;
+  actionLabel?: string;
+  visual?: React.ReactNode;
 }
 
 export function PageHeroBanner({
@@ -20,9 +24,39 @@ export function PageHeroBanner({
   imageSrc,
   imageAlt,
   priority = true,
+  variant = 'default',
+  actionHref,
+  actionLabel,
+  visual,
 }: PageHeroBannerProps) {
+  if (variant !== 'default') {
+    const light = variant !== 'blogs';
+    return (
+      <section data-no-reveal className={`${light ? 'bg-[#f7f9fc]' : 'bg-[#f3f6fb]'} border-b border-[#e2e8f0] py-12 sm:py-16`}>
+        <div className={`site-container grid items-center gap-8 ${variant === 'blogs' ? 'lg:grid-cols-[1.2fr_0.8fr]' : 'lg:grid-cols-2'}`}>
+          <div>
+            <p className="text-sm font-semibold text-[#0056D2]">{badgeText}</p>
+            <h1 className="mt-3 max-w-3xl text-[#1F1F1F]">{title}</h1>
+            <p className="mt-4 max-w-2xl text-[#565656]">{description}</p>
+            {actionHref && actionLabel && (
+              <a href={actionHref} className="mt-6 inline-flex rounded-full bg-[#0056D2] px-5 py-3 text-base font-semibold text-white">{actionLabel}</a>
+            )}
+          </div>
+          {visual ? (
+            <div className="w-full">{visual}</div>
+          ) : (
+            <div className={`relative overflow-hidden rounded-3xl border border-[#e2e8f0] bg-white ${variant === 'blogs' ? 'aspect-[5/4]' : 'aspect-[4/3]'}`}>
+              {imageSrc && (
+                <Image src={imageSrc} alt={imageAlt || ''} fill priority={priority} sizes="(max-width: 1024px) 100vw, 640px" className="object-cover" />
+              )}
+            </div>
+          )}
+        </div>
+      </section>
+    );
+  }
   return (
-    <section className="bg-gradient-to-br from-[#003e9a] via-[#0056D2] to-[#0284c7] text-white py-12 sm:py-16 lg:py-20 border-b border-[#0056D2]/30 relative overflow-hidden">
+    <section data-no-reveal className="bg-gradient-to-br from-[#003e9a] via-[#0056D2] to-[#0284c7] text-white py-12 sm:py-16 lg:py-20 border-b border-[#0056D2]/30 relative overflow-hidden">
       {/* Subtle ambient background glow */}
       <div
         aria-hidden="true"
@@ -53,24 +87,24 @@ export function PageHeroBanner({
             <div className="mt-8 pt-6 border-t border-white/15 flex flex-wrap items-center gap-4 text-xs text-white/70 font-medium">
               <div className="flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                <span>UK Professional Standards</span>
+                <span>Learn it. Teach it. Certify it.</span>
               </div>
-              <span className="text-white/40 hidden sm:inline">•</span>
-              <div>ASNT · ASME · ISO Curriculum Alignment</div>
             </div>
           </div>
 
           {/* Right Column (5 cols on desktop): Hero Image */}
           <div className="lg:col-span-5 w-full">
             <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-white/20 shadow-2xl bg-[#003e9a] aspect-[4/3] group">
+              {imageSrc && (
               <Image
                 src={imageSrc}
-                alt={imageAlt}
+                alt={imageAlt || ''}
                 fill
                 priority={priority}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 550px"
                 className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
               />
+              )}
               {/* Clean edge highlight without any dull tint */}
               <div
                 aria-hidden="true"

@@ -30,6 +30,7 @@ async function fetchWithDeduplication<T>(
     try {
       const res = await fetch(url, {
         headers: { Accept: 'application/json' },
+        cache: ttlMs === 0 ? 'no-store' : 'default',
       });
       if (!res.ok) {
         throw new Error(`Request to ${url} failed with status ${res.status}`);
@@ -50,7 +51,7 @@ export async function getCachedCategories() {
   return fetchWithDeduplication<{ ok: boolean; categories: any[] }>(
     'categories',
     '/api/categories',
-    60000
+    0
   );
 }
 
@@ -58,7 +59,7 @@ export async function getCachedCourses() {
   return fetchWithDeduplication<{ ok: boolean; courses: any[] }>(
     'public-courses',
     '/api/public-courses',
-    60000
+    0
   );
 }
 

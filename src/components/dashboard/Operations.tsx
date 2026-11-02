@@ -711,7 +711,7 @@ export function CourseDesk() {
     if (result.ok) load();
   };
 
-  const visible = courses.filter((item) => item.title.toLowerCase().includes(query.trim().toLowerCase()));
+  const visible = courses.filter((item) => item.id.startsWith('ref-') && item.title.toLowerCase().includes(query.trim().toLowerCase()));
   const groups = useMemo(() => {
     const names = ['Uncategorised', ...categories.map((item) => item.name)];
     return names.map((label) => ({ label, courses: visible.filter((course) => (course.categoryName || 'Uncategorised') === label) })).filter((group) => group.courses.length);
@@ -862,7 +862,7 @@ export function AttendanceRegister() {
         </select>
         <select className={field} value={courseId} onChange={(event) => setCourseId(event.target.value)}>
           <option value="">All courses</option>
-          {courses.map((course) => <option key={course.id} value={course.id}>{course.title}</option>)}
+          {courses.filter((course) => course.id.startsWith('ref-')).map((course) => <option key={course.id} value={course.id}>{course.title}</option>)}
         </select>
         <input required type="date" className={field} value={date} onChange={(event) => setDate(event.target.value)} />
         <select className={field} value={status} onChange={(event) => setStatus(event.target.value as 'present' | 'absent' | 'late')}>
@@ -896,100 +896,12 @@ export function AttendanceRegister() {
 }
 
 export function CurrencyPreferencePanel() {
-  const [currency, setCurrency] = useState<'INR' | 'EUR' | 'GBP' | 'USD' | 'AED'>('EUR');
-  const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    fetch('/api/website-settings')
-      .then((res) => (res.ok ? res.json() : null))
-      .then((data) => {
-        if (data?.default_currency) {
-          setCurrency(data.default_currency);
-          localStorage.setItem('savvy_admin_currency', data.default_currency);
-          localStorage.setItem('savvy_currency', data.default_currency);
-        }
-      })
-      .catch(() => {})
-      .finally(() => setLoading(false));
-  }, []);
-
-  const handleSave = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSaving(true);
-    setMessage('');
-    try {
-      const res = await fetch('/api/website-settings', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ default_currency: currency }),
-      });
-      if (res.ok) {
-        localStorage.setItem('savvy_admin_currency', currency);
-        localStorage.setItem('savvy_currency', currency);
-        window.dispatchEvent(new Event('storage'));
-        window.dispatchEvent(new CustomEvent('currency-changed', { detail: currency }));
-        setMessage(`Display currency saved successfully as ${currency}.`);
-        setTimeout(() => window.location.reload(), 600);
-      } else {
-        setMessage('Failed to save currency preference.');
-      }
-    } catch {
-      setMessage('Error connecting to server.');
-    } finally {
-      setSaving(false);
-    }
-  };
-
   return (
     <section className="rounded-2xl border border-border bg-white p-5 shadow-xs">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-border gap-2">
-        <div>
-          <h2 className="text-lg font-semibold text-foreground">Admin Currency &amp; Pricing Display</h2>
-          <p className="text-xs text-muted-foreground mt-0.5">
-            Configure whether course tuition and portal fees display in Euros (€), Indian Rupees (₹), British Pounds (£), or US Dollars ($).
-          </p>
-        </div>
-        <span className="text-xs font-bold px-3 py-1 rounded-full bg-forest/10 text-forest shrink-0 self-start sm:self-auto">
-          Active: {currency}
-        </span>
-      </div>
-
-      <form onSubmit={handleSave} className="mt-4 flex flex-col sm:flex-row items-center gap-3">
-        <div className="w-full sm:w-72">
-          <label className="block text-xs font-semibold text-foreground mb-1.5">
-            Select Display Currency
-          </label>
-          <select
-            value={currency}
-            onChange={(e) => setCurrency(e.target.value as any)}
-            className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-background text-sm text-foreground focus:outline-none focus:border-forest cursor-pointer"
-          >
-            <option value="EUR">Euros (EUR €)</option>
-            <option value="INR">Indian Rupees (INR ₹)</option>
-            <option value="GBP">British Pounds (GBP £)</option>
-            <option value="USD">US Dollars (USD $)</option>
-            <option value="AED">UAE Dirham (AED د.إ)</option>
-          </select>
-        </div>
-
-        <div className="w-full sm:w-auto pt-0 sm:pt-5">
-          <button
-            type="submit"
-            disabled={saving}
-            className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-forest text-white text-sm font-semibold hover:bg-forest/90 transition-colors shadow-sm disabled:opacity-50"
-          >
-            {saving ? 'Saving...' : 'Save Currency Setting'}
-          </button>
-        </div>
-      </form>
-
-      {message && (
-        <p className={`mt-3 text-xs font-semibold ${message.includes('success') ? 'text-emerald-600' : 'text-rose-600'}`}>
-          {message}
-        </p>
-      )}
+      <h2 className="text-lg font-semibold text-foreground">Course prices</h2>
+      <p className="mt-2 text-sm text-muted-foreground">
+        Public prices, when switched on under Website, are the stored pound amounts. There is no currency converter.
+      </p>
     </section>
   );
 }

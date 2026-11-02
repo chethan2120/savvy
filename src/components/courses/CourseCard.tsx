@@ -5,15 +5,16 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Clock, Award, ArrowRight, ShieldCheck } from 'lucide-react';
 import type { Course } from '@/lib/types';
-import { useCurrency } from '@/lib/currency';
+import { gbpLabel, useShowCoursePrices } from '@/lib/public-price';
+import { courseVisualBySrc } from '@/lib/course-visuals';
 
 interface CourseCardProps {
   course: Course;
 }
 
 export function CourseCard({ course }: CourseCardProps) {
-  const { currency, getCoursePriceDisplay } = useCurrency();
-  const priceInfo = getCoursePriceDisplay(course, currency);
+  const showPrices = useShowCoursePrices();
+  const price = showPrices ? gbpLabel(course) : null;
   const [imgError, setImgError] = useState(false);
 
   const hasImage = Boolean(course.featured_image) && !imgError;
@@ -25,7 +26,7 @@ export function CourseCard({ course }: CourseCardProps) {
         {hasImage ? (
           <Image
             src={course.featured_image!}
-            alt={course.title}
+            alt={courseVisualBySrc(course.featured_image)?.alt || course.title}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -97,14 +98,16 @@ export function CourseCard({ course }: CourseCardProps) {
 
         {/* Price & Action */}
         <div className="mt-6 pt-4 border-t border-[#e2e8f0] flex items-center justify-between gap-3">
+          {price && (
           <div className="flex flex-col">
             <span className="text-[10px] text-[#565656] uppercase font-semibold">
               Tuition Fee
             </span>
             <span className="text-base font-bold text-[#0056D2]">
-              {priceInfo.formatted}
+              {price}
             </span>
           </div>
+          )}
 
           <Link
             href={`/courses/${course.slug || course.id}`}

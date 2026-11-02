@@ -31,7 +31,7 @@ export function CertificateCtaSection() {
 
           {/* Supporting text */}
           <p className="text-base sm:text-lg text-[#565656] max-w-xl mx-auto leading-relaxed mb-10 font-normal">
-            Discover the right course for your career goals and learn more about our internationally recognised technical certification programmes.
+            Choose a teaching qualification, an online course, or an accreditation application. Prices are shown in pounds only when a price has been set.
           </p>
 
           {/* Call to Action Buttons */}

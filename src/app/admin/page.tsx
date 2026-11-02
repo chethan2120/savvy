@@ -19,6 +19,7 @@ import { AccountSettingsHub, AttendanceRegister, CourseDesk, EnrollmentQueue, Pe
 import { RegistrationRequests } from '@/components/dashboard/RegistrationRequests';
 import { CertificateDesk } from '@/components/dashboard/Learning';
 import { ContactInfoPanel } from '@/components/dashboard/ContactInfoPanel';
+import { CommunityDesk, WebsiteDesk } from '@/components/dashboard/WebsiteDesk';
 import { ArticleDesk } from '@/components/dashboard/ArticleDesk';
 import { NoteBody, VideoPreview } from '@/components/portal/MaterialViewer';
 import {
@@ -70,11 +71,11 @@ type EnrollmentRow = {
   courses?: { title: string };
 };
 
-type AdminTab = 'overview' | 'accounts' | 'registrations' | 'programs' | 'profile' | 'applications' | 'contacts' | 'students' | 'materials' | 'certificates' | 'blogs' | LmsSection;
+type AdminTab = 'overview' | 'accounts' | 'registrations' | 'programs' | 'profile' | 'applications' | 'contacts' | 'students' | 'materials' | 'certificates' | 'blogs' | 'website' | 'community' | LmsSection;
 
 const ADMIN_TABS: AdminTab[] = [
   'overview', 'accounts', 'registrations', 'programs', 'applications', 'contacts', 'students', 'approvals', 'staff', 'courseAdmin',
-  'materials', 'attendance', 'certificates', 'settings', 'reports', 'audit', 'blogs', 'profile',
+  'materials', 'attendance', 'certificates', 'settings', 'reports', 'audit', 'blogs', 'website', 'community', 'profile',
 ];
 
 const isAdminTab = (v: string): v is AdminTab => (ADMIN_TABS as string[]).includes(v);
@@ -632,6 +633,24 @@ export default function AdminPage() {
                     {contacts.length > 0 && (
                       <span className="text-[10px] text-muted-foreground font-mono">{contacts.length}</span>
                     )}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { selectTab('website'); setMobileMenuOpen(false); }}
+                    className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
+                      activeTab === 'website' ? 'bg-[#00543d]/10 text-[#00543d] font-bold' : 'text-foreground/80 hover:bg-muted/70'
+                    }`}
+                  >
+                    <span>Website</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { selectTab('community'); setMobileMenuOpen(false); }}
+                    className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
+                      activeTab === 'community' ? 'bg-[#00543d]/10 text-[#00543d] font-bold' : 'text-foreground/80 hover:bg-muted/70'
+                    }`}
+                  >
+                    <span>Community</span>
                   </button>
                   <button
                     type="button"
@@ -1242,6 +1261,8 @@ export default function AdminPage() {
           {/* TAB: COMMUNICATION & ARTICLES                                 */}
           {/* ------------------------------------------------------------- */}
           {activeTab === 'contacts' && <ContactInfoPanel />}
+          {activeTab === 'website' && <WebsiteDesk />}
+          {activeTab === 'community' && <CommunityDesk />}
           {activeTab === 'blogs' && <ArticleDesk />}
 
           {/* ------------------------------------------------------------- */}
@@ -2142,7 +2163,7 @@ function CertificatesPanel({
             <Select label="Student" value={studentId} onChange={setStudentId} options={students.map((s) => ({ value: s.id, label: `${s.full_name} (${s.enrollment_no})` }))} />
             <Select label="Course" value={courseId} onChange={setCourseId} options={courses.map((c) => ({ value: c.id, label: c.title }))} />
             <Select label="Grade" value={grade} onChange={setGrade} options={['A+', 'A', 'B+', 'B', 'C'].map((g) => ({ value: g, label: g }))} placeholder="A" />
-            <Input label="Examiner" value={instructor} onChange={setInstructor} placeholder="e.g. Feroz Alam" />
+            <Input label="Examiner" value={instructor} onChange={setInstructor} placeholder="Examiner name" />
           </div>
           <button disabled={busy} className="pill-button-forest text-xs py-2.5 px-6 self-start flex items-center gap-1.5">
             {busy ? <Loader2 className="w-4 h-4 animate-spin" /> : <Award className="w-4 h-4" />} Issue certificate

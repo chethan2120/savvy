@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { getPublishedCourses } from '@/lib/courses';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   const { courses, error } = await getPublishedCourses();
   if (error) return NextResponse.json({ message: error, courses: [] }, { status: 503 });
@@ -11,6 +13,7 @@ export async function GET() {
       title: c.title,
       duration: c.duration,
       fee: c.fee,
+      training_mode: c.training_mode,
       category: c.category,
       categoryId: (c as any).categoryId,
       featured_image: c.featured_image,

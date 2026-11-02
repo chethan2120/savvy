@@ -200,6 +200,66 @@
       "accountId": "acct-admin",
       "loggedInAt": "2026-10-27T12:26:25.753Z",
       "loggedOutAt": "2026-10-27T12:27:08.098Z"
+    },
+    {
+      "id": "login-22c316757606",
+      "accountId": "acct-admin",
+      "loggedInAt": "2026-11-02T06:11:02.306Z",
+      "loggedOutAt": "2026-11-02T07:40:32.968Z"
+    },
+    {
+      "id": "login-4ba83b00d481",
+      "accountId": "acct-admin",
+      "loggedInAt": "2026-11-02T06:52:48.185Z",
+      "loggedOutAt": "2026-11-02T06:53:08.255Z"
+    },
+    {
+      "id": "login-db64e13a6862",
+      "accountId": "acct-admin",
+      "loggedInAt": "2026-11-02T07:43:15.145Z",
+      "loggedOutAt": null
+    },
+    {
+      "id": "login-31a5e8aecebc",
+      "accountId": "acct-admin",
+      "loggedInAt": "2026-11-02T08:17:05.419Z",
+      "loggedOutAt": null
+    },
+    {
+      "id": "login-e074086b5592",
+      "accountId": "acct-admin",
+      "loggedInAt": "2026-11-02T08:50:57.316Z",
+      "loggedOutAt": "2026-11-02T09:10:59.204Z"
+    },
+    {
+      "id": "login-7f799009b18c",
+      "accountId": "acct-admin",
+      "loggedInAt": "2026-11-02T09:52:11.812Z",
+      "loggedOutAt": null
+    },
+    {
+      "id": "login-27475071e609",
+      "accountId": "acct-admin",
+      "loggedInAt": "2026-11-02T09:53:05.774Z",
+      "loggedOutAt": null
+    },
+    {
+      "id": "login-325c31504dbd",
+      "accountId": "acct-admin",
+      "loggedInAt": "2026-11-02T09:54:07.168Z",
+      "loggedOutAt": null
+    },
+    {
+      "id": "login-ad364681d172",
+      "accountId": "acct-admin",
+      "loggedInAt": "2026-11-02T11:05:40.430Z",
+      "loggedOutAt": null
+    },
+    {
+      "id": "login-16d262b132df",
+      "accountId": "acct-admin",
+      "loggedInAt": "2026-11-02T11:08:25.090Z",
+      "loggedOutAt": null
     }
   ],
   "punches": [
@@ -244,6 +304,20 @@
       "description": "HVAC design, 3D Revit MEP modeling, and building engineering systems",
       "active": true,
       "createdAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "cat-teaching",
+      "name": "Teaching qualifications",
+      "description": "Regulated teaching qualifications, completed fully online with live Zoom sessions.",
+      "active": true,
+      "createdAt": "2026-10-05T00:00:00.000Z"
+    },
+    {
+      "id": "cat-online",
+      "name": "Online courses",
+      "description": "Practical courses taught by Lisa Zaman, with manuals, video demonstrations and a certificate on completion.",
+      "active": true,
+      "createdAt": "2026-10-05T00:00:00.000Z"
     }
   ],
   "customCourses": [
@@ -270,7 +344,226 @@
       "certificate": "",
       "prerequisites": [],
       "outcomes": [],
-      "visible": true
+      "visible": false
+    },
+    {
+      "id": "ref-award-in-education-and-training",
+      "slug": "award-in-education-and-training",
+      "title": "Award in Education and Training",
+      "duration": "Level 3",
+      "description": "The starting point for anyone new to teaching. Intended for new trainers in any sector. Study method: Online + Zoom.",
+      "shortDescription": "The starting point for anyone new to teaching",
+      "categoryId": "cat-teaching",
+      "active": true,
+      "createdAt": "2026-10-05T00:00:00.000Z",
+      "prices": {
+        "GBP": null
+      },
+      "certificate": "Regulated teaching qualification",
+      "outcomes": [
+        "New trainers in any sector"
+      ],
+      "visible": true,
+      "trainingMode": "Online + Zoom",
+      "image": "/images/courses/award-in-education-and-training.jpg"
+    },
+    {
+      "id": "ref-certificate-in-education-and-training",
+      "slug": "certificate-in-education-and-training",
+      "title": "Certificate in Education and Training",
+      "duration": "Level 4",
+      "description": "Build on the Award with teaching practice. Intended for working trainers and tutors. Study method: Online + Zoom.",
+      "shortDescription": "Build on the Award with teaching practice",
+      "categoryId": "cat-teaching",
+      "active": true,
+      "createdAt": "2026-10-05T00:00:00.000Z",
+      "prices": {
+        "GBP": null
+      },
+      "certificate": "Regulated teaching qualification",
+      "outcomes": [
+        "Working trainers and tutors"
+      ],
+      "visible": true,
+      "trainingMode": "Online + Zoom",
+      "image": "/images/courses/certificate-in-education-and-training.jpg"
+    },
+    {
+      "id": "ref-diploma-in-education-and-training",
+      "slug": "diploma-in-education-and-training",
+      "title": "Diploma in Education and Training",
+      "duration": "Level 5",
+      "description": "Full teaching qualification for further education. Intended for career teachers in FE and training. Study method: Online + Zoom.",
+      "shortDescription": "Full teaching qualification for further education",
+      "categoryId": "cat-teaching",
+      "active": true,
+      "createdAt": "2026-10-05T00:00:00.000Z",
+      "prices": {
+        "GBP": null
+      },
+      "certificate": "Regulated teaching qualification",
+      "outcomes": [
+        "Career teachers in FE and training"
+      ],
+      "visible": true,
+      "trainingMode": "Online + Zoom",
+      "image": "/images/courses/diploma-in-education-and-training.jpg"
+    },
+    {
+      "id": "ref-certificate-in-assessing-vocational-achievement",
+      "slug": "certificate-in-assessing-vocational-achievement",
+      "title": "Certificate in Assessing Vocational Achievement",
+      "duration": "Level 3",
+      "description": "Assess learners in the workplace and classroom. Intended for assessors and practical trainers. Study method: Online + Zoom.",
+      "shortDescription": "Assess learners in the workplace and classroom",
+      "categoryId": "cat-teaching",
+      "active": true,
+      "createdAt": "2026-10-05T00:00:00.000Z",
+      "prices": {
+        "GBP": null
+      },
+      "certificate": "Regulated teaching qualification",
+      "outcomes": [
+        "Assessors and practical trainers"
+      ],
+      "visible": true,
+      "trainingMode": "Online + Zoom",
+      "image": "/images/courses/certificate-in-assessing-vocational-achievement.jpg"
+    },
+    {
+      "id": "ref-internal-quality-assurance",
+      "slug": "internal-quality-assurance",
+      "title": "Internal Quality Assurance",
+      "duration": "Level 4",
+      "description": "Quality-check assessment across a centre. Intended for experienced assessors. Study method: Online + Zoom.",
+      "shortDescription": "Quality-check assessment across a centre",
+      "categoryId": "cat-teaching",
+      "active": true,
+      "createdAt": "2026-10-05T00:00:00.000Z",
+      "prices": {
+        "GBP": null
+      },
+      "certificate": "Regulated teaching qualification",
+      "outcomes": [
+        "Experienced assessors"
+      ],
+      "visible": true,
+      "trainingMode": "Online + Zoom",
+      "image": "/images/courses/internal-quality-assurance.jpg"
+    },
+    {
+      "id": "ref-beauty-therapy-essentials",
+      "slug": "beauty-therapy-essentials",
+      "title": "Beauty Therapy Essentials",
+      "duration": "8 modules",
+      "description": "Facials, waxing, brow shaping and client consultation. Online and self-paced, with a certificate on completion. The source site describes manuals and video demonstrations, but it does not publish the video files.",
+      "shortDescription": "Facials, waxing, brow shaping and client consultation.",
+      "categoryId": "cat-online",
+      "active": true,
+      "createdAt": "2026-10-05T00:00:00.000Z",
+      "prices": {
+        "GBP": null
+      },
+      "manualChapterCount": 8,
+      "certificate": "Certificate",
+      "visible": true,
+      "trainingMode": "Online, self-paced",
+      "image": "/images/courses/beauty-therapy-essentials.jpg"
+    },
+    {
+      "id": "ref-swedish-massage",
+      "slug": "swedish-massage",
+      "title": "Swedish Massage",
+      "duration": "6 modules",
+      "description": "Full-body massage routine, anatomy and contraindications. Online and self-paced, with a certificate on completion. The source site describes manuals and video demonstrations, but it does not publish the video files.",
+      "shortDescription": "Full-body massage routine, anatomy and contraindications.",
+      "categoryId": "cat-online",
+      "active": true,
+      "createdAt": "2026-10-05T00:00:00.000Z",
+      "prices": {
+        "GBP": null
+      },
+      "manualChapterCount": 6,
+      "certificate": "Certificate",
+      "visible": true,
+      "trainingMode": "Online, self-paced",
+      "image": "/images/courses/swedish-massage.jpg"
+    },
+    {
+      "id": "ref-hairdressing-foundations",
+      "slug": "hairdressing-foundations",
+      "title": "Hairdressing Foundations",
+      "duration": "10 modules",
+      "description": "Cutting, colour theory, blow-drying and styling. Online and self-paced, with a certificate on completion. The source site describes manuals and video demonstrations, but it does not publish the video files.",
+      "shortDescription": "Cutting, colour theory, blow-drying and styling.",
+      "categoryId": "cat-online",
+      "active": true,
+      "createdAt": "2026-10-05T00:00:00.000Z",
+      "prices": {
+        "GBP": null
+      },
+      "manualChapterCount": 10,
+      "certificate": "Certificate",
+      "visible": true,
+      "trainingMode": "Online, self-paced",
+      "image": "/images/courses/hairdressing-foundations.jpg"
+    },
+    {
+      "id": "ref-lash-extensions",
+      "slug": "lash-extensions",
+      "title": "Lash Extensions",
+      "duration": "5 modules",
+      "description": "Classic and volume techniques, isolation and aftercare. Online and self-paced, with a certificate on completion. The source site describes manuals and video demonstrations, but it does not publish the video files.",
+      "shortDescription": "Classic and volume techniques, isolation and aftercare.",
+      "categoryId": "cat-online",
+      "active": true,
+      "createdAt": "2026-10-05T00:00:00.000Z",
+      "prices": {
+        "GBP": null
+      },
+      "manualChapterCount": 5,
+      "certificate": "Certificate",
+      "visible": true,
+      "trainingMode": "Online, self-paced",
+      "image": "/images/courses/lash-extensions.jpg"
+    },
+    {
+      "id": "ref-nail-technology",
+      "slug": "nail-technology",
+      "title": "Nail Technology",
+      "duration": "7 modules",
+      "description": "Gel polish, extensions, nail art and hygiene. Online and self-paced, with a certificate on completion. The source site describes manuals and video demonstrations, but it does not publish the video files.",
+      "shortDescription": "Gel polish, extensions, nail art and hygiene.",
+      "categoryId": "cat-online",
+      "active": true,
+      "createdAt": "2026-10-05T00:00:00.000Z",
+      "prices": {
+        "GBP": null
+      },
+      "manualChapterCount": 7,
+      "certificate": "Certificate",
+      "visible": true,
+      "trainingMode": "Online, self-paced",
+      "image": "/images/courses/nail-technology.jpg"
+    },
+    {
+      "id": "ref-hot-stone-massage",
+      "slug": "hot-stone-massage",
+      "title": "Hot Stone Massage",
+      "duration": "4 modules",
+      "description": "Stone heating, placement and combined techniques. Online and self-paced, with a certificate on completion. The source site describes manuals and video demonstrations, but it does not publish the video files.",
+      "shortDescription": "Stone heating, placement and combined techniques.",
+      "categoryId": "cat-online",
+      "active": true,
+      "createdAt": "2026-10-05T00:00:00.000Z",
+      "prices": {
+        "GBP": null
+      },
+      "manualChapterCount": 4,
+      "certificate": "Certificate",
+      "visible": true,
+      "trainingMode": "Online, self-paced",
+      "image": "/images/courses/hot-stone-massage.jpg"
     }
   ],
   "courseOverrides": {
@@ -281,7 +574,8 @@
         "USD": 420,
         "AED": 1550
       },
-      "priceInr": 35000
+      "priceInr": 35000,
+      "visible": false
     },
     "c2": {
       "prices": {
@@ -290,7 +584,8 @@
         "USD": 420,
         "AED": 1550
       },
-      "priceInr": 35000
+      "priceInr": 35000,
+      "visible": false
     },
     "c3": {
       "prices": {
@@ -299,7 +594,8 @@
         "USD": 540,
         "AED": 1980
       },
-      "priceInr": 45000
+      "priceInr": 45000,
+      "visible": false
     },
     "c4": {
       "prices": {
@@ -308,7 +604,8 @@
         "USD": 300,
         "AED": 1100
       },
-      "priceInr": 25000
+      "priceInr": 25000,
+      "visible": false
     },
     "c5": {
       "prices": {
@@ -317,7 +614,8 @@
         "USD": 300,
         "AED": 1100
       },
-      "priceInr": 25000
+      "priceInr": 25000,
+      "visible": false
     },
     "c6": {
       "prices": {
@@ -326,7 +624,8 @@
         "USD": 2150,
         "AED": 7900
       },
-      "priceInr": 180000
+      "priceInr": 180000,
+      "visible": false
     },
     "c7": {
       "prices": {
@@ -335,7 +634,8 @@
         "USD": 360,
         "AED": 1350
       },
-      "priceInr": 28000
+      "priceInr": 28000,
+      "visible": false
     },
     "c8": {
       "prices": {
@@ -344,7 +644,8 @@
         "USD": 320,
         "AED": 1200
       },
-      "priceInr": 25000
+      "priceInr": 25000,
+      "visible": false
     },
     "c9": {
       "prices": {
@@ -353,7 +654,8 @@
         "USD": 410,
         "AED": 1550
       },
-      "priceInr": 32000
+      "priceInr": 32000,
+      "visible": false
     }
   },
   "courseCategories": {
@@ -366,7 +668,18 @@
     "c7": "cat-ndt",
     "c8": "cat-ndt",
     "c9": "cat-qaqc",
-    "course-d5b00b87": "cat-ndt"
+    "course-d5b00b87": "cat-ndt",
+    "ref-award-in-education-and-training": "cat-teaching",
+    "ref-certificate-in-education-and-training": "cat-teaching",
+    "ref-diploma-in-education-and-training": "cat-teaching",
+    "ref-certificate-in-assessing-vocational-achievement": "cat-teaching",
+    "ref-internal-quality-assurance": "cat-teaching",
+    "ref-beauty-therapy-essentials": "cat-online",
+    "ref-swedish-massage": "cat-online",
+    "ref-hairdressing-foundations": "cat-online",
+    "ref-lash-extensions": "cat-online",
+    "ref-nail-technology": "cat-online",
+    "ref-hot-stone-massage": "cat-online"
   },
   "marks": [],
   "notifications": [
@@ -414,6 +727,69 @@
       "href": "/admin#contacts",
       "read": false,
       "createdAt": "2026-10-27T07:54:42.230Z"
+    },
+    {
+      "id": "ntf-8e7eb6bf",
+      "accountId": "acct-admin",
+      "title": "New Contact Enquiry",
+      "body": "Career Test enquired about Career enquiry (Leeds).",
+      "href": "/admin#contacts",
+      "read": false,
+      "createdAt": "2026-11-02T05:59:23.424Z"
+    },
+    {
+      "id": "ntf-83a9654f",
+      "accountId": "acct-admin",
+      "title": "New Contact Enquiry",
+      "body": "Mentor Test enquired about Mentorship enquiry ().",
+      "href": "/admin#contacts",
+      "read": false,
+      "createdAt": "2026-11-02T05:59:23.425Z"
+    },
+    {
+      "id": "ntf-3b9d9436",
+      "accountId": "acct-admin",
+      "title": "New Contact Enquiry",
+      "body": "Contact Test enquired about Nail Technology (Manchester).",
+      "href": "/admin#contacts",
+      "read": false,
+      "createdAt": "2026-11-02T05:59:23.425Z"
+    },
+    {
+      "id": "ntf-c8342bc3",
+      "accountId": "acct-admin",
+      "title": "New Contact Enquiry",
+      "body": "Filter Check enquired about Mentorship enquiry ().",
+      "href": "/admin#contacts",
+      "read": false,
+      "createdAt": "2026-11-02T06:11:37.680Z"
+    },
+    {
+      "id": "ntf-98fecd48",
+      "accountId": "acct-admin",
+      "title": "New Contact Enquiry",
+      "body": "Shop Enquiry Test enquired about Course Manual Pack (London, United Kingdom).",
+      "href": "/admin#contacts",
+      "read": false,
+      "createdAt": "2026-11-02T07:42:36.785Z"
+    },
+    {
+      "id": "ntf-91c59ffd",
+      "accountId": "acct-admin",
+      "title": "New Contact Enquiry",
+      "body": "Strategy Call Test enquired about Free Technical Career Strategy Call (London, United Kingdom).",
+      "href": "/admin#contacts",
+      "read": false,
+      "createdAt": "2026-11-02T08:17:05.334Z"
+    },
+    {
+      "id": "ntf-8052745e",
+      "accountId": "acct-admin",
+      "title": "New Contact Enquiry",
+      "body": "Strategy Call Test enquired about Free Technical Career Strategy Call (London, United Kingdom).",
+      "href": "/admin#contacts",
+      "read": false,
+      "createdAt": "2026-11-02T08:46:56.275Z"
     }
   ],
   "announcements": [],
@@ -1081,7 +1457,8 @@
       "location": "Online Session / Web Enquiry",
       "courseName": "Strategy Call: NDT Level II (UT, RT, MPT, LPT, VT)",
       "message": "Booked 40-Minute FREE Technical Strategy Call for NDT Level II. Preferred Date: Mon, 2 Nov, Time: 11:30 AM.",
-      "status": "new"
+      "status": "new",
+      "category": "contact"
     },
     {
       "id": "enq-8bacf5086adf",
@@ -1092,7 +1469,8 @@
       "location": "Online Session / Web Enquiry",
       "courseName": "Strategy Call: NDT Level II (UT, RT, MPT, LPT, VT)",
       "message": "Booked 40-Minute FREE Technical Strategy Call for NDT Level II. Preferred Date: Mon, 2 Nov, Time: 11:30 AM.",
-      "status": "new"
+      "status": "new",
+      "category": "contact"
     },
     {
       "id": "enq-b31c397dff39",
@@ -1103,7 +1481,8 @@
       "location": "BANGLAORE",
       "courseId": "c2",
       "courseName": "QA & QC Course",
-      "status": "new"
+      "status": "new",
+      "category": "contact"
     }
   ],
   "newsletter": [
@@ -1206,5 +1585,193 @@
       "createdAt": "2025-07-04",
       "updatedAt": "2025-07-04"
     }
-  ]
+  ],
+  "shopProducts": [
+    {
+      "id": "shop-course-manual-pack",
+      "slug": "course-manual-pack",
+      "title": "Course Manual Pack",
+      "format": "PDF download",
+      "includes": [
+        "Beauty, massage or hair manual",
+        "Editable for your branding",
+        "Learner workbook included"
+      ],
+      "priceGbp": null,
+      "published": true,
+      "fileName": null,
+      "createdAt": "2026-10-05T00:00:00.000Z"
+    },
+    {
+      "id": "shop-business-starter-kit",
+      "slug": "business-starter-kit",
+      "title": "Business Starter Kit",
+      "format": "PDF + templates",
+      "includes": [
+        "Business plan template",
+        "Pricing calculator",
+        "Launch checklist"
+      ],
+      "priceGbp": null,
+      "published": true,
+      "fileName": null,
+      "createdAt": "2026-10-05T00:00:00.000Z"
+    },
+    {
+      "id": "shop-consultation-and-consent-forms",
+      "slug": "consultation-and-consent-forms",
+      "title": "Consultation & Consent Forms",
+      "format": "Editable Word files",
+      "includes": [
+        "Client record cards",
+        "Consent and aftercare forms",
+        "Contraindication checklists"
+      ],
+      "priceGbp": null,
+      "published": true,
+      "fileName": null,
+      "createdAt": "2026-10-05T00:00:00.000Z"
+    },
+    {
+      "id": "shop-trainer-resource-bundle",
+      "slug": "trainer-resource-bundle",
+      "title": "Trainer Resource Bundle",
+      "format": "PDF + slides",
+      "includes": [
+        "Lesson plans and schemes of work",
+        "Assessment paperwork",
+        "Certificate templates"
+      ],
+      "priceGbp": null,
+      "published": true,
+      "fileName": null,
+      "createdAt": "2026-10-05T00:00:00.000Z"
+    }
+  ],
+  "reviews": [],
+  "threads": [
+    {
+      "id": "example-unit-3",
+      "title": "Tips for writing Unit 3 assessment plans?",
+      "category": "Teaching Qualifications",
+      "initials": "AM",
+      "exampleReplyCount": 12,
+      "body": "",
+      "example": true,
+      "pending": false,
+      "authorId": "example",
+      "authorName": "AM",
+      "createdAt": "2026-10-05T00:00:00.000Z",
+      "hidden": false,
+      "reported": false,
+      "replies": []
+    },
+    {
+      "id": "example-sensitive-wax",
+      "title": "Best wax for sensitive skin clients",
+      "category": "Beauty",
+      "initials": "RK",
+      "exampleReplyCount": 8,
+      "body": "",
+      "example": true,
+      "pending": false,
+      "authorId": "example",
+      "authorName": "RK",
+      "createdAt": "2026-10-05T00:00:00.000Z",
+      "hidden": false,
+      "reported": false,
+      "replies": []
+    },
+    {
+      "id": "example-home-room",
+      "title": "Setting up a training room at home: insurance?",
+      "category": "Business",
+      "initials": "SL",
+      "exampleReplyCount": 15,
+      "body": "",
+      "example": true,
+      "pending": false,
+      "authorId": "example",
+      "authorName": "SL",
+      "createdAt": "2026-10-05T00:00:00.000Z",
+      "hidden": false,
+      "reported": false,
+      "replies": []
+    },
+    {
+      "id": "example-massage-partner",
+      "title": "Looking for a massage practice partner nearby",
+      "category": "Massage",
+      "initials": "AM",
+      "exampleReplyCount": 4,
+      "body": "",
+      "example": true,
+      "pending": false,
+      "authorId": "example",
+      "authorName": "AM",
+      "createdAt": "2026-10-05T00:00:00.000Z",
+      "hidden": false,
+      "reported": false,
+      "replies": []
+    }
+  ],
+  "referenceCatalogSeeded": true,
+  "guestFeedback": [],
+  "portalItems": [],
+  "communityExamplesSeeded": true,
+  "websiteSettings": {
+    "showRecognitions": false,
+    "instituteName": "Savvy Training Institute",
+    "defaultCurrency": "GBP",
+    "showCoursePrices": false,
+    "updatedAt": "2026-11-02T07:43:15.385Z"
+  },
+  "homepageFaqs": [
+    {
+      "id": "faq-start",
+      "question": "Which teaching qualification should I start with?",
+      "answer": "If you have not taught before, start with the Level 3 Award in Education and Training. It is the starting point for new trainers in any sector. The Level 4 Certificate is for working trainers and tutors and adds teaching practice to the Award. The Level 5 Diploma is the full teaching qualification for further education."
+    },
+    {
+      "id": "faq-online",
+      "question": "Can I study online?",
+      "answer": "Yes. The teaching qualifications are completed online, with live Zoom sessions. The beauty, massage and hairdressing courses are online and self-paced."
+    },
+    {
+      "id": "faq-zoom",
+      "question": "Are Zoom sessions available?",
+      "answer": "Teaching qualifications include scheduled Zoom classes and one-to-one tutorials. Learners join them from the student portal."
+    },
+    {
+      "id": "faq-assignments",
+      "question": "How do I submit my assignments?",
+      "answer": "On a teaching qualification, you upload your work as files. Briefs and resources can be downloaded from the portal."
+    },
+    {
+      "id": "faq-feedback",
+      "question": "Will I receive feedback on my work?",
+      "answer": "Yes. Your tutor marks each piece of teaching work and leaves written feedback. Accreditation applications also receive written feedback from Lisa before a decision."
+    },
+    {
+      "id": "faq-certificate",
+      "question": "How do I receive my certificate?",
+      "answer": "Online courses include a certificate on completion. Once an accreditation application is approved, the certificate and logo are ready to download from the account. The website does not publish a separate delivery method for teaching qualification certificates."
+    },
+    {
+      "id": "faq-accreditation",
+      "question": "How can I apply for course accreditation?",
+      "answer": "Apply online and describe your business, the course you deliver and who it is for. You then upload the course manual, lesson plans, assessment materials, insurance and your own qualifications. Lisa reviews the course against content, assessment and learner-safety standards."
+    },
+    {
+      "id": "faq-mentorship",
+      "question": "How can I contact Savvy for mentorship?",
+      "answer": "Use the mentorship page to ask about business start-ups, regular mentorship, venue set-up or awarding body registration. You can also send a message through the contact form. A postal address, phone number and email address are not published."
+    },
+    {
+      "id": "faq-portal",
+      "question": "How do I access the student portal?",
+      "answer": "Use the Login button. Tutors and students have separate secure logins and their own dashboards. Teaching learners use the portal to join Zoom sessions and upload assignments."
+    }
+  ],
+  "homepageFaqsSeeded": true
 }

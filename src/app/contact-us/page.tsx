@@ -7,6 +7,7 @@ import {
   AlertCircle, ShieldCheck, Building, Loader2
 } from 'lucide-react';
 import { getCachedCourses } from '@/lib/api-cache';
+import { shopProducts, STRATEGY_CALL_LABEL } from '@/lib/academy-content';
 import { PageHeroBanner } from '@/components/common/PageHeroBanner';
 
 interface CourseOption {
@@ -19,13 +20,15 @@ function ContactPageContent() {
   const searchParams = useSearchParams();
   const preselectedCourseId = searchParams.get('course') || '';
   const preselectedCourseName = searchParams.get('courseName') || '';
+  const preselectedItem = searchParams.get('item') || '';
+  const strategyCall = searchParams.get('enquiry') === 'strategy';
 
   const [courses, setCourses] = useState<CourseOption[]>([]);
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [location, setLocation] = useState('');
-  const [selectedCourse, setSelectedCourse] = useState(preselectedCourseId);
+  const [selectedCourse, setSelectedCourse] = useState(strategyCall ? `strategy:${STRATEGY_CALL_LABEL}` : preselectedItem ? `shop:${preselectedItem}` : preselectedCourseId);
   const [otherCourse, setOtherCourse] = useState('');
   const [message, setMessage] = useState('');
 
@@ -36,6 +39,39 @@ function ContactPageContent() {
 
   // Anti-spam honeypot
   const [honeypot, setHoneypot] = useState('');
+
+  useEffect(() => {
+    const saved = sessionStorage.getItem('savvy-enquiry');
+    if (!saved) return;
+    try {
+      const data = JSON.parse(saved);
+      setFullName(data.fullName || '');
+      setPhone(data.phone || '');
+      setEmail(data.email || '');
+      setLocation(data.location || '');
+      setMessage(data.message || '');
+      if (!preselectedCourseId && !preselectedCourseName && !preselectedItem && !strategyCall) {
+        setSelectedCourse(data.selectedCourse || '');
+        setOtherCourse(data.otherCourse || '');
+      }
+    } catch {
+      sessionStorage.removeItem('savvy-enquiry');
+    }
+  }, [preselectedCourseId, preselectedCourseName, preselectedItem, strategyCall]);
+
+  useEffect(() => {
+    if (preselectedItem) setSelectedCourse(`shop:${preselectedItem}`);
+  }, [preselectedItem]);
+
+  useEffect(() => {
+    if (strategyCall) setSelectedCourse(`strategy:${STRATEGY_CALL_LABEL}`);
+  }, [strategyCall]);
+
+  useEffect(() => {
+    sessionStorage.setItem('savvy-enquiry', JSON.stringify({
+      fullName, phone, email, location, selectedCourse, otherCourse, message,
+    }));
+  }, [fullName, phone, email, location, selectedCourse, otherCourse, message]);
 
   // Fetch courses dynamically for the dropdown (deduplicated & cached)
   useEffect(() => {
@@ -146,6 +182,10 @@ function ContactPageContent() {
 
     if (selectedCourse === 'other') {
       courseName = otherCourse.trim();
+    } else if (selectedCourse.startsWith('shop:')) {
+      courseName = selectedCourse.slice(5);
+    } else if (selectedCourse.startsWith('strategy:')) {
+      courseName = STRATEGY_CALL_LABEL;
     } else {
       const match = courses.find((c) => c.id === selectedCourse || c.title === selectedCourse);
       if (match) {
@@ -169,6 +209,7 @@ function ContactPageContent() {
           courseName,
           otherCourse: selectedCourse === 'other' ? otherCourse.trim() : undefined,
           message: message.trim() || undefined,
+          category: selectedCourse.startsWith('strategy:') ? 'strategy' : 'contact',
         }),
       });
 
@@ -203,11 +244,14 @@ function ContactPageContent() {
     <div className="bg-white pb-24">
       {/* Header Banner with Consistent 16:9 Hero Image */}
       <PageHeroBanner
-        badgeText="Admissions & Advisory Desk"
-        title="Contact Savvy Training Institute"
-        description="Get in touch with our training coordinators for detailed syllabi, upcoming batch schedules, corporate training quotes, and enrolment assistance."
+        variant="contact"
+        badgeText="Contact us"
+        title="Talk to the institute about your next step"
+        description="Ask about a qualification, an online course, a resource or support for your training business. The form below is the way to reach the academy."
         imageSrc="/images/heroes/contact-hero.jpg"
-        imageAlt="Savvy Training Institute admissions consultation suite and engineering seminar room"
+        imageAlt="Two people in a consultation at a training office"
+        actionHref="#enquiry"
+        actionLabel="Send an enquiry"
         priority={true}
       />
 
@@ -322,7 +366,7 @@ function ContactPageContent() {
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
+              <form id="enquiry" onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
                 {/* Honeypot field (hidden from real users) */}
                 <input
                   type="text"
@@ -448,7 +492,7 @@ function ContactPageContent() {
                 {/* 5. Course of Interest Dropdown */}
                 <div>
                   <label htmlFor="course" className="block text-xs font-bold text-[#1F1F1F] mb-1.5">
-                    Course of Interest <span className="text-rose-500">*</span>
+                    Course or shop item <span className="text-rose-500">*</span>
                   </label>
                   <select
                     id="course"
@@ -466,9 +510,15 @@ function ContactPageContent() {
                     }`}
                   >
                     <option value="">— Select a Course —</option>
+                    <option value={`strategy:${STRATEGY_CALL_LABEL}`}>{STRATEGY_CALL_LABEL}</option>
                     {courses.map((c) => (
                       <option key={c.id} value={c.id}>
                         {c.title} {c.category ? `(${c.category})` : ''}
+                      </option>
+                    ))}
+                    {shopProducts.map((product) => (
+                      <option key={product.slug} value={`shop:${product.title}`}>
+                        Shop: {product.title}
                       </option>
                     ))}
                     <option value="other">Other / Custom Course Request</option>

@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { Loader2, Trash2, AlertTriangle, X } from 'lucide-react';
 
-type Program = { id: string; slug: string; title: string; duration: string; image: string; href: string; categoryName?: string; fee?: string; certification?: string; eligibility?: string; expectedHours?: number | null; custom?: boolean };
+type Program = { id: string; slug: string; title: string; duration: string; image: string; href: string; categoryName?: string; fee?: string; certification?: string; eligibility?: string; expectedHours?: number | null; custom?: boolean; visible?: boolean };
 type CourseLink = { id: string; accountId: string; courseId: string; status: 'enrolled' | 'requested' };
 type Account = { id: string; fullName: string; email: string; phone: string; role: 'admin' | 'staff' | 'student'; status: 'active' | 'inactive' };
 type AttendanceRow = {
@@ -294,7 +294,7 @@ export function UserManagement() {
           </select>
           <select className={fieldClass} value={form.courseId} onChange={(event) => setForm({ ...form, courseId: event.target.value })}>
             <option value="">Assigned course (optional)</option>
-            {programs.map((course) => <option key={course.id} value={course.id}>{course.title}</option>)}
+            {programs.filter((course) => course.visible !== false && course.id.startsWith('ref-')).map((course) => <option key={course.id} value={course.id}>{course.title}</option>)}
           </select>
           <select className={fieldClass} value={form.status} onChange={(event) => setForm({ ...form, status: event.target.value })}>
             <option value="active">Active</option>
@@ -622,7 +622,8 @@ export function CertifiedPrograms({
 
   useEffect(() => { load(); }, [load]);
 
-  const visible = programs.filter((course) => course.title.toLowerCase().includes(query.trim().toLowerCase()));
+  const catalogue = programs.filter((course) => course.visible !== false && course.id.startsWith('ref-'));
+  const visible = catalogue.filter((course) => course.title.toLowerCase().includes(query.trim().toLowerCase()));
   const mine = (courseId: string) => links.find((link) => link.courseId === courseId);
   const enrolled = programs.filter((course) => mine(course.id)?.status === 'enrolled');
   const assigned = mode === 'staff' ? enrolled : enrolled;
@@ -716,7 +717,7 @@ export function CertifiedPrograms({
           </select>
           <select required className={fieldClass} value={assignCourse} onChange={(event) => setAssignCourse(event.target.value)}>
             <option value="">Course</option>
-            {programs.map((course) => <option key={course.id} value={course.id}>{course.title}</option>)}
+            {catalogue.map((course) => <option key={course.id} value={course.id}>{course.title}</option>)}
           </select>
           <button type="submit" className="pill-button-forest py-2.5 text-sm">Assign course</button>
         </form>

@@ -8,8 +8,7 @@ import {
 } from 'lucide-react';
 import type { Course } from '@/lib/types';
 import { CourseCard } from '@/components/courses/CourseCard';
-import { StrategyCallSection } from '@/components/home/StrategyCallSection';
-import { useCurrency, SUPPORTED_CURRENCIES, CURRENCY_CONFIGS, CurrencyCode } from '@/lib/currency';
+import { CareerStrategyCall } from '@/components/home/CareerStrategyCall';
 import { getCachedCourses, getCachedCategories } from '@/lib/api-cache';
 
 interface CategoryItem {
@@ -21,8 +20,6 @@ interface CategoryItem {
 function CoursesCatalogueContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { currency, setCurrency, getCoursePriceDisplay } = useCurrency();
-
   const [courses, setCourses] = useState<Course[]>([]);
   const [categories, setCategories] = useState<CategoryItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -107,14 +104,14 @@ function CoursesCatalogueContent() {
       result.sort((a, b) => b.title.localeCompare(a.title));
     } else if (sortBy === 'price-asc') {
       result.sort((a, b) => {
-        const priceA = getCoursePriceDisplay(a, currency).amount ?? 99999999;
-        const priceB = getCoursePriceDisplay(b, currency).amount ?? 99999999;
+        const priceA = a.currency_prices?.GBP ?? 99999999;
+        const priceB = b.currency_prices?.GBP ?? 99999999;
         return priceA - priceB;
       });
     } else if (sortBy === 'price-desc') {
       result.sort((a, b) => {
-        const priceA = getCoursePriceDisplay(a, currency).amount ?? 0;
-        const priceB = getCoursePriceDisplay(b, currency).amount ?? 0;
+        const priceA = a.currency_prices?.GBP ?? 0;
+        const priceB = b.currency_prices?.GBP ?? 0;
         return priceB - priceA;
       });
     } else {
@@ -127,7 +124,7 @@ function CoursesCatalogueContent() {
     }
 
     return result;
-  }, [courses, categories, selectedCategory, searchQuery, sortBy, currency, getCoursePriceDisplay]);
+  }, [courses, categories, selectedCategory, searchQuery, sortBy]);
 
   // Pagination
   const totalCourses = filteredAndSorted.length;
@@ -389,7 +386,7 @@ export default function CoursesPage() {
       <Suspense fallback={<div className="site-container py-20 text-center text-sm text-[#687587]">Loading course catalogue...</div>}>
         <CoursesCatalogueContent />
       </Suspense>
-      <StrategyCallSection />
+      <CareerStrategyCall />
     </>
   );
 }
