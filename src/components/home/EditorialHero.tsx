@@ -88,8 +88,8 @@ export function EditorialHero() {
                 </div>
                 <div className="relative h-48 min-h-48 w-full shrink-0 overflow-hidden sm:h-auto sm:min-h-full sm:w-[46%]">
                   <Image
-                    src="/images/heroes/about-hero.jpg"
-                    alt="Adult learners in a training session"
+                    src="/images/courses/beauty-therapy-essentials.jpg"
+                    alt="A beauty therapist consulting with a client during training"
                     fill
                     sizes="320px"
                     className="object-cover object-center"
@@ -169,8 +169,8 @@ export function EditorialHero() {
                 </div>
                 <div className="relative h-48 min-h-48 w-full shrink-0 overflow-hidden sm:h-auto sm:min-h-full sm:w-[46%]">
                   <Image
-                    src="/images/courses/internal-quality-assurance.jpg"
-                    alt="An assessor reviewing training assessment folders"
+                    src="/images/courses/hairdressing-foundations.jpg"
+                    alt="A hairdresser training a cut in a salon"
                     fill
                     sizes="320px"
                     className="object-cover object-center"
