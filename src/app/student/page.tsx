@@ -301,7 +301,7 @@ export default function StudentPortalPage() {
   if (checking || !authed) {
     return (
       <div className="min-h-screen bg-[#f3f5fb] flex items-center justify-center gap-2 text-sm text-[#565656]">
-        <Loader2 className="w-5 h-5 animate-spin text-[#0056D2]" />
+        <Loader2 className="w-5 h-5 animate-spin text-[#B14B6C]" />
         <span>{checking ? 'Authenticating student portal...' : 'Redirecting to login...'}</span>
       </div>
     );
@@ -344,13 +344,13 @@ export default function StudentPortalPage() {
 
           {/* Center: Global Search Bar (Only shown on medium+ screens) */}
           <div className="hidden md:flex flex-1 max-w-md mx-6 relative">
-            <Search className="w-4 h-4 text-[#8C9BAE] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <Search className="w-4 h-4 text-[#A08B94] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search courses, assignments, or anything..."
-              className="w-full pl-9 pr-4 py-2 rounded-xl border border-[#E2E8F0] bg-[#FBFBFC] hover:bg-white text-xs text-[#010101] placeholder-[#8C9BAE] focus:outline-none focus:border-[#00543d] focus:bg-white transition-all shadow-2xs"
+              className="w-full pl-9 pr-4 py-2 rounded-xl border border-[#F0E2E7] bg-[#FBFBFC] hover:bg-white text-xs text-[#010101] placeholder-[#A08B94] focus:outline-none focus:border-[#00543d] focus:bg-white transition-all shadow-2xs"
             />
           </div>
 
@@ -391,13 +391,13 @@ export default function StudentPortalPage() {
 
                   <div className="flex flex-col gap-2 max-h-64 overflow-y-auto">
                     {notifications.length === 0 ? (
-                      <p className="text-xs text-[#8C9BAE] py-4 text-center">No notifications at this time.</p>
+                      <p className="text-xs text-[#A08B94] py-4 text-center">No notifications at this time.</p>
                     ) : (
                       notifications.slice(0, 5).map((n) => (
                         <div key={n.id} className="p-2.5 rounded-xl bg-[#F7F8FA] border border-[#E5E7EB] text-xs">
                           <p className="font-semibold text-[#1F1F1F]">{n.title}</p>
                           <p className="text-[11px] text-[#565656] mt-0.5 leading-snug">{n.body}</p>
-                          <span className="text-[10px] text-[#8C9BAE] block mt-1">
+                          <span className="text-[10px] text-[#A08B94] block mt-1">
                             {new Date(n.createdAt).toLocaleDateString()}
                           </span>
                         </div>
@@ -430,14 +430,14 @@ export default function StudentPortalPage() {
                     Student
                   </span>
                 </div>
-                <ChevronDown className="w-3.5 h-3.5 text-[#8C9BAE]" />
+                <ChevronDown className="w-3.5 h-3.5 text-[#A08B94]" />
               </button>
 
               {userMenuOpen && (
                 <div className="absolute right-0 mt-2 w-52 rounded-2xl bg-white border border-[#E5E7EB] shadow-[0_12px_36px_rgba(0,0,0,0.12)] p-2 z-50 animate-in fade-in zoom-in-95 text-xs">
                   <div className="px-3 py-2 border-b border-[#E5E7EB] mb-1">
                     <p className="font-bold text-[#1F1F1F] truncate">{studentName}</p>
-                    <p className="text-[11px] text-[#8C9BAE] truncate">{account?.email || 'Student Portal'}</p>
+                    <p className="text-[11px] text-[#A08B94] truncate">{account?.email || 'Student Portal'}</p>
                   </div>
                   <button
                     onClick={() => { openTab('profile'); setUserMenuOpen(false); }}
@@ -484,7 +484,7 @@ export default function StudentPortalPage() {
             {/* Mobile close toggle */}
             <div className="flex items-center justify-between lg:hidden pb-2 border-b border-[#E5E7EB]">
               <span className="text-xs font-bold uppercase tracking-wider text-[#1F1F1F]">Menu</span>
-              <button onClick={() => setSidebarOpen(false)} className="p-1 rounded-lg text-[#8C9BAE] hover:text-black">
+              <button onClick={() => setSidebarOpen(false)} className="p-1 rounded-lg text-[#A08B94] hover:text-black">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -638,8 +638,8 @@ export default function StudentPortalPage() {
 
                 {/* Metric 5: Profile Progress */}
                 <DashboardMetricCard
-                  icon={<User className="w-5 h-5 text-[#0056D2]" />}
-                  iconBg="bg-blue-50"
+                  icon={<User className="w-5 h-5 text-[#B14B6C]" />}
+                  iconBg="bg-[#FBEAF0]"
                   title="Profile Progress"
                   value={`${profileProgress}%`}
                   subtitle="Complete Your Profile"
@@ -673,7 +673,7 @@ export default function StudentPortalPage() {
                     {/* Enrolled Courses Cards List */}
                     <div className="flex flex-col gap-3.5">
                       {courses.length === 0 ? (
-                        <div className="p-8 text-center text-xs text-[#8C9BAE]">
+                        <div className="p-8 text-center text-xs text-[#A08B94]">
                           <p>You have not enrolled in any programmes yet.</p>
                           <button
                             onClick={() => openTab('courses')}
@@ -706,7 +706,7 @@ export default function StudentPortalPage() {
                                     In Progress
                                   </span>
                                 </div>
-                                <span className="text-[11px] text-[#8C9BAE] mt-0.5">
+                                <span className="text-[11px] text-[#A08B94] mt-0.5">
                                   Savvy Technical Academy · {c.duration || '6 Modules'}
                                 </span>
                                 {/* Progress Bar */}
@@ -845,9 +845,9 @@ export default function StudentPortalPage() {
 
                       <button
                         onClick={() => openTab('certificates')}
-                        className="p-3.5 rounded-xl border border-[#E5E7EB] hover:border-[#0056D2] hover:bg-[#F7F8FA] transition-all flex flex-col items-center text-center gap-2 group cursor-pointer"
+                        className="p-3.5 rounded-xl border border-[#E5E7EB] hover:border-[#B14B6C] hover:bg-[#F7F8FA] transition-all flex flex-col items-center text-center gap-2 group cursor-pointer"
                       >
-                        <div className="w-9 h-9 rounded-xl bg-blue-50 flex items-center justify-center text-[#0056D2] group-hover:scale-110 transition-transform">
+                        <div className="w-9 h-9 rounded-xl bg-[#FBEAF0] flex items-center justify-center text-[#B14B6C] group-hover:scale-110 transition-transform">
                           <Download className="w-4 h-4" />
                         </div>
                         <span className="text-xs font-bold text-[#1F1F1F]">Download Certificate</span>
@@ -881,8 +881,8 @@ export default function StudentPortalPage() {
                         time="2 hours ago"
                       />
                       <ActivityTimelineItem
-                        icon={<PlayCircle className="w-3.5 h-3.5 text-blue-600" />}
-                        iconBg="bg-blue-50"
+                        icon={<PlayCircle className="w-3.5 h-3.5 text-[#B14B6C]" />}
+                        iconBg="bg-[#FBEAF0]"
                         title="New lesson available"
                         detail="Ultrasonic Testing Calibration Procedure"
                         time="1 day ago"
@@ -946,7 +946,7 @@ export default function StudentPortalPage() {
                         <span className="text-xs font-bold text-[#1F1F1F]">
                           Overall Course Completion
                         </span>
-                        <span className="text-[11px] text-[#8C9BAE] mt-0.5">
+                        <span className="text-[11px] text-[#A08B94] mt-0.5">
                           1 of {Math.max(1, courses.length)} courses completed
                         </span>
                       </div>
@@ -980,7 +980,7 @@ export default function StudentPortalPage() {
                           <div key={ann.id} className="pb-2 border-b border-[#E5E7EB]/60 last:border-0 last:pb-0">
                             <p className="font-bold text-[#1F1F1F] line-clamp-1">{ann.title}</p>
                             <p className="text-[11px] text-[#565656] line-clamp-1 mt-0.5">{ann.content}</p>
-                            <span className="text-[10px] text-[#8C9BAE] mt-1 block">
+                            <span className="text-[10px] text-[#A08B94] mt-1 block">
                               {new Date(ann.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
                             </span>
                           </div>
@@ -989,15 +989,15 @@ export default function StudentPortalPage() {
                         <>
                           <div className="pb-2 border-b border-[#E5E7EB]/60">
                             <p className="font-bold text-[#1F1F1F]">New Course Added: Revit MEP 3D BIM</p>
-                            <span className="text-[10px] text-[#8C9BAE] mt-0.5 block">24 Oct 2025</span>
+                            <span className="text-[10px] text-[#A08B94] mt-0.5 block">24 Oct 2025</span>
                           </div>
                           <div className="pb-2 border-b border-[#E5E7EB]/60">
                             <p className="font-bold text-[#1F1F1F]">Practical Lab Flaw Detector Calibration</p>
-                            <span className="text-[10px] text-[#8C9BAE] mt-0.5 block">22 Oct 2025</span>
+                            <span className="text-[10px] text-[#A08B94] mt-0.5 block">22 Oct 2025</span>
                           </div>
                           <div>
                             <p className="font-bold text-[#1F1F1F]">Exam Submission &amp; Credential Verification</p>
-                            <span className="text-[10px] text-[#8C9BAE] mt-0.5 block">20 Oct 2025</span>
+                            <span className="text-[10px] text-[#A08B94] mt-0.5 block">20 Oct 2025</span>
                           </div>
                         </>
                       )}
@@ -1006,7 +1006,7 @@ export default function StudentPortalPage() {
                 </div>
 
                 {/* Inspirational Ad Banner Card */}
-                <div className="rounded-2xl p-6 bg-gradient-to-br from-[#003e9a] via-[#0056D2] to-[#0284c7] text-white flex flex-col justify-between shadow-xs relative overflow-hidden">
+                <div className="rounded-2xl p-6 bg-gradient-to-br from-[#7A2E49] via-[#B14B6C] to-[#E7A0B6] text-white flex flex-col justify-between shadow-xs relative overflow-hidden">
                   <div
                     aria-hidden="true"
                     className="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-2xl pointer-events-none"
@@ -1025,7 +1025,7 @@ export default function StudentPortalPage() {
 
                   <Link
                     href="/courses"
-                    className="mt-4 self-start inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white text-[#0056D2] hover:bg-[#F3F5FB] text-xs font-bold transition-all shadow-sm active:scale-98"
+                    className="mt-4 self-start inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white text-[#B14B6C] hover:bg-[#F3F5FB] text-xs font-bold transition-all shadow-sm active:scale-98"
                   >
                     <span>Explore Programmes</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -1043,7 +1043,7 @@ export default function StudentPortalPage() {
               <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB]">
                 <div>
                   <h1 className="text-xl font-bold text-[#1F1F1F]">My Enrolled Courses</h1>
-                  <p className="text-xs text-[#8C9BAE] mt-0.5">Manage your active qualifications and syllabus progression.</p>
+                  <p className="text-xs text-[#A08B94] mt-0.5">Manage your active qualifications and syllabus progression.</p>
                 </div>
                 <button
                   onClick={() => openTab('dashboard')}
@@ -1079,7 +1079,7 @@ export default function StudentPortalPage() {
               <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB]">
                 <div>
                   <h1 className="text-xl font-bold text-[#1F1F1F]">Assignments &amp; Course Materials</h1>
-                  <p className="text-xs text-[#8C9BAE] mt-0.5">Access lecture notes, assignments, and practical flaw test manuals.</p>
+                  <p className="text-xs text-[#A08B94] mt-0.5">Access lecture notes, assignments, and practical flaw test manuals.</p>
                 </div>
                 <button
                   onClick={() => openTab('dashboard')}
@@ -1090,8 +1090,8 @@ export default function StudentPortalPage() {
               </div>
 
               {notes.length === 0 ? (
-                <div className="bg-white rounded-2xl border border-[#E5E7EB] p-8 text-center text-xs text-[#8C9BAE]">
-                  <FileText className="w-8 h-8 text-[#8C9BAE] mx-auto mb-2" />
+                <div className="bg-white rounded-2xl border border-[#E5E7EB] p-8 text-center text-xs text-[#A08B94]">
+                  <FileText className="w-8 h-8 text-[#A08B94] mx-auto mb-2" />
                   <p className="font-semibold text-[#1F1F1F]">No pending assignments or notes.</p>
                   <p className="mt-1">Course notes appear here as soon as published by your instructors.</p>
                 </div>
@@ -1112,7 +1112,7 @@ export default function StudentPortalPage() {
                         <div className="flex items-start justify-between gap-3">
                           <span className="text-xs font-bold text-[#1F1F1F]">{v.title}</span>
                           {v.duration && (
-                            <span className="text-[11px] text-[#8C9BAE] flex items-center gap-1">
+                            <span className="text-[11px] text-[#A08B94] flex items-center gap-1">
                               <Clock className="w-3 h-3" /> {v.duration}
                             </span>
                           )}
@@ -1134,7 +1134,7 @@ export default function StudentPortalPage() {
               <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB]">
                 <div>
                   <h1 className="text-xl font-bold text-[#1F1F1F]">Student Attendance</h1>
-                  <p className="text-xs text-[#8C9BAE] mt-0.5">View your punch history and verified classroom attendance record.</p>
+                  <p className="text-xs text-[#A08B94] mt-0.5">View your punch history and verified classroom attendance record.</p>
                 </div>
                 <button
                   onClick={() => openTab('dashboard')}
@@ -1160,7 +1160,7 @@ export default function StudentPortalPage() {
               <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB]">
                 <div>
                   <h1 className="text-xl font-bold text-[#1F1F1F]">Grades &amp; Study Hours</h1>
-                  <p className="text-xs text-[#8C9BAE] mt-0.5">Track accredited study hours, inspection practicals, and module grades.</p>
+                  <p className="text-xs text-[#A08B94] mt-0.5">Track accredited study hours, inspection practicals, and module grades.</p>
                 </div>
                 <button
                   onClick={() => openTab('dashboard')}
@@ -1189,7 +1189,7 @@ export default function StudentPortalPage() {
               <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB]">
                 <div>
                   <h1 className="text-xl font-bold text-[#1F1F1F]">Certificates &amp; Credentials</h1>
-                  <p className="text-xs text-[#8C9BAE] mt-0.5">Download verifiable qualifications and digital credential records.</p>
+                  <p className="text-xs text-[#A08B94] mt-0.5">Download verifiable qualifications and digital credential records.</p>
                 </div>
                 <button
                   onClick={() => openTab('dashboard')}
@@ -1221,7 +1221,7 @@ export default function StudentPortalPage() {
                   <h1 className="text-xl font-bold text-[#1F1F1F]">
                     {tab === 'profile' ? 'Student Profile' : 'Account Settings'}
                   </h1>
-                  <p className="text-xs text-[#8C9BAE] mt-0.5">
+                  <p className="text-xs text-[#A08B94] mt-0.5">
                     {tab === 'profile' ? 'View and update your student registration information.' : 'Manage login credentials and institute notifications.'}
                   </p>
                 </div>
@@ -1247,7 +1247,7 @@ export default function StudentPortalPage() {
         <div className="max-w-[1600px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <span className="font-semibold text-[#1F1F1F]">Savvy Training Institute</span>
-            <span className="text-[#8C9BAE]">|</span>
+            <span className="text-[#A08B94]">|</span>
             <span>Empowering Learners. Building Futures.</span>
           </div>
           <div>
@@ -1332,7 +1332,7 @@ function DashboardMetricCard({
         <div className={`w-9 h-9 rounded-xl ${iconBg} flex items-center justify-center shrink-0 mb-3`}>
           {icon}
         </div>
-        <span className="text-[11px] font-semibold text-[#8C9BAE] block">
+        <span className="text-[11px] font-semibold text-[#A08B94] block">
           {title}
         </span>
         <div className="text-2xl font-extrabold text-[#1F1F1F] tracking-tight mt-0.5">
@@ -1373,11 +1373,11 @@ function ScheduleItem({
       <div className="flex items-center gap-3 min-w-0">
         <div className="w-11 h-11 rounded-xl bg-[#F7F8FA] border border-[#E5E7EB] flex flex-col items-center justify-center shrink-0 text-[#1F1F1F]">
           <span className="text-xs font-extrabold leading-none">{day}</span>
-          <span className="text-[9px] uppercase font-bold text-[#8C9BAE] leading-tight mt-0.5">{month}</span>
+          <span className="text-[9px] uppercase font-bold text-[#A08B94] leading-tight mt-0.5">{month}</span>
         </div>
         <div className="flex flex-col min-w-0">
           <span className="text-xs font-bold text-[#1F1F1F] truncate">{title}</span>
-          <span className="text-[11px] text-[#8C9BAE] mt-0.5">{time} · {type}</span>
+          <span className="text-[11px] text-[#A08B94] mt-0.5">{time} · {type}</span>
         </div>
       </div>
 
@@ -1414,7 +1414,7 @@ function ActivityTimelineItem({
         <span className="text-xs font-bold text-[#1F1F1F] leading-snug">{title}</span>
         <span className="text-[11px] text-[#687587] truncate">{detail}</span>
       </div>
-      <span className="text-[10px] text-[#8C9BAE] shrink-0 whitespace-nowrap">{time}</span>
+      <span className="text-[10px] text-[#A08B94] shrink-0 whitespace-nowrap">{time}</span>
     </div>
   );
 }
@@ -1440,13 +1440,13 @@ function CourseSection({
       <header className="px-5 py-4 border-b border-[#E5E7EB] flex flex-wrap items-start justify-between gap-3">
         <div className="flex flex-col gap-1">
           <h2 className="text-base font-bold text-[#1F1F1F]">{course.title}</h2>
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-[#8C9BAE]">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-[#A08B94]">
             <span className="capitalize">{course.status}</span>
             {course.duration && <span>{course.duration}</span>}
             {course.certification && <span>{course.certification}</span>}
             <span>{notes.length} notes · {videos.length} videos</span>
           </div>
-          {note && <p className="text-xs text-[#8C9BAE]">{note}</p>}
+          {note && <p className="text-xs text-[#A08B94]">{note}</p>}
         </div>
         {certificate && (
           <span className="text-xs bg-emerald-100 text-emerald-800 font-semibold px-2.5 py-1 rounded-full flex items-center gap-1.5">
@@ -1463,7 +1463,7 @@ function CourseSection({
         {videos.length > 0 && (
           <div className="flex flex-col gap-3">
             <h3 className="text-xs font-bold text-[#1F1F1F] uppercase tracking-wider flex items-center gap-2">
-              <PlayCircle className="w-4 h-4 text-[#0056D2]" /> Video Lessons
+              <PlayCircle className="w-4 h-4 text-[#B14B6C]" /> Video Lessons
             </h3>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {videos.map((v) => (
@@ -1471,7 +1471,7 @@ function CourseSection({
                   <div className="flex items-start justify-between gap-3">
                     <span className="text-xs font-bold text-[#1F1F1F]">{v.title}</span>
                     {v.duration && (
-                      <span className="text-[11px] text-[#8C9BAE] flex items-center gap-1">
+                      <span className="text-[11px] text-[#A08B94] flex items-center gap-1">
                         <Clock className="w-3 h-3" /> {v.duration}
                       </span>
                     )}
@@ -1509,23 +1509,23 @@ function NoteRow({ material, courseName }: { material: CourseMaterial; courseNam
       >
         <span className="flex flex-col gap-0.5 min-w-0">
           {courseName && (
-            <span className="text-[10px] uppercase tracking-wider text-[#8C9BAE] font-semibold">
+            <span className="text-[10px] uppercase tracking-wider text-[#A08B94] font-semibold">
               {courseName}
             </span>
           )}
           <span className="text-xs font-bold text-[#1F1F1F]">{material.title}</span>
           {material.description && (
-            <span className="text-[11px] text-[#8C9BAE] truncate">{material.description}</span>
+            <span className="text-[11px] text-[#A08B94] truncate">{material.description}</span>
           )}
         </span>
-        <ChevronDown className={`w-4 h-4 text-[#8C9BAE] shrink-0 transition-transform ${open ? 'rotate-180' : ''}`} />
+        <ChevronDown className={`w-4 h-4 text-[#A08B94] shrink-0 transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
       {open && (
         <div className="px-4 pb-4 pt-1 border-t border-[#E5E7EB] bg-[#FAF9F5]">
           {material.content ? (
             <NoteBody content={material.content} />
           ) : (
-            <p className="text-xs text-[#8C9BAE]">This note has no text content published.</p>
+            <p className="text-xs text-[#A08B94]">This note has no text content published.</p>
           )}
         </div>
       )}
@@ -1546,7 +1546,7 @@ function CertificateCard({ cert, onPreview }: { cert: Certificate; onPreview: ()
     <div className="rounded-2xl p-6 bg-white border border-[#E5E7EB] shadow-xs flex flex-col gap-4">
       <div className="flex items-start justify-between gap-3">
         <div className="flex flex-col gap-1">
-          <span className="text-xs uppercase tracking-wider text-[#8C9BAE] font-semibold">{cert.course_title}</span>
+          <span className="text-xs uppercase tracking-wider text-[#A08B94] font-semibold">{cert.course_title}</span>
           <span className="text-base font-bold text-[#1F1F1F]">{cert.student_name}</span>
         </div>
         <span className={`shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full ${cert.revoked_at ? 'bg-red-50 text-red-700' : 'bg-[#E6F4EA] text-[#00543d]'}`}>
@@ -1554,10 +1554,10 @@ function CertificateCard({ cert, onPreview }: { cert: Certificate; onPreview: ()
         </span>
       </div>
       <dl className="grid grid-cols-2 gap-y-2 gap-x-3 text-xs">
-        <div><dt className="text-[#8C9BAE]">Certificate No.</dt><dd className="font-semibold text-[#1F1F1F]">{cert.certificate_no}</dd></div>
-        <div><dt className="text-[#8C9BAE]">Issued Date</dt><dd className="font-semibold text-[#1F1F1F]">{fmtDate(cert.issue_date)}</dd></div>
-        {cert.expiry_date && <div><dt className="text-[#8C9BAE]">Valid Until</dt><dd className="font-semibold text-[#1F1F1F]">{fmtDate(cert.expiry_date)}</dd></div>}
-        {cert.instructor_name && <div><dt className="text-[#8C9BAE]">Examiner</dt><dd className="font-semibold text-[#1F1F1F]">{cert.instructor_name}</dd></div>}
+        <div><dt className="text-[#A08B94]">Certificate No.</dt><dd className="font-semibold text-[#1F1F1F]">{cert.certificate_no}</dd></div>
+        <div><dt className="text-[#A08B94]">Issued Date</dt><dd className="font-semibold text-[#1F1F1F]">{fmtDate(cert.issue_date)}</dd></div>
+        {cert.expiry_date && <div><dt className="text-[#A08B94]">Valid Until</dt><dd className="font-semibold text-[#1F1F1F]">{fmtDate(cert.expiry_date)}</dd></div>}
+        {cert.instructor_name && <div><dt className="text-[#A08B94]">Examiner</dt><dd className="font-semibold text-[#1F1F1F]">{cert.instructor_name}</dd></div>}
       </dl>
       <div className="flex flex-wrap gap-2 mt-auto pt-2 border-t border-[#E5E7EB]">
         <button onClick={save} disabled={saving || Boolean(cert.revoked_at)} className="px-4 py-2 rounded-xl bg-[#00543d] hover:bg-[#004230] text-white text-xs font-bold flex items-center gap-1.5 transition-all">

@@ -89,20 +89,20 @@ export function StrategyCallSection() {
   };
 
   return (
-    <section className="py-12 sm:py-16 bg-white border-b border-[#e2e8f0] relative overflow-hidden">
+    <section className="py-12 sm:py-16 bg-white border-b border-[#F0E2E7] relative overflow-hidden">
       <div className="site-container relative z-10 max-w-5xl">
         {/* Main Single-Frame Compact Card */}
-        <div className="bg-white rounded-3xl border border-[#e2e8f0] shadow-sm overflow-hidden">
+        <div className="bg-white rounded-3xl border border-[#F0E2E7] shadow-sm overflow-hidden">
           {/* Card Header */}
-          <div className="px-5 sm:px-8 pt-7 pb-5 border-b border-[#e2e8f0] flex flex-col items-center text-center">
+          <div className="px-5 sm:px-8 pt-7 pb-5 border-b border-[#F0E2E7] flex flex-col items-center text-center">
             <div className="flex items-center gap-2 mb-2">
-              <div className="h-7 w-7 rounded-full bg-white border border-[#e2e8f0] p-0.5 flex items-center justify-center shrink-0 shadow-2xs">
+              <div className="h-7 w-7 rounded-full bg-white border border-[#F0E2E7] p-0.5 flex items-center justify-center shrink-0 shadow-2xs">
                 <SavvyLogo markClassName="h-full w-full object-contain" />
               </div>
               <span className="text-[11px] sm:text-xs font-extrabold uppercase tracking-widest text-[#1F1F1F]">
                 Savvy Training Institute
               </span>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-[#0056D2] bg-[#EBF3FF] px-2.5 py-0.5 rounded-full border border-[#0056D2]/20 ml-1">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[#B14B6C] bg-[#FBEAF0] px-2.5 py-0.5 rounded-full border border-[#B14B6C]/20 ml-1">
                 Free Technical Advisory
               </span>
             </div>
@@ -114,11 +114,11 @@ export function StrategyCallSection() {
             {/* Metadata Badges */}
             <div className="flex flex-wrap items-center justify-center gap-4 mt-3 text-xs text-[#565656] font-medium">
               <div className="flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5 text-[#0056D2]" />
+                <Clock className="w-3.5 h-3.5 text-[#B14B6C]" />
                 <span className="font-bold text-[#1F1F1F]">40 min 1-on-1</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <Video className="w-3.5 h-3.5 text-[#0056D2]" />
+                <Video className="w-3.5 h-3.5 text-[#B14B6C]" />
                 <span>Web conferencing details provided upon confirmation.</span>
               </div>
               <div className="flex items-center gap-1.5">
@@ -139,15 +139,15 @@ export function StrategyCallSection() {
                   Strategy Call Reserved!
                 </h3>
                 <p className="text-xs sm:text-sm text-[#565656] max-w-md mt-1.5 leading-relaxed">
-                  Thank you, <strong className="text-[#1F1F1F]">{fullName}</strong>. Your session for <strong className="text-[#0056D2]">{discipline}</strong> has been booked for <strong className="text-[#1F1F1F]">{selectedDate}</strong> at <strong className="text-[#1F1F1F]">{selectedSlot}</strong>.
+                  Thank you, <strong className="text-[#1F1F1F]">{fullName}</strong>. Your session for <strong className="text-[#B14B6C]">{discipline}</strong> has been booked for <strong className="text-[#1F1F1F]">{selectedDate}</strong> at <strong className="text-[#1F1F1F]">{selectedSlot}</strong>.
                 </p>
-                <p className="text-xs text-[#8C9BAE] mt-2">
+                <p className="text-xs text-[#A08B94] mt-2">
                   Our technical advisor will connect with you via email &amp; WhatsApp prior to your session.
                 </p>
                 <button
                   type="button"
                   onClick={() => setStatus('idle')}
-                  className="mt-5 px-5 py-2 rounded-full bg-[#0056D2] text-white text-xs font-bold hover:bg-[#00419e] transition-colors shadow-xs"
+                  className="mt-5 px-5 py-2 rounded-full bg-[#B14B6C] text-white text-xs font-bold hover:bg-[#8E3854] transition-colors shadow-xs"
                 >
                   Book Another Call
                 </button>
@@ -168,12 +168,12 @@ export function StrategyCallSection() {
                           onClick={() => setSelectedDate(d.label)}
                           className={`p-2 rounded-xl border text-xs text-center transition-all ${
                             selectedDate === d.label
-                              ? 'bg-[#0056D2] text-white border-[#0056D2] shadow-xs'
-                              : 'bg-white text-[#1F1F1F] border-[#e2e8f0] hover:border-[#0056D2]/50'
+                              ? 'bg-[#B14B6C] text-white border-[#B14B6C] shadow-xs'
+                              : 'bg-white text-[#1F1F1F] border-[#F0E2E7] hover:border-[#B14B6C]/50'
                           }`}
                         >
                           <span className="block font-bold text-[11px] leading-tight">{d.label.split(' ')[0]}</span>
-                          <span className={`text-[10px] block mt-0.5 ${selectedDate === d.label ? 'text-white/80' : 'text-[#8C9BAE]'}`}>
+                          <span className={`text-[10px] block mt-0.5 ${selectedDate === d.label ? 'text-white/80' : 'text-[#A08B94]'}`}>
                             {d.label.split(' ').slice(1).join(' ')}
                           </span>
                         </button>
@@ -193,8 +193,8 @@ export function StrategyCallSection() {
                           onClick={() => setSelectedSlot(slot)}
                           className={`px-3 py-1.5 rounded-lg border text-xs font-semibold transition-all ${
                             selectedSlot === slot
-                              ? 'bg-[#0056D2] text-white border-[#0056D2] shadow-xs'
-                              : 'bg-white text-[#1F1F1F] border-[#e2e8f0] hover:border-[#0056D2]/50'
+                              ? 'bg-[#B14B6C] text-white border-[#B14B6C] shadow-xs'
+                              : 'bg-white text-[#1F1F1F] border-[#F0E2E7] hover:border-[#B14B6C]/50'
                           }`}
                         >
                           {slot}
@@ -210,7 +210,7 @@ export function StrategyCallSection() {
                     <select
                       value={discipline}
                       onChange={(e) => setDiscipline(e.target.value)}
-                      className="w-full px-3 py-2 rounded-xl border border-[#e2e8f0] bg-white text-xs sm:text-sm text-[#1F1F1F] focus:outline-none focus:border-[#0056D2] cursor-pointer shadow-2xs"
+                      className="w-full px-3 py-2 rounded-xl border border-[#F0E2E7] bg-white text-xs sm:text-sm text-[#1F1F1F] focus:outline-none focus:border-[#B14B6C] cursor-pointer shadow-2xs"
                     >
                       {DISCIPLINES.map((d) => (
                         <option key={d} value={d}>
@@ -222,7 +222,7 @@ export function StrategyCallSection() {
                 </div>
 
                 {/* Right: Contact Information & Submission */}
-                <div className="lg:col-span-6 bg-white p-5 rounded-2xl border border-[#e2e8f0] shadow-xs flex flex-col gap-3">
+                <div className="lg:col-span-6 bg-white p-5 rounded-2xl border border-[#F0E2E7] shadow-xs flex flex-col gap-3">
                   <h3 className="text-sm font-bold text-[#1F1F1F]">
                     Enter Details to Confirm Session
                   </h3>
@@ -237,7 +237,7 @@ export function StrategyCallSection() {
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       placeholder="e.g. John Doe / Rahul Verma"
-                      className="w-full px-3 py-2 rounded-lg border border-[#e2e8f0] text-xs sm:text-sm text-[#1F1F1F] placeholder-[#8C9BAE] focus:outline-none focus:border-[#0056D2]"
+                      className="w-full px-3 py-2 rounded-lg border border-[#F0E2E7] text-xs sm:text-sm text-[#1F1F1F] placeholder-[#A08B94] focus:outline-none focus:border-[#B14B6C]"
                     />
                   </div>
 
@@ -252,7 +252,7 @@ export function StrategyCallSection() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="e.g. name@example.com"
-                        className="w-full px-3 py-2 rounded-lg border border-[#e2e8f0] text-xs sm:text-sm text-[#1F1F1F] placeholder-[#8C9BAE] focus:outline-none focus:border-[#0056D2]"
+                        className="w-full px-3 py-2 rounded-lg border border-[#F0E2E7] text-xs sm:text-sm text-[#1F1F1F] placeholder-[#A08B94] focus:outline-none focus:border-[#B14B6C]"
                       />
                     </div>
 
@@ -266,7 +266,7 @@ export function StrategyCallSection() {
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="e.g. +44 7700 900077"
-                        className="w-full px-3 py-2 rounded-lg border border-[#e2e8f0] text-xs sm:text-sm text-[#1F1F1F] placeholder-[#8C9BAE] focus:outline-none focus:border-[#0056D2]"
+                        className="w-full px-3 py-2 rounded-lg border border-[#F0E2E7] text-xs sm:text-sm text-[#1F1F1F] placeholder-[#A08B94] focus:outline-none focus:border-[#B14B6C]"
                       />
                     </div>
                   </div>
@@ -275,14 +275,14 @@ export function StrategyCallSection() {
                     <button
                       type="submit"
                       disabled={status === 'submitting'}
-                      className="w-full inline-flex items-center justify-center gap-2 py-3 px-6 rounded-full bg-[#0056D2] hover:bg-[#00419e] text-white text-xs sm:text-sm font-bold shadow-[0_4px_16px_rgba(0,86,210,0.25)] transition-all disabled:opacity-50"
+                      className="w-full inline-flex items-center justify-center gap-2 py-3 px-6 rounded-full bg-[#B14B6C] hover:bg-[#8E3854] text-white text-xs sm:text-sm font-bold shadow-[0_4px_16px_rgba(177,75,108,0.25)] transition-all disabled:opacity-50"
                     >
                       <span>{status === 'submitting' ? 'Confirming...' : 'Book My Free Strategy Call'}</span>
                       <ArrowRight className="w-4 h-4 text-white" />
                     </button>
                   </div>
 
-                  <div className="pt-2 border-t border-[#e2e8f0] flex items-center justify-between text-[11px] text-[#8C9BAE]">
+                  <div className="pt-2 border-t border-[#F0E2E7] flex items-center justify-between text-[11px] text-[#A08B94]">
                     <span className="flex items-center gap-1">
                       <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
                       Free Consultation
@@ -291,7 +291,7 @@ export function StrategyCallSection() {
                       href="https://wa.me/919000012345?text=Hello%2C%20I%20am%20interested%20in%20a%20technical%20career%20strategy%20call"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-semibold text-[#0056D2] hover:underline flex items-center gap-1"
+                      className="font-semibold text-[#B14B6C] hover:underline flex items-center gap-1"
                     >
                       <MessageSquare className="w-3 h-3" />
                       Chat on WhatsApp

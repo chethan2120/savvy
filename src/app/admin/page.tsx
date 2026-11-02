@@ -844,11 +844,11 @@ export default function AdminPage() {
                 {/* 3. Active Staff */}
                 <div
                   onClick={() => selectTab('staff')}
-                  className="bg-white p-4 rounded-2xl border border-border hover:border-blue-400 hover:shadow-sm cursor-pointer transition-all flex flex-col justify-between"
+                  className="bg-white p-4 rounded-2xl border border-border hover:border-[#E7A0B6] hover:shadow-sm cursor-pointer transition-all flex flex-col justify-between"
                 >
                   <div className="text-[11px] font-semibold text-muted-foreground">Active Staff</div>
                   <div className="mt-2 text-2xl font-bold text-foreground">38</div>
-                  <div className="mt-2 flex items-center gap-1 text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full w-fit">
+                  <div className="mt-2 flex items-center gap-1 text-[10px] font-bold text-[#8E3854] bg-[#FBEAF0] px-2 py-0.5 rounded-full w-fit">
                     <CheckCircle2 className="w-3 h-3" />
                     <span>Full capacity</span>
                   </div>
@@ -992,7 +992,7 @@ export default function AdminPage() {
                     <line x1="0" y1="40" x2="700" y2="40" stroke="#f1f5f9" strokeWidth="1" strokeDasharray="4 4" />
                     <line x1="0" y1="90" x2="700" y2="90" stroke="#f1f5f9" strokeWidth="1" strokeDasharray="4 4" />
                     <line x1="0" y1="140" x2="700" y2="140" stroke="#f1f5f9" strokeWidth="1" strokeDasharray="4 4" />
-                    <line x1="0" y1="190" x2="700" y2="190" stroke="#e2e8f0" strokeWidth="1" />
+                    <line x1="0" y1="190" x2="700" y2="190" stroke="#F0E2E7" strokeWidth="1" />
 
                     {/* Area under lines */}
                     <path
@@ -1133,7 +1133,7 @@ export default function AdminPage() {
                 </div>
 
                 {/* Educational Graphic Card / Savvy Accreditation Badge */}
-                <div className="bg-gradient-to-br from-[#0A1B30] to-[#102B4E] rounded-2xl p-6 text-white flex flex-col justify-between shadow-md relative overflow-hidden">
+                <div className="bg-gradient-to-br from-[#5C2038] to-[#8E3854] rounded-2xl p-6 text-white flex flex-col justify-between shadow-md relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-[#C8A45D]/10 rounded-full blur-2xl pointer-events-none" />
                   <div>
                     <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#C8A45D]/20 text-[#C8A45D] text-[10px] font-bold uppercase tracking-wider mb-3">
@@ -1184,7 +1184,7 @@ export default function AdminPage() {
 
                   <div className="flex items-center justify-between p-3 rounded-xl bg-[#F8FAFC] border border-border">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-800 flex items-center justify-center font-bold text-xs shrink-0">
+                      <div className="w-8 h-8 rounded-full bg-[#F8D5E2] text-[#7A2E49] flex items-center justify-center font-bold text-xs shrink-0">
                         <BookOpen className="w-4 h-4" />
                       </div>
                       <div>

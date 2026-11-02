@@ -114,7 +114,7 @@ export function WebsiteDesk() {
       <div className="rounded-2xl border border-border bg-white p-5">
         <h2 className="text-xl font-semibold">Course prices</h2>
         <p className="mt-2 text-sm text-muted-foreground">When this is off, public pages do not show a price, a zero, or a placeholder.</p>
-        <button type="button" onClick={() => savePrices(!pricesOn)} className="mt-4 rounded-full bg-[#0056D2] px-4 py-2 text-sm font-semibold text-white">
+        <button type="button" onClick={() => savePrices(!pricesOn)} className="mt-4 rounded-full bg-[#B14B6C] px-4 py-2 text-sm font-semibold text-white">
           {pricesOn ? 'Turn price display off' : 'Turn price display on'}
         </button>
       </div>
@@ -132,7 +132,7 @@ export function WebsiteDesk() {
           <input name="zoomUrl" placeholder="Zoom link" className="rounded-lg border px-3 py-2 text-sm" />
           <textarea name="detail" placeholder="Details" className="md:col-span-2 rounded-lg border px-3 py-2 text-sm" />
           <label className="flex items-center gap-2 text-sm"><input name="published" type="checkbox" defaultChecked /> Published</label>
-          <button className="rounded-full bg-[#0056D2] px-4 py-2 text-sm font-semibold text-white" type="submit">Add portal item</button>
+          <button className="rounded-full bg-[#B14B6C] px-4 py-2 text-sm font-semibold text-white" type="submit">Add portal item</button>
         </form>
         <ul className="mt-5 space-y-3">
           {items.map((item) => (
@@ -164,7 +164,7 @@ export function WebsiteDesk() {
         </div>
         <div className="mt-4 flex flex-wrap gap-3">
           <button type="button" className="rounded-full border px-4 py-2 text-sm" onClick={() => setFaqs((current) => [...current, { id: '', question: '', answer: '' }])}>Add question</button>
-          <button type="button" className="rounded-full bg-[#0056D2] px-4 py-2 text-sm font-semibold text-white" onClick={saveFaqs}>Save questions</button>
+          <button type="button" className="rounded-full bg-[#B14B6C] px-4 py-2 text-sm font-semibold text-white" onClick={saveFaqs}>Save questions</button>
         </div>
       </div>
       {message && <p className="text-sm">{message}</p>}

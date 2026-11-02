@@ -44,21 +44,21 @@ export function SiteFooter() {
   };
 
   return (
-    <footer className="bg-white text-[#1F1F1F] pt-16 pb-10 border-t border-[#e2e8f0]">
+    <footer className="bg-white text-[#1F1F1F] pt-16 pb-10 border-t border-[#F0E2E7]">
       <div className="site-container">
         {/* 4-Column Main Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-14 border-b border-[#e2e8f0]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-14 border-b border-[#F0E2E7]">
           {/* Column 1: Institute Identity */}
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-3">
-              <div className="h-12 w-12 rounded-full overflow-hidden bg-white shadow-xs border border-[#e2e8f0] p-0.5 flex items-center justify-center shrink-0">
+              <div className="h-12 w-12 rounded-full overflow-hidden bg-white shadow-xs border border-[#F0E2E7] p-0.5 flex items-center justify-center shrink-0">
                 <SavvyLogo markClassName="h-full w-full object-contain" />
               </div>
               <div className="flex flex-col">
                 <span className="font-extrabold text-lg tracking-tight text-[#1F1F1F] leading-tight">
                   Savvy Training Institute
                 </span>
-                <span className="text-xs sm:text-[13px] font-bold text-[#0056D2] tracking-wider uppercase">
+                <span className="text-xs sm:text-[13px] font-bold text-[#B14B6C] tracking-wider uppercase">
                   Technical Certification
                 </span>
               </div>
@@ -79,27 +79,27 @@ export function SiteFooter() {
             </h3>
             <ul className="flex flex-col gap-2.5 text-sm text-[#565656] mt-1 font-normal">
               <li>
-                <Link href="/" className="hover:text-[#0056D2] transition-colors">
+                <Link href="/" className="hover:text-[#B14B6C] transition-colors">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/courses" className="hover:text-[#0056D2] transition-colors">
+                <Link href="/courses" className="hover:text-[#B14B6C] transition-colors">
                   Explore Courses
                 </Link>
               </li>
               <li>
-                <Link href="/about-us" className="hover:text-[#0056D2] transition-colors">
+                <Link href="/about-us" className="hover:text-[#B14B6C] transition-colors">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/blogs" className="hover:text-[#0056D2] transition-colors">
+                <Link href="/blogs" className="hover:text-[#B14B6C] transition-colors">
                   Blogs
                 </Link>
               </li>
               <li>
-                <Link href="/contact-us" className="hover:text-[#0056D2] transition-colors">
+                <Link href="/contact-us" className="hover:text-[#B14B6C] transition-colors">
                   Contact Us
                 </Link>
               </li>
@@ -114,7 +114,7 @@ export function SiteFooter() {
             <ul className="flex flex-col gap-2.5 text-sm text-[#565656] mt-1 font-normal">
               {onlineCourses.map((course) => (
                 <li key={course.slug}>
-                  <Link href={`/courses/${course.slug}`} className="hover:text-[#0056D2] transition-colors">
+                  <Link href={`/courses/${course.slug}`} className="hover:text-[#B14B6C] transition-colors">
                     {course.title}
                   </Link>
                 </li>
@@ -139,13 +139,13 @@ export function SiteFooter() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email address"
                   disabled={status === 'loading'}
-                  className="w-full px-4 py-3 rounded-lg bg-white border border-[#e2e8f0] text-sm text-[#1F1F1F] placeholder-[#8C9BAE] focus:outline-none focus:border-[#0056D2] focus:ring-1 focus:ring-[#0056D2] transition-colors shadow-2xs"
+                  className="w-full px-4 py-3 rounded-lg bg-white border border-[#F0E2E7] text-sm text-[#1F1F1F] placeholder-[#A08B94] focus:outline-none focus:border-[#B14B6C] focus:ring-1 focus:ring-[#B14B6C] transition-colors shadow-2xs"
                 />
               </div>
               <button
                 type="submit"
                 disabled={status === 'loading'}
-                className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-[#0056D2] text-white text-sm font-bold hover:bg-[#00419e] transition-colors shadow-sm disabled:opacity-50"
+                className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-[#B14B6C] text-white text-sm font-bold hover:bg-[#8E3854] transition-colors shadow-sm disabled:opacity-50"
               >
                 <span>{status === 'loading' ? 'Subscribing...' : 'Subscribe'}</span>
                 <ArrowRight className="w-4 h-4 text-white" />
@@ -181,7 +181,7 @@ export function SiteFooter() {
               href="https://webnxt.co/"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-bold text-[#0056D2] hover:underline"
+              className="font-bold text-[#B14B6C] hover:underline"
             >
               WebNxt
             </a>
@@ -192,7 +192,7 @@ export function SiteFooter() {
             {/* Login Option */}
             <Link
               href="/login"
-              className="inline-flex items-center gap-2 rounded-full bg-[#0056D2] px-5 py-3 text-base font-semibold text-white hover:bg-[#00419e]"
+              className="inline-flex items-center gap-2 rounded-full bg-[#B14B6C] px-5 py-3 text-base font-semibold text-white hover:bg-[#8E3854]"
             >
               <User className="h-4 w-4" />
               <span>Login</span>

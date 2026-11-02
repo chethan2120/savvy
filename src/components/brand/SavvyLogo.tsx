@@ -1,8 +1,7 @@
 import React from 'react';
 
 /**
- * The institute seal, used as supplied. The artwork already carries the name,
- * so the component does not add a second wordmark or recolour the file.
+ * The institute seal. The enamel is rose; the gold, lettering and monogram stay.
  */
 export const SavvyLogo: React.FC<{
   tone?: 'ink' | 'light';

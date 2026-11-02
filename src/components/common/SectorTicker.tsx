@@ -18,7 +18,7 @@ const icons = {
 export function SectorTicker({ title = 'Sectors welcomed for accreditation' }: { title?: string }) {
   const labels = [...accreditationSectors, ...accreditationSectors];
   return (
-    <section className="border-b border-[#e2e8f0] bg-white py-10 sm:py-14">
+    <section className="border-b border-[#F0E2E7] bg-white py-10 sm:py-14">
       <div className="site-container">
         <h2 className="text-[#1F1F1F]">{title}</h2>
         <p className="mt-3 max-w-3xl text-[#565656]">
@@ -30,7 +30,7 @@ export function SectorTicker({ title = 'Sectors welcomed for accreditation' }: {
               const Icon = icons[label];
               return (
                 <span key={`${label}-${index}`} className="sector-chip">
-                  <Icon className="h-5 w-5 shrink-0 text-[#0056D2]" aria-hidden="true" />
+                  <Icon className="h-5 w-5 shrink-0 text-[#B14B6C]" aria-hidden="true" />
                   <span>{label}</span>
                 </span>
               );

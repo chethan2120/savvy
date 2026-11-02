@@ -20,7 +20,7 @@ export default function MentorshipPage() {
       <section className="site-container py-14 grid grid-cols-1 lg:grid-cols-2 gap-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 content-start">
           {mentorshipServices.map((item) => (
-            <article key={item.title} className="rounded-2xl border border-[#e2e8f0] p-5">
+            <article key={item.title} className="rounded-2xl border border-[#F0E2E7] p-5">
               <h2 className="text-lg font-semibold text-[#1F1F1F]">{item.title}</h2>
               <p className="mt-2 text-sm text-[#565656]">{item.body}</p>
             </article>

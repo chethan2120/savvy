@@ -30,7 +30,7 @@ export function TestimonialsSection({
     >
       <div className="mx-auto flex max-w-container flex-col items-center gap-6 text-center sm:gap-12">
         <div className="flex flex-col items-center gap-2.5 px-4 sm:gap-3 max-w-3xl">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#0056D2]">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#B14B6C]">
             {badge}
           </span>
           <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#1F1F1F] leading-tight">

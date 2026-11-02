@@ -19,7 +19,7 @@ const approachCards: iCardItem[] = [
     tag: 'Phase 01',
     src: '/images/heroes/blogs-hero.jpg',
     link: '/accreditation',
-    color: '#003e9a',
+    color: '#7A2E49',
     textColor: '#FFFFFF',
   },
   {
@@ -28,7 +28,7 @@ const approachCards: iCardItem[] = [
     tag: 'Phase 02',
     src: '/images/courses/award-in-education-and-training.jpg',
     link: '/teaching',
-    color: '#0056D2',
+    color: '#B14B6C',
     textColor: '#FFFFFF',
   },
   {
@@ -37,7 +37,7 @@ const approachCards: iCardItem[] = [
     tag: 'Phase 03',
     src: '/images/courses/beauty-therapy-essentials.jpg',
     link: '/courses',
-    color: '#003e9a',
+    color: '#7A2E49',
     textColor: '#FFFFFF',
   },
   {
@@ -46,7 +46,7 @@ const approachCards: iCardItem[] = [
     tag: 'Phase 04',
     src: '/images/courses/hairdressing-foundations.jpg',
     link: '/mentorship',
-    color: '#0056D2',
+    color: '#B14B6C',
     textColor: '#FFFFFF',
   },
 ];
@@ -72,19 +72,19 @@ export default function AboutUsPage() {
         priority={true}
       />
 
-      <section id="founder" className="py-16 bg-white border-b border-[#e2e8f0]">
+      <section id="founder" className="py-16 bg-white border-b border-[#F0E2E7]">
         <div className="site-container">
-          <p className="text-sm font-semibold text-[#0056D2]">Meet the founder</p>
+          <p className="text-sm font-semibold text-[#B14B6C]">Meet the founder</p>
           <h2 className="mt-2 text-[#1F1F1F]">Lisa Zaman is the founder, tutor and assessor.</h2>
           <div className="mt-8 grid items-center gap-8 lg:grid-cols-2">
-            <div className="rounded-3xl border border-[#e2e8f0] bg-white p-8 shadow-sm">
+            <div className="rounded-3xl border border-[#F0E2E7] bg-white p-8 shadow-sm">
               <div className="flex items-center gap-5">
-                <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-[#0056D2] text-2xl font-semibold tracking-wide text-white" aria-hidden="true">
+                <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-[#B14B6C] text-2xl font-semibold tracking-wide text-white" aria-hidden="true">
                   LZ
                 </div>
                 <div>
                   <h3 className="text-[#1F1F1F]">Lisa Zaman</h3>
-                  <p className="text-sm font-semibold text-[#0056D2]">Founder, tutor and assessor</p>
+                  <p className="text-sm font-semibold text-[#B14B6C]">Founder, tutor and assessor</p>
                 </div>
               </div>
               <p className="mt-5 text-base leading-relaxed text-[#565656]">{academyIntro.founderIntro}</p>
@@ -97,13 +97,13 @@ export default function AboutUsPage() {
       <LearningPortalSection />
 
       {/* Institute Overview & Mission */}
-      <section className="py-20 bg-white border-b border-[#e2e8f0]">
+      <section className="py-20 bg-white border-b border-[#F0E2E7]">
         <div className="site-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#e2e8f0] shadow-2xs mb-4">
-                <span className="w-2 h-2 rounded-full bg-[#0056D2]" />
-                <span className="text-xs font-bold uppercase tracking-wider text-[#0056D2]">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#F0E2E7] shadow-2xs mb-4">
+                <span className="w-2 h-2 rounded-full bg-[#B14B6C]" />
+                <span className="text-xs font-bold uppercase tracking-wider text-[#B14B6C]">
                   Our Purpose
                 </span>
               </div>
@@ -161,33 +161,33 @@ export default function AboutUsPage() {
             </div>
 
             {/* Seal & Values Box */}
-            <div className="rounded-3xl bg-white border border-[#e2e8f0] shadow-sm p-8 sm:p-10 flex flex-col items-center text-center">
-              <div className="h-28 w-28 rounded-full overflow-hidden bg-white p-2 border border-[#e2e8f0] shadow-md mb-6">
+            <div className="rounded-3xl bg-white border border-[#F0E2E7] shadow-sm p-8 sm:p-10 flex flex-col items-center text-center">
+              <div className="h-28 w-28 rounded-full overflow-hidden bg-white p-2 border border-[#F0E2E7] shadow-md mb-6">
                 <SavvyLogo markClassName="h-full w-full object-contain" />
               </div>
               <h3 className="text-lg font-bold text-[#1F1F1F]">
                 Savvy Training Institute
               </h3>
-              <p className="text-xs text-[#0056D2] font-bold uppercase tracking-wider mt-1">
+              <p className="text-xs text-[#B14B6C] font-bold uppercase tracking-wider mt-1">
                 Founded by Lisa Zaman
               </p>
               <p className="text-xs text-[#565656] max-w-sm mt-3 leading-relaxed font-normal">
                 The source website does not publish an address. Use the contact form to reach the academy.
               </p>
 
-              <div className="mt-8 pt-6 border-t border-[#e2e8f0] w-full flex items-center justify-around text-center text-xs">
+              <div className="mt-8 pt-6 border-t border-[#F0E2E7] w-full flex items-center justify-around text-center text-xs">
                 <div>
-                  <div className="text-xl font-extrabold text-[#0056D2]">5</div>
+                  <div className="text-xl font-extrabold text-[#B14B6C]">5</div>
                   <div className="text-[11px] text-[#565656] mt-0.5 font-medium">Teaching qualifications</div>
                 </div>
-                <div className="h-8 w-px bg-[#e2e8f0]" />
+                <div className="h-8 w-px bg-[#F0E2E7]" />
                 <div>
-                  <div className="text-xl font-extrabold text-[#0056D2]">6</div>
+                  <div className="text-xl font-extrabold text-[#B14B6C]">6</div>
                   <div className="text-[11px] text-[#565656] mt-0.5 font-medium">Online courses</div>
                 </div>
-                <div className="h-8 w-px bg-[#e2e8f0]" />
+                <div className="h-8 w-px bg-[#F0E2E7]" />
                 <div>
-                  <div className="text-xl font-extrabold text-[#0056D2]">4</div>
+                  <div className="text-xl font-extrabold text-[#B14B6C]">4</div>
                   <div className="text-[11px] text-[#565656] mt-0.5 font-medium">Shop resources</div>
                 </div>
               </div>
@@ -199,7 +199,7 @@ export default function AboutUsPage() {
       <SectorTicker />
 
       {/* Contact CTA */}
-      <section className="py-16 bg-gradient-to-br from-[#003e9a] via-[#0056D2] to-[#0284c7] text-white">
+      <section className="py-16 bg-gradient-to-br from-[#7A2E49] via-[#B14B6C] to-[#E7A0B6] text-white">
         <div className="site-container flex flex-col sm:flex-row items-center justify-between gap-6">
           <div>
             <h2 className="text-xl sm:text-2xl font-bold text-white">
@@ -211,7 +211,7 @@ export default function AboutUsPage() {
           </div>
           <Link
             href="/contact-us"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-[#0056D2] text-xs font-bold hover:bg-[#f3f5fb] transition-colors shrink-0 shadow-md"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-[#B14B6C] text-xs font-bold hover:bg-[#f3f5fb] transition-colors shrink-0 shadow-md"
           >
             <span>Speak With an Advisor</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -220,10 +220,10 @@ export default function AboutUsPage() {
       </section>
 
       {/* Our Approach to Technical Training (Interactive Parallax Scroll Feature) */}
-      <section className="py-20 sm:py-24 bg-white border-b border-[#e2e8f0]">
+      <section className="py-20 sm:py-24 bg-white border-b border-[#F0E2E7]">
         <div className="site-container">
           <div className="max-w-3xl mx-auto text-center mb-10">
-            <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0056D2]">
+            <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#B14B6C]">
               How the academy works
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#1F1F1F] tracking-tight mt-2 leading-snug">
@@ -241,13 +241,13 @@ export default function AboutUsPage() {
           <div className="mt-14 text-center flex flex-wrap items-center justify-center gap-4">
             <Link
               href="/courses"
-              className="px-8 py-3.5 rounded-full bg-[#0056D2] text-white text-sm font-bold hover:bg-[#00419e] transition-colors shadow-sm"
+              className="px-8 py-3.5 rounded-full bg-[#B14B6C] text-white text-sm font-bold hover:bg-[#8E3854] transition-colors shadow-sm"
             >
               Explore Course Syllabi
             </Link>
             <Link
               href="/contact-us"
-              className="px-8 py-3.5 rounded-full border-2 border-[#0056D2] text-[#0056D2] text-sm font-bold hover:bg-[#EBF3FF] transition-colors"
+              className="px-8 py-3.5 rounded-full border-2 border-[#B14B6C] text-[#B14B6C] text-sm font-bold hover:bg-[#FBEAF0] transition-colors"
             >
               Contact Course Advisor
             </Link>

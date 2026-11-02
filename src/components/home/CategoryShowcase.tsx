@@ -16,7 +16,7 @@ interface CategoryItem {
 
 export function CategoryShowcase({ categories }: { categories: CategoryItem[] }) {
   return (
-    <section className="border-b border-[#e2e8f0] bg-white py-12 sm:py-16 lg:py-24">
+    <section className="border-b border-[#F0E2E7] bg-white py-12 sm:py-16 lg:py-24">
       <div className="site-container">
         <div className="mx-auto mb-10 max-w-3xl px-1 text-center sm:mb-14">
           <h2 className="text-[#1F1F1F]">Browse the course categories</h2>
@@ -30,7 +30,7 @@ export function CategoryShowcase({ categories }: { categories: CategoryItem[] })
             <Link
               key={cat.id}
               href={`/courses?category=${cat.id}`}
-              className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#e2e8f0] bg-white hover:border-[#0056D2]/50"
+              className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#F0E2E7] bg-white hover:border-[#B14B6C]/50"
             >
               <div className="relative aspect-[16/9] bg-[#f4f8ff]">
                 {cat.image ? (
@@ -39,14 +39,14 @@ export function CategoryShowcase({ categories }: { categories: CategoryItem[] })
               </div>
               <div className="flex flex-1 flex-col justify-between p-6">
                 <div>
-                  <h3 className="text-xl font-semibold text-[#1F1F1F] group-hover:text-[#0056D2]">{cat.name}</h3>
+                  <h3 className="text-xl font-semibold text-[#1F1F1F] group-hover:text-[#B14B6C]">{cat.name}</h3>
                   {cat.description && <p className="mt-2 text-[#565656]">{cat.description}</p>}
                 </div>
-                <div className="mt-6 flex items-center justify-between border-t border-[#e2e8f0] pt-4 text-sm">
-                  <span className="font-semibold text-[#0056D2]">
+                <div className="mt-6 flex items-center justify-between border-t border-[#F0E2E7] pt-4 text-sm">
+                  <span className="font-semibold text-[#B14B6C]">
                     {cat.courseCount} {cat.courseCount === 1 ? 'Programme' : 'Programmes'}
                   </span>
-                  <span className="inline-flex items-center gap-1 font-semibold text-[#0056D2]">
+                  <span className="inline-flex items-center gap-1 font-semibold text-[#B14B6C]">
                     Explore
                     <ArrowRight className="h-4 w-4" />
                   </span>

@@ -69,8 +69,8 @@ export default function ShopPage() {
         {error && <p className="text-sm text-red-700" role="alert">{error}</p>}
         <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
           {products.map((product) => (
-            <article key={product.id} className="rounded-2xl border border-[#e2e8f0] p-6">
-              <p className="text-xs font-bold uppercase tracking-wider text-[#0056D2]">{product.format}</p>
+            <article key={product.id} className="rounded-2xl border border-[#F0E2E7] p-6">
+              <p className="text-xs font-bold uppercase tracking-wider text-[#B14B6C]">{product.format}</p>
               <h2 className="mt-2 text-xl font-semibold text-[#1F1F1F]">{product.title}</h2>
               <ul className="mt-3 list-disc pl-5 text-sm text-[#565656]">
                 {product.includes.map((item) => <li key={item}>{item}</li>)}
@@ -78,7 +78,7 @@ export default function ShopPage() {
               {product.priceGbp != null && (
               <p className="mt-4 text-sm font-semibold text-[#1F1F1F]">£{product.priceGbp}</p>
               )}
-              <Link href={`/contact-us?item=${encodeURIComponent(product.title)}`} className="mt-4 inline-flex rounded-full bg-[#0056D2] px-5 py-2.5 text-sm font-semibold text-white">
+              <Link href={`/contact-us?item=${encodeURIComponent(product.title)}`} className="mt-4 inline-flex rounded-full bg-[#B14B6C] px-5 py-2.5 text-sm font-semibold text-white">
                 Buy Now
               </Link>
               <p className="mt-1 text-xs text-[#687587]">
@@ -88,11 +88,11 @@ export default function ShopPage() {
               {isAdmin && (
                 <div className="mt-4 flex flex-wrap gap-2">
                   {product.fileName && (
-                    <a className="text-sm font-semibold text-[#0056D2]" href={`/api/shop?file=${product.id}`}>Download stored file</a>
+                    <a className="text-sm font-semibold text-[#B14B6C]" href={`/api/shop?file=${product.id}`}>Download stored file</a>
                   )}
                   <button
                     type="button"
-                    className="text-sm font-semibold text-[#0056D2]"
+                    className="text-sm font-semibold text-[#B14B6C]"
                     onClick={async () => {
                       await fetch('/api/shop', {
                         method: 'POST',
@@ -121,14 +121,14 @@ export default function ShopPage() {
         </div>
 
         {isAdmin && (
-          <form onSubmit={saveProduct} className="mt-10 max-w-xl rounded-3xl border border-[#e2e8f0] p-6 flex flex-col gap-3">
+          <form onSubmit={saveProduct} className="mt-10 max-w-xl rounded-3xl border border-[#F0E2E7] p-6 flex flex-col gap-3">
             <h2 className="text-lg font-semibold text-[#1F1F1F]">Add a shop resource</h2>
-            <input name="title" required placeholder="Title" className="rounded-xl border border-[#e2e8f0] px-3 py-2 text-sm" />
-            <input name="format" placeholder="Format, for example PDF download" className="rounded-xl border border-[#e2e8f0] px-3 py-2 text-sm" />
-            <textarea name="includes" placeholder="One included item per line" rows={4} className="rounded-xl border border-[#e2e8f0] px-3 py-2 text-sm" />
-            <input name="priceGbp" inputMode="decimal" placeholder="Price in GBP, or leave blank" className="rounded-xl border border-[#e2e8f0] px-3 py-2 text-sm" />
+            <input name="title" required placeholder="Title" className="rounded-xl border border-[#F0E2E7] px-3 py-2 text-sm" />
+            <input name="format" placeholder="Format, for example PDF download" className="rounded-xl border border-[#F0E2E7] px-3 py-2 text-sm" />
+            <textarea name="includes" placeholder="One included item per line" rows={4} className="rounded-xl border border-[#F0E2E7] px-3 py-2 text-sm" />
+            <input name="priceGbp" inputMode="decimal" placeholder="Price in GBP, or leave blank" className="rounded-xl border border-[#F0E2E7] px-3 py-2 text-sm" />
             <input name="file" type="file" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg,.webp" className="text-sm" />
-            <button className="rounded-full bg-[#0056D2] px-4 py-2 text-sm font-semibold text-white" type="submit">Save product</button>
+            <button className="rounded-full bg-[#B14B6C] px-4 py-2 text-sm font-semibold text-white" type="submit">Save product</button>
           </form>
         )}
       </section>

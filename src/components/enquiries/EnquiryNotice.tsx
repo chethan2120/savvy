@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { careerAvailability, careerSpecialisms, mentorshipServices } from '@/lib/academy-content';
 
-const fieldClass = 'w-full rounded-xl border border-[#e2e8f0] bg-white px-3 py-2.5 text-sm text-[#1F1F1F] focus:border-[#0056D2] focus:outline-none focus:ring-2 focus:ring-[#0056D2]/15';
+const fieldClass = 'w-full rounded-xl border border-[#F0E2E7] bg-white px-3 py-2.5 text-sm text-[#1F1F1F] focus:border-[#B14B6C] focus:outline-none focus:ring-2 focus:ring-[#B14B6C]/15';
 
 function Shell({
   title,
@@ -19,14 +19,14 @@ function Shell({
   message: string;
 }) {
   return (
-    <form onSubmit={onSubmit} className="rounded-3xl border border-[#e2e8f0] bg-white p-6 sm:p-8 shadow-sm flex flex-col gap-4">
+    <form onSubmit={onSubmit} className="rounded-3xl border border-[#F0E2E7] bg-white p-6 sm:p-8 shadow-sm flex flex-col gap-4">
       <h2 className="text-xl font-semibold text-[#1F1F1F]">{title}</h2>
       <input name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
       {children}
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="mt-2 inline-flex items-center justify-center rounded-full bg-[#0056D2] px-5 py-3 text-sm font-semibold text-white hover:bg-[#00419e] disabled:opacity-60"
+        className="mt-2 inline-flex items-center justify-center rounded-full bg-[#B14B6C] px-5 py-3 text-sm font-semibold text-white hover:bg-[#8E3854] disabled:opacity-60"
       >
         {status === 'loading' ? 'Sending…' : 'Submit'}
       </button>

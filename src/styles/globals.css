@@ -4,40 +4,40 @@
 
 :root {
   --card: #ffffff;
-  --ring: #0056D2;
+  --ring: #B14B6C;
   --input: #ffffff;
-  --muted: #F5F7FA;
-  --accent: #0056D2;
-  --border: #E2E8F0;
+  --muted: #F8F1F4;
+  --accent: #B14B6C;
+  --border: #F0E2E7;
   --radius: 0.5rem;
-  --chart-1: #0056D2;
+  --chart-1: #B14B6C;
   --chart-2: #00823B;
   --chart-3: #7C3AED;
   --chart-4: #EA580C;
-  --chart-5: #0284C7;
+  --chart-5: #E7A0B6;
   --popover: #ffffff;
-  --primary: #0056D2;
-  --sidebar: #0056D2;
+  --primary: #B14B6C;
+  --sidebar: #B14B6C;
   --spacing: 0.24rem;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --font-sans: 'Source Sans 3', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --secondary: #0056D2;
-  --background: #ffffff;
+  --secondary: #B14B6C;
+  --background: #FFF7F9;
   --font-serif: 'Source Sans 3', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --foreground: #1F1F1F;
   --destructive: #D92D20;
   --shadow-blur: 2px;
-  --shadow-color: #0056D2;
-  --sidebar-ring: #0056D2;
+  --shadow-color: #B14B6C;
+  --sidebar-ring: #B14B6C;
   --shadow-spread: 0px;
   --letter-spacing: 0em;
   --shadow-opacity: 0.05;
-  --sidebar-accent: #0056D2;
-  --sidebar-border: #E2E8F0;
+  --sidebar-accent: #B14B6C;
+  --sidebar-border: #F0E2E7;
   --card-foreground: #1F1F1F;
   --shadow-offset-x: 0;
   --shadow-offset-y: 1px;
-  --sidebar-primary: #0056D2;
+  --sidebar-primary: #B14B6C;
   --muted-foreground: #565656;
   --accent-foreground: #ffffff;
   --popover-foreground: #1F1F1F;
@@ -53,21 +53,21 @@
   --surface-rgb: 255 255 255;
   --foreground-rgb: 31 31 31;
   --muted-foreground-rgb: 86 86 86;
-  --border-rgb: 226 232 240;
-  --border-strong-rgb: 203 213 225;
-  --primary-rgb: 0 86 210;
-  --ring-rgb: 0 86 210;
-  --sidebar-rgb: 0 86 210;
+  --border-rgb: 240 226 231;
+  --border-strong-rgb: 214 176 190;
+  --primary-rgb: 177 75 108;
+  --ring-rgb: 177 75 108;
+  --sidebar-rgb: 177 75 108;
   --forest: #00823B;
   --forest-rgb: 0 130 59;
-  --periwinkle: #0056D2;
-  --periwinkle-rgb: 0 86 210;
+  --periwinkle: #B14B6C;
+  --periwinkle-rgb: 177 75 108;
   --pink: #CF3FD9;
   --pink-rgb: 207 63 217;
   --yellow: #F59E0B;
   --yellow-rgb: 245 158 11;
-  --industrial-blue: #0056D2;
-  --industrial-blue-rgb: 0 86 210;
+  --industrial-blue: #B14B6C;
+  --industrial-blue-rgb: 177 75 108;
   --safety-orange: #EA580C;
   --safety-orange-rgb: 234 88 12;
 
@@ -107,19 +107,19 @@
 
 .dark {
   --card: #0a0a0a;
-  --ring: #6a8dd8;
+  --ring: #E7A0B8;
   --input: #121212;
   --muted: #262626;
   --accent: #404040;
   --border: #282828;
   --radius: 0.5rem;
-  --chart-1: #6a8dd8;
+  --chart-1: #E7A0B8;
   --chart-2: #2062ce;
   --chart-3: #4c5f00;
   --chart-4: #cc7455;
   --chart-5: #4bb3a1;
   --popover: #171717;
-  --primary: #6a8dd8;
+  --primary: #E7A0B8;
   --sidebar: #0a0a0a;
   --spacing: 0.24rem;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -131,7 +131,7 @@
   --destructive: #cd6e7b;
   --shadow-blur: 2px;
   --shadow-color: #000000;
-  --sidebar-ring: #6a8dd8;
+  --sidebar-ring: #E7A0B8;
   --shadow-spread: 0px;
   --letter-spacing: 0em;
   --shadow-opacity: 0.05;
@@ -140,7 +140,7 @@
   --card-foreground: #fafafa;
   --shadow-offset-x: 0;
   --shadow-offset-y: 1px;
-  --sidebar-primary: #6a8dd8;
+  --sidebar-primary: #E7A0B8;
   --muted-foreground: #a1a1a1;
   --accent-foreground: #fafafa;
   --popover-foreground: #fafafa;
@@ -156,7 +156,7 @@
   --foreground-rgb: 250 250 250;
   --muted-foreground-rgb: 161 161 161;
   --border-rgb: 40 40 40;
-  --primary-rgb: 106 141 216;
+  --primary-rgb: 231 160 184;
   --sidebar-rgb: 10 10 10;
 }
 
@@ -184,7 +184,7 @@
     letter-spacing: -0.02em;
     font-weight: 600;
     line-height: 1.2;
-    color: #0056D2;
+    color: #B14B6C;
     text-wrap: balance;
     overflow-wrap: anywhere;
   }
@@ -814,7 +814,7 @@
   [class*="14532d"],
   .text-foreground
 ) {
-  background-image: linear-gradient(102deg, #003d99 0%, #0056D2 52%, #3b82f6 100%);
+  background-image: linear-gradient(102deg, #7A2E49 0%, #B14B6C 52%, #E7A0B6 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -868,9 +868,9 @@ body:not(:has(.account-theme)) .text-xs {
   flex: none;
   align-items: center;
   gap: 0.7rem;
-  border: 1px solid #d7e3f4;
+  border: 1px solid #F0D5DE;
   border-radius: 999px;
-  background: #f7f9fc;
+  background: #FBF6F8;
   padding: 0.9rem 1.35rem;
   color: #1f1f1f;
   font-size: 1.125rem;
@@ -879,7 +879,7 @@ body:not(:has(.account-theme)) .text-xs {
 }
 
 .sector-chip:hover {
-  border-color: #0056D2;
+  border-color: #B14B6C;
   background: #fff;
 }
 

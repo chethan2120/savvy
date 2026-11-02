@@ -260,7 +260,7 @@ function ContactPageContent() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           {/* Left Column (5 cols): Institute Information & Assurance */}
           <div className="lg:col-span-5 flex flex-col gap-6">
-            <div className="bg-white rounded-3xl p-8 border border-[#e2e8f0] shadow-xs">
+            <div className="bg-white rounded-3xl p-8 border border-[#F0E2E7] shadow-xs">
               <h2 className="text-xl font-bold text-[#1F1F1F] mb-2">
                 Admissions Office
               </h2>
@@ -270,8 +270,8 @@ function ContactPageContent() {
 
               <div className="flex flex-col gap-5 text-xs text-[#565656]">
                 <div className="flex items-start gap-3.5">
-                  <div className="h-9 w-9 rounded-xl bg-[#EBF3FF] border border-[#0056D2]/20 shadow-2xs flex items-center justify-center shrink-0 text-[#0056D2]">
-                    <MapPin className="w-4 h-4 text-[#0056D2]" />
+                  <div className="h-9 w-9 rounded-xl bg-[#FBEAF0] border border-[#B14B6C]/20 shadow-2xs flex items-center justify-center shrink-0 text-[#B14B6C]">
+                    <MapPin className="w-4 h-4 text-[#B14B6C]" />
                   </div>
                   <div>
                     <strong className="block text-[#1F1F1F]">Training Centre Location</strong>
@@ -282,8 +282,8 @@ function ContactPageContent() {
                 </div>
 
                 <div className="flex items-start gap-3.5">
-                  <div className="h-9 w-9 rounded-xl bg-[#EBF3FF] border border-[#0056D2]/20 shadow-2xs flex items-center justify-center shrink-0 text-[#0056D2]">
-                    <Phone className="w-4 h-4 text-[#0056D2]" />
+                  <div className="h-9 w-9 rounded-xl bg-[#FBEAF0] border border-[#B14B6C]/20 shadow-2xs flex items-center justify-center shrink-0 text-[#B14B6C]">
+                    <Phone className="w-4 h-4 text-[#B14B6C]" />
                   </div>
                   <div>
                     <strong className="block text-[#1F1F1F]">Phone &amp; WhatsApp</strong>
@@ -294,8 +294,8 @@ function ContactPageContent() {
                 </div>
 
                 <div className="flex items-start gap-3.5">
-                  <div className="h-9 w-9 rounded-xl bg-[#EBF3FF] border border-[#0056D2]/20 shadow-2xs flex items-center justify-center shrink-0 text-[#0056D2]">
-                    <Mail className="w-4 h-4 text-[#0056D2]" />
+                  <div className="h-9 w-9 rounded-xl bg-[#FBEAF0] border border-[#B14B6C]/20 shadow-2xs flex items-center justify-center shrink-0 text-[#B14B6C]">
+                    <Mail className="w-4 h-4 text-[#B14B6C]" />
                   </div>
                   <div>
                     <strong className="block text-[#1F1F1F]">Admissions Enquiries</strong>
@@ -306,8 +306,8 @@ function ContactPageContent() {
                 </div>
 
                 <div className="flex items-start gap-3.5">
-                  <div className="h-9 w-9 rounded-xl bg-[#EBF3FF] border border-[#0056D2]/20 shadow-2xs flex items-center justify-center shrink-0 text-[#0056D2]">
-                    <Clock className="w-4 h-4 text-[#0056D2]" />
+                  <div className="h-9 w-9 rounded-xl bg-[#FBEAF0] border border-[#B14B6C]/20 shadow-2xs flex items-center justify-center shrink-0 text-[#B14B6C]">
+                    <Clock className="w-4 h-4 text-[#B14B6C]" />
                   </div>
                   <div>
                     <strong className="block text-[#1F1F1F]">Office &amp; Lab Hours</strong>
@@ -320,7 +320,7 @@ function ContactPageContent() {
             </div>
 
             {/* Quality & Security Note */}
-            <div className="bg-gradient-to-br from-[#003e9a] via-[#0056D2] to-[#0284c7] rounded-3xl p-8 text-white shadow-md border border-[#0056D2]/30">
+            <div className="bg-gradient-to-br from-[#7A2E49] via-[#B14B6C] to-[#E7A0B6] rounded-3xl p-8 text-white shadow-md border border-[#B14B6C]/30">
               <div className="flex items-center gap-3 mb-3">
                 <ShieldCheck className="w-6 h-6 text-emerald-300" />
                 <h3 className="text-sm font-bold">Privacy &amp; Verification</h3>
@@ -333,7 +333,7 @@ function ContactPageContent() {
 
           {/* Right Column (7 cols): Properly Labelled Contact Form */}
           <div className="lg:col-span-7">
-            <div className="bg-white rounded-3xl p-8 sm:p-10 border border-[#e2e8f0] shadow-xs">
+            <div className="bg-white rounded-3xl p-8 sm:p-10 border border-[#F0E2E7] shadow-xs">
               <h2 className="text-xl sm:text-2xl font-bold text-[#1F1F1F] mb-1">
                 Course Enquiry Form
               </h2>
@@ -394,10 +394,10 @@ function ContactPageContent() {
                     placeholder="e.g. Alexander Wright"
                     required
                     disabled={status === 'submitting'}
-                    className={`w-full px-4 py-3 rounded-xl border text-sm text-[#1F1F1F] placeholder-[#8C9BAE] transition-colors focus:outline-none ${
+                    className={`w-full px-4 py-3 rounded-xl border text-sm text-[#1F1F1F] placeholder-[#A08B94] transition-colors focus:outline-none ${
                       errors.fullName
                         ? 'border-rose-400 bg-rose-50/40 focus:border-rose-500'
-                        : 'border-[#e2e8f0] bg-white focus:border-[#0056D2] focus:ring-1 focus:ring-[#0056D2]'
+                        : 'border-[#F0E2E7] bg-white focus:border-[#B14B6C] focus:ring-1 focus:ring-[#B14B6C]'
                     }`}
                   />
                   {errors.fullName && (
@@ -423,10 +423,10 @@ function ContactPageContent() {
                       placeholder="e.g. +44 7700 900077 or +91 98765 43210"
                       required
                       disabled={status === 'submitting'}
-                      className={`w-full px-4 py-3 rounded-xl border text-sm text-[#1F1F1F] placeholder-[#8C9BAE] transition-colors focus:outline-none ${
+                      className={`w-full px-4 py-3 rounded-xl border text-sm text-[#1F1F1F] placeholder-[#A08B94] transition-colors focus:outline-none ${
                         errors.phone
                           ? 'border-rose-400 bg-rose-50/40 focus:border-rose-500'
-                          : 'border-[#e2e8f0] bg-white focus:border-[#0056D2] focus:ring-1 focus:ring-[#0056D2]'
+                          : 'border-[#F0E2E7] bg-white focus:border-[#B14B6C] focus:ring-1 focus:ring-[#B14B6C]'
                       }`}
                     />
                     {errors.phone && (
@@ -450,10 +450,10 @@ function ContactPageContent() {
                       placeholder="e.g. alexander@example.com"
                       required
                       disabled={status === 'submitting'}
-                      className={`w-full px-4 py-3 rounded-xl border text-sm text-[#1F1F1F] placeholder-[#8C9BAE] transition-colors focus:outline-none ${
+                      className={`w-full px-4 py-3 rounded-xl border text-sm text-[#1F1F1F] placeholder-[#A08B94] transition-colors focus:outline-none ${
                         errors.email
                           ? 'border-rose-400 bg-rose-50/40 focus:border-rose-500'
-                          : 'border-[#e2e8f0] bg-white focus:border-[#0056D2] focus:ring-1 focus:ring-[#0056D2]'
+                          : 'border-[#F0E2E7] bg-white focus:border-[#B14B6C] focus:ring-1 focus:ring-[#B14B6C]'
                       }`}
                     />
                     {errors.email && (
@@ -478,10 +478,10 @@ function ContactPageContent() {
                     placeholder="e.g. London, United Kingdom or Bengaluru, India"
                     required
                     disabled={status === 'submitting'}
-                    className={`w-full px-4 py-3 rounded-xl border text-sm text-[#1F1F1F] placeholder-[#8C9BAE] transition-colors focus:outline-none ${
+                    className={`w-full px-4 py-3 rounded-xl border text-sm text-[#1F1F1F] placeholder-[#A08B94] transition-colors focus:outline-none ${
                       errors.location
                         ? 'border-rose-400 bg-rose-50/40 focus:border-rose-500'
-                        : 'border-[#e2e8f0] bg-white focus:border-[#0056D2] focus:ring-1 focus:ring-[#0056D2]'
+                        : 'border-[#F0E2E7] bg-white focus:border-[#B14B6C] focus:ring-1 focus:ring-[#B14B6C]'
                     }`}
                   />
                   {errors.location && (
@@ -506,7 +506,7 @@ function ContactPageContent() {
                     className={`w-full px-4 py-3 rounded-xl border text-sm text-[#1F1F1F] transition-colors focus:outline-none cursor-pointer ${
                       errors.course
                         ? 'border-rose-400 bg-rose-50/40 focus:border-rose-500'
-                        : 'border-[#e2e8f0] bg-white focus:border-[#0056D2] focus:ring-1 focus:ring-[#0056D2]'
+                        : 'border-[#F0E2E7] bg-white focus:border-[#B14B6C] focus:ring-1 focus:ring-[#B14B6C]'
                     }`}
                   >
                     <option value="">— Select a Course —</option>
@@ -545,10 +545,10 @@ function ContactPageContent() {
                       placeholder="e.g. Advanced Phased Array (PAUT) or API 510 Pressure Vessel Inspector"
                       required
                       disabled={status === 'submitting'}
-                      className={`w-full px-4 py-3 rounded-xl border text-sm text-[#1F1F1F] placeholder-[#8C9BAE] transition-colors focus:outline-none ${
+                      className={`w-full px-4 py-3 rounded-xl border text-sm text-[#1F1F1F] placeholder-[#A08B94] transition-colors focus:outline-none ${
                         errors.otherCourse
                           ? 'border-rose-400 bg-rose-50/40 focus:border-rose-500'
-                          : 'border-[#e2e8f0] bg-white focus:border-[#0056D2] focus:ring-1 focus:ring-[#0056D2]'
+                          : 'border-[#F0E2E7] bg-white focus:border-[#B14B6C] focus:ring-1 focus:ring-[#B14B6C]'
                       }`}
                     />
                     {errors.otherCourse && (
@@ -569,7 +569,7 @@ function ContactPageContent() {
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Tell us about your educational background, preferred schedule (weekday/weekend), or any specific training queries..."
                     disabled={status === 'submitting'}
-                    className="w-full px-4 py-3 rounded-xl border border-[#e2e8f0] bg-white text-sm text-[#1F1F1F] placeholder-[#8C9BAE] transition-colors focus:outline-none focus:border-[#0056D2] focus:ring-1 focus:ring-[#0056D2]"
+                    className="w-full px-4 py-3 rounded-xl border border-[#F0E2E7] bg-white text-sm text-[#1F1F1F] placeholder-[#A08B94] transition-colors focus:outline-none focus:border-[#B14B6C] focus:ring-1 focus:ring-[#B14B6C]"
                   />
                 </div>
 
@@ -577,7 +577,7 @@ function ContactPageContent() {
                 <button
                   type="submit"
                   disabled={status === 'submitting'}
-                  className="w-full inline-flex items-center justify-center gap-2 py-4 rounded-full bg-[#0056D2] hover:bg-[#00419e] text-white text-sm font-bold shadow-md transition-colors disabled:opacity-50 mt-2 cursor-pointer"
+                  className="w-full inline-flex items-center justify-center gap-2 py-4 rounded-full bg-[#B14B6C] hover:bg-[#8E3854] text-white text-sm font-bold shadow-md transition-colors disabled:opacity-50 mt-2 cursor-pointer"
                 >
                   {status === 'submitting' ? (
                     <>

@@ -10,37 +10,37 @@ import {
 export function WhySavvySection() {
   const strengths = [
     {
-      icon: <Award className="w-6 h-6 text-[#0056D2]" />,
+      icon: <Award className="w-6 h-6 text-[#B14B6C]" />,
       title: 'Get accredited',
       description: 'Businesses and trainers can apply to certify learners in their own right. Lisa reviews content, assessment and learner-safety standards.',
       badge: 'Accreditation',
     },
     {
-      icon: <BookOpen className="w-6 h-6 text-[#0056D2]" />,
+      icon: <BookOpen className="w-6 h-6 text-[#B14B6C]" />,
       title: 'Become a teacher',
       description: 'Regulated teaching qualifications are completed fully online, with live Zoom sessions from the portal.',
       badge: 'Teaching',
     },
     {
-      icon: <Users className="w-6 h-6 text-[#0056D2]" />,
+      icon: <Users className="w-6 h-6 text-[#B14B6C]" />,
       title: 'Learn a skill',
       description: 'Online courses in beauty, massage and hairdressing include manuals, video demonstrations and a certificate on completion.',
       badge: 'Online',
     },
     {
-      icon: <Compass className="w-6 h-6 text-[#0056D2]" />,
+      icon: <Compass className="w-6 h-6 text-[#B14B6C]" />,
       title: 'Build your business',
       description: 'One-to-one support covers business start-ups, regular mentorship, venue setup and awarding body registration.',
       badge: 'Mentorship',
     },
     {
-      icon: <ShieldCheck className="w-6 h-6 text-[#0056D2]" />,
+      icon: <ShieldCheck className="w-6 h-6 text-[#B14B6C]" />,
       title: 'Tutor feedback',
       description: 'Teaching learners upload assignments, download briefs, and receive written feedback from their tutor.',
       badge: 'Study',
     },
     {
-      icon: <Building2 className="w-6 h-6 text-[#0056D2]" />,
+      icon: <Building2 className="w-6 h-6 text-[#B14B6C]" />,
       title: 'Separate logins',
       description: 'Tutors and students each have a secure login and their own dashboard.',
       badge: 'Portal',
@@ -48,13 +48,13 @@ export function WhySavvySection() {
   ];
 
   return (
-    <section className="py-20 sm:py-24 bg-white border-b border-[#e2e8f0]">
+    <section className="py-20 sm:py-24 bg-white border-b border-[#F0E2E7]">
       <div className="site-container">
         {/* Section Header with Coursera-Style Outcome Metric */}
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#e2e8f0] shadow-xs mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#0056D2]" />
-            <span className="text-[11px] font-bold tracking-widest uppercase text-[#0056D2]">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#F0E2E7] shadow-xs mb-4">
+            <span className="w-2 h-2 rounded-full bg-[#B14B6C]" />
+            <span className="text-[11px] font-bold tracking-widest uppercase text-[#B14B6C]">
               Invest In Your Career
             </span>
           </div>
@@ -73,19 +73,19 @@ export function WhySavvySection() {
           {strengths.map((item, index) => (
             <div
               key={index}
-              className="group bg-white rounded-2xl p-7 border border-[#e2e8f0] shadow-xs hover:shadow-lg hover:border-[#0056D2]/50 transition-all duration-300 flex flex-col justify-between"
+              className="group bg-white rounded-2xl p-7 border border-[#F0E2E7] shadow-xs hover:shadow-lg hover:border-[#B14B6C]/50 transition-all duration-300 flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between mb-5">
-                  <div className="h-12 w-12 rounded-xl bg-[#EBF3FF] border border-[#0056D2]/20 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <div className="h-12 w-12 rounded-xl bg-[#FBEAF0] border border-[#B14B6C]/20 flex items-center justify-center group-hover:scale-105 transition-transform">
                     {item.icon}
                   </div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#EBF3FF] text-[#0056D2]">
+                  <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#FBEAF0] text-[#B14B6C]">
                     {item.badge}
                   </span>
                 </div>
 
-                <h3 className="text-lg font-bold text-[#1F1F1F] group-hover:text-[#0056D2] transition-colors leading-snug">
+                <h3 className="text-lg font-bold text-[#1F1F1F] group-hover:text-[#B14B6C] transition-colors leading-snug">
                   {item.title}
                 </h3>
 
@@ -94,7 +94,7 @@ export function WhySavvySection() {
                 </p>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-[#e2e8f0] flex items-center gap-1.5 text-xs font-semibold text-[#0056D2] transition-colors">
+              <div className="mt-6 pt-4 border-t border-[#F0E2E7] flex items-center gap-1.5 text-xs font-semibold text-[#B14B6C] transition-colors">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                 <span>Verified Institute Standard</span>
               </div>
@@ -103,9 +103,9 @@ export function WhySavvySection() {
         </div>
 
         {/* Bottom Callout Bar */}
-        <div className="mt-12 sm:mt-16 p-6 sm:p-8 rounded-2xl bg-[#F8FAFC] border border-[#e2e8f0] shadow-xs flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="mt-12 sm:mt-16 p-6 sm:p-8 rounded-2xl bg-[#F8FAFC] border border-[#F0E2E7] shadow-xs flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4">
-            <div className="h-12 w-12 rounded-full bg-[#0056D2] text-white flex items-center justify-center shrink-0">
+            <div className="h-12 w-12 rounded-full bg-[#B14B6C] text-white flex items-center justify-center shrink-0">
               <Building2 className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -121,13 +121,13 @@ export function WhySavvySection() {
           <div className="flex items-center gap-3 shrink-0 w-full sm:w-auto">
             <Link
               href="/about-us"
-              className="w-full sm:w-auto px-5 py-2.5 rounded-full border border-[#e2e8f0] text-xs font-semibold text-[#1F1F1F] hover:border-[#0056D2] hover:text-[#0056D2] text-center transition-colors bg-white hover:bg-slate-50"
+              className="w-full sm:w-auto px-5 py-2.5 rounded-full border border-[#F0E2E7] text-xs font-semibold text-[#1F1F1F] hover:border-[#B14B6C] hover:text-[#B14B6C] text-center transition-colors bg-white hover:bg-slate-50"
             >
               Learn About Us
             </Link>
             <Link
               href="/contact-us"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-full bg-[#0056D2] text-white text-xs font-bold hover:bg-[#00419e] transition-colors shadow-sm"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-full bg-[#B14B6C] text-white text-xs font-bold hover:bg-[#8E3854] transition-colors shadow-sm"
             >
               <span>Enquire Today</span>
               <ArrowRight className="w-3.5 h-3.5 text-white" />

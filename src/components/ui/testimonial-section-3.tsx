@@ -122,7 +122,7 @@ export default function Testimonial3({ testimonials }: { testimonials: ApprovedT
 
   return (
     <section
-      className="w-full overflow-hidden border-b border-[#e2e8f0] bg-[#f7f9fc] py-16 sm:py-20"
+      className="w-full overflow-hidden border-b border-[#F0E2E7] bg-[#FBF6F8] py-16 sm:py-20"
       aria-label={isPreview ? "Testimonials sample preview" : "Testimonials"}
       tabIndex={0}
       onKeyDown={onKeyDown}
@@ -133,7 +133,7 @@ export default function Testimonial3({ testimonials }: { testimonials: ApprovedT
           Hear from students who have advanced their careers with Savvy.
         </p>
         {isPreview && (
-          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold text-[#0056D2]">
+          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold text-[#B14B6C]">
             Sample preview. These quotes are not verified student reviews.
           </p>
         )}
@@ -151,7 +151,7 @@ export default function Testimonial3({ testimonials }: { testimonials: ApprovedT
                   <React.Fragment key={`${item.id}-${item.position}`}>
                     {index > 0 && (
                       <div className="relative hidden w-5 shrink-0 lg:block">
-                        <div className="absolute inset-0 h-full w-full bg-[repeating-linear-gradient(315deg,currentColor_0,currentColor_1px,transparent_0,transparent_50%)] bg-[length:10px_10px] text-[#d7e3f4] opacity-80" />
+                        <div className="absolute inset-0 h-full w-full bg-[repeating-linear-gradient(315deg,currentColor_0,currentColor_1px,transparent_0,transparent_50%)] bg-[length:10px_10px] text-[#F0D5DE] opacity-80" />
                       </div>
                     )}
                     <motion.div
@@ -163,8 +163,8 @@ export default function Testimonial3({ testimonials }: { testimonials: ApprovedT
                       className={cn(
                         "relative flex w-full max-w-full shrink-0 flex-col justify-between overflow-hidden rounded-3xl border p-8 lg:w-[300px]",
                         isCenter
-                          ? "z-20 border-[#0056D2] bg-[#0056D2] text-white"
-                          : "z-0 hidden border-[#d7e3f4] bg-white text-[#565656] lg:flex",
+                          ? "z-20 border-[#B14B6C] bg-[#B14B6C] text-white"
+                          : "z-0 hidden border-[#F0D5DE] bg-white text-[#565656] lg:flex",
                       )}
                     >
                       {!isCenter && item.position === "left" && (
@@ -174,7 +174,7 @@ export default function Testimonial3({ testimonials }: { testimonials: ApprovedT
                         <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-l from-white/70 via-white/25 to-transparent" />
                       )}
                       {item.sample && (
-                        <p className={cn("mb-4 text-xs font-semibold uppercase tracking-wide", isCenter ? "text-blue-100" : "text-[#0056D2]")}>
+                        <p className={cn("mb-4 text-xs font-semibold uppercase tracking-wide", isCenter ? "text-[#F8D5E2]" : "text-[#B14B6C]")}>
                           Sample
                         </p>
                       )}
@@ -182,25 +182,25 @@ export default function Testimonial3({ testimonials }: { testimonials: ApprovedT
                         “{item.quote}”
                       </blockquote>
                       {rating && (
-                        <p className={cn("mb-4 flex gap-1", isCenter ? "text-white" : "text-[#0056D2]")} aria-label={`${rating} out of 5 stars`}>
+                        <p className={cn("mb-4 flex gap-1", isCenter ? "text-white" : "text-[#B14B6C]")} aria-label={`${rating} out of 5 stars`}>
                           {Array.from({ length: rating }, (_, star) => (
                             <Star key={star} className="h-4 w-4 fill-current" aria-hidden="true" />
                           ))}
                         </p>
                       )}
                       <div className="mt-auto flex items-center gap-4">
-                        <div className={cn("relative flex h-12 w-12 items-center justify-center overflow-hidden border-2", isCenter ? "border-white" : "border-[#0056D2]")}>
+                        <div className={cn("relative flex h-12 w-12 items-center justify-center overflow-hidden border-2", isCenter ? "border-white" : "border-[#B14B6C]")}>
                           {image ? (
                             <Image src={image} alt="" width={48} height={48} loading="lazy" sizes="48px" className="object-cover object-top" />
                           ) : (
-                            <span className={cn("text-sm font-semibold", isCenter ? "text-white" : "text-[#0056D2]")} aria-hidden="true">
+                            <span className={cn("text-sm font-semibold", isCenter ? "text-white" : "text-[#B14B6C]")} aria-hidden="true">
                               {initials(item.name)}
                             </span>
                           )}
                         </div>
                         <div className="flex flex-col text-left">
                           <span className={cn("text-lg font-bold", isCenter ? "text-white" : "text-[#1F1F1F]")}>{item.name}</span>
-                          {item.course && <span className={cn("text-sm", isCenter ? "text-blue-100" : "text-[#565656]")}>{item.course}</span>}
+                          {item.course && <span className={cn("text-sm", isCenter ? "text-[#F8D5E2]" : "text-[#565656]")}>{item.course}</span>}
                         </div>
                       </div>
                     </motion.div>
@@ -212,10 +212,10 @@ export default function Testimonial3({ testimonials }: { testimonials: ApprovedT
           {count > 1 && (
             <div className="mt-12 flex items-center justify-center gap-6">
               <button type="button" onClick={handlePrev} className="group rounded-full p-2 transition-colors hover:bg-white" aria-label="Previous testimonial">
-                <ArrowLeft className="h-6 w-6 text-[#8C9BAE] transition-colors group-hover:text-[#0056D2]" />
+                <ArrowLeft className="h-6 w-6 text-[#A08B94] transition-colors group-hover:text-[#B14B6C]" />
               </button>
               <button type="button" onClick={handleNext} className="group rounded-full p-2 transition-colors hover:bg-white" aria-label="Next testimonial">
-                <ArrowRight className="h-6 w-6 text-[#8C9BAE] transition-colors group-hover:text-[#0056D2]" />
+                <ArrowRight className="h-6 w-6 text-[#A08B94] transition-colors group-hover:text-[#B14B6C]" />
               </button>
             </div>
           )}

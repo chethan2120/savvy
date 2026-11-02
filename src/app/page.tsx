@@ -70,13 +70,13 @@ export default async function HomePage() {
       <WhySavvySection />
 
       {/* Part 5. Coursera-Style Institutional & Enterprise Excellence Section */}
-      <section className="py-20 sm:py-24 bg-white border-b border-[#e2e8f0]">
+      <section className="py-20 sm:py-24 bg-white border-b border-[#F0E2E7]">
         <div className="site-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#e2e8f0] shadow-2xs mb-4">
-                <span className="w-2 h-2 rounded-full bg-[#0056D2]" />
-                <span className="text-xs font-bold uppercase tracking-wider text-[#0056D2]">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#F0E2E7] shadow-2xs mb-4">
+                <span className="w-2 h-2 rounded-full bg-[#B14B6C]" />
+                <span className="text-xs font-bold uppercase tracking-wider text-[#B14B6C]">
                   The Savvy Standard
                 </span>
               </div>
@@ -88,9 +88,9 @@ export default async function HomePage() {
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-8">
-                <div className="p-5 rounded-2xl bg-white border border-[#e2e8f0] shadow-xs hover:border-[#0056D2]/50 transition-all">
-                  <div className="h-10 w-10 rounded-xl bg-[#EBF3FF] flex items-center justify-center mb-3">
-                    <Shield className="w-5 h-5 text-[#0056D2]" />
+                <div className="p-5 rounded-2xl bg-white border border-[#F0E2E7] shadow-xs hover:border-[#B14B6C]/50 transition-all">
+                  <div className="h-10 w-10 rounded-xl bg-[#FBEAF0] flex items-center justify-center mb-3">
+                    <Shield className="w-5 h-5 text-[#B14B6C]" />
                   </div>
                   <h3 className="text-sm font-bold text-[#1F1F1F]">Apply online</h3>
                   <p className="text-xs text-[#565656] mt-1.5 leading-relaxed font-normal">
@@ -98,9 +98,9 @@ export default async function HomePage() {
                   </p>
                 </div>
 
-                <div className="p-5 rounded-2xl bg-white border border-[#e2e8f0] shadow-xs hover:border-[#0056D2]/50 transition-all">
-                  <div className="h-10 w-10 rounded-xl bg-[#EBF3FF] flex items-center justify-center mb-3">
-                    <Compass className="w-5 h-5 text-[#0056D2]" />
+                <div className="p-5 rounded-2xl bg-white border border-[#F0E2E7] shadow-xs hover:border-[#B14B6C]/50 transition-all">
+                  <div className="h-10 w-10 rounded-xl bg-[#FBEAF0] flex items-center justify-center mb-3">
+                    <Compass className="w-5 h-5 text-[#B14B6C]" />
                   </div>
                   <h3 className="text-sm font-bold text-[#1F1F1F]">Document review</h3>
                   <p className="text-xs text-[#565656] mt-1.5 leading-relaxed font-normal">
@@ -108,9 +108,9 @@ export default async function HomePage() {
                   </p>
                 </div>
 
-                <div className="p-5 rounded-2xl bg-white border border-[#e2e8f0] shadow-xs hover:border-[#0056D2]/50 transition-all">
-                  <div className="h-10 w-10 rounded-xl bg-[#EBF3FF] flex items-center justify-center mb-3">
-                    <BookOpen className="w-5 h-5 text-[#0056D2]" />
+                <div className="p-5 rounded-2xl bg-white border border-[#F0E2E7] shadow-xs hover:border-[#B14B6C]/50 transition-all">
+                  <div className="h-10 w-10 rounded-xl bg-[#FBEAF0] flex items-center justify-center mb-3">
+                    <BookOpen className="w-5 h-5 text-[#B14B6C]" />
                   </div>
                   <h3 className="text-sm font-bold text-[#1F1F1F]">Written feedback</h3>
                   <p className="text-xs text-[#565656] mt-1.5 leading-relaxed font-normal">
@@ -118,9 +118,9 @@ export default async function HomePage() {
                   </p>
                 </div>
 
-                <div className="p-5 rounded-2xl bg-white border border-[#e2e8f0] shadow-xs hover:border-[#0056D2]/50 transition-all">
-                  <div className="h-10 w-10 rounded-xl bg-[#EBF3FF] flex items-center justify-center mb-3">
-                    <Award className="w-5 h-5 text-[#0056D2]" />
+                <div className="p-5 rounded-2xl bg-white border border-[#F0E2E7] shadow-xs hover:border-[#B14B6C]/50 transition-all">
+                  <div className="h-10 w-10 rounded-xl bg-[#FBEAF0] flex items-center justify-center mb-3">
+                    <Award className="w-5 h-5 text-[#B14B6C]" />
                   </div>
                   <h3 className="text-sm font-bold text-[#1F1F1F]">Certificate and logo</h3>
                   <p className="text-xs text-[#565656] mt-1.5 leading-relaxed font-normal">
@@ -131,9 +131,9 @@ export default async function HomePage() {
             </div>
 
             <div className="relative">
-              <div className="rounded-3xl bg-gradient-to-br from-[#003e9a] via-[#0056D2] to-[#0284c7] p-8 sm:p-10 text-white relative overflow-hidden shadow-xl border border-white/20">
+              <div className="rounded-3xl bg-gradient-to-br from-[#7A2E49] via-[#B14B6C] to-[#E7A0B6] p-8 sm:p-10 text-white relative overflow-hidden shadow-xl border border-white/20">
                 <div className="relative z-10">
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#0056D2] bg-white px-3 py-1 rounded-full shadow-2xs">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#B14B6C] bg-white px-3 py-1 rounded-full shadow-2xs">
                     Savvy for Enterprise &amp; Teams
                   </span>
                   <h3 className="text-xl sm:text-2xl font-extrabold text-white mt-4 tracking-tight">
@@ -161,7 +161,7 @@ export default async function HomePage() {
                   <div className="mt-8 pt-6 border-t border-white/20 flex flex-wrap items-center gap-4">
                     <Link
                       href="/mentorship"
-                      className="px-6 py-3 rounded-full bg-white hover:bg-slate-100 text-[#0056D2] text-xs font-bold transition-all shadow-sm"
+                      className="px-6 py-3 rounded-full bg-white hover:bg-slate-100 text-[#B14B6C] text-xs font-bold transition-all shadow-sm"
                     >
                       Request mentorship
                     </Link>
