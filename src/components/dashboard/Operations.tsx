@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { Trash2, AlertTriangle, X, Loader2 } from 'lucide-react';
 import { InstituteIdentity, RoleAccessPanel } from '@/components/dashboard/Learning';
 
-type Person = { id: string; fullName: string; email: string; phone: string; role: string; status: string; createdAt: string; permissions?: Record<string, boolean>; studentPermissions?: Record<string, boolean> };
+type Person = { id: string; fullName: string; email: string; phone: string; role: string; status: string; createdAt: string; designation?: string; notes?: string; isDemo?: boolean; assignedCourseIds?: string[]; permissions?: Record<string, boolean>; studentPermissions?: Record<string, boolean> };
+type EnrolmentLink = { accountId: string; courseId: string; status: string; courseTitle?: string; createdAt?: string };
 type Course = {
   id: string; title: string; duration: string; categoryId: string; categoryName: string; href: string;
   description?: string; shortDescription?: string; custom?: boolean; fee?: string; priceInr?: number | null;
@@ -18,6 +19,12 @@ type Mark = { id: string; name: string; role: string; date: string; status: stri
 
 const field = 'w-full rounded-lg border border-border bg-white px-3 py-2.5 text-sm focus:border-forest focus:outline-none';
 
+function ukDate(value?: string) {
+  if (!value) return '—';
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? value.slice(0, 10) : new Intl.DateTimeFormat('en-GB').format(date);
+}
+
 async function post(body: object) {
   const response = await fetch('/api/workspace', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
   const payload = await response.json().catch(() => ({}));
@@ -27,7 +34,8 @@ async function post(body: object) {
 export function PeopleDirectory({ role }: { role: 'student' | 'staff' }) {
   const [people, setPeople] = useState<Person[]>([]);
   const [courses, setCourses] = useState<Course[]>([]);
-  const [links, setLinks] = useState<{ accountId: string; courseId: string; status: string; courseTitle?: string }[]>([]);
+  const [links, setLinks] = useState<EnrolmentLink[]>([]);
+  const [enrolFor, setEnrolFor] = useState<Person | null>(null);
   const [query, setQuery] = useState('');
   const [status, setStatus] = useState('all');
   const [selected, setSelected] = useState<Person | null>(null);
@@ -123,7 +131,7 @@ export function PeopleDirectory({ role }: { role: 'student' | 'staff' }) {
             onClick={() => setShowCreateModal(true)}
             className="whitespace-nowrap rounded-lg bg-forest px-4 py-2 text-sm font-semibold text-white hover:bg-forest/90 transition-colors shadow-xs"
           >
-            + Create {role === 'student' ? 'Student' : 'Staff'}
+            + Add {role === 'student' ? 'Student' : 'Staff'}
           </button>
         </div>
       </div>
@@ -140,7 +148,7 @@ export function PeopleDirectory({ role }: { role: 'student' | 'staff' }) {
                   <td className="py-3 pr-3 font-medium text-[#641B38]">{person.fullName}</td>
                   <td className="py-3 pr-3">{person.email}</td>
                   <td className="py-3 pr-3">{person.phone}</td>
-                  <td className="py-3 pr-3">{person.createdAt.slice(0, 10)}</td>
+                  <td className="py-3 pr-3">{ukDate(person.createdAt)}</td>
                   <td className="py-3 pr-3 capitalize">
                     <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${person.status === 'active' ? 'bg-emerald-100 text-emerald-800' : 'bg-gray-100 text-gray-700'}`}>
                       {person.status}
@@ -149,6 +157,7 @@ export function PeopleDirectory({ role }: { role: 'student' | 'staff' }) {
                   <td className="py-3">
                     <span className="flex items-center gap-3">
                       <button type="button" className="text-forest underline font-semibold text-xs" onClick={() => setSelected(person)}>View &amp; Permissions</button>
+                      <button type="button" className="text-[#B83268] underline font-semibold text-xs" onClick={() => { setSelected(person); setEnrolFor(person); }}>+ Enrol</button>
                       <button type="button" className="text-muted-foreground hover:text-foreground underline text-xs" onClick={() => toggle(person)}>
                         {person.status === 'active' ? 'Deactivate' : 'Activate'}
                       </button>
@@ -180,14 +189,45 @@ export function PeopleDirectory({ role }: { role: 'student' | 'staff' }) {
             <button type="button" className="text-forest font-semibold" onClick={() => setSelected(null)}>Close</button>
           </div>
           <div className="mt-3">
-            <p className="font-medium text-xs uppercase tracking-wider text-muted-foreground">Enrolled / Assigned Courses</p>
+            <div className="flex items-center justify-between gap-3">
+              <p className="font-medium text-xs uppercase tracking-wider text-muted-foreground">Enrolled / Assigned Courses</p>
+              <button type="button" className="text-xs font-semibold text-[#B83268]" onClick={() => setEnrolFor(selected)}>+ Enrol {selected.role === 'staff' ? 'Staff' : 'Student'}</button>
+            </div>
             <ul className="mt-1 text-xs">
               {links.length === 0 && <li className="text-muted-foreground">No course records for this account.</li>}
-              {links.map((link) => <li key={`${link.courseTitle}-${link.status}`} className="py-0.5">• {link.courseTitle} · <span className="capitalize">{link.status}</span></li>)}
+              {links.map((link) => (
+                <li key={`${link.courseId}-${link.createdAt}`} className="py-0.5">
+                  • {link.courseTitle} · {ukDate(link.createdAt)} · <span className="capitalize">{link.status}</span> · Progress not recorded
+                </li>
+              ))}
             </ul>
+            {selected.role === 'staff' && (
+              <StaffAssignment person={selected} courses={courses} onSaved={(message) => { setNotice(message); load(); }} />
+            )}
           </div>
-          <PermissionEditor person={selected} onSaved={(message) => { setNotice(message); load(); }} />
+          {selected.isDemo ? (
+            <p className="mt-3 text-xs text-[#6B5A60]">This is a demo record. It cannot be edited or used to sign in. Switch Demo Data off to hide it.</p>
+          ) : (
+            <PermissionEditor person={selected} onSaved={(message) => { setNotice(message); load(); }} />
+          )}
         </div>
+      )}
+
+      {enrolFor && (
+        <EnrolModal
+          person={enrolFor}
+          courses={courses}
+          onClose={() => setEnrolFor(null)}
+          onEnrolled={(message) => {
+            setNotice(message);
+            setEnrolFor(null);
+            if (selected) {
+              fetch('/api/workspace?resource=requests', { cache: 'no-store' }).then((response) => response.json()).then((body) => {
+                setLinks((body.requests ?? []).filter((row: EnrolmentLink) => row.accountId === selected.id));
+              }).catch(() => undefined);
+            }
+          }}
+        />
       )}
 
       {showCreateModal && (
@@ -294,6 +334,15 @@ function CreateAccountModal({
   const [password, setPassword] = useState('Savvy@2026');
   const [status, setStatus] = useState<'active' | 'inactive'>('active');
   const [courseId, setCourseId] = useState('');
+  const [courseIds, setCourseIds] = useState<string[]>([]);
+  const [designation, setDesignation] = useState('');
+  const [notes, setNotes] = useState('');
+  const [permissions, setPermissions] = useState<Record<string, boolean>>({
+    viewAssignedCourses: true,
+    viewStudents: true,
+    viewEnrolledStudents: true,
+    markAttendance: true,
+  });
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
 
@@ -316,7 +365,11 @@ function CreateAccountModal({
           role,
           password: password.trim(),
           status,
-          courseId: courseId || undefined,
+          courseId: role === 'student' ? (courseId || undefined) : undefined,
+          courseIds: undefined,
+          designation: designation || undefined,
+          notes: notes || undefined,
+          permissions: role === 'staff' ? permissions : undefined,
         }),
       });
       const data = await response.json();
@@ -324,6 +377,9 @@ function CreateAccountModal({
         setError(data.message || 'Failed to create account.');
         setSubmitting(false);
         return;
+      }
+      if (role === 'staff' && data.account?.id) {
+        await Promise.all(courseIds.map((id) => post({ resource: 'assign-instructor', accountId: data.account.id, courseId: id })));
       }
       onCreated(fullName.trim());
     } catch {
@@ -411,6 +467,42 @@ function CreateAccountModal({
             />
           </div>
 
+          {role === 'staff' && (
+            <>
+              <label className="block text-xs font-semibold">Staff designation
+                <input className={`${field} mt-1 font-normal`} value={designation} onChange={(event) => setDesignation(event.target.value)} placeholder="Tutor, assessor, coordinator" />
+              </label>
+              <div>
+                <p className="text-xs font-semibold">Assigned courses</p>
+                <div className="mt-1 max-h-32 overflow-y-auto text-xs">
+                  {courses.map((course) => (
+                    <label key={course.id} className="flex items-center gap-2 py-0.5 font-normal">
+                      <input type="checkbox" checked={courseIds.includes(course.id)} onChange={(event) => setCourseIds((current) => event.target.checked ? [...current, course.id] : current.filter((id) => id !== course.id))} />
+                      {course.title}
+                    </label>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <p className="text-xs font-semibold">Permissions</p>
+                <div className="mt-1 grid gap-1 text-xs">
+                  {[
+                    ['viewAssignedCourses', 'View assigned courses'],
+                    ['uploadMaterials', 'Upload course materials'],
+                    ['viewStudents', 'View student records'],
+                    ['manageEnrolments', 'Manage enrolments'],
+                    ['markAttendance', 'Mark attendance'],
+                  ].map(([key, label]) => (
+                    <label key={key} className="flex items-center gap-2 font-normal">
+                      <input type="checkbox" checked={Boolean(permissions[key])} onChange={(event) => setPermissions((current) => ({ ...current, [key]: event.target.checked }))} />
+                      {label}
+                    </label>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
+
           {role === 'student' && courses.length > 0 && (
             <div>
               <label className="block text-xs font-semibold text-[#454545] mb-1">
@@ -431,9 +523,13 @@ function CreateAccountModal({
             </div>
           )}
 
+          <label className="block text-xs font-semibold">Additional details
+            <textarea className={`${field} mt-1 font-normal`} value={notes} onChange={(event) => setNotes(event.target.value)} />
+          </label>
+
           <div>
             <label className="block text-xs font-semibold text-[#454545] mb-1">
-              Account Status
+              {role === 'student' ? 'Student status' : 'Account status'}
             </label>
             <select
               className={field}
@@ -459,11 +555,109 @@ function CreateAccountModal({
               disabled={submitting}
               className="rounded-lg bg-forest px-5 py-2 text-xs font-bold text-white hover:bg-forest/90 disabled:opacity-50"
             >
-              {submitting ? 'Creating...' : `Create ${role === 'student' ? 'Student' : 'Staff'} Account`}
+              {submitting ? 'Saving…' : `+ Add ${role === 'student' ? 'Student' : 'Staff'}`}
             </button>
           </div>
         </form>
       </div>
+    </div>
+  );
+}
+
+function EnrolModal({ person, courses, onClose, onEnrolled }: { person: Person; courses: Course[]; onClose: () => void; onEnrolled: (message: string) => void }) {
+  const [query, setQuery] = useState('');
+  const [chosen, setChosen] = useState<Course | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState('');
+  const matches = courses.filter((course) => `${course.title} ${course.categoryName || ''}`.toLowerCase().includes(query.trim().toLowerCase()));
+  const confirm = async () => {
+    if (!chosen) return;
+    if (!window.confirm(`Enrol ${person.fullName} on ${chosen.title}?`)) return;
+    setBusy(true);
+    setError('');
+    const response = await fetch('/api/enrollments', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ accountId: person.id, courseId: chosen.id }),
+    });
+    const body = await response.json().catch(() => ({}));
+    setBusy(false);
+    if (!response.ok) { setError(body.message || 'The enrolment was not saved.'); return; }
+    onEnrolled(`${person.fullName} is enrolled on ${chosen.title}.`);
+  };
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+      <div className="max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-2xl border border-[#EAD9E0] bg-white p-5">
+        <div className="flex items-center justify-between">
+          <h3 className="font-bold text-[#641B38]">Enrol {person.fullName}</h3>
+          <button type="button" onClick={onClose}>✕</button>
+        </div>
+        <input className={`${field} mt-3`} placeholder="Search courses" value={query} onChange={(event) => setQuery(event.target.value)} />
+        <ul className="mt-3 flex max-h-64 flex-col gap-2 overflow-y-auto">
+          {matches.map((course) => (
+            <li key={course.id}>
+              <button type="button" onClick={() => setChosen(course)} className={`w-full rounded-xl border px-3 py-2 text-left text-sm ${chosen?.id === course.id ? 'border-[#641B38] bg-[#F8EDF1]' : 'border-[#EAD9E0]'}`}>
+                <span className="font-semibold">{course.title}</span>
+                <span className="mt-0.5 block text-xs text-[#6B5A60]">{course.categoryName || 'Uncategorised'} · {course.duration || 'Duration not set'}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+        {error && <p className="mt-3 text-sm text-red-700">{error}</p>}
+        <div className="mt-4 flex justify-end gap-2">
+          <button type="button" className="rounded-full border border-[#EAD9E0] px-4 py-2 text-sm" onClick={onClose}>Cancel</button>
+          <button type="button" disabled={!chosen || busy} className="rounded-full bg-[#B83268] px-4 py-2 text-sm font-semibold text-white" onClick={confirm}>{busy ? 'Saving…' : 'Confirm enrolment'}</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function StaffAssignment({ person, courses, onSaved }: { person: Person; courses: Course[]; onSaved: (message: string) => void }) {
+  const [chosen, setChosen] = useState<string[]>(person.assignedCourseIds ?? []);
+  const [designation, setDesignation] = useState(person.designation || '');
+  const [notes, setNotes] = useState(person.notes || '');
+  const save = async () => {
+    if (!person.isDemo) {
+      const response = await fetch('/api/accounts', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: person.id, designation, notes, fullName: person.fullName, phone: person.phone }),
+      });
+      const body = await response.json().catch(() => ({}));
+      if (!response.ok) { onSaved(body.message || 'Staff details were not saved.'); return; }
+    }
+    const current = new Set(person.assignedCourseIds ?? []);
+    const next = new Set(chosen);
+    await Promise.all([
+      ...[...next].filter((id) => !current.has(id)).map((courseId) => post({ resource: 'assign-instructor', accountId: person.id, courseId })),
+      ...[...current].filter((id) => !next.has(id)).map((courseId) => post({ resource: 'clear-instructor', accountId: person.id, courseId })),
+    ]);
+    onSaved(person.isDemo ? 'Courses assigned to this demo staff account.' : 'Staff details and assigned courses were saved.');
+  };
+  return (
+    <div className="mt-3 border-t border-border pt-3">
+      {person.isDemo && <p className="mb-2 text-xs text-[#6B5A60]">Demo staff can be enrolled and assigned to courses. Their name and login stay fixed.</p>}
+      {!person.isDemo && (
+        <>
+          <label className="text-xs font-semibold">Designation
+            <input className={`${field} mt-1 font-normal`} value={designation} onChange={(event) => setDesignation(event.target.value)} />
+          </label>
+          <label className="mt-2 block text-xs font-semibold">Additional details
+            <textarea className={`${field} mt-1 font-normal`} value={notes} onChange={(event) => setNotes(event.target.value)} />
+          </label>
+        </>
+      )}
+      <p className="mt-2 text-xs font-semibold">Assigned courses</p>
+      <div className="mt-1 grid gap-1 text-xs">
+        {courses.map((course) => (
+          <label key={course.id} className="flex items-center gap-2 font-normal">
+            <input type="checkbox" checked={chosen.includes(course.id)} onChange={(event) => setChosen((current) => event.target.checked ? [...current, course.id] : current.filter((id) => id !== course.id))} />
+            {course.title}
+          </label>
+        ))}
+      </div>
+      <button type="button" className="mt-2 rounded-full bg-[#641B38] px-3 py-1.5 text-xs font-semibold text-white" onClick={save}>{person.isDemo ? 'Save assigned courses' : 'Save staff details'}</button>
     </div>
   );
 }
@@ -530,6 +724,40 @@ function PermissionEditor({ person, onSaved }: { person: Person; onSaved: (messa
         Save individual permissions
       </button>
     </div>
+  );
+}
+
+export function InstituteEnrolments() {
+  const [rows, setRows] = useState<Array<EnrolmentLink & { studentName?: string; studentEmail?: string }>>([]);
+  useEffect(() => {
+    fetch('/api/workspace?resource=requests', { cache: 'no-store' })
+      .then((response) => response.json())
+      .then((body) => setRows(body.requests ?? []))
+      .catch(() => undefined);
+  }, []);
+  return (
+    <section className="rounded-2xl border border-[#EAD9E0] bg-white p-5">
+      <h2 className="text-lg font-semibold text-[#641B38]">Enrolments</h2>
+      <p className="mt-1 text-sm text-[#6B5A60]">{rows.length} enrolment record{rows.length === 1 ? '' : 's'}</p>
+      {rows.length === 0 ? <p className="mt-4 text-sm text-[#6B5A60]">No enrolments have been recorded.</p> : (
+        <div className="mt-4 overflow-x-auto">
+          <table className="w-full min-w-[720px] text-left text-sm">
+            <thead className="text-xs uppercase text-[#6B5A60]"><tr>{['Student', 'Email', 'Course', 'Date', 'Status'].map((heading) => <th key={heading} className="py-2 pr-3">{heading}</th>)}</tr></thead>
+            <tbody>
+              {rows.map((row) => (
+                <tr key={`${row.accountId}-${row.courseId}-${row.createdAt}`} className="border-t border-[#EAD9E0]">
+                  <td className="py-2 pr-3">{row.studentName}</td>
+                  <td className="py-2 pr-3">{row.studentEmail}</td>
+                  <td className="py-2 pr-3">{row.courseTitle}</td>
+                  <td className="py-2 pr-3">{ukDate(row.createdAt)}</td>
+                  <td className="py-2 pr-3 capitalize">{row.status}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </section>
   );
 }
 
@@ -711,7 +939,7 @@ export function CourseDesk() {
     if (result.ok) load();
   };
 
-  const visible = courses.filter((item) => item.id.startsWith('ref-') && item.title.toLowerCase().includes(query.trim().toLowerCase()));
+  const visible = courses.filter((item) => (item.custom || item.id.startsWith('ref-')) && item.title.toLowerCase().includes(query.trim().toLowerCase()));
   const groups = useMemo(() => {
     const names = ['Uncategorised', ...categories.map((item) => item.name)];
     return names.map((label) => ({ label, courses: visible.filter((course) => (course.categoryName || 'Uncategorised') === label) })).filter((group) => group.courses.length);
@@ -862,7 +1090,7 @@ export function AttendanceRegister() {
         </select>
         <select className={field} value={courseId} onChange={(event) => setCourseId(event.target.value)}>
           <option value="">All courses</option>
-          {courses.filter((course) => course.id.startsWith('ref-')).map((course) => <option key={course.id} value={course.id}>{course.title}</option>)}
+          {courses.filter((course) => course.custom || course.id.startsWith('ref-')).map((course) => <option key={course.id} value={course.id}>{course.title}</option>)}
         </select>
         <input required type="date" className={field} value={date} onChange={(event) => setDate(event.target.value)} />
         <select className={field} value={status} onChange={(event) => setStatus(event.target.value as 'present' | 'absent' | 'late')}>

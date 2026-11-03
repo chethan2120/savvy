@@ -41,6 +41,7 @@ export interface Course {
   start_date?: string;
   end_date?: string;
   category?: string;
+  categoryId?: string;
   attribution?: string;
   prerequisites?: string[];
   learning_outcomes?: string[];

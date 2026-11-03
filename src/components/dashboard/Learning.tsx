@@ -4,6 +4,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { DashboardHeader } from '@/components/dashboard/DashboardHeader';
+import { AdminChrome } from '@/components/dashboard/AdminChrome';
+import { InstituteMaterials } from '@/components/dashboard/InstituteMaterials';
 import { CertificateDocument } from '@/components/CertificateDocument';
 import { signOutPortal } from '@/lib/portal-auth';
 
@@ -19,7 +21,7 @@ type Detail = {
   chapterCount: number;
   studyHours: number | null;
   enrolledCount: number | null;
-  students: { id: string; fullName: string; email: string }[];
+  students: { id: string; fullName: string; email: string; enrolledAt?: string }[];
   staffChoices: { id: string; fullName: string }[];
   enrollmentStatus: string | null;
   canAddChapter: boolean;
@@ -87,23 +89,29 @@ export function CourseDetailPage({ role, courseId }: { role: Role; courseId: str
       ? [['/staff#dashboard', 'Dashboard'], ['/staff#courses', 'Assigned Courses'], ['/staff#profile', 'My Profile']]
       : [['/student#courses', 'My courses'], ['/student#certificates', 'Certificates'], ['/student#profile', 'My Profile']];
 
-  return (
-    <div className={`${role}-dashboard account-theme min-h-screen pb-16`}>
-      <DashboardHeader role={role} onLogout={() => signOutPortal()} onProfile={() => router.push(`/${role}#profile`)} onSettings={() => router.push(role === 'admin' ? '/admin#settings' : `/${role}#profile`)} />
-      <div className="site-container grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-6 py-6">
-        <nav className="flex lg:flex-col gap-1 overflow-x-auto" aria-label="Dashboard">
-          {links.map(([href, label]) => (
-            <Link key={href} href={href} className={`rounded-lg px-3.5 py-2.5 text-xs whitespace-nowrap ${href === back ? 'bg-forest text-white' : 'text-[#30262B] hover:bg-white'}`}>{label}</Link>
-          ))}
-        </nav>
-        <main>
-        <Link href={back} className="text-sm text-forest">← Back to {role === 'admin' ? 'Certified Programs' : 'Courses'}</Link>
+  const page = (
+        <main className={role === 'admin' ? 'p-4 sm:p-6 lg:p-8' : undefined}>
+        <Link href={back} className="text-sm text-[#B83268]">← Back to {role === 'admin' ? 'Certified Programmes' : 'Courses'}</Link>
         {loading && <div className="mt-4 h-40 animate-pulse rounded-2xl bg-white" aria-label="Loading course" />}
         {error && <p className="mt-4 rounded-xl border border-border bg-white p-4 text-sm">{error}</p>}
         {detail && (
           <CourseBody detail={detail} role={role} section={section} setSection={setSection} notice={notice} setNotice={setNotice} reload={load} />
         )}
         </main>
+  );
+
+  if (role === 'admin') return <AdminChrome active="programs">{page}</AdminChrome>;
+
+  return (
+    <div className={`${role}-dashboard account-theme min-h-screen pb-16`}>
+      <DashboardHeader role={role} onLogout={() => signOutPortal()} onProfile={() => router.push(`/${role}#profile`)} onSettings={() => router.push(`/${role}#profile`)} />
+      <div className="site-container grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-6 py-6">
+        <nav className="flex lg:flex-col gap-1 overflow-x-auto" aria-label="Dashboard">
+          {links.map(([href, label]) => (
+            <Link key={href} href={href} className={`rounded-lg px-3.5 py-2.5 text-xs whitespace-nowrap ${href === back ? 'bg-[#641B38] text-white' : 'text-[#30262B] hover:bg-white'}`}>{label}</Link>
+          ))}
+        </nav>
+        {page}
       </div>
     </div>
   );
@@ -157,18 +165,90 @@ function CourseBody({
       {section === 'chapters' && <Chapters detail={detail} role={role} setNotice={setNotice} reload={reload} />}
       {section === 'staff' && role !== 'student' && <Instructors detail={detail} setNotice={setNotice} reload={reload} />}
       {section === 'students' && role !== 'student' && (
-        <ul className="rounded-2xl border border-border bg-white p-4 text-sm">
-          {detail.students.length === 0 && <li>No approved student enrolments.</li>}
-          {detail.students.map((student) => <li key={student.id}>{student.fullName} · {student.email}</li>)}
-        </ul>
+        <CourseStudents detail={detail} canAdd={role === 'admin'} setNotice={setNotice} reload={reload} />
       )}
       {section === 'materials' && (
-        <ul className="rounded-2xl border border-border bg-white p-4 text-sm">
-          {detail.chapters.filter((chapter) => chapter.content || chapter.objectives).length === 0 && <li>No chapter materials have been published.</li>}
-          {detail.chapters.filter((chapter) => chapter.content || chapter.objectives).map((chapter) => (
-            <li key={chapter.id} className="mt-2"><strong>{chapter.title}</strong><p>{chapter.objectives}</p><p>{chapter.content}</p></li>
-          ))}
-        </ul>
+        <div className="flex flex-col gap-4">
+          <InstituteMaterials courseId={course.id} chapters={detail.chapters.map((chapter) => ({ id: chapter.id, title: chapter.title }))} readOnly={role === 'student'} />
+          <ul className="rounded-2xl border border-border bg-white p-4 text-sm">
+            {detail.chapters.filter((chapter) => chapter.content || chapter.objectives).length === 0 && <li>No chapter notes have been published.</li>}
+            {detail.chapters.filter((chapter) => chapter.content || chapter.objectives).map((chapter) => (
+              <li key={chapter.id} className="mt-2"><strong>{chapter.title}</strong><p>{chapter.objectives}</p><p>{chapter.content}</p></li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function CourseStudents({ detail, canAdd, setNotice, reload }: { detail: Detail; canAdd: boolean; setNotice: (value: string) => void; reload: () => void }) {
+  const [open, setOpen] = useState(false);
+  const [people, setPeople] = useState<{ id: string; fullName: string; email: string }[]>([]);
+  const [query, setQuery] = useState('');
+  const [chosen, setChosen] = useState<string[]>([]);
+  const [busy, setBusy] = useState(false);
+  const enrolled = new Set(detail.students.map((student) => student.id));
+  const matches = people.filter((person) => !enrolled.has(person.id) && `${person.fullName} ${person.email}`.toLowerCase().includes(query.trim().toLowerCase()));
+  const openPicker = async () => {
+    const response = await fetch('/api/accounts', { cache: 'no-store' });
+    const body = await response.json().catch(() => ({}));
+    setPeople((body.accounts ?? []).filter((account: { role: string }) => account.role === 'student'));
+    setChosen([]);
+    setOpen(true);
+  };
+  const confirm = async () => {
+    if (!chosen.length || !window.confirm(`Enrol ${chosen.length} student${chosen.length === 1 ? '' : 's'} on ${detail.course.title}?`)) return;
+    setBusy(true);
+    const results = await Promise.all(chosen.map(async (accountId) => {
+      const response = await fetch('/api/enrollments', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ accountId, courseId: detail.course.id }) });
+      const body = await response.json().catch(() => ({}));
+      return response.ok ? '' : (body.message || 'One enrolment was not saved.');
+    }));
+    setBusy(false);
+    const failed = results.filter(Boolean);
+    setNotice(failed.length ? failed[0] : 'Students enrolled.');
+    setOpen(false);
+    reload();
+  };
+  return (
+    <div className="rounded-2xl border border-border bg-white p-4 text-sm">
+      <div className="flex items-center justify-between gap-3">
+        <h3 className="font-semibold text-[#641B38]">Enrolled students</h3>
+        {canAdd && <button type="button" className="rounded-full bg-[#B83268] px-3 py-1.5 text-xs font-semibold text-white" onClick={openPicker}>+ Add Student</button>}
+      </div>
+      <ul className="mt-3">
+        {detail.students.length === 0 && <li>No approved student enrolments.</li>}
+        {detail.students.map((student) => (
+          <li key={student.id} className="border-t border-[#EAD9E0] py-2 first:border-0">
+            {student.fullName} · {student.email}
+            {student.enrolledAt && <span className="text-[#6B5A60]"> · {new Intl.DateTimeFormat('en-GB').format(new Date(student.enrolledAt))}</span>}
+            <span className="capitalize text-[#6B5A60]"> · Enrolled</span>
+          </li>
+        ))}
+      </ul>
+      {open && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-2xl bg-white p-5">
+            <h3 className="font-bold text-[#641B38]">Add students to {detail.course.title}</h3>
+            <input className={`${field} mt-3`} placeholder="Search by name or email" value={query} onChange={(event) => setQuery(event.target.value)} />
+            <ul className="mt-3 max-h-64 overflow-y-auto text-sm">
+              {matches.map((person) => (
+                <li key={person.id}>
+                  <label className="flex items-center gap-2 py-1">
+                    <input type="checkbox" checked={chosen.includes(person.id)} onChange={(event) => setChosen((current) => event.target.checked ? [...current, person.id] : current.filter((id) => id !== person.id))} />
+                    <span>{person.fullName} · {person.email}</span>
+                  </label>
+                </li>
+              ))}
+              {matches.length === 0 && <li className="text-[#6B5A60]">No matching student accounts.</li>}
+            </ul>
+            <div className="mt-4 flex justify-end gap-2">
+              <button type="button" className="rounded-full border border-[#EAD9E0] px-4 py-2" onClick={() => setOpen(false)}>Cancel</button>
+              <button type="button" disabled={!chosen.length || busy} className="rounded-full bg-[#641B38] px-4 py-2 font-semibold text-white" onClick={confirm}>{busy ? 'Saving…' : 'Confirm enrolment'}</button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

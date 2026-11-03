@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
-import { listCategories, allCourses } from '@/lib/server/institute-db';
+import { listCategories, allCourses, isLegacyProgram } from '@/lib/server/institute-db';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
   const categories = listCategories().filter((cat) => cat.active);
-  const courses = allCourses().filter((c) => c.visible && c.active && c.id.startsWith('ref-'));
+  const courses = allCourses().filter((c) => c.visible && c.active && !isLegacyProgram(c.id));
 
   const categoriesWithCourses = categories.map((cat) => ({
     id: cat.id,

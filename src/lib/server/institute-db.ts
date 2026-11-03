@@ -82,6 +82,10 @@ export type InstituteAccount = {
   photo?: string | null;
   permissions?: StaffPermissions;
   studentPermissions?: Partial<StudentAccess>;
+  /** Sample records used only while Demo Data is switched on. They cannot sign in. */
+  isDemo?: boolean;
+  designation?: string;
+  notes?: string;
   /** Set only for accounts that came from the public registration form. */
   registrationStatus?: RegistrationStatus;
   courseInterest?: string;
@@ -104,6 +108,21 @@ export type CourseCategory = {
   name: string;
   description: string;
   active: boolean;
+  createdAt: string;
+  parentId?: string | null;
+};
+
+export type CourseMaterialRecord = {
+  id: string;
+  courseId: string;
+  chapterId?: string | null;
+  title: string;
+  description: string;
+  type: 'pdf' | 'document' | 'slides' | 'link' | 'other';
+  fileName?: string | null;
+  storageName?: string | null;
+  externalUrl?: string | null;
+  visibility: 'enrolled' | 'staff' | 'admin';
   createdAt: string;
 };
 
@@ -382,24 +401,7 @@ export type ArticleDraft = {
   published?: boolean;
 };
 
-const DEFAULT_CATEGORIES: CourseCategory[] = [
-  { id: 'cat-ndt', name: 'Non-Destructive Testing (NDT)', description: 'ASNT Level II, Ultrasonic, Radiographic, and Surface testing techniques', active: true, createdAt: '2026-01-01T00:00:00.000Z' },
-  { id: 'cat-qaqc', name: 'QA & QC Inspection', description: 'Welding inspection, quality assurance protocols, ASME/ISO codes', active: true, createdAt: '2026-01-01T00:00:00.000Z' },
-  { id: 'cat-hse', name: 'Health, Safety & Environment', description: 'Industrial safety engineering, fire hazard management, and OSHA audits', active: true, createdAt: '2026-01-01T00:00:00.000Z' },
-  { id: 'cat-mep', name: 'MEP & Building Services', description: 'HVAC design, 3D Revit MEP modeling, and building engineering systems', active: true, createdAt: '2026-01-01T00:00:00.000Z' },
-];
-
-const DEFAULT_COURSE_CATEGORIES: Record<string, string> = {
-  c1: 'cat-ndt',
-  c2: 'cat-qaqc',
-  c3: 'cat-hse',
-  c4: 'cat-mep',
-  c5: 'cat-mep',
-  c6: 'cat-qaqc',
-  c7: 'cat-ndt',
-  c8: 'cat-ndt',
-  c9: 'cat-qaqc',
-};
+const RETIRED_CATEGORY_IDS = new Set(['cat-ndt', 'cat-qaqc', 'cat-hse', 'cat-mep']);
 
 const DEFAULT_SEED_PRICES: Record<string, Partial<Record<'INR' | 'GBP' | 'USD' | 'AED', number>>> = {
   c1: { INR: 35000, GBP: 330, USD: 420, AED: 1550 },
@@ -444,6 +446,8 @@ type Database = {
   communityExamplesSeeded?: boolean;
   homepageFaqs?: HomepageFaq[];
   homepageFaqsSeeded?: boolean;
+  demoDataEnabled?: boolean;
+  courseMaterials?: CourseMaterialRecord[];
 };
 
 const DATA_DIR = path.join(process.cwd(), 'data');
@@ -457,6 +461,10 @@ export const SESSION_COOKIE = 'savvy_session';
 export const INSTITUTE_TZ = 'Asia/Kolkata';
 
 const PROGRAM_IDS = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9'];
+
+export function isLegacyProgram(id: string) {
+  return PROGRAM_IDS.includes(id);
+}
 type DatabaseCourse = {
   id: string; slug: string; title: string; short_description?: string; duration: string;
   fee?: string; featured_image?: string; category?: string | null; expected_hours?: number | null;
@@ -534,10 +542,10 @@ function emptyDatabase(): Database {
     ],
     logins: [],
     punches: [],
-    categories: [...DEFAULT_CATEGORIES],
+    categories: [],
     customCourses: [],
     courseOverrides: overrides,
-    courseCategories: { ...DEFAULT_COURSE_CATEGORIES },
+    courseCategories: {},
     marks: [],
     notifications: [],
     announcements: [],
@@ -578,11 +586,10 @@ function ensureReferenceCatalog(parsed: Database) {
       changed = true;
     }
   }
-  for (const course of parsed.customCourses) {
-    if (!course.id.startsWith('ref-') && course.visible !== false) {
-      course.visible = false;
-      changed = true;
-    }
+  if (parsed.customCourses) {
+    const before = parsed.customCourses.length;
+    parsed.customCourses = parsed.customCourses.filter((course) => course.id !== 'course-d5b00b87' && course.title.trim().toLowerCase() !== 'social media');
+    if (parsed.customCourses.length !== before) changed = true;
   }
 
   if (!parsed.referenceCatalogSeeded && !parsed.categories.some((item) => item.id === 'cat-teaching')) {
@@ -727,17 +734,34 @@ function normaliseDb(parsed: Database) {
   parsed.logins ??= [];
   parsed.punches ??= [];
   parsed.categories ??= [];
-  if (parsed.categories.length === 0) {
-    parsed.categories = [...DEFAULT_CATEGORIES];
-  }
+  const categoryCount = parsed.categories.length;
+  parsed.categories = parsed.categories.filter((category) => !RETIRED_CATEGORY_IDS.has(category.id));
   parsed.customCourses ??= [];
-  parsed.courseOverrides ??= {};
-  parsed.courseCategories ??= {};
-  for (const [id, catId] of Object.entries(DEFAULT_COURSE_CATEGORIES)) {
-    if (!parsed.courseCategories[id]) {
-      parsed.courseCategories[id] = catId;
+  const customCount = parsed.customCourses.length;
+  parsed.customCourses = parsed.customCourses.filter((course) => course.id !== 'course-d5b00b87' && course.title.trim().toLowerCase() !== 'social media');
+  let republished = false;
+  for (const course of parsed.customCourses) {
+    if (course.id.startsWith('course-') && course.visible === false) {
+      course.visible = true;
+      republished = true;
     }
   }
+  parsed.courseOverrides ??= {};
+  parsed.courseCategories ??= {};
+  let linksRemoved = false;
+  for (const id of [...PROGRAM_IDS, 'course-d5b00b87']) {
+    if (parsed.courseCategories[id]) {
+      delete parsed.courseCategories[id];
+      linksRemoved = true;
+    }
+  }
+  for (const [id, categoryId] of Object.entries(parsed.courseCategories)) {
+    if (RETIRED_CATEGORY_IDS.has(categoryId)) {
+      delete parsed.courseCategories[id];
+      linksRemoved = true;
+    }
+  }
+  const retiredTouched = parsed.categories.length !== categoryCount || parsed.customCourses.length !== customCount || linksRemoved || republished;
   for (const [id, prices] of Object.entries(DEFAULT_SEED_PRICES)) {
     if (!parsed.courseOverrides[id]) {
       parsed.courseOverrides[id] = { prices, priceInr: prices.INR ?? null };
@@ -779,6 +803,8 @@ function normaliseDb(parsed: Database) {
   parsed.enquiries ??= [];
   parsed.newsletter ??= [];
   parsed.articles ??= [];
+  parsed.demoDataEnabled ??= false;
+  parsed.courseMaterials ??= [];
   if (parsed.articles.length === 0 && blogPostsData && blogPostsData.length > 0) {
     parsed.articles = blogPostsData.map((post) => ({
       id: post.id,
@@ -794,7 +820,7 @@ function normaliseDb(parsed: Database) {
       updatedAt: post.published_at || new Date().toISOString(),
     }));
   }
-  normaliseShouldPersist = ensureReferenceCatalog(parsed);
+  normaliseShouldPersist = ensureReferenceCatalog(parsed) || retiredTouched;
   if (normaliseShouldPersist) parsed.referenceCatalogSeeded = parsed.referenceCatalogSeeded ?? true;
   return parsed;
 }
@@ -922,6 +948,12 @@ export function publicAccount(account: InstituteAccount) {
     status: account.status,
     createdAt: account.createdAt,
     hasPhoto: Boolean(account.photo),
+    isDemo: account.isDemo === true,
+    designation: account.designation || '',
+    notes: account.notes || '',
+    assignedCourseIds: account.role === 'staff'
+      ? readDb().instructors.filter((row) => row.accountId === account.id).map((row) => row.courseId)
+      : undefined,
     permissions: account.role === 'staff' ? { ...DEFAULT_STAFF_PERMISSIONS, ...account.permissions } : undefined,
     studentPermissions: account.role === 'student' ? { ...DEFAULT_STUDENT_ACCESS, ...(readDb().studentAccess || {}), ...(account.studentPermissions || {}) } : undefined,
   };
@@ -951,6 +983,7 @@ export function authenticate(identifier: string, password: string, role: Institu
   if (account.role !== role) return { ok: false as const, code: 'wrong-role' as const, role: account.role };
   if (account.registrationStatus === 'pending') return { ok: false as const, code: 'pending' as const };
   if (account.registrationStatus === 'rejected') return { ok: false as const, code: 'rejected' as const };
+  if (account.isDemo) return { ok: false as const, code: 'inactive' as const };
   if (account.status !== 'active') return { ok: false as const, code: 'inactive' as const };
   const db = readDb();
   db.logins.push({
@@ -970,10 +1003,15 @@ export function closeOpenLogin(accountId: string) {
   writeDb(db);
 }
 
+function shownInDirectory(db: Database, account: InstituteAccount) {
+  if (account.registrationStatus === 'pending' || account.registrationStatus === 'rejected') return false;
+  if (account.isDemo && db.demoDataEnabled !== true) return false;
+  return true;
+}
+
 export function listAccounts() {
-  return readDb().accounts
-    .filter((account) => account.registrationStatus !== 'pending' && account.registrationStatus !== 'rejected')
-    .map(publicAccount);
+  const db = readDb();
+  return db.accounts.filter((account) => shownInDirectory(db, account)).map(publicAccount);
 }
 
 export function submitRegistration(input: { fullName: string; email: string; phone: string; password: string; courseInterest: string }) {
@@ -1071,6 +1109,10 @@ export function createAccount(input: {
   password: string;
   status: AccountStatus;
   courseId?: string;
+  courseIds?: string[];
+  designation?: string;
+  notes?: string;
+  permissions?: Partial<StaffPermissions>;
 }) {
   const db = readDb();
   const email = input.email.trim().toLowerCase();
@@ -1080,6 +1122,10 @@ export function createAccount(input: {
   }
   if (phone && db.accounts.some((account) => digits(account.phone) === phone)) {
     return { ok: false as const, message: 'An account with this phone number already exists.' };
+  }
+  const courseIds = [...new Set([...(input.courseIds ?? []), ...(input.courseId ? [input.courseId] : [])])];
+  if (courseIds.some((courseId) => !allCourses().some((course) => course.id === courseId))) {
+    return { ok: false as const, message: 'That course is not available.' };
   }
   const secret = hashPassword(input.password);
   const account: InstituteAccount = {
@@ -1092,13 +1138,16 @@ export function createAccount(input: {
     passwordHash: secret.passwordHash,
     passwordSalt: secret.passwordSalt,
     createdAt: new Date().toISOString(),
+    designation: input.designation?.trim() || undefined,
+    notes: input.notes?.trim() || undefined,
+    permissions: input.role === 'staff' && input.permissions ? { ...DEFAULT_STAFF_PERMISSIONS, ...input.permissions } : undefined,
   };
   db.accounts.push(account);
-  if (input.courseId && PROGRAM_IDS.includes(input.courseId)) {
+  for (const courseId of courseIds) {
     db.enrollments.push({
       id: `enr-${randomBytes(4).toString('hex')}`,
       accountId: account.id,
-      courseId: input.courseId,
+      courseId,
       status: 'enrolled',
       createdAt: new Date().toISOString(),
     });
@@ -1163,10 +1212,14 @@ export function updateAccount(id: string, patch: {
   phone?: string;
   status?: AccountStatus;
   password?: string;
+  designation?: string;
+  notes?: string;
+  permissions?: Partial<StaffPermissions>;
 }) {
   const db = readDb();
   const account = db.accounts.find((item) => item.id === id);
   if (!account || account.role === 'admin') return { ok: false as const, message: 'That account cannot be edited here.' };
+  if (account.isDemo) return { ok: false as const, message: 'Demo records are controlled by the Demo Data setting and cannot be edited.' };
   if (patch.email) {
     const email = patch.email.trim().toLowerCase();
     if (db.accounts.some((item) => item.id !== id && item.email.toLowerCase() === email)) {
@@ -1182,6 +1235,11 @@ export function updateAccount(id: string, patch: {
     account.phone = patch.phone.trim();
   }
   if (patch.fullName) account.fullName = patch.fullName.trim();
+  if (patch.designation !== undefined) account.designation = patch.designation.trim();
+  if (patch.notes !== undefined) account.notes = patch.notes.trim();
+  if (patch.permissions && account.role === 'staff') {
+    account.permissions = { ...DEFAULT_STAFF_PERMISSIONS, ...account.permissions, ...patch.permissions };
+  }
   if (patch.status) account.status = patch.status;
   if (patch.password) {
     const secret = hashPassword(patch.password);
@@ -1197,6 +1255,7 @@ export function deleteAccount(id: string, options?: { force?: boolean }): { ok: 
   const account = db.accounts.find((item) => item.id === id);
   if (!account) return { ok: false, message: 'Account not found.' };
   if (account.role === 'admin') return { ok: false, message: 'Administrator accounts cannot be deleted.' };
+  if (account.isDemo) return { ok: false, message: 'Demo records stay in place. Switch Demo Data off to hide them.' };
 
   // Check academic retention dependencies
   const hasCertificates = db.certificates.some((c) => c.studentId === id && c.status === 'issued');
@@ -1332,7 +1391,7 @@ export function allCourses() {
 /** Public catalogue: the same active courses the admin list edits, including later additions. */
 export function websiteCourses(): Course[] {
   const db = readDb();
-  return allCourses().filter((course) => course.visible && course.active && course.id.startsWith('ref-')).map((course) => {
+  return allCourses().filter((course) => course.visible && course.active && !PROGRAM_IDS.includes(course.id)).map((course) => {
     const seed = coursesData.find((item) => item.id === course.id);
     const chapters = db.chapters
       .filter((chapter) => chapter.courseId === course.id && chapter.status === 'published')
@@ -1362,6 +1421,7 @@ export function websiteCourses(): Course[] {
       expected_hours: course.expectedHours,
       chapter_count: course.chapterCount > 0 ? course.chapterCount : (seed?.modules?.length ?? 0),
       category: course.categoryName === 'Uncategorised' ? undefined : course.categoryName,
+      categoryId: course.categoryId || undefined,
       prerequisites: course.prerequisites,
       learning_outcomes: course.outcomes,
       rating: seed?.rating ?? 0,
@@ -1457,8 +1517,10 @@ export function assignCourse(accountId: string, courseId: string) {
   const account = db.accounts.find((item) => item.id === accountId);
   if (!account || account.role === 'admin') return { ok: false as const, message: 'Choose a staff or student account.' };
   const existing = db.enrollments.find((row) => row.accountId === accountId && row.courseId === courseId);
+  if (existing?.status === 'enrolled') return { ok: false as const, message: 'This account is already enrolled on that course.' };
   if (existing) {
     existing.status = 'enrolled';
+    existing.reviewedAt = new Date().toISOString();
   } else {
     db.enrollments.push({
       id: `enr-${randomBytes(4).toString('hex')}`,
@@ -1641,8 +1703,10 @@ export function listEnrollmentRequests() {
         role: account?.role ?? 'student',
         courseTitle: course?.title ?? row.courseId,
         categoryName: course?.categoryName ?? 'Uncategorised',
+        visible: account ? shownInDirectory(db, account) : false,
       };
     })
+    .filter((row) => row.visible)
     .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 }
 
@@ -1668,15 +1732,123 @@ export function reviewEnrollment(reviewerId: string, enrollmentId: string, decis
   return { ok: true as const };
 }
 
+const DEMO_STUDENTS = [
+  ['Amelia Hart', 'amelia.hart@demo.savvy.invalid', '+44 7700 900201'],
+  ['Oliver Bennett', 'oliver.bennett@demo.savvy.invalid', '+44 7700 900202'],
+  ['Charlotte Hughes', 'charlotte.hughes@demo.savvy.invalid', '+44 7700 900203'],
+  ['Harry Clarke', 'harry.clarke@demo.savvy.invalid', '+44 7700 900204'],
+  ['Sophie Wright', 'sophie.wright@demo.savvy.invalid', '+44 7700 900205'],
+  ['George Edwards', 'george.edwards@demo.savvy.invalid', '+44 7700 900206'],
+  ['Isla Thompson', 'isla.thompson@demo.savvy.invalid', '+44 7700 900207'],
+  ['Jack Wilson', 'jack.wilson@demo.savvy.invalid', '+44 7700 900208'],
+  ['Freya Morgan', 'freya.morgan@demo.savvy.invalid', '+44 7700 900209'],
+  ['Leo Patel', 'leo.patel@demo.savvy.invalid', '+44 7700 900210'],
+  ['Grace Campbell', 'grace.campbell@demo.savvy.invalid', '+44 7700 900211'],
+  ['Noah Richardson', 'noah.richardson@demo.savvy.invalid', '+44 7700 900212'],
+  ['Emily Foster', 'emily.foster@demo.savvy.invalid', '+44 7700 900213'],
+  ['Arthur Davies', 'arthur.davies@demo.savvy.invalid', '+44 7700 900214'],
+  ['Poppy Shaw', 'poppy.shaw@demo.savvy.invalid', '+44 7700 900215'],
+] as const;
+
+const DEMO_STAFF = [
+  ['Margaret Ellis', 'margaret.ellis@demo.savvy.invalid', '+44 7700 900301', 'Tutor'],
+  ['James Whitaker', 'james.whitaker@demo.savvy.invalid', '+44 7700 900302', 'Assessor'],
+  ['Hannah Brooks', 'hannah.brooks@demo.savvy.invalid', '+44 7700 900303', 'Course coordinator'],
+  ['Daniel Price', 'daniel.price@demo.savvy.invalid', '+44 7700 900304', 'Quality lead'],
+  ['Rebecca Cole', 'rebecca.cole@demo.savvy.invalid', '+44 7700 900305', 'Admissions officer'],
+] as const;
+
+function ensureDemoAccounts(db: Database) {
+  const secret = hashPassword(randomBytes(24).toString('hex'));
+  DEMO_STUDENTS.forEach((row, index) => {
+    const id = `demo-stu-${String(index + 1).padStart(2, '0')}`;
+    if (db.accounts.some((account) => account.id === id)) return;
+    db.accounts.push({
+      id,
+      fullName: row[0],
+      email: row[1],
+      phone: row[2],
+      role: 'student',
+      status: 'active',
+      passwordHash: secret.passwordHash,
+      passwordSalt: secret.passwordSalt,
+      createdAt: new Date(Date.UTC(2026, 0, index + 1)).toISOString(),
+      isDemo: true,
+    });
+  });
+  DEMO_STAFF.forEach((row, index) => {
+    const id = `demo-stf-${String(index + 1).padStart(2, '0')}`;
+    if (db.accounts.some((account) => account.id === id)) return;
+    db.accounts.push({
+      id,
+      fullName: row[0],
+      email: row[1],
+      phone: row[2],
+      role: 'staff',
+      status: 'active',
+      passwordHash: secret.passwordHash,
+      passwordSalt: secret.passwordSalt,
+      createdAt: new Date(Date.UTC(2026, 0, index + 1)).toISOString(),
+      isDemo: true,
+      designation: row[3],
+      permissions: { ...DEFAULT_STAFF_PERMISSIONS },
+    });
+  });
+}
+
+export function setDemoData(enabled: boolean) {
+  const db = readDb();
+  db.demoDataEnabled = enabled;
+  if (enabled) ensureDemoAccounts(db);
+  writeDb(db);
+  return { ok: true as const, ...overviewCounts() };
+}
+
 export function overviewCounts() {
   const db = readDb();
-  const courses = allCourses();
+  const visible = (accountId: string) => {
+    const account = db.accounts.find((item) => item.id === accountId);
+    return Boolean(account && shownInDirectory(db, account));
+  };
+  const students = db.accounts.filter((account) => account.role === 'student' && shownInDirectory(db, account));
+  const staff = db.accounts.filter((account) => account.role === 'staff' && shownInDirectory(db, account) && account.status === 'active');
+  const courses = allCourses().filter((course) => course.visible !== false && course.active !== false);
+  const enrolments = db.enrollments.filter((row) => row.status === 'enrolled' && visible(row.accountId) && db.accounts.find((account) => account.id === row.accountId)?.role === 'student');
+  const pendingRequests = db.enrollments.filter((row) => row.status === 'requested' && visible(row.accountId));
+  const pendingRegistrations = db.accounts.filter((account) => account.registrationStatus === 'pending' && !account.isDemo).length;
+  const certificates = db.certificates.filter((item) => item.status === 'issued' && visible(item.studentId));
+  const now = new Date();
+  const start = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - 11, 1));
+  const end = new Date(Date.UTC(now.getUTCFullYear(), 11, 1));
+  const months: { key: string; label: string; shortLabel: string; year: number; month: number; students: number; enrolments: number; certificates: number; staff: number; requests: number }[] = [];
+  for (let cursor = start; cursor <= end; cursor = new Date(Date.UTC(cursor.getUTCFullYear(), cursor.getUTCMonth() + 1, 1))) {
+    const key = `${cursor.getUTCFullYear()}-${String(cursor.getUTCMonth() + 1).padStart(2, '0')}`;
+    months.push({
+      key,
+      label: new Intl.DateTimeFormat('en-GB', { month: 'long', timeZone: 'UTC' }).format(cursor),
+      shortLabel: new Intl.DateTimeFormat('en-GB', { month: 'short', timeZone: 'UTC' }).format(cursor),
+      year: cursor.getUTCFullYear(),
+      month: cursor.getUTCMonth() + 1,
+      students: students.filter((account) => account.createdAt.slice(0, 7) === key).length,
+      enrolments: enrolments.filter((row) => row.createdAt.slice(0, 7) === key).length,
+      certificates: certificates.filter((item) => (item.issueDate || '').slice(0, 7) === key).length,
+      staff: db.accounts.filter((account) => account.role === 'staff' && shownInDirectory(db, account) && account.createdAt.slice(0, 7) === key).length,
+      requests: db.enrollments.filter((row) => visible(row.accountId) && row.createdAt.slice(0, 7) === key && row.status === 'requested').length,
+    });
+  }
   return {
-    students: db.accounts.filter((account) => account.role === 'student').length,
-    staff: db.accounts.filter((account) => account.role === 'staff').length,
+    demoDataEnabled: db.demoDataEnabled === true,
+    students: students.length,
+    staff: staff.length,
+    activeStaff: staff.length,
     courses: courses.length,
-    pendingRequests: db.enrollments.filter((row) => row.status === 'requested').length,
-    enrolments: db.enrollments.filter((row) => row.status === 'enrolled' && db.accounts.find((account) => account.id === row.accountId)?.role === 'student').length,
+    publishedCourses: courses.length,
+    pendingRequests: pendingRequests.length,
+    pendingRegistrations,
+    applicationsAwaiting: 0,
+    enrolments: enrolments.length,
+    certificates: certificates.length,
+    months,
   };
 }
 
@@ -1688,7 +1860,7 @@ export function listCategories() {
   }));
 }
 
-export function saveCategory(input: { id?: string; name: string; description?: string; active?: boolean }) {
+export function saveCategory(input: { id?: string; name: string; description?: string; active?: boolean; parentId?: string | null }) {
   const db = readDb();
   const name = input.name.trim();
   if (!name) return { ok: false as const, message: 'Enter a category name.' };
@@ -1701,6 +1873,12 @@ export function saveCategory(input: { id?: string; name: string; description?: s
     category.name = name;
     if (input.description !== undefined) category.description = input.description.trim();
     if (input.active !== undefined) category.active = input.active;
+    if (input.parentId !== undefined) {
+      if (input.parentId && (input.parentId === category.id || !db.categories.some((item) => item.id === input.parentId))) {
+        return { ok: false as const, message: 'Choose a valid parent category.' };
+      }
+      category.parentId = input.parentId || null;
+    }
     writeDb(db);
     return { ok: true as const, category };
   }
@@ -1710,10 +1888,97 @@ export function saveCategory(input: { id?: string; name: string; description?: s
     description: input.description?.trim() ?? '',
     active: input.active !== false,
     createdAt: new Date().toISOString(),
+    parentId: input.parentId || null,
   };
+  if (category.parentId && !db.categories.some((item) => item.id === category.parentId)) {
+    return { ok: false as const, message: 'Choose a valid parent category.' };
+  }
   db.categories.push(category);
   writeDb(db);
   return { ok: true as const, category };
+}
+
+export function deleteCategory(id: string) {
+  const db = readDb();
+  const category = db.categories.find((item) => item.id === id);
+  if (!category) return { ok: false as const, message: 'That category was not found.' };
+  const linked = allCourses().filter((course) => course.categoryId === id).map((course) => course.title);
+  if (linked.length > 0) {
+    return { ok: false as const, message: `Reassign or remove ${linked.length} course${linked.length === 1 ? '' : 's'} before deleting this category.`, courses: linked };
+  }
+  if (db.categories.some((item) => item.parentId === id)) {
+    return { ok: false as const, message: 'Move or delete the subcategories first.' };
+  }
+  db.categories = db.categories.filter((item) => item.id !== id);
+  writeDb(db);
+  return { ok: true as const };
+}
+
+export function listCourseMaterials(courseId?: string) {
+  const db = readDb();
+  return (db.courseMaterials ?? []).filter((item) => !courseId || item.courseId === courseId);
+}
+
+export function saveCourseMaterial(input: {
+  id?: string;
+  courseId: string;
+  chapterId?: string | null;
+  title: string;
+  description?: string;
+  type?: CourseMaterialRecord['type'];
+  fileName?: string | null;
+  storageName?: string | null;
+  externalUrl?: string | null;
+  visibility?: CourseMaterialRecord['visibility'];
+}) {
+  const db = readDb();
+  const title = input.title.trim();
+  if (!title) return { ok: false as const, message: 'Enter a material title.' };
+  if (!allCourses().some((course) => course.id === input.courseId)) return { ok: false as const, message: 'Choose a course.' };
+  if (input.chapterId && !db.chapters.some((chapter) => chapter.id === input.chapterId && chapter.courseId === input.courseId)) {
+    return { ok: false as const, message: 'Choose a chapter from that course.' };
+  }
+  db.courseMaterials ??= [];
+  if (input.id) {
+    const row = db.courseMaterials.find((item) => item.id === input.id);
+    if (!row) return { ok: false as const, message: 'That material was not found.' };
+    row.title = title;
+    row.description = input.description?.trim() ?? row.description;
+    row.courseId = input.courseId;
+    row.chapterId = input.chapterId || null;
+    row.type = input.type || row.type;
+    row.externalUrl = input.externalUrl?.trim() || null;
+    row.visibility = input.visibility || row.visibility;
+    if (input.fileName !== undefined) row.fileName = input.fileName;
+    if (input.storageName !== undefined) row.storageName = input.storageName;
+    writeDb(db);
+    return { ok: true as const, material: row };
+  }
+  const row: CourseMaterialRecord = {
+    id: `mat-${randomBytes(4).toString('hex')}`,
+    courseId: input.courseId,
+    chapterId: input.chapterId || null,
+    title,
+    description: input.description?.trim() ?? '',
+    type: input.type || (input.externalUrl ? 'link' : 'other'),
+    fileName: input.fileName || null,
+    storageName: input.storageName || null,
+    externalUrl: input.externalUrl?.trim() || null,
+    visibility: input.visibility || 'enrolled',
+    createdAt: new Date().toISOString(),
+  };
+  db.courseMaterials.push(row);
+  writeDb(db);
+  return { ok: true as const, material: row };
+}
+
+export function deleteCourseMaterial(id: string) {
+  const db = readDb();
+  const row = (db.courseMaterials ?? []).find((item) => item.id === id);
+  if (!row) return { ok: false as const, message: 'That material was not found.' };
+  db.courseMaterials = (db.courseMaterials ?? []).filter((item) => item.id !== id);
+  writeDb(db);
+  return { ok: true as const, material: row };
 }
 
 type CourseDraft = {
@@ -1773,7 +2038,7 @@ export function createCustomCourse(input: CourseDraft) {
   };
 
   const course: CustomCourse = {
-    id: `course-${randomBytes(4).toString('hex')}`,
+    id: `ref-${slug}`,
     title,
     slug,
     duration: input.duration?.trim() || 'Not set',
@@ -1909,6 +2174,7 @@ export function savePermissions(accountId: string, permissions: Partial<StaffPer
   const db = readDb();
   const account = db.accounts.find((item) => item.id === accountId);
   if (!account) return { ok: false as const, message: 'Account not found.' };
+  if (account.isDemo) return { ok: false as const, message: 'Demo records are controlled by the Demo Data setting and cannot be edited.' };
   if (account.role === 'staff') {
     account.permissions = { ...DEFAULT_STAFF_PERMISSIONS, ...account.permissions, ...(permissions as StaffPermissions) };
   } else if (account.role === 'student') {
@@ -2119,7 +2385,10 @@ export function courseRecord(courseId: string, viewer: InstituteAccount) {
     .map((row) => db.accounts.find((account) => account.id === row.accountId))
     .filter((account): account is InstituteAccount => Boolean(account))
     .map((account) => ({ id: account.id, fullName: account.fullName }));
-  const enrolledStudents = db.enrollments.filter((row) => row.courseId === courseId && row.status === 'enrolled' && db.accounts.find((account) => account.id === row.accountId)?.role === 'student');
+  const enrolledStudents = db.enrollments.filter((row) => {
+    const student = db.accounts.find((account) => account.id === row.accountId);
+    return row.courseId === courseId && row.status === 'enrolled' && student?.role === 'student' && shownInDirectory(db, student);
+  });
   const manage = viewer.role === 'admin' || (viewer.role === 'staff' && (staffAllows(viewer, 'viewEnrolledStudents') || staffAllows(viewer, 'viewStudents')));
   return {
     ok: true as const,

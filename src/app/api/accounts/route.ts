@@ -22,6 +22,10 @@ export async function POST(request: Request) {
   const password = String(body.password ?? '');
   const status = body.status === 'inactive' ? 'inactive' : 'active';
   const courseId = body.courseId ? String(body.courseId) : undefined;
+  const courseIds = Array.isArray(body.courseIds) ? body.courseIds.map(String) : undefined;
+  const designation = body.designation ? String(body.designation) : undefined;
+  const notes = body.notes ? String(body.notes) : undefined;
+  const permissions = body.permissions && typeof body.permissions === 'object' ? body.permissions : undefined;
   if (!fullName || !email.includes('@') || phone.replace(/\D/g, '').length < 8) {
     return NextResponse.json({ message: 'Enter a name, a valid email, and a phone number.' }, { status: 400 });
   }
@@ -31,7 +35,7 @@ export async function POST(request: Request) {
   if (password.length < 8) {
     return NextResponse.json({ message: 'Set a password of at least 8 characters.' }, { status: 400 });
   }
-  const result = createAccount({ fullName, email, phone, role, password, status, courseId });
+  const result = createAccount({ fullName, email, phone, role, password, status, courseId, courseIds, designation, notes, permissions });
   if (!result.ok) return NextResponse.json({ message: result.message }, { status: 409 });
   return NextResponse.json({ account: result.account });
 }
@@ -47,6 +51,9 @@ export async function PATCH(request: Request) {
     phone: body.phone ? String(body.phone) : undefined,
     status: body.status === 'active' || body.status === 'inactive' ? body.status : undefined,
     password: body.password ? String(body.password) : undefined,
+    designation: body.designation !== undefined ? String(body.designation) : undefined,
+    notes: body.notes !== undefined ? String(body.notes) : undefined,
+    permissions: body.permissions && typeof body.permissions === 'object' ? body.permissions : undefined,
   });
   if (!result.ok) return NextResponse.json({ message: result.message }, { status: 400 });
   return NextResponse.json({ account: result.account });

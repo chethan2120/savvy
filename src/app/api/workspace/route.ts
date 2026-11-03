@@ -6,6 +6,7 @@ import {
   listAnnouncements,
   listAccounts,
   listCategories,
+  isLegacyProgram,
   listEnrollmentRequests,
   listLeave,
   listMarks,
@@ -18,6 +19,9 @@ import {
   reviewLeave,
   saveAnnouncement,
   saveCategory,
+  deleteCategory,
+  setDemoData,
+  listCourseMaterials,
   saveMark,
   archiveChapter,
   assignInstructor,
@@ -44,8 +48,9 @@ export async function GET(request: Request) {
   await refreshCourseCatalog();
   const resource = new URL(request.url).searchParams.get('resource');
   if (resource === 'overview' && account.role === 'admin') return NextResponse.json(overviewCounts());
+  if (resource === 'materials' && account.role !== 'student') return NextResponse.json({ materials: listCourseMaterials(new URL(request.url).searchParams.get('courseId') || undefined), courses: programs() });
   if (resource === 'requests' && account.role === 'admin') return NextResponse.json({ requests: listEnrollmentRequests() });
-  if (resource === 'categories') return NextResponse.json({ categories: listCategories(), courses: programs() });
+  if (resource === 'categories') return NextResponse.json({ categories: listCategories(), courses: programs().filter((course) => !isLegacyProgram(course.id)) });
   if (resource === 'marks') {
     const url = new URL(request.url);
     if (account.role === 'student') return NextResponse.json({ marks: listMarks({ accountId: account.id }) });
@@ -98,9 +103,21 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true });
   }
 
+  if (resource === 'demo-data') {
+    if (account.role !== 'admin') return NextResponse.json({ message: 'Only an administrator can change demo data.' }, { status: 403 });
+    return NextResponse.json(setDemoData(body.enabled === true));
+  }
+
+  if (resource === 'delete-category') {
+    if (account.role !== 'admin') return NextResponse.json({ message: 'Only an administrator can delete categories.' }, { status: 403 });
+    const result = deleteCategory(String(body.id ?? ''));
+    if (!result.ok) return NextResponse.json({ message: result.message, courses: 'courses' in result ? result.courses : undefined }, { status: 400 });
+    return NextResponse.json({ ok: true });
+  }
+
   if (resource === 'category') {
     if (account.role !== 'admin') return NextResponse.json({ message: 'Only an administrator can manage categories.' }, { status: 403 });
-    const result = saveCategory({ id: body.id ? String(body.id) : undefined, name: String(body.name ?? ''), description: String(body.description ?? ''), active: body.active !== false });
+    const result = saveCategory({ id: body.id ? String(body.id) : undefined, name: String(body.name ?? ''), description: String(body.description ?? ''), active: body.active !== false, parentId: body.parentId ? String(body.parentId) : null });
     if (!result.ok) return NextResponse.json({ message: result.message }, { status: 400 });
     return NextResponse.json({ category: result.category });
   }

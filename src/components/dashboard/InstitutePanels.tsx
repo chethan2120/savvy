@@ -134,7 +134,54 @@ export function AccountProfile() {
       </label>
       <button type="submit" disabled={busy} className="pill-button-forest py-2.5 text-sm">{busy ? 'Saving' : 'Save changes'}</button>
       {message && <Notice tone={tone}>{message}</Notice>}
+      {account.role === 'admin' && <DemoDataCard />}
     </form>
+  );
+}
+
+function DemoDataCard() {
+  const [enabled, setEnabled] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    fetch('/api/workspace?resource=overview', { cache: 'no-store' })
+      .then((response) => (response.ok ? response.json() : null))
+      .then((body) => { if (body) setEnabled(Boolean(body.demoDataEnabled)); })
+      .catch(() => undefined);
+  }, []);
+
+  const toggle = async () => {
+    const next = !enabled;
+    if (next && !window.confirm('Show the 15 demo students and 5 demo staff across the admin panel?')) return;
+    setBusy(true);
+    setMessage('');
+    const response = await fetch('/api/workspace', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ resource: 'demo-data', enabled: next }),
+    });
+    const body = await response.json().catch(() => ({}));
+    setBusy(false);
+    if (!response.ok) { setMessage(body.message || 'The setting was not saved.'); return; }
+    setEnabled(next);
+    setMessage(next ? 'Demo data is on. 15 students and 5 staff are included.' : 'Demo data is off. Genuine records remain.');
+  };
+
+  return (
+    <section className="mt-2 rounded-2xl border border-[#EAD9E0] bg-[#FCF8F7] p-4">
+      <div className="flex items-center justify-between gap-4">
+        <div>
+          <h3 className="font-semibold text-[#641B38]">Demo Data</h3>
+          <p className="mt-1 text-sm text-[#30262B]">Enable sample student and staff records to demonstrate the institute&apos;s administration system.</p>
+        </div>
+        <button type="button" role="switch" aria-checked={enabled} disabled={busy} onClick={toggle} className={`relative h-7 w-12 shrink-0 rounded-full ${enabled ? 'bg-[#B83268]' : 'bg-[#EAD9E0]'}`}>
+          <span className={`absolute top-0.5 h-6 w-6 rounded-full bg-white transition-all ${enabled ? 'left-5' : 'left-0.5'}`} />
+          <span className="sr-only">{enabled ? 'On' : 'Off'}</span>
+        </button>
+      </div>
+      {message && <p className="mt-2 text-sm text-[#641B38]">{message}</p>}
+    </section>
   );
 }
 
@@ -294,7 +341,7 @@ export function UserManagement() {
           </select>
           <select className={fieldClass} value={form.courseId} onChange={(event) => setForm({ ...form, courseId: event.target.value })}>
             <option value="">Assigned course (optional)</option>
-            {programs.filter((course) => course.visible !== false && course.id.startsWith('ref-')).map((course) => <option key={course.id} value={course.id}>{course.title}</option>)}
+            {programs.filter((course) => course.visible !== false && (course.custom || course.id.startsWith('ref-'))).map((course) => <option key={course.id} value={course.id}>{course.title}</option>)}
           </select>
           <select className={fieldClass} value={form.status} onChange={(event) => setForm({ ...form, status: event.target.value })}>
             <option value="active">Active</option>
@@ -622,7 +669,7 @@ export function CertifiedPrograms({
 
   useEffect(() => { load(); }, [load]);
 
-  const catalogue = programs.filter((course) => course.visible !== false && course.id.startsWith('ref-'));
+  const catalogue = programs.filter((course) => course.visible !== false && (course.custom || course.id.startsWith('ref-')));
   const visible = catalogue.filter((course) => course.title.toLowerCase().includes(query.trim().toLowerCase()));
   const mine = (courseId: string) => links.find((link) => link.courseId === courseId);
   const enrolled = programs.filter((course) => mine(course.id)?.status === 'enrolled');

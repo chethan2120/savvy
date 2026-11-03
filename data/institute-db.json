@@ -72,6 +72,341 @@
       "passwordHash": "f0c9c9b51ac5e3bf335dab07a12f5623b3bf015c451561178aaf185157b4b53b",
       "passwordSalt": "a4d20dc7b0ad2bc959bb6b96f0a69501",
       "createdAt": "2026-10-27T07:58:24.106Z"
+    },
+    {
+      "id": "demo-stu-01",
+      "fullName": "Amelia Hart",
+      "email": "amelia.hart@demo.savvy.invalid",
+      "phone": "+44 7700 900201",
+      "role": "student",
+      "status": "active",
+      "passwordHash": "c0028a34bc274e864dd58b0253da59b9979555c51f612f39cf05c3fb1bc79627",
+      "passwordSalt": "ab09b4a171a3e12cb17964ab05b959f7",
+      "createdAt": "2026-01-01T00:00:00.000Z",
+      "isDemo": true
+    },
+    {
+      "id": "demo-stu-02",
+      "fullName": "Oliver Bennett",
+      "email": "oliver.bennett@demo.savvy.invalid",
+      "phone": "+44 7700 900202",
+      "role": "student",
+      "status": "active",
+      "passwordHash": "c0028a34bc274e864dd58b0253da59b9979555c51f612f39cf05c3fb1bc79627",
+      "passwordSalt": "ab09b4a171a3e12cb17964ab05b959f7",
+      "createdAt": "2026-01-02T00:00:00.000Z",
+      "isDemo": true
+    },
+    {
+      "id": "demo-stu-03",
+      "fullName": "Charlotte Hughes",
+      "email": "charlotte.hughes@demo.savvy.invalid",
+      "phone": "+44 7700 900203",
+      "role": "student",
+      "status": "active",
+      "passwordHash": "c0028a34bc274e864dd58b0253da59b9979555c51f612f39cf05c3fb1bc79627",
+      "passwordSalt": "ab09b4a171a3e12cb17964ab05b959f7",
+      "createdAt": "2026-01-03T00:00:00.000Z",
+      "isDemo": true
+    },
+    {
+      "id": "demo-stu-04",
+      "fullName": "Harry Clarke",
+      "email": "harry.clarke@demo.savvy.invalid",
+      "phone": "+44 7700 900204",
+      "role": "student",
+      "status": "active",
+      "passwordHash": "c0028a34bc274e864dd58b0253da59b9979555c51f612f39cf05c3fb1bc79627",
+      "passwordSalt": "ab09b4a171a3e12cb17964ab05b959f7",
+      "createdAt": "2026-01-04T00:00:00.000Z",
+      "isDemo": true
+    },
+    {
+      "id": "demo-stu-05",
+      "fullName": "Sophie Wright",
+      "email": "sophie.wright@demo.savvy.invalid",
+      "phone": "+44 7700 900205",
+      "role": "student",
+      "status": "active",
+      "passwordHash": "c0028a34bc274e864dd58b0253da59b9979555c51f612f39cf05c3fb1bc79627",
+      "passwordSalt": "ab09b4a171a3e12cb17964ab05b959f7",
+      "createdAt": "2026-01-05T00:00:00.000Z",
+      "isDemo": true
+    },
+    {
+      "id": "demo-stu-06",
+      "fullName": "George Edwards",
+      "email": "george.edwards@demo.savvy.invalid",
+      "phone": "+44 7700 900206",
+      "role": "student",
+      "status": "active",
+      "passwordHash": "c0028a34bc274e864dd58b0253da59b9979555c51f612f39cf05c3fb1bc79627",
+      "passwordSalt": "ab09b4a171a3e12cb17964ab05b959f7",
+      "createdAt": "2026-01-06T00:00:00.000Z",
+      "isDemo": true
+    },
+    {
+      "id": "demo-stu-07",
+      "fullName": "Isla Thompson",
+      "email": "isla.thompson@demo.savvy.invalid",
+      "phone": "+44 7700 900207",
+      "role": "student",
+      "status": "active",
+      "passwordHash": "c0028a34bc274e864dd58b0253da59b9979555c51f612f39cf05c3fb1bc79627",
+      "passwordSalt": "ab09b4a171a3e12cb17964ab05b959f7",
+      "createdAt": "2026-01-07T00:00:00.000Z",
+      "isDemo": true
+    },
+    {
+      "id": "demo-stu-08",
+      "fullName": "Jack Wilson",
+      "email": "jack.wilson@demo.savvy.invalid",
+      "phone": "+44 7700 900208",
+      "role": "student",
+      "status": "active",
+      "passwordHash": "c0028a34bc274e864dd58b0253da59b9979555c51f612f39cf05c3fb1bc79627",
+      "passwordSalt": "ab09b4a171a3e12cb17964ab05b959f7",
+      "createdAt": "2026-01-08T00:00:00.000Z",
+      "isDemo": true
+    },
+    {
+      "id": "demo-stu-09",
+      "fullName": "Freya Morgan",
+      "email": "freya.morgan@demo.savvy.invalid",
+      "phone": "+44 7700 900209",
+      "role": "student",
+      "status": "active",
+      "passwordHash": "c0028a34bc274e864dd58b0253da59b9979555c51f612f39cf05c3fb1bc79627",
+      "passwordSalt": "ab09b4a171a3e12cb17964ab05b959f7",
+      "createdAt": "2026-01-09T00:00:00.000Z",
+      "isDemo": true
+    },
+    {
+      "id": "demo-stu-10",
+      "fullName": "Leo Patel",
+      "email": "leo.patel@demo.savvy.invalid",
+      "phone": "+44 7700 900210",
+      "role": "student",
+      "status": "active",
+      "passwordHash": "c0028a34bc274e864dd58b0253da59b9979555c51f612f39cf05c3fb1bc79627",
+      "passwordSalt": "ab09b4a171a3e12cb17964ab05b959f7",
+      "createdAt": "2026-01-10T00:00:00.000Z",
+      "isDemo": true
+    },
+    {
+      "id": "demo-stu-11",
+      "fullName": "Grace Campbell",
+      "email": "grace.campbell@demo.savvy.invalid",
+      "phone": "+44 7700 900211",
+      "role": "student",
+      "status": "active",
+      "passwordHash": "c0028a34bc274e864dd58b0253da59b9979555c51f612f39cf05c3fb1bc79627",
+      "passwordSalt": "ab09b4a171a3e12cb17964ab05b959f7",
+      "createdAt": "2026-01-11T00:00:00.000Z",
+      "isDemo": true
+    },
+    {
+      "id": "demo-stu-12",
+      "fullName": "Noah Richardson",
+      "email": "noah.richardson@demo.savvy.invalid",
+      "phone": "+44 7700 900212",
+      "role": "student",
+      "status": "active",
+      "passwordHash": "c0028a34bc274e864dd58b0253da59b9979555c51f612f39cf05c3fb1bc79627",
+      "passwordSalt": "ab09b4a171a3e12cb17964ab05b959f7",
+      "createdAt": "2026-01-12T00:00:00.000Z",
+      "isDemo": true
+    },
+    {
+      "id": "demo-stu-13",
+      "fullName": "Emily Foster",
+      "email": "emily.foster@demo.savvy.invalid",
+      "phone": "+44 7700 900213",
+      "role": "student",
+      "status": "active",
+      "passwordHash": "c0028a34bc274e864dd58b0253da59b9979555c51f612f39cf05c3fb1bc79627",
+      "passwordSalt": "ab09b4a171a3e12cb17964ab05b959f7",
+      "createdAt": "2026-01-13T00:00:00.000Z",
+      "isDemo": true
+    },
+    {
+      "id": "demo-stu-14",
+      "fullName": "Arthur Davies",
+      "email": "arthur.davies@demo.savvy.invalid",
+      "phone": "+44 7700 900214",
+      "role": "student",
+      "status": "active",
+      "passwordHash": "c0028a34bc274e864dd58b0253da59b9979555c51f612f39cf05c3fb1bc79627",
+      "passwordSalt": "ab09b4a171a3e12cb17964ab05b959f7",
+      "createdAt": "2026-01-14T00:00:00.000Z",
+      "isDemo": true
+    },
+    {
+      "id": "demo-stu-15",
+      "fullName": "Poppy Shaw",
+      "email": "poppy.shaw@demo.savvy.invalid",
+      "phone": "+44 7700 900215",
+      "role": "student",
+      "status": "active",
+      "passwordHash": "c0028a34bc274e864dd58b0253da59b9979555c51f612f39cf05c3fb1bc79627",
+      "passwordSalt": "ab09b4a171a3e12cb17964ab05b959f7",
+      "createdAt": "2026-01-15T00:00:00.000Z",
+      "isDemo": true
+    },
+    {
+      "id": "demo-stf-01",
+      "fullName": "Margaret Ellis",
+      "email": "margaret.ellis@demo.savvy.invalid",
+      "phone": "+44 7700 900301",
+      "role": "staff",
+      "status": "active",
+      "passwordHash": "c0028a34bc274e864dd58b0253da59b9979555c51f612f39cf05c3fb1bc79627",
+      "passwordSalt": "ab09b4a171a3e12cb17964ab05b959f7",
+      "createdAt": "2026-01-01T00:00:00.000Z",
+      "isDemo": true,
+      "designation": "Tutor",
+      "permissions": {
+        "manageCourses": false,
+        "markAttendance": true,
+        "uploadMaterials": false,
+        "viewStudents": true,
+        "manageAnnouncements": false,
+        "viewEnrollments": false,
+        "viewAssignedCourses": true,
+        "viewAllCourses": false,
+        "editCourses": false,
+        "manageChapters": false,
+        "addChapters": false,
+        "editChapters": false,
+        "publishChapters": false,
+        "viewEnrolledStudents": true,
+        "assignTeachingStaff": false,
+        "manageEnrolments": false
+      }
+    },
+    {
+      "id": "demo-stf-02",
+      "fullName": "James Whitaker",
+      "email": "james.whitaker@demo.savvy.invalid",
+      "phone": "+44 7700 900302",
+      "role": "staff",
+      "status": "active",
+      "passwordHash": "c0028a34bc274e864dd58b0253da59b9979555c51f612f39cf05c3fb1bc79627",
+      "passwordSalt": "ab09b4a171a3e12cb17964ab05b959f7",
+      "createdAt": "2026-01-02T00:00:00.000Z",
+      "isDemo": true,
+      "designation": "Assessor",
+      "permissions": {
+        "manageCourses": false,
+        "markAttendance": true,
+        "uploadMaterials": false,
+        "viewStudents": true,
+        "manageAnnouncements": false,
+        "viewEnrollments": false,
+        "viewAssignedCourses": true,
+        "viewAllCourses": false,
+        "editCourses": false,
+        "manageChapters": false,
+        "addChapters": false,
+        "editChapters": false,
+        "publishChapters": false,
+        "viewEnrolledStudents": true,
+        "assignTeachingStaff": false,
+        "manageEnrolments": false
+      }
+    },
+    {
+      "id": "demo-stf-03",
+      "fullName": "Hannah Brooks",
+      "email": "hannah.brooks@demo.savvy.invalid",
+      "phone": "+44 7700 900303",
+      "role": "staff",
+      "status": "active",
+      "passwordHash": "c0028a34bc274e864dd58b0253da59b9979555c51f612f39cf05c3fb1bc79627",
+      "passwordSalt": "ab09b4a171a3e12cb17964ab05b959f7",
+      "createdAt": "2026-01-03T00:00:00.000Z",
+      "isDemo": true,
+      "designation": "Course coordinator",
+      "permissions": {
+        "manageCourses": false,
+        "markAttendance": true,
+        "uploadMaterials": false,
+        "viewStudents": true,
+        "manageAnnouncements": false,
+        "viewEnrollments": false,
+        "viewAssignedCourses": true,
+        "viewAllCourses": false,
+        "editCourses": false,
+        "manageChapters": false,
+        "addChapters": false,
+        "editChapters": false,
+        "publishChapters": false,
+        "viewEnrolledStudents": true,
+        "assignTeachingStaff": false,
+        "manageEnrolments": false
+      }
+    },
+    {
+      "id": "demo-stf-04",
+      "fullName": "Daniel Price",
+      "email": "daniel.price@demo.savvy.invalid",
+      "phone": "+44 7700 900304",
+      "role": "staff",
+      "status": "active",
+      "passwordHash": "c0028a34bc274e864dd58b0253da59b9979555c51f612f39cf05c3fb1bc79627",
+      "passwordSalt": "ab09b4a171a3e12cb17964ab05b959f7",
+      "createdAt": "2026-01-04T00:00:00.000Z",
+      "isDemo": true,
+      "designation": "Quality lead",
+      "permissions": {
+        "manageCourses": false,
+        "markAttendance": true,
+        "uploadMaterials": false,
+        "viewStudents": true,
+        "manageAnnouncements": false,
+        "viewEnrollments": false,
+        "viewAssignedCourses": true,
+        "viewAllCourses": false,
+        "editCourses": false,
+        "manageChapters": false,
+        "addChapters": false,
+        "editChapters": false,
+        "publishChapters": false,
+        "viewEnrolledStudents": true,
+        "assignTeachingStaff": false,
+        "manageEnrolments": false
+      }
+    },
+    {
+      "id": "demo-stf-05",
+      "fullName": "Rebecca Cole",
+      "email": "rebecca.cole@demo.savvy.invalid",
+      "phone": "+44 7700 900305",
+      "role": "staff",
+      "status": "active",
+      "passwordHash": "c0028a34bc274e864dd58b0253da59b9979555c51f612f39cf05c3fb1bc79627",
+      "passwordSalt": "ab09b4a171a3e12cb17964ab05b959f7",
+      "createdAt": "2026-01-05T00:00:00.000Z",
+      "isDemo": true,
+      "designation": "Admissions officer",
+      "permissions": {
+        "manageCourses": false,
+        "markAttendance": true,
+        "uploadMaterials": false,
+        "viewStudents": true,
+        "manageAnnouncements": false,
+        "viewEnrollments": false,
+        "viewAssignedCourses": true,
+        "viewAllCourses": false,
+        "editCourses": false,
+        "manageChapters": false,
+        "addChapters": false,
+        "editChapters": false,
+        "publishChapters": false,
+        "viewEnrolledStudents": true,
+        "assignTeachingStaff": false,
+        "manageEnrolments": false
+      }
     }
   ],
   "enrollments": [
@@ -102,6 +437,27 @@
       "courseId": "c9",
       "status": "requested",
       "createdAt": "2026-10-27T05:52:21.913Z"
+    },
+    {
+      "id": "enr-ed13cf88",
+      "accountId": "acct-a465cdabc05f",
+      "courseId": "ref-hot-stone-massage",
+      "status": "enrolled",
+      "createdAt": "2026-11-03T06:49:54.260Z"
+    },
+    {
+      "id": "enr-32767537",
+      "accountId": "demo-stu-01",
+      "courseId": "ref-beauty-therapy-essentials",
+      "status": "enrolled",
+      "createdAt": "2026-11-03T07:04:54.761Z"
+    },
+    {
+      "id": "enr-74a3297c",
+      "accountId": "demo-stu-03",
+      "courseId": "ref-certificate-in-education-and-training",
+      "status": "enrolled",
+      "createdAt": "2026-11-03T07:09:40.861Z"
     }
   ],
   "logins": [
@@ -260,6 +616,30 @@
       "accountId": "acct-admin",
       "loggedInAt": "2026-11-02T11:08:25.090Z",
       "loggedOutAt": null
+    },
+    {
+      "id": "login-60b80bbd2c55",
+      "accountId": "acct-admin",
+      "loggedInAt": "2026-11-03T06:41:45.682Z",
+      "loggedOutAt": "2026-11-03T06:47:21.862Z"
+    },
+    {
+      "id": "login-dbed421c695e",
+      "accountId": "acct-admin",
+      "loggedInAt": "2026-11-03T06:42:26.469Z",
+      "loggedOutAt": "2026-11-03T06:47:21.859Z"
+    },
+    {
+      "id": "login-5b6bbbab5eae",
+      "accountId": "acct-admin",
+      "loggedInAt": "2026-11-03T06:48:03.508Z",
+      "loggedOutAt": "2026-11-03T07:20:06.133Z"
+    },
+    {
+      "id": "login-4248ea2727b6",
+      "accountId": "acct-admin",
+      "loggedInAt": "2026-11-03T07:03:43.100Z",
+      "loggedOutAt": "2026-11-03T07:20:06.131Z"
     }
   ],
   "punches": [
@@ -278,34 +658,6 @@
   ],
   "categories": [
     {
-      "id": "cat-ndt",
-      "name": "Non-Destructive Testing (NDT)",
-      "description": "ASNT Level II, Ultrasonic, Radiographic, and Surface testing techniques",
-      "active": true,
-      "createdAt": "2026-01-01T00:00:00.000Z"
-    },
-    {
-      "id": "cat-qaqc",
-      "name": "QA & QC Inspection",
-      "description": "Welding inspection, quality assurance protocols, ASME/ISO codes",
-      "active": true,
-      "createdAt": "2026-01-01T00:00:00.000Z"
-    },
-    {
-      "id": "cat-hse",
-      "name": "Health, Safety & Environment",
-      "description": "Industrial safety engineering, fire hazard management, and OSHA audits",
-      "active": true,
-      "createdAt": "2026-01-01T00:00:00.000Z"
-    },
-    {
-      "id": "cat-mep",
-      "name": "MEP & Building Services",
-      "description": "HVAC design, 3D Revit MEP modeling, and building engineering systems",
-      "active": true,
-      "createdAt": "2026-01-01T00:00:00.000Z"
-    },
-    {
       "id": "cat-teaching",
       "name": "Teaching qualifications",
       "description": "Regulated teaching qualifications, completed fully online with live Zoom sessions.",
@@ -321,31 +673,6 @@
     }
   ],
   "customCourses": [
-    {
-      "id": "course-d5b00b87",
-      "title": "social media",
-      "slug": "social-media",
-      "duration": "45 days",
-      "description": "",
-      "shortDescription": "",
-      "categoryId": "cat-ndt",
-      "active": true,
-      "createdAt": "2026-10-27T08:35:51.429Z",
-      "priceInr": 2500,
-      "prices": {
-        "INR": 2500,
-        "GBP": 236,
-        "USD": 555,
-        "AED": 352
-      },
-      "studyHours": null,
-      "manualChapterCount": null,
-      "image": "",
-      "certificate": "",
-      "prerequisites": [],
-      "outcomes": [],
-      "visible": false
-    },
     {
       "id": "ref-award-in-education-and-training",
       "slug": "award-in-education-and-training",
@@ -659,16 +986,6 @@
     }
   },
   "courseCategories": {
-    "c1": "cat-ndt",
-    "c2": "cat-qaqc",
-    "c3": "cat-hse",
-    "c4": "cat-mep",
-    "c5": "cat-mep",
-    "c6": "cat-qaqc",
-    "c7": "cat-ndt",
-    "c8": "cat-ndt",
-    "c9": "cat-qaqc",
-    "course-d5b00b87": "cat-ndt",
     "ref-award-in-education-and-training": "cat-teaching",
     "ref-certificate-in-education-and-training": "cat-teaching",
     "ref-diploma-in-education-and-training": "cat-teaching",
@@ -790,6 +1107,15 @@
       "href": "/admin#contacts",
       "read": false,
       "createdAt": "2026-11-02T08:46:56.275Z"
+    },
+    {
+      "id": "ntf-97daa5db",
+      "accountId": "acct-a465cdabc05f",
+      "title": "Certificate issued",
+      "body": "Hot Stone Massage certificate SAV-2026-B76032 is ready to download.",
+      "href": "/student#certificates",
+      "read": false,
+      "createdAt": "2026-11-03T06:50:29.164Z"
     }
   ],
   "announcements": [],
@@ -1432,7 +1758,19 @@
       "accountId": "acct-staff"
     }
   ],
-  "certificates": [],
+  "certificates": [
+    {
+      "id": "cert-cec6dac4",
+      "number": "SAV-2026-B76032",
+      "studentId": "acct-a465cdabc05f",
+      "courseId": "ref-hot-stone-massage",
+      "studentName": "A M Chethan Kumar",
+      "courseTitle": "Hot Stone Massage",
+      "completionDate": "2026-11-04",
+      "issueDate": "2026-11-03T06:50:29.164Z",
+      "status": "issued"
+    }
+  ],
   "branding": {
     "seal": "seal.png",
     "signature": "signature.png",
@@ -1773,5 +2111,7 @@
       "answer": "Use the Login button. Tutors and students have separate secure logins and their own dashboards. Teaching learners use the portal to join Zoom sessions and upload assignments."
     }
   ],
-  "homepageFaqsSeeded": true
+  "homepageFaqsSeeded": true,
+  "demoDataEnabled": true,
+  "courseMaterials": []
 }

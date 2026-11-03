@@ -18,11 +18,11 @@ export function PopularCoursesSection({ courses, children }: PopularCoursesSecti
   const showPrices = useShowCoursePrices();
   const [selectedFilter, setSelectedFilter] = useState('All');
 
-  const filterTabs = ['All', ...Array.from(new Set(courses.map((course) => course.category).filter((name): name is string => Boolean(name))))].slice(0, 6);
+  const filterTabs = ['All', ...Array.from(new Set(courses.map((course) => course.category).filter((name): name is string => Boolean(name))))];
 
   const filteredCourses = useMemo(() => {
-    if (selectedFilter === 'All') return courses.slice(0, 6);
-    return courses.filter((course) => course.category === selectedFilter).slice(0, 6);
+    if (selectedFilter === 'All') return courses;
+    return courses.filter((course) => course.category === selectedFilter);
   }, [courses, selectedFilter]);
 
   const toCard = (course: Course) => ({
